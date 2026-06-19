@@ -1,0 +1,114 @@
+{
+    "commitInfo": {
+        "timestamp": 1709133408152,
+        "userId": "8355321721036096",
+        "userName": "aws_club_data_lakehouse@iconsulting.biz",
+        "operation": "CREATE TABLE AS SELECT",
+        "operationParameters": {
+            "partitionBy": "[]",
+            "description": null,
+            "isManaged": "false",
+            "properties": "{}",
+            "statsOnLoad": false
+        },
+        "notebook": {
+            "notebookId": "68312033830310"
+        },
+        "clusterId": "0112-095737-cgwksnoz",
+        "isolationLevel": "WriteSerializable",
+        "isBlindAppend": true,
+        "operationMetrics": {
+            "numFiles": "4",
+            "numOutputRows": "1000000",
+            "numOutputBytes": "79811576"
+        },
+        "tags": {
+            "restoresDeletedRows": "false"
+        },
+        "engineInfo": "Databricks-Runtime/13.3.x-scala2.12",
+        "txnId": "afc094e5-7096-40cb-b4f7-33e98c5d3a4b"
+    }
+}
+{
+    "metaData": {
+        "id": "3341d00a-0f5c-4682-a703-08f026917a47",
+        "format": {
+            "provider": "parquet",
+            "options": {}
+        },
+        "schemaString": "{\"type\":\"struct\",\"fields\":[{\"name\":\"s_suppkey\",\"type\":\"long\",\"nullable\":true,\"metadata\":{}},{\"name\":\"s_name\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"s_address\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"s_nationkey\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"s_phone\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"s_acctbal\",\"type\":\"double\",\"nullable\":true,\"metadata\":{}},{\"name\":\"s_comment\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+        "partitionColumns": [],
+        "configuration": {},
+        "createdTime": 1709133404430
+    }
+}
+{
+    "protocol": {
+        "minReaderVersion": 1,
+        "minWriterVersion": 2
+    }
+}
+{
+    "add": {
+        "path": "part-00000-d7654bfc-8169-41a7-a7fc-28586c8f73f9-c000.snappy.parquet",
+        "partitionValues": {},
+        "size": 20588082,
+        "modificationTime": 1709133407000,
+        "dataChange": true,
+        "stats": "{\"numRecords\":257994,\"minValues\":{\"s_suppkey\":1,\"s_name\":\"Supplier#000000001\",\"s_address\":\"  , Jd6qNPDAgz\",\"s_nationkey\":0,\"s_phone\":\"10-100-166-6237\",\"s_acctbal\":-999.94,\"s_comment\":\" Customer  blithely regular pint\"},\"maxValues\":{\"s_suppkey\":257994,\"s_name\":\"Supplier#000257994\",\"s_address\":\"zzyv9d9xGUF QcjHQG8gDjuLo pLBxBZ�\",\"s_nationkey\":24,\"s_phone\":\"34-999-987-5257\",\"s_acctbal\":9999.93,\"s_comment\":\"zzle. sometimes bold pinto beans�\"},\"nullCount\":{\"s_suppkey\":0,\"s_name\":0,\"s_address\":0,\"s_nationkey\":0,\"s_phone\":0,\"s_acctbal\":0,\"s_comment\":0}}",
+        "tags": {
+            "INSERTION_TIME": "1709133407000000",
+            "MIN_INSERTION_TIME": "1709133407000000",
+            "MAX_INSERTION_TIME": "1709133407000000",
+            "OPTIMIZE_TARGET_SIZE": "268435456"
+        }
+    }
+}
+{
+    "add": {
+        "path": "part-00001-758ed86b-1400-46b8-b73f-50c6ad4324f1-c000.snappy.parquet",
+        "partitionValues": {},
+        "size": 20516343,
+        "modificationTime": 1709133408000,
+        "dataChange": true,
+        "stats": "{\"numRecords\":257111,\"minValues\":{\"s_suppkey\":257995,\"s_name\":\"Supplier#000257995\",\"s_address\":\"   t2HGWJzQQcWUyx\",\"s_nationkey\":0,\"s_phone\":\"10-100-154-1322\",\"s_acctbal\":-999.96,\"s_comment\":\" Customer  blithe requesComplain\"},\"maxValues\":{\"s_suppkey\":515105,\"s_name\":\"Supplier#000515105\",\"s_address\":\"zzyvSACyGWpp5gCaZbUL7lKRUnhe7m6p�\",\"s_nationkey\":24,\"s_phone\":\"34-999-802-1817\",\"s_acctbal\":9999.95,\"s_comment\":\"zzle. regular foxes are ironic p�\"},\"nullCount\":{\"s_suppkey\":0,\"s_name\":0,\"s_address\":0,\"s_nationkey\":0,\"s_phone\":0,\"s_acctbal\":0,\"s_comment\":0}}",
+        "tags": {
+            "INSERTION_TIME": "1709133407000001",
+            "MIN_INSERTION_TIME": "1709133407000001",
+            "MAX_INSERTION_TIME": "1709133407000001",
+            "OPTIMIZE_TARGET_SIZE": "268435456"
+        }
+    }
+}
+{
+    "add": {
+        "path": "part-00002-f0d08922-127d-4111-a366-6295aab90b79-c000.snappy.parquet",
+        "partitionValues": {},
+        "size": 20522398,
+        "modificationTime": 1709133407000,
+        "dataChange": true,
+        "stats": "{\"numRecords\":257056,\"minValues\":{\"s_suppkey\":515106,\"s_name\":\"Supplier#000515106\",\"s_address\":\"  0B3IFYvNKOoWCY6SKsS\",\"s_nationkey\":0,\"s_phone\":\"10-100-121-2154\",\"s_acctbal\":-999.99,\"s_comment\":\" Customer Recommendss! pending \"},\"maxValues\":{\"s_suppkey\":772161,\"s_name\":\"Supplier#000772161\",\"s_address\":\"zzzthSsa D9XtPL3Yp\",\"s_nationkey\":24,\"s_phone\":\"34-999-934-1626\",\"s_acctbal\":9999.98,\"s_comment\":\"zzle. regular theodolites cajole�\"},\"nullCount\":{\"s_suppkey\":0,\"s_name\":0,\"s_address\":0,\"s_nationkey\":0,\"s_phone\":0,\"s_acctbal\":0,\"s_comment\":0}}",
+        "tags": {
+            "INSERTION_TIME": "1709133407000002",
+            "MIN_INSERTION_TIME": "1709133407000002",
+            "MAX_INSERTION_TIME": "1709133407000002",
+            "OPTIMIZE_TARGET_SIZE": "268435456"
+        }
+    }
+}
+{
+    "add": {
+        "path": "part-00003-262b5672-2fa3-4b22-adec-e6420267c8a5-c000.snappy.parquet",
+        "partitionValues": {},
+        "size": 18184753,
+        "modificationTime": 1709133407000,
+        "dataChange": true,
+        "stats": "{\"numRecords\":227839,\"minValues\":{\"s_suppkey\":772162,\"s_name\":\"Supplier#000772162\",\"s_address\":\"   BG60YdunyyeyE5Ffo8YGQSQGZEO,h\",\"s_nationkey\":0,\"s_phone\":\"10-100-175-5602\",\"s_acctbal\":-999.9,\"s_comment\":\" Customer es sleep furiously car\"},\"maxValues\":{\"s_suppkey\":1000000,\"s_name\":\"Supplier#001000000\",\"s_address\":\"zzzAKnn9sKLOiv84dg4idSkWqTFGzhzQ�\",\"s_nationkey\":24,\"s_phone\":\"34-999-949-3305\",\"s_acctbal\":9999.82,\"s_comment\":\"zzle. requests cajole slyly slyl�\"},\"nullCount\":{\"s_suppkey\":0,\"s_name\":0,\"s_address\":0,\"s_nationkey\":0,\"s_phone\":0,\"s_acctbal\":0,\"s_comment\":0}}",
+        "tags": {
+            "INSERTION_TIME": "1709133407000003",
+            "MIN_INSERTION_TIME": "1709133407000003",
+            "MAX_INSERTION_TIME": "1709133407000003",
+            "OPTIMIZE_TARGET_SIZE": "268435456"
+        }
+    }
+}

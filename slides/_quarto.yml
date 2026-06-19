@@ -1,0 +1,52 @@
+project:
+  output-dir: _site
+  preview:
+    host: 0.0.0.0
+    port: 6778
+    browser: false
+    watch-inputs: true
+
+format:
+  revealjs: 
+    theme: [white, utils/slides.scss]
+    menu: true
+    progress: true
+    slide-number: true
+    default-image-extension: ""
+    footer: "Matteo Francia - Big Data and Cloud Platforms (Module 2) - A.Y. 2025/26"
+    # navigation-mode: vertical
+    controls-layout: bottom-right
+    controls-tutorial: true
+    preview-links: auto
+    reference-location: document
+    footnotes-hover: true
+    scrollable: false
+    width: 1280
+    pdf-separate-fragments: true
+    echo: true
+    code-fold: show
+    code-copy: false
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+
+  pptx:
+    reference-doc: slides.pptx
+
+  html:
+    code-line-numbers: true
+    code-fold: show
+    code-copy: false
+    code-tools:
+      source: true
+      toggle: false
+      caption: none
+
+author: Matteo Francia <br/> DISI --- University of Bologna <br/> m.francia@unibo.it
+title: Big Data and Cloud Platforms (Module 2)
+bibliography:
+  - refs/refs.bib
+
+execute:
+    enabled: false
