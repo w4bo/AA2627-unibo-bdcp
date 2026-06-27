@@ -1,4 +1,4 @@
-awswrangler==3.16.1
+awswrangler==3.17.0
 flaml[automl]==2.6.0
 jupyter==1.1.1
 matplotlib==3.11.0
