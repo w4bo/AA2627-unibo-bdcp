@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="07-computing_files/libs/quarto-html/tabby.min.js"></script>
+<script src="07-computing_files/libs/quarto-html/popper.min.js"></script>
+<script src="07-computing_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="07-computing_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="07-computing_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="07-computing_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Matteo Francia   DISI — University of Bologna   m.francia@unibo.it">
+  <title>Big Data and Cloud Platforms (Module 2)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="07-computing_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="07-computing_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="07-computing_files/libs/revealjs/dist/theme/quarto-631d64cbe8f93e46e3d9b034de013131.css">
+  <link href="07-computing_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="07-computing_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="07-computing_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="07-computing_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="07-computing_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="07-computing_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Big Data and Cloud Platforms (Module 2)</h1>
+  <p class="subtitle">Data pipelines on cloud (Computing)</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it 
+</div>
+</div>
+</div>
+
+</section>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="img/281.svg" class="r-stretch quarto-figure-center"><p class="caption">Computing</p></section>
+
+<section id="supporting-data-pipelines" class="title-slide slide level1 center">
+<h1>Supporting data pipelines</h1>
+<p>We can choose the XaaS configuration to build our pipelines</p>
+</section>
+
+<section id="supporting-data-pipelines-iaas" class="title-slide slide level1 center">
+<h1>Supporting data pipelines: <em>IaaS</em></h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Outsource virtual machines to the cloud (<a href="https://aws.amazon.com/ec2">AWS EC2</a>)</li>
+<li>(You) Manage technological and business challenges</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides197.png"></p>
+<figcaption>EC2</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="single-instance-aws-ec2" class="title-slide slide level1 center">
+<h1>Single instance: AWS EC2</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Amazon <strong>Elastic Compute Cloud</strong> (EC2)</p>
+<ul>
+<li>A web service that provides resizable computing capacity</li>
+<li>Complete control of computing resources
+<ul>
+<li>Processor, storage, networking, OS, and purchase model</li>
+</ul></li>
+</ul>
+<p>The <a href="https://aws.amazon.com/ec2/instance-types">instance type</a> determines the hardware</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compute-optimized-instances.html">Different</a> compute and memory capabilities</li>
+</ul>
+<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instances-and-amis.html">Amazon Machine Image</a> is a software template</p>
+<ul>
+<li>The EC2 instance is used for creating the virtual server instance</li>
+<li>The AMI is the EC2 virtual machine image</li>
+</ul>
+<p>Interact with EC2 instance as with any computer</p>
+<ul>
+<li>You have complete control of your instances</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides199.png"></p>
+<figcaption>AMI Instance</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="single-instance-aws-ec2-1" class="title-slide slide level1 center">
+<h1>Single instance: AWS EC2</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides201.png"></p>
+<figcaption>General purpose</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides200.png"></p>
+<figcaption>Compute optimized</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="supporting-data-pipelines-paas" class="title-slide slide level1 center">
+<h1>Supporting data pipelines: <em>PaaS</em></h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Outsource the data ecosystem to the cloud (e.g., <a href="https://aws.amazon.com/emr">AWS EMR</a>)</li>
+<li>(You) Manage business challenges</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides198.png"></p>
+<figcaption>EMR</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="cluster-aws-emr" class="title-slide slide level1 center">
+<h1>Cluster: AWS EMR</h1>
+<p>Amazon EMR is a data platform based on the Hadoop stack</p>
+<ul>
+<li>Apache Spark, Apache Hive, Apache HBase, etc.</li>
+<li>You can run workloads on
+<ul>
+<li>Amazon EC2 instances</li>
+<li>Amazon Elastic Kubernetes Service (EKS) clusters</li>
+</ul></li>
+</ul>
+<p>Example of workload</p>
+<ul>
+<li>Upload input data into Amazon S3</li>
+<li>EMR launches EC2 instances that you specified</li>
+<li>EMR begins the execution while pulling the input data from S3 into the launched instances</li>
+<li>Once the cluster is finished, EMR transfers output data to Amazon S3</li>
+</ul>
+</section>
+
+<section id="aws-emr" class="title-slide slide level1 center">
+<h1>AWS EMR</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/288a.svg"></p>
+<figcaption>Deploy multiple clusters</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/288b.svg"></p>
+<figcaption>Add or remove capacity at any time</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="aws-emr-1" class="title-slide slide level1 center">
+<h1>AWS EMR</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>EMR cluster</p>
+<p><em>Master group</em></p>
+<ul>
+<li>Control the cluster</li>
+<li>Coordinate the work distribution</li>
+<li>Manage the cluster state</li>
+</ul>
+<p><em>Core groups</em></p>
+<ul>
+<li>Run Data Node (HDFS) daemons</li>
+</ul>
+<p>(Optional) Task instances</p>
+<ul>
+<li>Provide computational power</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="img/289.svg"></p>
+</div></div>
+</section>
+
+<section id="aws-emr-2" class="title-slide slide level1 center">
+<h1>AWS EMR</h1>
+<p>The central component of Amazon EMR is the <em>cluster</em></p>
+<ul>
+<li>A collection of <em>Amazon Elastic Compute Cloud (Amazon EC2)</em> instances</li>
+<li>Each instance is called a <em>node</em></li>
+</ul>
+<p>The <em>node type</em> identifies the role within the cluster</p>
+<ul>
+<li><em>Master</em> node coordinates the distribution of data and tasks among other nodes
+<ul>
+<li>Every cluster has (at least) a master node</li>
+<li>Always active</li>
+</ul></li>
+<li><em>Core</em> node runs tasks and store data in the Hadoop Distributed File System (HDFS)
+<ul>
+<li>Multi-node clusters have at least one core node</li>
+<li>Always active, contains the data node daemon</li>
+</ul></li>
+<li><em>Task</em> node only runs tasks
+<ul>
+<li>Task nodes are optional</li>
+<li>Decoupling processing and storage, we lose data locality</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="aws-emr-pricing" class="title-slide slide level1 center">
+<h1>AWS EMR: <a href="https://aws.amazon.com/ec2/pricing/">pricing</a></h1>
+<p><em>On-Demand Instance</em></p>
+<ul>
+<li>Pay for computing capacity by the hour (minimum of 60 seconds)</li>
+<li>No long-term commitments</li>
+</ul>
+<p><em>Spot Instance</em></p>
+<ul>
+<li>Unused EC2 instance that is available for less than the on-demand price</li>
+<li>The hourly price is called <em>spot price</em>
+<ul>
+<li>Adjusted based on long-term supply and demand for spot instances</li>
+</ul></li>
+<li>Run the instance when capacity is available and the price is below the threshold
+<ul>
+<li>When data-center resources are low, spot instances are dropped</li>
+<li>Mainly suitable for batch workloads</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="aws-emr-3" class="title-slide slide level1 center">
+<h1>AWS EMR</h1>
+<p>Spot Instance cost strategies</p>
+<p><em>Capacity-optimized strategy</em></p>
+<ul>
+<li>Allocated instances into the most available pools</li>
+<li>Look at real-time capacity data, and predict which are the most available</li>
+<li>Works well for workloads such as big data and analytics</li>
+<li>Works well when we have a high cost of interruption</li>
+</ul>
+<p><em>Lowest-price strategy</em></p>
+<ul>
+<li>Allocates instances in pools with the lowest price at the time of fulfillment</li>
+</ul>
+</section>
+
+<section id="creating-the-cluster" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+<p>Choose to launch <strong>master</strong>, <strong>core</strong>, or <strong>task</strong> on Spot Instances</p>
+<ul>
+<li>The <strong>master</strong> node controls the cluster
+<ul>
+<li>When terminated, the cluster ends</li>
+<li>Use <em>spot instances</em> if you are running a cluster where sudden termination is acceptable</li>
+</ul></li>
+<li><strong>Core</strong> nodes process data and store information using HDFS
+<ul>
+<li>When terminated, data is lost</li>
+<li>Use <em>spot instances</em> when partial HDFS data loss is tolerable</li>
+</ul></li>
+<li><strong>Task</strong> nodes process data but do not hold persistent data in HDFS
+<ul>
+<li>When terminated, computational capacity is lost</li>
+<li>The effect of spot instances on the cluster is “minimal”</li>
+</ul></li>
+</ul>
+<p><a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html">https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html</a></p>
+</section>
+
+<section id="creating-the-cluster-1" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+
+<img data-src="img/slides290.png" class="r-stretch"></section>
+
+<section id="creating-the-cluster-2" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+<p>Amazon EMR provides two main file systems</p>
+<ul>
+<li><strong>HDFS</strong> and <strong>EMRFS</strong>, specify which file system to use by the prefix</li>
+<li><code>hdfs://path</code> (or just <code>path</code>)
+<ul>
+<li>HDFS is used by the master and core nodes</li>
+<li><em>AWS EBS volume storage is used for HDFS data</em></li>
+<li>It is fast and best used for caching the results produced by intermediate job-flow steps. <em>Why?</em></li>
+<li>It’s temporary storage which is reclaimed when the cluster ends</li>
+</ul></li>
+<li><code>s3://DOC-EXAMPLE-BUCKET1/path</code> (EMRFS)
+<ul>
+<li>An implementation of the Hadoop file system atop Amazon S3</li>
+<li>We can avoid EBS storage</li>
+</ul></li>
+</ul>
+<p><a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-storage.html">https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-storage.html</a></p>
+</section>
+
+<section id="creating-the-cluster-3" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+
+<img data-src="img/slides291.png" class="r-stretch quarto-figure-center"><p class="caption">Software and steps</p></section>
+
+<section id="creating-the-cluster-4" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+
+<img data-src="img/slides288.png" class="r-stretch quarto-figure-center"><p class="caption">Hardware</p></section>
+
+<section id="creating-the-cluster-5" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+
+<img data-src="img/slides293.png" class="r-stretch quarto-figure-center"><p class="caption">General cluster settings</p></section>
+
+<section id="creating-the-cluster-6" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+
+<img data-src="img/slides294.png" class="r-stretch quarto-figure-center"><p class="caption">Security</p></section>
+
+<section id="creating-the-cluster-7" class="title-slide slide level1 center">
+<h1>Creating the cluster</h1>
+<p><em>Infrastructure as code</em>: using CLI (command line interface)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">aws</span> emr create-cluster</span>
+<span id="cb1-2"><a href=""></a>  <span class="ex">--auto-scaling-role</span> EMR_AutoScaling_DefaultRole</span>
+<span id="cb1-3"><a href=""></a>  <span class="ex">--termination-protected</span></span>
+<span id="cb1-4"><a href=""></a>  <span class="ex">--applications</span> Name=Hadoop Name=Hive Name=Hue Name=JupyterEnterpriseGateway Name=Spark</span>
+<span id="cb1-5"><a href=""></a>  <span class="ex">--ebs-root-volume-size</span> 10</span>
+<span id="cb1-6"><a href=""></a>  <span class="ex">--ec2-attributes</span> <span class="st">'{"KeyName":"bigdata","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-5fa2f912","EmrManagedSlaveSecurityGroup":"sg-07818b5690a50b3f1","EmrManagedMasterSecurityGroup":"sg-0e2f5550a2cb98f79"}'</span></span>
+<span id="cb1-7"><a href=""></a>  <span class="ex">--service-role</span> EMR_DefaultRole</span>
+<span id="cb1-8"><a href=""></a>  <span class="ex">--enable-debugging</span></span>
+<span id="cb1-9"><a href=""></a>  <span class="ex">--release-label</span> emr-6.2.0</span>
+<span id="cb1-10"><a href=""></a>  <span class="ex">--log-uri</span> <span class="st">'s3n://aws-logs-604905954159-us-east-1/elasticmapreduce/'</span></span>
+<span id="cb1-11"><a href=""></a>  <span class="ex">--name</span> <span class="st">'BigData'</span></span>
+<span id="cb1-12"><a href=""></a>  <span class="ex">--instance-groups</span> <span class="st">'</span></span>
+<span id="cb1-13"><a href=""></a><span class="st">    [{  "InstanceCount": 1,</span></span>
+<span id="cb1-14"><a href=""></a><span class="st">        "BidPrice": "OnDemandPrice",</span></span>
+<span id="cb1-15"><a href=""></a><span class="st">        "EbsConfiguration": {</span></span>
+<span id="cb1-16"><a href=""></a><span class="st">          "EbsBlockDeviceConfigs": [{</span></span>
+<span id="cb1-17"><a href=""></a><span class="st">            "VolumeSpecification": { "SizeInGB": 32, "VolumeType": "gp2" },</span></span>
+<span id="cb1-18"><a href=""></a><span class="st">            "VolumesPerInstance": 2</span></span>
+<span id="cb1-19"><a href=""></a><span class="st">          }]},</span></span>
+<span id="cb1-20"><a href=""></a><span class="st">        "InstanceGroupType": "MASTER",</span></span>
+<span id="cb1-21"><a href=""></a><span class="st">        "InstanceType": "m4.xlarge",</span></span>
+<span id="cb1-22"><a href=""></a><span class="st">        "Name": "Master - 1"</span></span>
+<span id="cb1-23"><a href=""></a><span class="st">      }, {</span></span>
+<span id="cb1-24"><a href=""></a><span class="st">        "InstanceCount": 1,</span></span>
+<span id="cb1-25"><a href=""></a><span class="st">        "BidPrice": "OnDemandPrice",</span></span>
+<span id="cb1-26"><a href=""></a><span class="st">        "EbsConfiguration": {</span></span>
+<span id="cb1-27"><a href=""></a><span class="st">          "EbsBlockDeviceConfigs": [{</span></span>
+<span id="cb1-28"><a href=""></a><span class="st">            "VolumeSpecification": { "SizeInGB": 32, "VolumeType": "gp2" },</span></span>
+<span id="cb1-29"><a href=""></a><span class="st">            "VolumesPerInstance": 2</span></span>
+<span id="cb1-30"><a href=""></a><span class="st">      }]},</span></span>
+<span id="cb1-31"><a href=""></a><span class="st">      "InstanceGroupType": "CORE",</span></span>
+<span id="cb1-32"><a href=""></a><span class="st">      "InstanceType": "m4.xlarge",</span></span>
+<span id="cb1-33"><a href=""></a><span class="st">      "Name": "Core - 2"}]'</span></span>
+<span id="cb1-34"><a href=""></a>  <span class="ex">--scale-down-behavior</span> TERMINATE_AT_TASK_COMPLETION</span>
+<span id="cb1-35"><a href=""></a>  <span class="ex">--region</span> us-east-1</span></code></pre></div>
+</section>
+
+<section id="cluster-lifecycle" class="title-slide slide level1 center">
+<h1>Cluster lifecycle</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Creating a cluster (it takes ~10 minutes)</p>
+<ul>
+<li>A cluster cannot be stopped</li>
+<li>It can only be terminated</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides295.png"></p>
+<figcaption>Lifecycle</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="cluster-lifecycle-1" class="title-slide slide level1 center">
+<h1>Cluster lifecycle</h1>
+<p><code>STARTING</code>: EMR provisions EC2 instances for each required instance</p>
+<p><code>BOOTSTRAPPING</code>: EMR runs actions that you specify on each instance</p>
+<ul>
+<li>E.g., install custom applications and perform customizations such as Hive, Hadoop, Spark, and so on</li>
+</ul>
+<p><code>RUNNING</code>: a step for the cluster is currently being run</p>
+<ul>
+<li>Cluster sequentially runs any steps that you specified when you created the cluster</li>
+</ul>
+<p><code>WAITING</code>: after steps run successfully</p>
+<p><code>TERMINATING</code>: after manual shutdown</p>
+<ul>
+<li><em>Any data stored on the cluster is deleted</em></li>
+</ul>
+</section>
+
+<section id="cluster-lifecycle-2" class="title-slide slide level1 center">
+<h1>Cluster lifecycle</h1>
+<p>A <strong>step</strong> is a user-defined unit of processing</p>
+<ul>
+<li>E.g., one algorithm that manipulates the data</li>
+</ul>
+<p>Step states</p>
+<ul>
+<li><code>PENDING</code>: The step is waiting to be run</li>
+<li><code>RUNNING</code>: The step is currently running</li>
+<li><code>COMPLETED</code>: The step completed successfully</li>
+<li><code>CANCELLED</code>: The step was canceled before running because an earlier step failed</li>
+<li><code>FAILED</code>: The step failed while running</li>
+</ul>
+</section>
+
+<section id="running-the-cluster" class="title-slide slide level1 center">
+<h1>Running the cluster</h1>
+
+<img data-src="img/slides296.png" class="r-stretch"></section>
+
+<section id="running-the-cluster-1" class="title-slide slide level1 center">
+<h1>Running the cluster</h1>
+
+
+<img data-src="img/slides297.png" class="r-stretch"></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Matteo Francia - Big Data and Cloud Platforms (Module 2) - A.Y. 2026/27</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="07-computing_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="07-computing_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="07-computing_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="07-computing_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': true,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

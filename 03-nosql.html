@@ -1,0 +1,2844 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="03-nosql_files/libs/quarto-html/tabby.min.js"></script>
+<script src="03-nosql_files/libs/quarto-html/popper.min.js"></script>
+<script src="03-nosql_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="03-nosql_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="03-nosql_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="03-nosql_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Matteo Francia   DISI — University of Bologna   m.francia@unibo.it">
+  <title>Big Data and Cloud Platforms (Module 2)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="03-nosql_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="03-nosql_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="03-nosql_files/libs/revealjs/dist/theme/quarto-631d64cbe8f93e46e3d9b034de013131.css">
+  <link href="03-nosql_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="03-nosql_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="03-nosql_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="03-nosql_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="03-nosql_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="03-nosql_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Big Data and Cloud Platforms (Module 2)</h1>
+  <p class="subtitle">NoSQL DBMS</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it 
+</div>
+</div>
+</div>
+
+</section>
+<section id="not-only-sql" class="title-slide slide level1 center">
+<h1>Not only SQL</h1>
+<p>After the relational model <span class="citation" data-cites="DBLP:journals/cacm/Codd70">(<a href="#/references" role="doc-biblioref" onclick="">Codd 1970</a>)</span> new types of databases have emerged.</p>
+</section>
+
+<section id="strengths-of-rdbmss" class="title-slide slide level1 center">
+<h1>Strengths of RDBMSs?</h1>
+
+</section>
+
+<section id="strengths-of-rdbmss-1" class="title-slide slide level1 center">
+<h1>Strengths of RDBMSs</h1>
+<p><em>ACID properties</em></p>
+<ul>
+<li>Provides guarantees in terms of consistency and concurrent accesses</li>
+</ul>
+<p><em>Data integration and normalization of schemas</em></p>
+<ul>
+<li>Several applications can share and reuse the same information</li>
+</ul>
+<p><em>Standard model and query language</em></p>
+<ul>
+<li>The relational model and SQL are very well-known standards</li>
+<li>The different implementations share the same theoretical background</li>
+</ul>
+<p><em>Robustness</em></p>
+<ul>
+<li>Have been used for over 40 years</li>
+</ul>
+</section>
+
+<section id="weaknesses-of-rdbms" class="title-slide slide level1 center">
+<h1>Weaknesses of RDBMS?</h1>
+
+</section>
+
+<section id="weaknesses-of-rdbms-1" class="title-slide slide level1 center">
+<h1>Weaknesses of RDBMS</h1>
+<p><em>Impedance mismatch</em></p>
+<ul>
+<li>Data are stored according to the relational model, but applications to modify them typically rely on the object-oriented model</li>
+<li>Many solutions, no standard
+<ul>
+<li>E.g.: Object Oriented DBMS (OODBMS), Object-Relational DBMS (ORDBMS), Object-Relational Mapping (ORM) frameworks</li>
+</ul></li>
+</ul>
+<p><em>Painful scaling-out</em></p>
+<ul>
+<li>Not suited for a cluster architecture</li>
+<li>Distributing an RDBMS is neither easy nor cheap (e.g., Oracle RAC)</li>
+</ul>
+<p><em>Consistency vs latency</em></p>
+<ul>
+<li>Consistency is a must – even at the expense of latency</li>
+<li>Today’s applications require high reading/writing throughput with low latency</li>
+</ul>
+<p><em>Schema rigidity</em></p>
+<ul>
+<li>Schema evolution is often expensive</li>
+</ul>
+</section>
+
+<section id="what-nosql-means" class="title-slide slide level1 center">
+<h1>What NoSQL means</h1>
+<p>The term was first used in 1998 by Carlo Strozzi.</p>
+<ul>
+<li>It referred to an open-source RDBMS that used a query language different from SQL</li>
+</ul>
+<p>In 2009, it was adopted by a meetup in San Francisco.</p>
+<ul>
+<li>Goal: discuss open-source projects related to the newest databases from Google and Amazon</li>
+<li>Participants: Voldemort, Cassandra, Dynomite, HBase, Hypertable, CouchDB, MongoDB</li>
+</ul>
+<p>Today, <em>NoSQL</em> indicates <em>DBMSs</em> adopting a <em>different data model from the relational one</em></p>
+<ul>
+<li><strong>NoSQL = Not Only SQL</strong></li>
+<li>According to Strozzi himself, NoREL would have been a more proper noun</li>
+</ul>
+</section>
+
+<section id="the-first-nosql-systems" class="title-slide slide level1 center">
+<h1>The first NoSQL systems</h1>
+<p><em>LiveJournal, 2003</em></p>
+<ul>
+<li>Goal: reduce the number of queries on a DB from a pool of web servers</li>
+<li>Solution: <em>Memcached</em>, designed to keep queries and results in RAM</li>
+</ul>
+<p><em>Google, 2005</em></p>
+<ul>
+<li>Goal: handle Big Data (web indexing, Maps, Gmail, etc.)</li>
+<li>Solution: <em>BigTable</em> <span class="citation" data-cites="DBLP:journals/tocs/ChangDGHWBCFG08">(<a href="#/references" role="doc-biblioref" onclick="">Chang et al. 2008</a>)</span>, designed for scalability and high performance on Petabytes of data</li>
+</ul>
+<p><em>Amazon, 2007</em></p>
+<ul>
+<li>Goal: ensure the availability and reliability of its e-commerce service 24/7</li>
+<li>Solution: <em>DynamoDB</em> <span class="citation" data-cites="sivasubramanian2012amazon">(<a href="#/references" role="doc-biblioref" onclick="">Sivasubramanian 2012</a>)</span>, characterized by strong simplicity for data storage and manipulation</li>
+</ul>
+</section>
+
+<section id="nosql-common-features" class="title-slide slide level1 center">
+<h1>NoSQL common features</h1>
+<p><em>Not just rows and tables</em>: several data models adopted to store and manipulate data</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Relational_database_terms.svg/2880px-Relational_database_terms.svg.png"></p>
+<figcaption>Relational data model</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/PageRanks-Example.svg/2560px-PageRanks-Example.svg.png"></p>
+<figcaption>Graph data model</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="nosql-common-features-1" class="title-slide slide level1 center">
+<h1>NoSQL common features</h1>
+<p><em>Freedom from joins</em>: joins are either not supported or discouraged</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Triangle-query-join-query-plan-r-st.svg/1920px-Triangle-query-join-query-plan-r-st.svg.png"></p>
+<figcaption>SQL Join</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="https://martinfowler.com/bliki/images/aggregateOrientedDatabase/aggregate-split.png"></p>
+<figcaption>Aggregate-oriented modeling</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="nosql-common-features-2" class="title-slide slide level1 center">
+<h1>NoSQL common features</h1>
+<p><em>Distributed, shared-nothing architecture</em></p>
+<ul>
+<li>A shared-nothing architecture is a distributed architecture in which each update request is satisfied by a single node in a computer cluster
+<ul>
+<li>Nodes do not share (independently access) the same memory or storage.</li>
+</ul></li>
+<li>Trivial scalability in a distributed environment with no performance decay</li>
+</ul>
+
+<img data-src="https://cloudian.com/wp-content/uploads/2024/02/Shared-Nothing-architecture.png" class="r-stretch quarto-figure-center"><p class="caption">Shared everything vs shared nothing</p></section>
+
+<section id="nosql-common-features-3" class="title-slide slide level1 center">
+<h1>NoSQL common features</h1>
+<p><em>Freedom from rigid schemas</em>: data can be stored or queried without pre-defining a schema (<em>schemaless</em> or <em>soft-schema</em>)</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Product</th>
+<th style="text-align: center;">Name</th>
+<th style="text-align: center;">Price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">P1</td>
+<td style="text-align: center;">Beer</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">P2</td>
+<td style="text-align: center;">Cola</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">P3</td>
+<td style="text-align: center;">Pizza</td>
+<td style="text-align: center;">6</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb1-1"><a href=""></a><span class="ot">[</span></span>
+<span id="cb1-2"><a href=""></a>    <span class="fu">{</span></span>
+<span id="cb1-3"><a href=""></a>        <span class="dt">"Product"</span><span class="fu">:</span> <span class="st">"P1"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href=""></a>        <span class="dt">"Name"</span><span class="fu">:</span> <span class="st">"Beer"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href=""></a>        <span class="dt">"Price"</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href=""></a>        <span class="dt">"Quantity"</span><span class="fu">:</span> <span class="st">"0.4L"</span></span>
+<span id="cb1-7"><a href=""></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-8"><a href=""></a>    <span class="fu">{</span></span>
+<span id="cb1-9"><a href=""></a>        <span class="dt">"Product"</span><span class="fu">:</span> <span class="st">"P2"</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href=""></a>        <span class="dt">"Name"</span><span class="fu">:</span> <span class="st">"Milk"</span><span class="fu">,</span></span>
+<span id="cb1-11"><a href=""></a>        <span class="dt">"Price"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb1-12"><a href=""></a>        <span class="dt">"Expiration"</span><span class="fu">:</span> <span class="st">"2024-11-30"</span></span>
+<span id="cb1-13"><a href=""></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-14"><a href=""></a>    <span class="fu">{</span></span>
+<span id="cb1-15"><a href=""></a>        <span class="dt">"Product"</span><span class="fu">:</span> <span class="st">"P3"</span><span class="fu">,</span></span>
+<span id="cb1-16"><a href=""></a>        <span class="dt">"Name"</span><span class="fu">:</span> <span class="st">"Pizza"</span><span class="fu">,</span></span>
+<span id="cb1-17"><a href=""></a>        <span class="dt">"Price"</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span></span>
+<span id="cb1-18"><a href=""></a>        <span class="dt">"Ingredients"</span><span class="fu">:</span> <span class="ot">[</span><span class="er">...</span><span class="ot">]</span></span>
+<span id="cb1-19"><a href=""></a>    <span class="fu">}</span></span>
+<span id="cb1-20"><a href=""></a><span class="ot">]</span></span></code></pre></div>
+</div></div>
+</section>
+
+<section id="nosql-common-features-4" class="title-slide slide level1 center">
+<h1>NoSQL common features</h1>
+<p><em>SQL is dead, long live SQL</em>!</p>
+<ul>
+<li>Some systems do adopt SQL (or a SQL-like language)</li>
+</ul>
+</section>
+
+<section id="nosql-in-the-big-data-world" class="title-slide slide level1 center">
+<h1>NoSQL in the Big Data world</h1>
+<p><em>NoSQL</em> systems are mainly used for operational workloads (<em>OLTP</em>)</p>
+<ul>
+<li>Optimized for high read and write throughput on small amounts of data</li>
+</ul>
+<p><em>Big Data</em> technologies are mainly used for analytical workloads (<em>OLAP</em>)</p>
+<ul>
+<li>Optimized for high read throughput on large amounts of data</li>
+</ul>
+<p>Can NoSQL systems be used for OLAP?</p>
+<ul>
+<li>Possibly, but through Big Data analytical tools (e.g., Spark)</li>
+</ul>
+</section>
+
+<section id="nosql-several-data-models" class="title-slide slide level1 center">
+<h1>NoSQL: several data models</h1>
+<p>One of the key challenges is to determine which one best suits the required application.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Model</th>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Use cases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Key-value</strong></td>
+<td style="text-align: center;">Associates any kind of value to a string</td>
+<td style="text-align: center;">Dictionary, lookup table, cache, file, and image storage</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Document</strong></td>
+<td style="text-align: center;">Stores hierarchical data in a tree-like structure</td>
+<td style="text-align: center;">Documents, anything that fits into a hierarchical structure</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Wide-column</strong></td>
+<td style="text-align: center;">Stores sparse matrices where a cell is identified by the row and column keys</td>
+<td style="text-align: center;">Crawling, high-variability systems, sparse matrices</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Graph</strong></td>
+<td style="text-align: center;">Stores vertices and arches</td>
+<td style="text-align: center;">Social network queries, inference, pattern matching</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="running-example" class="title-slide slide level1 center">
+<h1>Running example</h1>
+<p>Typical use case: customers, orders, and products</p>
+
+<img data-src="img/99.svg" class="r-stretch quarto-figure-center"><p class="caption">Running example</p></section>
+
+<section id="relational-data-model" class="title-slide slide level1 center">
+<h1>Relational: data model</h1>
+<p>Based on tables and rows</p>
+
+<img data-src="img/slides70.png" class="r-stretch quarto-figure-center"><p class="caption">Relational model</p></section>
+
+<section id="data-modeling-example-relational-model" class="title-slide slide level1 center">
+<h1>Data modeling example: relational model</h1>
+
+<img data-src="img/slides71.png" class="r-stretch quarto-figure-center"><p class="caption">Relational implementation</p></section>
+
+<section id="graph-data-model-dblpconficdeangles12" class="title-slide slide level1 center">
+<h1>Graph: data model <span class="citation" data-cites="DBLP:conf/icde/Angles12">(<a href="#/references" role="doc-biblioref" onclick="">Angles 2012</a>)</span></h1>
+<p>Each DB contains one or more <em>graphs</em></p>
+<ul>
+<li>Each graph contains <em>vertices</em> and <em>arcs</em></li>
+<li><em>Vertices</em>: usually represent real-world entities
+<ul>
+<li>E.g.: people, organizations, web pages, workstations, cells, books, etc.</li>
+</ul></li>
+<li><em>Arcs</em>: represent directed relationships between the vertices
+<ul>
+<li>E.g.: friendship, work relationship, hyperlink, ethernet links, copyright, etc.</li>
+</ul></li>
+<li>Vertices and arcs are described by <em>properties</em></li>
+<li>Arcs are stored as physical pointers</li>
+</ul>
+
+<img data-src="img/slides72.png" class="r-stretch quarto-figure-center"><p class="caption">Property graph</p></section>
+
+<section id="data-modeling-example-graph-model" class="title-slide slide level1 center">
+<h1>Data modeling example: graph model</h1>
+<p>IDs are implicitly handled; different edge colors imply different edge types.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/104a.svg"></p>
+<figcaption>Graph implementation</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/104b.svg"></p>
+<figcaption>Running example</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="graph-storage" class="title-slide slide level1 center">
+<h1>Graph: storage</h1>
+<p><strong>Index-free adjacency</strong></p>
+<ul>
+<li>Each node directly references its adjacent (neighboring) nodes</li>
+<li>Accessing relationships is simply a memory pointer lookup</li>
+</ul>
+<p>Graph processing time</p>
+<ul>
+<li>Proportional to the amount of data processed</li>
+<li>Not increasing exponentially with the number of relationships traversed</li>
+</ul>
+</section>
+
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="https://dist.neo4j.com/wp-content/uploads/20181218005826/non-native-graph-database-relying-on-index.png" class="r-stretch quarto-figure-center"><p class="caption">Implementing a graph as a relational database</p></section>
+
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+
+<img data-src="https://dist.neo4j.com/wp-content/uploads/20181218005743/native-graph-technology-index-free-adjacency.png" class="r-stretch quarto-figure-center"><p class="caption">Index-free adjacency</p></section>
+
+<section id="graph-querying" class="title-slide slide level1 center">
+<h1>Graph: querying</h1>
+<p>Graph databases usually model relationship-rich scenarios.</p>
+<ul>
+<li><em>Query language based on detecting patterns</em> (e.g., Cypher)
+<ul>
+<li>Simplifies the navigation of the relationships</li>
+</ul></li>
+<li>Support for transactions, indexes, selections, and projections</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Query</th>
+<th style="text-align: left;">Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Find friends of friends</td>
+<td style="text-align: left;"><code>(user)-[:KNOWS]-(friend)-[:KNOWS]-(foaf)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Find shortest path from A to B</td>
+<td style="text-align: left;"><code>shortestPath((userA)-[:KNOWS*..5]-(userB))</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">What products were bought by users who purchased the same items?</td>
+<td style="text-align: left;"><code>(u)-[:PURCHASED]-&gt;(p)&lt;-[:PURCHASED]-()-[:PURCHASED]-&gt;(otherP)</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="graph-vs-aggregate-modeling" class="title-slide slide level1 center">
+<h1>Graph vs Aggregate modeling</h1>
+<p>The graph data model is intrinsically different from the others.</p>
+<p><strong>Data-driven modeling</strong></p>
+<ul>
+<li>Focused on the relationships rather than on the entities per se</li>
+<li><em>Limited scalability</em>: it is often impossible to shard a graph on several machines without “cutting” several arcs
+<ul>
+<li>I.e., having several cross-machine links</li>
+<li>Batch cross-machine queries: don’t follow relationships one by one, but “group them” to make fewer requests</li>
+<li>Limit the depth of cross-machine node searches</li>
+</ul></li>
+</ul>
+<p><strong>Aggregate-oriented modeling</strong>: data queries are stored together</p>
+<ul>
+<li>Aggregate = key-value pair, document, row (respectively)</li>
+<li>The aggregate is the atomic block (no guarantees for multi-aggregate operations)</li>
+</ul>
+<p>Based on the concept of encapsulation</p>
+<ul>
+<li>Avoid joins as much as possible and achieve <em>high scalability</em></li>
+<li>Data denormalization and <em>potential inconsistencies in the data</em></li>
+<li><em>Query-driven modeling</em></li>
+</ul>
+</section>
+
+<section id="document-data-model" class="title-slide slide level1 center">
+<h1>Document: data model</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Each DB contains one or more <em>collections</em> (corresponding to tables)</p>
+<ul>
+<li>Each collection contains a list of <em>documents</em> (usually JSON)</li>
+<li>Documents are hierarchically structured</li>
+</ul>
+<p>Each document contains a set of <em>fields</em></p>
+<ul>
+<li>The <em>ID</em> is mandatory</li>
+</ul>
+<p>Each field corresponds to a <em>key-value pair</em></p>
+<ul>
+<li><em>Key</em>: unique string in the document</li>
+<li><em>Value</em>: either simple (string, number, boolean) or complex (object, array, BLOB)
+<ul>
+<li>A complex field can contain other fields</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb2-1"><a href=""></a><span class="ot">[</span></span>
+<span id="cb2-2"><a href=""></a>    <span class="fu">{</span></span>
+<span id="cb2-3"><a href=""></a>        <span class="dt">"_id"</span><span class="fu">:</span> <span class="st">"A12345"</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href=""></a>        <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Alice"</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href=""></a>        <span class="dt">"address"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-6"><a href=""></a>            <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"1st Avenue"</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href=""></a>            <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"Wonderland"</span></span>
+<span id="cb2-8"><a href=""></a>        <span class="fu">},</span></span>
+<span id="cb2-9"><a href=""></a>        <span class="dt">"contacts"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-10"><a href=""></a>              <span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span> <span class="st">"email"</span><span class="fu">,</span> <span class="dt">"value"</span><span class="fu">:</span> <span class="st">"alice@example.com"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-11"><a href=""></a>              <span class="fu">{</span><span class="dt">"type"</span><span class="fu">:</span> <span class="st">"phone"</span><span class="fu">,</span> <span class="dt">"number"</span><span class="fu">:</span> <span class="st">"+123456789"</span><span class="fu">}</span></span>
+<span id="cb2-12"><a href=""></a>        <span class="ot">]</span></span>
+<span id="cb2-13"><a href=""></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-14"><a href=""></a>    <span class="fu">{</span></span>
+<span id="cb2-15"><a href=""></a>        <span class="dt">"_id"</span><span class="fu">:</span> <span class="st">"B67890"</span><span class="fu">,</span></span>
+<span id="cb2-16"><a href=""></a>        <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Bob"</span><span class="fu">,</span></span>
+<span id="cb2-17"><a href=""></a>        <span class="dt">"address"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-18"><a href=""></a>            <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"2nd Street"</span><span class="fu">,</span></span>
+<span id="cb2-19"><a href=""></a>            <span class="dt">"postalCode"</span><span class="fu">:</span> <span class="st">"47522"</span></span>
+<span id="cb2-20"><a href=""></a>        <span class="fu">},</span></span>
+<span id="cb2-21"><a href=""></a>        <span class="dt">"birthdate"</span><span class="fu">:</span> <span class="st">"1990-05-15"</span></span>
+<span id="cb2-22"><a href=""></a>    <span class="fu">}</span></span>
+<span id="cb2-23"><a href=""></a><span class="ot">]</span></span></code></pre></div>
+</div></div>
+</section>
+
+<section id="document-querying" class="title-slide slide level1 center">
+<h1>Document: querying</h1>
+<p>The query language is quite expressive.</p>
+<ul>
+<li>Return more documents with one query</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb3-1"><a href=""></a>db<span class="op">.</span><span class="at">collection</span><span class="op">.</span><span class="fu">find</span>({})  <span class="co">// retrieves multiple documents matching the filter</span></span></code></pre></div>
+<ul>
+<li>Select which fields to project</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb4-1"><a href=""></a>db<span class="op">.</span><span class="at">collection</span><span class="op">.</span><span class="fu">find</span>({}<span class="op">,</span> { <span class="dt">field1</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">field2</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">_id</span><span class="op">:</span> <span class="dv">0</span> })  <span class="co">// only include specific fields</span></span></code></pre></div>
+<ul>
+<li>Filter on the fields</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb5-1"><a href=""></a>db<span class="op">.</span><span class="at">collection</span><span class="op">.</span><span class="fu">find</span>({ <span class="dt">status</span><span class="op">:</span> <span class="st">"active"</span><span class="op">,</span> <span class="dt">age</span><span class="op">:</span> { <span class="dt">$gt</span><span class="op">:</span> <span class="dv">30</span> } })  <span class="co">// filter by conditions</span></span></code></pre></div>
+<ul>
+<li>Update specific fields</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb6-1"><a href=""></a>db<span class="op">.</span><span class="at">collection</span><span class="op">.</span><span class="fu">updateMany</span>(</span>
+<span id="cb6-2"><a href=""></a>  { <span class="dt">status</span><span class="op">:</span> <span class="st">"active"</span> }<span class="op">,</span>           <span class="co">// filter</span></span>
+<span id="cb6-3"><a href=""></a>  { <span class="dt">$set</span><span class="op">:</span> { <span class="dt">verified</span><span class="op">:</span> <span class="kw">true</span> } }    <span class="co">// update specific field(s)</span></span>
+<span id="cb6-4"><a href=""></a>)</span></code></pre></div>
+<p>Different implementations, different functionalities</p>
+<ul>
+<li>Create indexes on fields and (materialized) views</li>
+<li>Provide connectors to Big Data tools (e.g., Spark, Hive, MapReduce)</li>
+<li>Provide <em>full-text search</em> capabilities</li>
+</ul>
+</section>
+
+<section id="data-modeling-example-aggregate-model" class="title-slide slide level1 center">
+<h1>Data modeling example: aggregate model</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/109.svg"></p>
+<figcaption>Designing aggregates</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<p>Collection answering the blue query</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb7-1"><a href=""></a><span class="ot">[</span></span>
+<span id="cb7-2"><a href=""></a>  <span class="fu">{</span></span>
+<span id="cb7-3"><a href=""></a>    <span class="dt">"_id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href=""></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Martin"</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href=""></a>    <span class="dt">"adrs"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb7-6"><a href=""></a>      <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"Adam"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"Chicago"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"Illinois"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">60007</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb7-7"><a href=""></a>      <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"9th"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">10001</span> <span class="fu">}</span></span>
+<span id="cb7-8"><a href=""></a>    <span class="ot">]</span></span>
+<span id="cb7-9"><a href=""></a>  <span class="fu">}</span></span>
+<span id="cb7-10"><a href=""></a><span class="ot">]</span></span></code></pre></div>
+<div class="fragment">
+<p>Collection answering the purple query</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb8-1"><a href=""></a><span class="ot">[</span></span>
+<span id="cb8-2"><a href=""></a>  <span class="fu">{</span></span>
+<span id="cb8-3"><a href=""></a>    <span class="dt">"_id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href=""></a>    <span class="dt">"customer"</span><span class="fu">:</span> <span class="st">"1"</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href=""></a>    <span class="dt">"orderpayments"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb8-6"><a href=""></a>      <span class="fu">{</span> </span>
+<span id="cb8-7"><a href=""></a>        <span class="dt">"card"</span><span class="fu">:</span> <span class="dv">457</span><span class="fu">,</span></span>
+<span id="cb8-8"><a href=""></a>        <span class="dt">"billadrs"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"Adam"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"Chicago"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"Illinois"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">60007</span> <span class="fu">}</span> </span>
+<span id="cb8-9"><a href=""></a>      </span>
+<span id="cb8-10"><a href=""></a>      <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb8-11"><a href=""></a>      <span class="fu">{</span> </span>
+<span id="cb8-12"><a href=""></a>        <span class="dt">"card"</span><span class="fu">:</span> <span class="dv">457</span><span class="fu">,</span></span>
+<span id="cb8-13"><a href=""></a>        <span class="dt">"billadrs"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"9th"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">10001</span> <span class="fu">}</span></span>
+<span id="cb8-14"><a href=""></a>      <span class="fu">}</span></span>
+<span id="cb8-15"><a href=""></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-16"><a href=""></a>    <span class="dt">"products"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb8-17"><a href=""></a>      <span class="fu">{</span> <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Cola"</span><span class="fu">,</span> <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">10.4</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb8-18"><a href=""></a>      <span class="fu">{</span> <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Beer"</span><span class="fu">,</span> <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">14.4</span> <span class="fu">}</span></span>
+<span id="cb8-19"><a href=""></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-20"><a href=""></a>    <span class="dt">"shipadrs"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"9th"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">10001</span> <span class="fu">}</span></span>
+<span id="cb8-21"><a href=""></a>  <span class="fu">}</span></span>
+<span id="cb8-22"><a href=""></a><span class="ot">]</span></span></code></pre></div>
+</div>
+</div></div>
+</section>
+
+<section id="data-modeling-example-document-model" class="title-slide slide level1 center">
+<h1>Data modeling example: document model</h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/108.svg"></p>
+<figcaption>Designing aggregates</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb9-1"><a href=""></a><span class="ot">[</span></span>
+<span id="cb9-2"><a href=""></a>  <span class="fu">{</span></span>
+<span id="cb9-3"><a href=""></a>    <span class="dt">"_id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb9-4"><a href=""></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Martin"</span><span class="fu">,</span></span>
+<span id="cb9-5"><a href=""></a>    <span class="dt">"adrs"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb9-6"><a href=""></a>      <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"Adam"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"Chicago"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"Illinois"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">60007</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb9-7"><a href=""></a>      <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"9th"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">10001</span> <span class="fu">}</span></span>
+<span id="cb9-8"><a href=""></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb9-9"><a href=""></a>    <span class="dt">"orders"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb9-10"><a href=""></a>      <span class="fu">{</span></span>
+<span id="cb9-11"><a href=""></a>        <span class="dt">"orderpayments"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb9-12"><a href=""></a>          <span class="fu">{</span> <span class="dt">"card"</span><span class="fu">:</span> <span class="dv">457</span><span class="fu">,</span> <span class="dt">"billadrs"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"Adam"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"Chicago"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"Illinois"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">60007</span> <span class="fu">}</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb9-13"><a href=""></a>          <span class="fu">{</span> <span class="dt">"card"</span><span class="fu">:</span> <span class="dv">457</span><span class="fu">,</span> <span class="dt">"billadrs"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"9th"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">10001</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb9-14"><a href=""></a>        <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb9-15"><a href=""></a>        <span class="dt">"products"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb9-16"><a href=""></a>          <span class="fu">{</span> <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Cola"</span><span class="fu">,</span> <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">10.4</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb9-17"><a href=""></a>          <span class="fu">{</span> <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span> <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Beer"</span><span class="fu">,</span> <span class="dt">"price"</span><span class="fu">:</span> <span class="fl">14.4</span> <span class="fu">}</span></span>
+<span id="cb9-18"><a href=""></a>        <span class="ot">]</span></span>
+<span id="cb9-19"><a href=""></a>      <span class="fu">}</span></span>
+<span id="cb9-20"><a href=""></a>    <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb9-21"><a href=""></a>    <span class="dt">"shipadrs"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"street"</span><span class="fu">:</span> <span class="st">"9th"</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"state"</span><span class="fu">:</span> <span class="st">"New York"</span><span class="fu">,</span> <span class="dt">"code"</span><span class="fu">:</span> <span class="dv">10001</span> <span class="fu">}</span></span>
+<span id="cb9-22"><a href=""></a>  <span class="fu">}</span></span>
+<span id="cb9-23"><a href=""></a><span class="ot">]</span></span></code></pre></div>
+</div></div>
+</section>
+
+<section id="aggregate-modeling-strategy" class="title-slide slide level1 center">
+<h1>Aggregate modeling strategy</h1>
+<p>The <em>aggregate</em> term comes from Domain-Driven Design.</p>
+<ul>
+<li>An aggregate is a group of tightly coupled objects to be handled as a block</li>
+<li>Aggregates are the basic unit for data manipulation and consistency management</li>
+</ul>
+<p>Advantages</p>
+<ul>
+<li><em>Can be distributed trivially</em>
+<ul>
+<li>Data that should be used together (e.g., orders and details) is stored together</li>
+</ul></li>
+<li><em>Facilitate the developer’s job</em>
+<ul>
+<li>By surpassing the impedance mismatch problem</li>
+</ul></li>
+</ul>
+<p>Disadvantages</p>
+<ul>
+<li><strong>No design strategy exists for aggregates</strong>
+<ul>
+<li><em>It only depends on how they are meant to be used</em></li>
+</ul></li>
+<li>Can optimize only a limited set of queries</li>
+<li>Data denormalization -&gt; possible inconsistencies</li>
+</ul>
+<p>RDBMSs are agnostic from this point of view.</p>
+</section>
+
+<section id="sharding-data" class="title-slide slide level1 center">
+<h1>Sharding data</h1>
+<p>A look behind the curtain</p>
+</section>
+
+<section id="sharding-data-1" class="title-slide slide level1 center">
+<h1>Sharding data</h1>
+<p>One of the strengths of NoSQL systems is their <em>scale-out capability</em></p>
+<ul>
+<li><em>Aggregate data modeling</em>: well-suited for being distributed within a cluster</li>
+<li>NoSQL systems can be used in a <em>single server environment</em> too
+<ul>
+<li>Graph databases do not scale as well as the others</li>
+</ul></li>
+</ul>
+<p>Two aspects must be considered when deploying on a cluster.</p>
+<ul>
+<li><strong>Sharding</strong>: <em>distributing the data across different nodes</em></li>
+<li><strong>Replication</strong>: <em>creating copies of the data on several nodes</em></li>
+</ul>
+</section>
+
+<section id="sharding" class="title-slide slide level1 center">
+<h1>Sharding</h1>
+<p><strong>Sharding</strong>: subdividing data in <em>shards that are stored in different machines</em></p>
+<ul>
+<li>Intrinsic in a distributed DB</li>
+<li>Improves the efficiency of the system
+<ul>
+<li>Read/write operations are distributed</li>
+</ul></li>
+</ul>
+<p>A good <em>sharding strategy</em> is <strong>fundamental </strong> to optimize performances</p>
+<ul>
+<li>Usually based on one or more fields composing the sharding key</li>
+</ul>
+
+<img data-src="img/slides81.png" class="r-stretch quarto-figure-center"><p class="caption">Sharding</p></section>
+
+<section id="sharding-strategy" class="title-slide slide level1 center">
+<h1>Sharding strategy</h1>
+<p>Thumbs-up rules for a sharding strategy:</p>
+<p><em>Data-locality</em></p>
+<ul>
+<li>Store the data close to those who need to access it</li>
+<li>E.g., store orders of Italian customers in the European data center</li>
+</ul>
+<p><em>Keep a balanced distribution</em></p>
+<ul>
+<li>Each node should have the same percentage of data (more or less)</li>
+</ul>
+<p><em>Keep together the data that must be accessed together</em></p>
+<ul>
+<li>E.g., store each client’s orders in the same node</li>
+</ul>
+</section>
+
+<section id="sharding-strategy-1" class="title-slide slide level1 center">
+<h1>Sharding strategy</h1>
+<p><em>Hash strategy</em>: a hash function is used to allocate data to partitions</p>
+<ul>
+<li>Adopted by DynamoDB and Cassandra</li>
+<li>Pros:
+<ul>
+<li>ensures even data distribution across nodes and massive scalability</li>
+<li>new nodes can be added without heavy data redistribution</li>
+</ul></li>
+<li>Con: range queries become inefficient</li>
+</ul>
+
+<img data-src="img/slides82.png" class="r-stretch quarto-figure-center"><p class="caption">Hash sharding</p></section>
+
+<section id="sharding-strategy-2" class="title-slide slide level1 center">
+<h1>Sharding strategy</h1>
+<p><em>Range strategy</em>: each partition contains a range of sorted data</p>
+<ul>
+<li>Adopted by HBase</li>
+<li>Pro: efficiently run range queries that work on the sharding key values</li>
+<li>Cons:
+<ul>
+<li>global ordering often generates hot spots -&gt; risk of bottlenecks</li>
+<li>ranges are defined a priori, and this can determine heavy data redistribution</li>
+</ul></li>
+</ul>
+
+<img data-src="img/slides83.png" class="r-stretch quarto-figure-center"><p class="caption">Range strategy</p></section>
+
+<section id="sharding-strategy-3" class="title-slide slide level1 center">
+<h1>Sharding strategy</h1>
+<p><em>Auto-sharding</em>: the database distributes the data according to the workload</p>
+<ul>
+<li>Beware: redefining (or choosing later) the sharding strategy can be quite expensive</li>
+</ul>
+
+<img data-src="img/slides84.png" class="r-stretch quarto-figure-center"><p class="caption">Auto-sharding</p></section>
+
+<section id="replication" class="title-slide slide level1 center">
+<h1>Replication</h1>
+<p><strong>Replication</strong>: the data is <em>copied</em> on several nodes</p>
+<ul>
+<li>Improves the robustness of the system
+<ul>
+<li>In case of node failure, replicas prevent data loss</li>
+</ul></li>
+<li>Improves the efficiency of the system
+<ul>
+<li>More users read the same data from different copies, in parallel</li>
+<li>Higher chance of enforcing data-locality</li>
+</ul></li>
+</ul>
+<p>How to distribute the replicas?</p>
+<ul>
+<li>Random (possibly <em>topology-aware</em>) distribution of each record
+<ul>
+<li>Similar to HDFS blocks</li>
+</ul></li>
+<li>Replication of entire instances</li>
+</ul>
+<p>Main issue: each update must be pushed to every replica</p>
+<ul>
+<li>Two techniques to handle updates: master-slave, peer-to-peer</li>
+</ul>
+</section>
+
+<section id="master-slave-replication" class="title-slide slide level1 center">
+<h1>Master-slave replication</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><em>Master</em></p>
+<ul>
+<li>It’s the manager of the data</li>
+<li><em>Handles every write operation</em></li>
+<li>Can be chosen or drawn</li>
+</ul>
+<p><em>Slaves</em></p>
+<ul>
+<li>Enable read operations</li>
+<li>In sync with the master</li>
+<li>Can become a master if the latter fails</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides85.png"></p>
+<figcaption>Master-slave replication</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="master-slave-replication-1" class="title-slide slide level1 center">
+<h1>Master-slave replication</h1>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Easily handles many read requests
+<ul>
+<li>Slaves do not need the master to perform reads</li>
+</ul></li>
+<li>Useful when the workload mainly consists of reads</li>
+<li>Useful to avoid write conflicts</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li><em>The master is a bottleneck</em>
+<ul>
+<li><strong>Only the master can handle writes</strong></li>
+<li>In case of failure, a new master must be drawn</li>
+</ul></li>
+<li>Delay in write propagation can be a source of inconsistency
+<ul>
+<li>Two users may read different values at the same time</li>
+<li><em>Read inconsistency can be problematic, but it is relatively limited in time</em></li>
+</ul></li>
+<li>Not ideal when the workload mainly consists of writes</li>
+</ul>
+</section>
+
+<section id="peer-to-peer-replication" class="title-slide slide level1 center">
+<h1>Peer-to-peer replication</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Each node has the same importance.</p>
+<p><em>Each node can handle write operations</em></p>
+<p>The loss of a node does not compromise reads or writes.</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides86.png"></p>
+<figcaption>P2P replicaion</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="peer-to-peer-replication-1" class="title-slide slide level1 center">
+<h1>Peer-to-peer replication</h1>
+<p><strong>Pro</strong></p>
+<ul>
+<li>The failure of a node does not interrupt read or write requests</li>
+<li>Write performances easily scale by adding new nodes</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li><em>Conflicts! </em></li>
+<li>Delay in write propagation can be a source of inconsistency
+<ul>
+<li>Same as with master-slave replication</li>
+</ul></li>
+<li>Two users may update the same value from different replicas
+<ul>
+<li><em>Write inconsistencies are way worse</em></li>
+</ul></li>
+</ul>
+</section>
+
+<section id="handling-conflicts" class="title-slide slide level1 center">
+<h1>Handling conflicts</h1>
+<p>Read conflicts</p>
+<ul>
+<li><em>Tolerate conflicts</em>: the <em>inconsistency window</em> is usually limited</li>
+<li><em>Read-your-writes</em>: read consistency is guaranteed for the data written by the same user
+<ul>
+<li>Applies only to reads that immediately follow a write operation</li>
+<li>One way is to associate a user with a node (risk: unbalanced workloads)</li>
+<li>Typically, versioning fields are used to ensure that the up-to-date version is read</li>
+</ul></li>
+</ul>
+<p>Write conflicts (P2P model)</p>
+<ul>
+<li><em>Last write wins</em>: in case of conflict, the latest update overrides the others</li>
+<li><em>Conflict prevention</em>: enforce writes on the most recent version by verifying that the value hasn’t changed since the last read</li>
+<li><em>Conflict detection</em>: preserve history, merge results, and let the user decide</li>
+</ul>
+</section>
+
+<section id="the-quorum-mechanism" class="title-slide slide level1 center">
+<h1>The quorum mechanism</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>The <em>quorum mechanism</em> ensures consistent IO under replication.</p>
+<ul>
+<li>Based on contacting a majority of the nodes responsible for certain data</li>
+<li>The quorum is the minimum number of nodes that a distributed operation has to obtain to be allowed to operate on a replicated data item</li>
+</ul>
+<p>Each data item has <span class="math inline">\(N\)</span> replicas.</p>
+<ul>
+<li>Writing quorum: <span class="math inline">\(W &gt; \frac{N}{2}\)</span>
+<ul>
+<li>The write operation is allowed only if W replicas can be updated</li>
+<li>Ensures that two write operations cannot occur concurrently</li>
+</ul></li>
+<li>Reading quorum: <span class="math inline">\(R &gt; N-W\)</span>
+<ul>
+<li>The read operation is allowed only if R replicas can be read</li>
+<li>Ensures that (at least) one copy with the up-to-date value is read</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/133.svg"></p>
+<figcaption>Quorum</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="managing-consistency" class="title-slide slide level1 center">
+<h1>Managing consistency</h1>
+<p>A look behind the curtain</p>
+</section>
+
+<section id="rdbms-vs-nosql-different-philosophies" class="title-slide slide level1 center">
+<h1>RDBMS vs NoSQL: different philosophies</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>RDBMSs come from decades of widespread usage.</p>
+<ul>
+<li>Strong focus on data consistency</li>
+<li>Years of research activities to optimize performances</li>
+<li>Highly complex systems (triggers, caching, security, etc.)</li>
+</ul>
+<p>NoSQL systems are designed to succeed where RDBMSs fail.</p>
+<ul>
+<li>Strong focus on data sharding and high availability</li>
+<li>Quite simple systems (for now)</li>
+<li>Speed and manageability rather than consistency at all costs</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides87.png"></p>
+<figcaption>RDBMS vs NoSQL</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="consistency-an-example" class="title-slide slide level1 center">
+<h1>Consistency: an example</h1>
+<p>Consider 1000€ to be transferred from bank account A to B; the transfer is made by:</p>
+<ul>
+<li>Removing 1000€ from A</li>
+<li>Adding 1000€ to B</li>
+</ul>
+<p>What should never happen</p>
+<ul>
+<li>The money is removed from A but not added to B</li>
+<li>The money is added twice to B</li>
+<li>A query on the database shows an intermediate state
+<ul>
+<li>E.g., A+B = 0€</li>
+</ul></li>
+</ul>
+<p>RDBMSs adopt <em>transactions </em> to avoid this kind of issue.</p>
+</section>
+
+<section id="consistency-in-rdbmss-acid" class="title-slide slide level1 center">
+<h1>Consistency in RDBMSs: ACID</h1>
+<p>Transactions guarantee four fundamental properties: ACID.</p>
+<p><em>A</em>tomicity</p>
+<ul>
+<li>The transaction is indivisible: either it fully completes, or it fails</li>
+<li>It cannot be completed partially</li>
+</ul>
+<p><em>C</em>onsistency</p>
+<ul>
+<li>The transaction leaves the DB in a consistent state</li>
+<li>Integrity constraints can never be violated</li>
+</ul>
+<p><em>I</em>solation</p>
+<ul>
+<li>The transaction is independent of the others</li>
+<li>In case of concurrent transactions, the effect is the same as their sequential execution</li>
+</ul>
+<p><em>D</em>urability</p>
+<ul>
+<li>The DBMS protects the DB from failures</li>
+</ul>
+</section>
+
+<section id="consistency-in-rdbmss-acid-1" class="title-slide slide level1 center">
+<h1>Consistency in RDBMSs: ACID</h1>
+<p>Implementation of ACID properties relies on <em>locking mechanisms and logs</em></p>
+<ul>
+<li>Resources are locked, updates are logged</li>
+<li>In case of problems, rollback to the original state</li>
+<li>If no error occurs, unlock the resources</li>
+</ul>
+<p>Consistency is guaranteed to the detriment of speed and availability.</p>
+<ul>
+<li>The user may have to wait</li>
+<li>Hard to replicate this mechanism in a distributed environment</li>
+</ul>
+<p>But sometimes, consistency is not that important.</p>
+<ul>
+<li>E.g.: e-commerce application</li>
+<li>Shopping cart management requires speed and availability</li>
+<li>Order emission requires consistency</li>
+</ul>
+</section>
+
+<section id="consistency-in-nosql" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL</h1>
+<p>Several attempts have been made to describe NoSQL properties with respect to ACID properties.</p>
+<ul>
+<li>CAP theorem</li>
+<li>PACELC theorem</li>
+<li>BASE philosophy</li>
+</ul>
+<p>They are not properties on which NoSQL systems rely.</p>
+<ul>
+<li>Rather, they simply <em>try </em> to describe their behavior</li>
+</ul>
+</section>
+
+<section id="consistency-in-nosql-cap" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: CAP</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>“Theorem”: only two of the following three properties can be guaranteed</p>
+<p><em>C</em>onsistency: the system is always consistent</p>
+<ul>
+<li>Every node returns the same, most recent, successful write</li>
+<li>Every client has the same view of the data</li>
+</ul>
+<p><em>A</em>vailability: the system is always available</p>
+<ul>
+<li>Every non-failing node returns a response for all read and write requests in a reasonable amount of time</li>
+</ul>
+<p><em>P</em>artition tolerance: the system continues to function and upholds its consistency guarantees despite network partitions</p>
+<ul>
+<li>In distributed systems, network <strong>partitioning is inevitably a possibility</strong></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides88.png"></p>
+<figcaption>Network partitioning</figcaption>
+</figure>
+</div>
+</div></div>
+<p>See <a href="https://dl.acm.org/doi/pdf/10.1145/564585.564601?casa*token=m69maazxkqIAAAAA:cBn5y1eKnJUh7Tl4GVsw9Hqv984qwQ3*b8XvSM*wM3U2zp*-363uPINWJADEmMt-8ZjPzA1yaoE">CAP demonstration</a></p>
+</section>
+
+<section id="consistency-in-nosql-cap-1" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: CAP</h1>
+<p>Three situations</p>
+<ul>
+<li><em>CA</em>: the system cannot suffer from network partitioning (single server)</li>
+<li><em>AP</em>: in case of partitioning, the system sacrifices consistency (overbooking)</li>
+<li><em>CP</em>: in case of partitioning, the system sacrifices availability (bookings prevented)</li>
+</ul>
+<p>Theorem interpretation is not trivial.</p>
+<ul>
+<li>Asymmetric properties: consistency is sacrificed to favor speed at all times, not just when partitioning happens</li>
+<li>Different application requirements -&gt; different algorithms handle these properties more strictly/loosely</li>
+</ul>
+</section>
+
+<section id="consistency-in-nosql-relaxing-cap" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: relaxing CAP</h1>
+<p>Consider two users who want to book the same room when a network partition happens.</p>
+<p><strong>CP</strong>: no one can book (<em>A is sacrificed</em>)</p>
+<ul>
+<li>Not the best solution</li>
+</ul>
+<p><strong>AP</strong>: both can book (<em>C is sacrificed</em>)</p>
+<ul>
+<li>Possible overbooking: writing conflict to handle</li>
+</ul>
+<p><strong>caP</strong>: only one can book</p>
+<ul>
+<li>The other will see the room available, but cannot book it</li>
+</ul>
+<p><em>This is admissible only in certain scenarios</em></p>
+<ul>
+<li>Finance? Blogs? E-commerce?</li>
+</ul>
+<p>It’s important to understand:</p>
+<ul>
+<li><em>What is the tolerance to obsolete reads</em></li>
+<li><em>How large can the inconsistency window be</em></li>
+</ul>
+</section>
+
+<section id="consistency-in-nosql-pacelc" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: PACELC</h1>
+<p>Evolution of the CAP theorem (less known, but more precise)</p>
+<p>If (<em>P</em>artition) then { <em>A</em>vailability or <em>C</em>onsistency? } Else { <em>L</em>atency or <em>C</em>onsistency? }</p>
+<p>Different behavior in the case of partitioning</p>
+<ul>
+<li>PA: in case of partitioning, the system sacrifices consistency (overbooking)</li>
+<li>PC: in case of partitioning, the system sacrifices availability (bookings prevented)</li>
+<li>EL: otherwise, the system sacrifices consistency in favor of speed</li>
+<li>EC: otherwise, the system sacrifices speed in favor of consistency</li>
+</ul>
+<p>Four situations:</p>
+<ul>
+<li>PA EL: system focused on speed and availability (main NoSQL philosophy)</li>
+<li>PA EC: consistency sacrificed only when partitioning happens</li>
+<li>PC EL: consistency enforced only when partitioning happens (e.g., Yahoo Sherpa)</li>
+<li>PC EC: system focused on consistency (RDBMS)</li>
+</ul>
+</section>
+
+<section id="consistency-in-nosql-base" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: BASE</h1>
+<p>The CAP theorem is often cited as a justification for the use of weaker consistency models, for example, <strong>BASE</strong></p>
+<ul>
+<li><em>Basically Available Soft-state services with Eventual consistency</em></li>
+</ul>
+<p><em>B</em>asic <em>A</em>vailability: the system should always be available</p>
+<p><em>S</em>oft-state: it is acceptable for the system to be temporarily inconsistent</p>
+<p><em>E</em>ventual consistency: eventually, the system becomes consistent</p>
+<p>ACID</p>
+<ul>
+<li>Pessimistic approach (better safe than sorry)</li>
+</ul>
+<p>BASE</p>
+<ul>
+<li>Optimistic approach (everything is going to be ok)</li>
+<li>Higher throughput is better than enforcing consistency</li>
+</ul>
+</section>
+
+<section id="consistency-in-nosql-summary" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: summary</h1>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Source</th>
+<th style="text-align: center;">Cause</th>
+<th style="text-align: center;">Effect</th>
+<th style="text-align: center;">Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Replication (MS and P2P)</td>
+<td style="text-align: center;">Write propagation delay between replicas is slow</td>
+<td style="text-align: center;">Read conflicts</td>
+<td style="text-align: center;">- Tolerate<br>- Read-your-writes<br>- Quorum</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Replication (P2P)</td>
+<td style="text-align: center;">Two write operations can be issued on different replicas</td>
+<td style="text-align: center;">Write conflicts</td>
+<td style="text-align: center;">- Last write wins<br>- Conflict prevention<br>- Conflict detection<br>- Quorum</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Network partitioning</td>
+<td style="text-align: center;">Inability to communicate with all replicas of a certain data</td>
+<td style="text-align: center;">- Read conflicts<br>- Possibly write conflicts</td>
+<td style="text-align: center;">- Relax CAP<br>- Prevent write conflicts<br>- Handle read conflict as above</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">No ACID transactions</td>
+<td style="text-align: center;">- An update over multiple records fails mid-query<br>- Two updates over multiple records are interleaved</td>
+<td style="text-align: center;">Unrecoverable inconsistency</td>
+<td style="text-align: center;">- Each system provides its own mechanism to offer limited ACID-like transactions</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Data de-normalization</td>
+<td style="text-align: center;">The same data is repeated in different instances with different values</td>
+<td style="text-align: center;">Inability to find the correct values</td>
+<td style="text-align: center;">- Avoid denormalization if strong consistency is needed<br>- Data cleaning before analysis</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="one-size-does-not-fit-all" class="title-slide slide level1 center">
+<h1>One size does not fit all</h1>
+<p>To each application, its own data model</p>
+</section>
+
+<section id="document-popular-dbs" class="title-slide slide level1 center">
+<h1>Document: popular DBs</h1>
+<p><strong>MongoDB</strong>: <a href="http://www.mongodb.org/">http://www.mongodb.org</a></p>
+<p><strong>Couchbase: </strong> <a href="http://www.couchbase.com/">http://www.couchbase.com</a></p>
+<p><strong>CouchDB</strong>: <a href="http://couchdb.apache.org/">http://couchdb.apache.org</a></p>
+</section>
+
+<section id="document-when-to-use" class="title-slide slide level1 center">
+<h1>Document: when to use</h1>
+<p>Higher expressiveness</p>
+<ul>
+<li>Store data according to a highly nested data model</li>
+<li>Need to formulate complex queries on many fields</li>
+</ul>
+<p>Examples</p>
+<ul>
+<li><strong>Event logs</strong>
+<ul>
+<li><em>Central repo to store event logs from many applications; </em> shard on app name or event type</li>
+</ul></li>
+<li><strong>CMS, blogging platforms</strong>
+<ul>
+<li><em>The absence of a predefined schema </em>fits well* within content management systems (CMS) or website management applications, to handle comments, registrations, and user profiles</li>
+</ul></li>
+<li><strong>Web Analytics or Real-Time Analytics</strong>
+<ul>
+<li><em>The ability to update only specific fields</em> enables fast update of analytical metrics</li>
+<li><em>Text indexing</em> enables real-time sentiment analysis and social media monitoring</li>
+</ul></li>
+<li><strong>E-commerce applications</strong>
+<ul>
+<li><em>Schema flexibility is often required</em> to store products and orders, as well as to enable schema evolution without incurring refactoring or migration costs</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="document-real-use-cases" class="title-slide slide level1 center">
+<h1>Document: real use cases</h1>
+<p><strong>Advertising services</strong></p>
+<ul>
+<li>MongoDB was born as a system for banner ads
+<ul>
+<li>24/7 availability and high performance</li>
+<li>Complex rules to find the right banner based on the user’s interests</li>
+<li>Handle several kinds of ads and show detailed analytics</li>
+</ul></li>
+</ul>
+<p><strong>Internet of Things</strong></p>
+<ul>
+<li>Real-time management of sensor-based data</li>
+<li>Bosch uses MongoDB to capture data from cars (brakes, ABS, windscreen wipers, etc.) and aircraft maintenance tools
+<ul>
+<li>Business rules are applied to warn the pilot when the breaking system pressure falls under a critical threshold, or the maintenance operator when the tool is used improperly</li>
+</ul></li>
+<li>Technogym uses MongoDB to capture data from gym equipment</li>
+</ul>
+</section>
+
+<section id="document-when-to-avoid" class="title-slide slide level1 center">
+<h1>Document: when to avoid</h1>
+<p><strong>ACID transactions requirement</strong></p>
+<ul>
+<li>If not for a few exceptions (e.g., RavenDB), document databases are not suited for cross-document atomicity</li>
+</ul>
+<p><strong>Queries on high-variety data</strong></p>
+<ul>
+<li><em>If the aggregate structure continuously evolves, queries must be constantly updated </em> (and normalization clashes with the concept of aggregate)</li>
+</ul>
+</section>
+
+<section id="graph-popular-dbs" class="title-slide slide level1 center">
+<h1>Graph: popular DBs</h1>
+<p><strong>Neo4J</strong>: <a href="http://neo4j.com/">http://neo4j.com</a></p>
+<p><strong>TigerGraph</strong>: <a href="https://www.tigergraph.com/">https://www.tigergraph.com/</a></p>
+</section>
+
+<section id="graph-when-to-use" class="title-slide slide level1 center">
+<h1>Graph: when to use</h1>
+<p><strong>Interlinked data</strong></p>
+<ul>
+<li><em>Social networks</em> are one of the most typical use cases of graph databases (e.g., to store friendships or work relationships); <em>every relationship-centric domain is a good one</em></li>
+</ul>
+<p><strong>Routing and location-based services</strong></p>
+<ul>
+<li>Applications working on the <em>TSP (Travelling Salesman Problem)</em> problem</li>
+<li>Location-based application that, for instance, recommends the best restaurant nearby; in this case, <em>relationships model the distance between nodes</em></li>
+</ul>
+<p><strong>Recommendation applications, fraud-detection</strong></p>
+<ul>
+<li>Systems recommending «the products bought by your friends», or «the products bought by those who bought the same products»</li>
+<li>When relationships model behaviors, outlier detection may be useful to identify fraud</li>
+</ul>
+</section>
+
+<section id="graph-real-use-cases" class="title-slide slide level1 center">
+<h1>Graph: real use cases</h1>
+<p><strong>Relationships analysis</strong></p>
+<ul>
+<li>Finding common friends (e.g., friend-of-a-friend) in a social network</li>
+<li>Identifying clusters of phone calls that identify a criminal network</li>
+<li>Analyzing flows of money to identify money recycling patterns or credit card theft</li>
+<li>Main users: law firms, police, intelligence agencies
+<ul>
+<li><a href="https://neo4j.com/use-cases/fraud-detection/">https://neo4j.com/use-cases/fraud-detection/</a></li>
+</ul></li>
+<li>Useful for text analysis as well (Natural Language Processing)</li>
+</ul>
+<p><strong>Inference</strong></p>
+<ul>
+<li>Creating rules that define new knowledge based on existing patterns (e.g., transitive relationships, trust mechanisms)</li>
+</ul>
+</section>
+
+<section id="graph-when-to-avoid" class="title-slide slide level1 center">
+<h1>Graph: when to avoid</h1>
+<p><strong>Data-intensive applications</strong></p>
+<ul>
+<li>Traversing the graph is trivial, but <em>analyzing the whole graph can be expensive</em></li>
+<li>There exist frameworks for distributed graph analysis (e.g., Apache Giraph), but they do not rely on a graph DB</li>
+</ul>
+</section>
+
+<section id="polyglot-persistence" class="title-slide slide level1 center">
+<h1>Polyglot persistence</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><em>Different databases are designed to solve different problems</em></p>
+<p>Using a single DBMS to handle everything…</p>
+<ul>
+<li>Operational data</li>
+<li>Temporary session information</li>
+<li>Graph traversing</li>
+<li>OLAP analyses</li>
+<li>…</li>
+</ul>
+<p>… usually lead to inefficient solutions</p>
+<ul>
+<li>Each activity has its own requirements (availability, consistency, fault tolerance, etc.)</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides90.jpg"></p>
+<figcaption>Polyglot system</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="traditional-approach" class="title-slide slide level1 center">
+<h1>Traditional approach</h1>
+<p>The <em>one-size-fits-all</em> solution…</p>
+
+<img data-src="img/slides91.png" class="r-stretch quarto-figure-center"><p class="caption">One-size-fits-all</p></section>
+
+<section id="polyglot-data-management" class="title-slide slide level1 center">
+<h1>Polyglot data management</h1>
+<p>… replaced by the <em>polyglot</em> solution</p>
+
+<img data-src="img/slides92.png" class="r-stretch quarto-figure-center"><p class="caption">Polyglot solution</p></section>
+
+<section id="service-oriented-polyglot-data-management" class="title-slide slide level1 center">
+<h1>Service-oriented polyglot data management</h1>
+<p>Each DB should be “embedded” within services, which offer API services to enable data access and manipulation.</p>
+<ul>
+<li>Several NoSQL systems (e.g., Riak, Neo4J) already provide REST APIs</li>
+</ul>
+
+<img data-src="img/slides93.png" class="r-stretch quarto-figure-center"><p class="caption">Encapsulating DBs with API</p></section>
+
+<section id="supporting-existing-technologies" class="title-slide slide level1 center">
+<h1>Supporting existing technologies</h1>
+<p>If the current solution cannot be changed, NoSQL systems can still support the existing ones.</p>
+
+<img data-src="img/slides94.png" class="r-stretch quarto-figure-center"><p class="caption">Legacy solutions</p></section>
+
+<section id="beyond-nosql" class="title-slide slide level1 center">
+<h1>Beyond NoSQL</h1>
+<p>NewSQL systems</p>
+<ul>
+<li>Combine the benefits from both relational and NoSQL worlds</li>
+<li>Ensure scalability without compromising consistency, but by <strong>compromising some availability</strong></li>
+</ul>
+<p>Extended RDBMSs</p>
+<ul>
+<li>KV implementable as a table with two fields: a string key, and a blob value</li>
+<li>Cypher query language on top of a relational implementation of a graph</li>
+<li>Hstore data type in PostgreSQL for wide-column-like implementation</li>
+<li><strong>Scalability issue remains</strong></li>
+</ul>
+<p>Multi-model NoSQL DBMSs</p>
+<ul>
+<li>ArangoDB, OrientDB</li>
+<li><strong>Support all NoSQL data models, but not the relational</strong></li>
+</ul>
+<p>Database-as-a-service</p>
+<ul>
+<li>All cloud providers offer storage services supporting all data models</li>
+</ul>
+</section>
+
+<section id="case-study-data-governance" class="title-slide slide level1 center" data-background-color="#121011">
+<h1><img src="./img/cs.svg" class="title-icon"> Case study: data governance</h1>
+
+</section>
+
+<section id="metadata-governance" class="title-slide slide level1 center">
+<h1>Metadata Governance</h1>
+<p>Organizations manage <strong>data catalogs</strong> with details about data, algorithms, and agents.</p>
+
+<img data-src="img/datacatalog.PNG" class="r-stretch quarto-figure-center"><p class="caption">Data catalog</p></section>
+
+<section id="how-can-we-implement-these-concepts-into-the-database" class="title-slide slide level1 center">
+<h1>How can we implement these concepts into the database?</h1>
+
+<img data-src="img/slides17.png" class="r-stretch quarto-figure-center"><p class="caption">PROV Standard</p></section>
+
+<section id="relational-data-model-1" class="title-slide slide level1 center">
+<h1>Relational data model</h1>
+
+<img data-src="img/cs-nosql/er.png" class="r-stretch quarto-figure-center"><p class="caption">ER representation</p></section>
+
+<section id="relational-data-model-2" class="title-slide slide level1 center">
+<h1>Relational data model</h1>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb10-1"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (</span>
+<span id="cb10-2"><a href=""></a>    entity_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb10-3"><a href=""></a>    name TEXT,</span>
+<span id="cb10-4"><a href=""></a>    file_type TEXT,</span>
+<span id="cb10-5"><a href=""></a>    created_at TEXT,</span>
+<span id="cb10-6"><a href=""></a>    wasDerivedFrom <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> entity(entity_id)</span>
+<span id="cb10-7"><a href=""></a>);</span>
+<span id="cb10-8"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id <span class="dt">INTEGER</span>, name TEXT);</span>
+<span id="cb10-9"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id <span class="dt">INTEGER</span>, name TEXT);</span>
+<span id="cb10-10"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
+<span id="cb10-11"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+</section>
+
+
+
+<section id="what-are-the-limitations-of-the-relational-model" class="title-slide slide level1 center">
+<h1>What are the limitations of the relational model?</h1>
+
+</section>
+
+<section id="limitations-of-the-relational-model" class="title-slide slide level1 center">
+<h1>Limitations of the Relational Model</h1>
+<p>Difficult to store <strong>heterogeneous metadata</strong>:</p>
+<ul>
+<li>CSV: columns, delimiter</li>
+<li>TIFF: resolution, color depth</li>
+<li>JSON: nested structures</li>
+</ul>
+</section>
+
+<section id="limitations-of-the-relational-model-1" class="title-slide slide level1 center">
+<h1>Limitations of the Relational Model</h1>
+<table class="caption-top">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Type</th>
+<th>Applies To</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>entity_id</strong></td>
+<td><code>INTEGER</code></td>
+<td>all</td>
+<td>Unique ID (primary key).</td>
+</tr>
+<tr class="even">
+<td><strong>name</strong></td>
+<td><code>TEXT</code></td>
+<td>all</td>
+<td>Human-readable name of the entity.</td>
+</tr>
+<tr class="odd">
+<td><strong>file_type</strong></td>
+<td><code>TEXT</code></td>
+<td>all</td>
+<td>Type of file (<code>csv</code>, <code>tiff</code>, <code>json</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>file_path</strong></td>
+<td><code>TEXT</code></td>
+<td>all</td>
+<td>File path or URI.</td>
+</tr>
+<tr class="odd">
+<td><strong>file_size</strong></td>
+<td><code>INTEGER</code></td>
+<td>all</td>
+<td>File size in bytes.</td>
+</tr>
+<tr class="even">
+<td><strong>checksum</strong></td>
+<td><code>TEXT</code></td>
+<td>all</td>
+<td>File checksum (e.g., SHA256).</td>
+</tr>
+<tr class="odd">
+<td><strong>created_at</strong></td>
+<td><code>TEXT</code></td>
+<td>all</td>
+<td>Timestamp when created.</td>
+</tr>
+<tr class="even">
+<td><strong>wasDerivedFrom</strong></td>
+<td><code>INTEGER</code></td>
+<td>all</td>
+<td>Foreign key to parent entity.</td>
+</tr>
+<tr class="odd">
+<td><strong>csv_columns</strong></td>
+<td><code>TEXT</code></td>
+<td>CSV</td>
+<td>Column names (e.g., <code>"id,name,price"</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>csv_delimiter</strong></td>
+<td><code>TEXT</code></td>
+<td>CSV</td>
+<td>Column separator (e.g., <code>","</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>csv_has_header</strong></td>
+<td><code>BOOLEAN</code></td>
+<td>CSV</td>
+<td>Indicates if first row is header.</td>
+</tr>
+<tr class="even">
+<td><strong>tiff_resolution</strong></td>
+<td><code>TEXT</code></td>
+<td>TIFF</td>
+<td>Image resolution (e.g., <code>300dpi</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>tiff_color_depth</strong></td>
+<td><code>INTEGER</code></td>
+<td>TIFF</td>
+<td>Bits per pixel (e.g., <code>24</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>tiff_compression</strong></td>
+<td><code>TEXT</code></td>
+<td>TIFF</td>
+<td>Compression type (e.g., <code>LZW</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>json_schema_version</strong></td>
+<td><code>TEXT</code></td>
+<td>JSON</td>
+<td>Version of JSON schema.</td>
+</tr>
+<tr class="even">
+<td><strong>json_root_keys</strong></td>
+<td><code>TEXT</code></td>
+<td>JSON</td>
+<td>Top-level keys.</td>
+</tr>
+<tr class="odd">
+<td><strong>json_nesting_level</strong></td>
+<td><code>INTEGER</code></td>
+<td>JSON</td>
+<td>Max nesting depth.</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="limitations-of-the-relational-model-2" class="title-slide slide level1 center">
+<h1>Limitations of the Relational Model</h1>
+<div style="font-size:0.6em">
+<table class="caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>entity_id</th>
+<th>name</th>
+<th>file_type</th>
+<th>file_size</th>
+<th>csv_columns</th>
+<th>csv_delimiter</th>
+<th>csv_has_header</th>
+<th>tiff_resolution</th>
+<th>tiff_color_depth</th>
+<th>json_schema_version</th>
+<th>json_root_keys</th>
+<th>json_nesting_level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>customers_raw</code></td>
+<td>csv</td>
+<td>10432</td>
+<td><code>id,name,email</code></td>
+<td><code>,</code></td>
+<td>TRUE</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>satellite_image</code></td>
+<td>tiff</td>
+<td>8500000</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td><code>300dpi</code></td>
+<td>24</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>api_response</code></td>
+<td>json</td>
+<td>2000</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>NULL</td>
+<td><code>v2.1</code></td>
+<td><code>["users","metadata"]</code></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="limitations-of-relational-model" class="title-slide slide level1 center">
+<h1>Limitations of Relational Model</h1>
+<p>Relationships (e.g., lineage chains) need complex joins:</p>
+<p>Which entity was derived from the entity <code>'a'</code>?</p>
+<div class="fragment">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb12-1"><a href=""></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<span id="cb12-2"><a href=""></a><span class="kw">FROM</span> entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id</span>
+<span id="cb12-3"><a href=""></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+</div>
+</section>
+
+<section id="limitations-of-the-relational-model-3" class="title-slide slide level1 center">
+<h1>Limitations of the Relational Model</h1>
+<p>Reference schema</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb13-1"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
+<span id="cb13-2"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
+<span id="cb13-3"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
+<span id="cb13-4"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
+<span id="cb13-5"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<p>Which entity was derived from an entity derived from <code>'a'</code>?</p>
+<div class="fragment">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb14-1"><a href=""></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<span id="cb14-2"><a href=""></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id)</span>
+<span id="cb14-3"><a href=""></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
+<span id="cb14-4"><a href=""></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+</div>
+</section>
+
+<section id="limitations-of-the-relational-model-4" class="title-slide slide level1 center">
+<h1>Limitations of the Relational Model</h1>
+<p>Reference schema</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb15-1"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
+<span id="cb15-2"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
+<span id="cb15-3"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
+<span id="cb15-4"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
+<span id="cb15-5"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<p>Which entity was (derived from an entity)<span class="math inline">\(^5\)</span> derived from <code>'a'</code>?</p>
+<div class="fragment">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb16-1"><a href=""></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<span id="cb16-2"><a href=""></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id)</span>
+<span id="cb16-3"><a href=""></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
+<span id="cb16-4"><a href=""></a>    <span class="kw">JOIN</span> entity e4 <span class="kw">ON</span> e3.wasDerivedFrom <span class="op">=</span> e4.entity_id</span>
+<span id="cb16-5"><a href=""></a>    <span class="kw">JOIN</span> entity e5 <span class="kw">ON</span> e4.wasDerivedFrom <span class="op">=</span> e5.entity_id</span>
+<span id="cb16-6"><a href=""></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+</div>
+</section>
+
+<section id="document-based-model" class="title-slide slide level1 center">
+<h1>Document-based model</h1>
+<p>Each entity becomes a (JSON) <strong>document</strong> with customizable attributes.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb17-1"><a href=""></a><span class="fu">{</span></span>
+<span id="cb17-2"><a href=""></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"customers_raw"</span><span class="fu">,</span></span>
+<span id="cb17-3"><a href=""></a>  <span class="dt">"file_type"</span><span class="fu">:</span> <span class="st">"csv"</span><span class="fu">,</span></span>
+<span id="cb17-4"><a href=""></a>  <span class="dt">"created_at"</span><span class="fu">:</span> <span class="st">"2026-07-12"</span><span class="fu">,</span></span>
+<span id="cb17-5"><a href=""></a>  <span class="dt">"agents"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"alice"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb17-6"><a href=""></a>  <span class="dt">"activities"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"extract_sales_data"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb17-7"><a href=""></a>  <span class="dt">"columns"</span><span class="fu">:</span> <span class="dv">8</span><span class="fu">,</span></span>
+<span id="cb17-8"><a href=""></a>  <span class="dt">"delimiter"</span><span class="fu">:</span> <span class="st">","</span><span class="fu">,</span></span>
+<span id="cb17-9"><a href=""></a>  <span class="dt">"encoding"</span><span class="fu">:</span> <span class="st">"utf-8"</span><span class="fu">,</span></span>
+<span id="cb17-10"><a href=""></a>  <span class="dt">"wasDerivedFrom"</span><span class="fu">:</span> <span class="st">"a"</span></span>
+<span id="cb17-11"><a href=""></a><span class="fu">}</span></span></code></pre></div>
+</div><div class="column" style="width:50%;">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb18-1"><a href=""></a><span class="fu">{</span></span>
+<span id="cb18-2"><a href=""></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"satellite_image"</span><span class="fu">,</span></span>
+<span id="cb18-3"><a href=""></a>  <span class="dt">"file_type"</span><span class="fu">:</span> <span class="st">"tiff"</span><span class="fu">,</span></span>
+<span id="cb18-4"><a href=""></a>  <span class="dt">"created_at"</span><span class="fu">:</span> <span class="st">"2026-07-12"</span><span class="fu">,</span></span>
+<span id="cb18-5"><a href=""></a>  <span class="dt">"agents"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"alice"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb18-6"><a href=""></a>  <span class="dt">"activities"</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></span>
+<span id="cb18-7"><a href=""></a>  <span class="dt">"tiff_resolution"</span><span class="fu">:</span> <span class="st">"300dpi"</span><span class="fu">,</span></span>
+<span id="cb18-8"><a href=""></a>  <span class="dt">"tiff_color_depth"</span><span class="fu">:</span> <span class="dv">24</span><span class="fu">,</span></span>
+<span id="cb18-9"><a href=""></a><span class="fu">}</span></span></code></pre></div>
+</div></div>
+<p>A <em>collection</em> is a list of documents.</p>
+</section>
+
+<section id="document-based-model-1" class="title-slide slide level1 center">
+<h1>Document-based model</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The relational model is <em>data-driven</em></p>
+<ul>
+<li>It represents concepts as relations and relationships.</li>
+</ul>
+<p>Reference schema</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb19-1"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
+<span id="cb19-2"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
+<span id="cb19-3"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
+<span id="cb19-4"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
+<span id="cb19-5"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<p>Which agents were attributed to the entity?</p>
+<div class="fragment">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb20-1"><a href=""></a><span class="kw">SELECT</span> e.name <span class="kw">AS</span> entity_name,a.name <span class="kw">AS</span> agent_name</span>
+<span id="cb20-2"><a href=""></a><span class="kw">FROM</span> entity e <span class="kw">JOIN</span> wasAttributedTo w <span class="kw">ON</span> e.<span class="kw">id</span> <span class="op">=</span> w.entity_id</span>
+<span id="cb20-3"><a href=""></a>    <span class="kw">JOIN</span> <span class="kw">agent</span> a <span class="kw">ON</span> w.agent_id <span class="op">=</span> a.<span class="kw">id</span></span>
+<span id="cb20-4"><a href=""></a><span class="kw">WHERE</span> e.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+<p>Which activities generated the entity?</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb21-1"><a href=""></a><span class="kw">SELECT</span> e.name <span class="kw">AS</span> entity_name, act.name <span class="kw">AS</span> activity_name</span>
+<span id="cb21-2"><a href=""></a><span class="kw">FROM</span> entity e <span class="kw">JOIN</span> wasGeneratedBy wgb <span class="kw">ON</span> e.<span class="kw">id</span> <span class="op">=</span> wgb.entity_id</span>
+<span id="cb21-3"><a href=""></a>    <span class="kw">JOIN</span> activity act <span class="kw">ON</span> wgb.activity_id <span class="op">=</span> act.<span class="kw">id</span></span>
+<span id="cb21-4"><a href=""></a><span class="kw">WHERE</span> e.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p>The document-based model is <em>aggregate-oriented</em></p>
+<ul>
+<li>Each document contains the data necessary to answer a query.</li>
+</ul>
+<p>Which agents were attributed to the entity?</p>
+<p>Which activities generated the entity?</p>
+<div class="sourceCode" id="cb22" data-code-line-numbers="5-6"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb22-1"><a href=""></a><span class="fu">{</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"a"</span><span class="fu">,</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="dt">"file_type"</span><span class="fu">:</span> <span class="st">"csv"</span><span class="fu">,</span></span>
+<span id="cb22-4"><a href=""></a>  <span class="dt">"created_at"</span><span class="fu">:</span> <span class="st">"2026-07-12"</span><span class="fu">,</span></span>
+<span id="cb22-5"><a href=""></a>  <span class="dt">"agents"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"alice"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb22-6"><a href=""></a>  <span class="dt">"activities"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"extract_sales_data"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb22-7"><a href=""></a>  <span class="dt">"columns"</span><span class="fu">:</span> <span class="dv">8</span><span class="fu">,</span></span>
+<span id="cb22-8"><a href=""></a>  <span class="dt">"delimiter"</span><span class="fu">:</span> <span class="st">","</span><span class="fu">,</span></span>
+<span id="cb22-9"><a href=""></a>  <span class="dt">"encoding"</span><span class="fu">:</span> <span class="st">"utf-8"</span><span class="fu">,</span></span>
+<span id="cb22-10"><a href=""></a><span class="fu">}</span></span></code></pre></div>
+</div>
+</div></div>
+</section>
+
+<section id="limitations-of-document-based-model" class="title-slide slide level1 center">
+<h1>Limitations of Document-based Model</h1>
+<ul>
+<li>Chains of relationships are implicit and difficult to traverse</li>
+<li>Data lineage analysis is cumbersome</li>
+</ul>
+</section>
+
+<section id="the-graph-data-model" class="title-slide slide level1 center">
+<h1>The graph data model</h1>
+<p>Reference schema</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb23-1"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
+<span id="cb23-2"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
+<span id="cb23-3"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
+<span id="cb23-4"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
+<span id="cb23-5"><a href=""></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<p>The graph data model is <strong>data-driven</strong> and represents data as <strong>nodes</strong> and <strong>edges</strong>.</p>
+<ul>
+<li>Relationships become <em>first-class citizens</em>.</li>
+</ul>
+
+<img data-src="img/cs-nosql/graph.svg" class="r-stretch quarto-figure-center"><p class="caption">Graph representation</p></section>
+
+<section id="the-graph-data-model-1" class="title-slide slide level1 center">
+<h1>The graph data model</h1>
+
+<img data-src="img/cs-nosql/graph.svg" class="r-stretch quarto-figure-center"><p class="caption">Graph representation</p><p>Example of implementation in Resource Description Framework (RDF) triples (Subject-Predicate-Object)</p>
+<pre><code>&lt;http://example.org/entity/a&gt; &lt;http://example.org/wasDerivedFrom&gt; &lt;http://example.org/entity/b&gt; .
+&lt;http://example.org/entity/a&gt; &lt;http://example.org/wasAttributedTo&gt; &lt;http://example.org/agent/alice&gt; .
+&lt;http://example.org/entity/a&gt; &lt;http://example.org/wasGeneratedBy&gt; &lt;http://example.org/activity/extract_sales_data&gt; .</code></pre>
+</section>
+
+<section id="the-graph-data-model-2" class="title-slide slide level1 center">
+<h1>The graph data model</h1>
+<p>Cypher is a declarative graph query language that allows for expressive and efficient data querying in a property graph.</p>
+<ul>
+<li><code>(:Agent)-[:WAS_ATTRIBUTED_TO]-&gt;(:Entity)</code></li>
+<li><code>(:Activity)-[:WAS_GENERATED_BY]-&gt;(:Entity)</code></li>
+<li><code>(:Entity)-[:WAS_DERIVED_FROM]-&gt;(:Entity)</code></li>
+</ul>
+<p>Metadata stays attached as key-value node properties.</p>
+</section>
+
+<section id="the-graph-data-model-3" class="title-slide slide level1 center">
+<h1>The graph data model</h1>
+<p>SQL</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb25-1"><a href=""></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<span id="cb25-2"><a href=""></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id) </span>
+<span id="cb25-3"><a href=""></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
+<span id="cb25-4"><a href=""></a>    <span class="kw">JOIN</span> entity e4 <span class="kw">ON</span> e3.wasDerivedFrom <span class="op">=</span> e4.entity_id</span>
+<span id="cb25-5"><a href=""></a>    <span class="kw">JOIN</span> entity e5 <span class="kw">ON</span> e4.wasDerivedFrom <span class="op">=</span> e5.entity_id</span>
+<span id="cb25-6"><a href=""></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+<p>Cypher</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource cypher number-lines"><code class="sourceCode"><span id="cb26-1"><a href=""></a>MATCH (e1:Entity {name: 'a'})</span>
+<span id="cb26-2"><a href=""></a>MATCH (e1)-[:WAS_DERIVED_FROM]-&gt;(e2:Entity)</span>
+<span id="cb26-3"><a href=""></a> -[:WAS_DERIVED_FROM]-&gt;(e3:Entity)</span>
+<span id="cb26-4"><a href=""></a> -[:WAS_DERIVED_FROM]-&gt;(e4:Entity)</span>
+<span id="cb26-5"><a href=""></a> -[:WAS_DERIVED_FROM]-&gt;(e5:Entity)</span>
+<span id="cb26-6"><a href=""></a>RETURN e1.name, e2.name, e3.name, e4.name, e5.name;</span></code></pre></div>
+</section>
+
+<section id="the-graph-data-model-4" class="title-slide slide level1 center">
+<h1>The graph data model</h1>
+<p>SQL</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb27-1"><a href=""></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<span id="cb27-2"><a href=""></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id) </span>
+<span id="cb27-3"><a href=""></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
+<span id="cb27-4"><a href=""></a>    <span class="kw">JOIN</span> entity e4 <span class="kw">ON</span> e3.wasDerivedFrom <span class="op">=</span> e4.entity_id</span>
+<span id="cb27-5"><a href=""></a>    <span class="kw">JOIN</span> entity e5 <span class="kw">ON</span> e4.wasDerivedFrom <span class="op">=</span> e5.entity_id</span>
+<span id="cb27-6"><a href=""></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+<p>Cypher</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource cypher number-lines"><code class="sourceCode"><span id="cb28-1"><a href=""></a>MATCH (e1:Entity {name: 'a'})-[:WAS_DERIVED_FROM*1..5]-&gt;(e2:Entity)</span>
+<span id="cb28-2"><a href=""></a>RETURN e1.name, e2.name;</span></code></pre></div>
+</section>
+
+<section id="comparison-summary" class="title-slide slide level1 center">
+<h1>Comparison Summary</h1>
+<table class="caption-top">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 25%">
+<col style="width: 23%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th style="text-align: center;">Relational</th>
+<th style="text-align: center;">Document</th>
+<th style="text-align: center;">Graph</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Schema Flexibility</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="even">
+<td>Relationship Modeling</td>
+<td style="text-align: center;">✅</td>
+<td style="text-align: center;">⚠️ (manual)</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="odd">
+<td>Querying Relationships</td>
+<td style="text-align: center;">⚠️ (joins)</td>
+<td style="text-align: center;">⚠️</td>
+<td style="text-align: center;">✅</td>
+</tr>
+<tr class="even">
+<td>Use Case Fit</td>
+<td style="text-align: center;">Structured data</td>
+<td style="text-align: center;">Semi-structured data</td>
+<td style="text-align: center;">Semi-structured data + Lineage</td>
+</tr>
+</tbody>
+</table>
+<p>Takeaways</p>
+<ul>
+<li><strong>No single DB fits all purposes.</strong></li>
+<li>This example mirrors <strong>real-world metadata governance systems</strong> (e.g., DataHub, Amundsen, OpenMetadata).</li>
+</ul>
+</section>
+
+<section id="end-of-the-case-study" class="title-slide slide level1 center" data-background-color="#121011">
+<h1>End of the case study</h1>
+
+</section>
+
+<section id="supplementary-material" class="title-slide slide level1 center">
+<h1>Supplementary material</h1>
+
+</section>
+
+<section id="key-value-data-model" class="title-slide slide level1 center">
+<h1>Key-value: data model</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Each DB contains one or more <em>collections</em> (corresponding to tables)</p>
+<ul>
+<li>Each collection contains a list of <em>key-value pairs</em></li>
+<li>Key: a unique string
+<ul>
+<li>E.g.: ids, hashes, paths, queries, REST calls</li>
+</ul></li>
+<li>Value: a BLOB (binary large object)
+<ul>
+<li>E.g.: text, documents, web pages, multimedia files</li>
+</ul></li>
+</ul>
+<p>Looks like a simple dictionary</p>
+<ul>
+<li><em>The collection is indexed by key</em></li>
+<li><em>The value may contain several information</em>
+<ul>
+<li>Definitions, synonyms and antonyms, images, etc.</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides76.png"></p>
+<figcaption>Key-value</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="key-value-querying" class="title-slide slide level1 center">
+<h1>Key-value: querying</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Three simple kinds of query:</p>
+<ul>
+<li><em>put($key as xs:string, $value as item())</em>
+<ul>
+<li>Adds a key-value pair to the collection</li>
+<li>If the key already exists, the value is replaced</li>
+</ul></li>
+<li><em>get($key as xs:string) as item()</em>
+<ul>
+<li>Returns the value corresponding to the key (if it exists)</li>
+</ul></li>
+<li><em>delete($key as xs:string)</em>
+<ul>
+<li>Deletes the key-value pair</li>
+</ul></li>
+</ul>
+<p>The value is a <em>black box</em>: it cannot be queried!</p>
+<ul>
+<li>No “where” clauses</li>
+<li>No indexes on the values</li>
+<li>Schema information is often indicated in the key</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Key</th>
+<th style="text-align: center;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">user:1234:name</td>
+<td style="text-align: center;">Enrico</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">user:1234:city</td>
+<td style="text-align: center;">Cesena</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">post:9876:written-by</td>
+<td style="text-align: center;">user:1234</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">post:9876:title</td>
+<td style="text-align: center;">NoSQL Databases</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">comment:5050:reply-to</td>
+<td style="text-align: center;">post:9876</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+
+<section id="data-modeling-example-key-value-model" class="title-slide slide level1 center">
+<h1>Data modeling example: key-value model</h1>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p>Product collection</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">key</th>
+<th style="text-align: center;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">p-1:name</td>
+<td style="text-align: center;">Cola</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">p-2:name</td>
+<td style="text-align: center;">Fanta</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:80%;">
+<p>Customer collection</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">key</th>
+<th style="text-align: center;">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">cust-1:name</td>
+<td style="text-align: center;">Martin</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">cust-1:adrs</td>
+<td style="text-align: center;">[ {“street”:“Adam”, “city”:“Chicago”, “state”:“Illinois”, “code”:60007}, {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, “code”:10001}]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">cust-1:ord-99</td>
+<td style="text-align: center;">{ “orderpayments”: [ {“card”:477, “billadrs”: {“street”:“Adam”, “city”:“Chicago”, “state”:“illinois”, “code”:60007} }, {“card”:457, “billadrs”: {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, “code”:10001} ], “products”: [ {“id”:1, “name”:“Cola”, “price”:12.4}, {“id”:2, “name”:“Fanta”, “price”:14.4} ], “shipAdrs”: {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, code”:10001}}</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+
+<section id="wide-column-data-model" class="title-slide slide level1 center">
+<h1>Wide column: data model</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Each DB contains one or more <em>column families</em> (corresponding to tables)</p>
+<ul>
+<li>Each column family contains a list of <em>rows</em> in the form of a key-value pair</li>
+<li>Key: unique string in the column family</li>
+<li>Value: a set of <em>columns</em></li>
+</ul>
+<p>Each column is a key-value pair itself.</p>
+<ul>
+<li>Key: unique string in the row</li>
+<li>Value: simple or complex (<em>supercolumn</em>)</li>
+</ul>
+<p>Essentially a 2-dimensional key-value store</p>
+<ul>
+<li>Rows specify only the columns <em>for which a value exists</em></li>
+<li>Particularly suited for sparse matrices and many-to-many relationships</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides77.png"></p>
+<figcaption>Wide column</figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+
+<section id="wide-column-querying" class="title-slide slide level1 center">
+<h1>Wide column: querying</h1>
+<p>The query language expressiveness is between key-value and document data models.</p>
+<ul>
+<li>Column indexes are discouraged</li>
+<li>Can filter on column values (not always)</li>
+<li>Can return more rows with one query</li>
+<li>Can select which columns to project</li>
+<li>Can update specific columns (not always)</li>
+</ul>
+<p>Given the similarity with the relational model, a <em>SQL-like </em> language is often used.</p>
+</section>
+
+<section id="wide-column-columnar" class="title-slide slide level1 center">
+<h1>Wide column: ≠ columnar</h1>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides78.png"></p>
+<figcaption>Table</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides79.png"></p>
+<figcaption>Row-oriented</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides80.png"></p>
+<figcaption>Column-oriented</figcaption>
+</figure>
+</div>
+</div></div>
+<p>Do not mistake the wide column data model with the columnar storage used for OLAP applications.</p>
+<p><em>Row-oriented</em></p>
+<ul>
+<li>Pro: inserting a record is easy</li>
+<li>Con: several unnecessary data points may be accessed when reading a record</li>
+</ul>
+<p><em>Column-oriented</em></p>
+<ul>
+<li>Pro: only the required values are accessed</li>
+<li>Con: writing a record requires multiple accesses</li>
+</ul>
+</section>
+
+<section id="data-modeling-example-wide-column-model" class="title-slide slide level1 center">
+<h1>Data modeling example: wide-column model</h1>
+
+<img data-src="img/118.svg" class="r-stretch quarto-figure-center"><p class="caption">Examples of wide columns</p></section>
+
+<section id="key-value-popular-dbs" class="title-slide slide level1 center">
+<h1>Key-Value: popular DBs</h1>
+<p><strong>Redis</strong> (Data Structure server): <a href="http://redis.io/">http://redis.io/</a></p>
+<ul>
+<li>Supports complex fields (list, set, …) and operations on values (range, diff, …)</li>
+</ul>
+<p><strong>Memcached DB:</strong> <a href="http://memcached.org/">http://memcached.org/</a></p>
+<ul>
+<li><strong>Riak</strong>: <a href="http://basho.com/riak/">http://basho.com/riak/</a></li>
+</ul>
+</section>
+
+<section id="key-value-when-to-use" class="title-slide slide level1 center">
+<h1>Key-Value: when to use</h1>
+<p>Very simple use cases</p>
+<ul>
+<li>Independent data (no need to model relationships)</li>
+<li>The typical query is a simple lookup</li>
+<li>Need super-fast performance</li>
+</ul>
+<p>Examples</p>
+<ul>
+<li><strong>Session information</strong>
+<ul>
+<li>Each web session is identified by its own sessionId: All related data can be stored with a PUT request and returned with a GET request</li>
+</ul></li>
+<li><strong>User profiles, preferences</strong>
+<ul>
+<li>Each user is uniquely identified (userId, username) and has their own preferences in terms of language, colors, timezone, products, etc.</li>
+<li><em>data that fits well within an aggregate</em></li>
+</ul></li>
+<li><strong>Shopping cart, chat services</strong>
+<ul>
+<li>Each e-commerce website associates a shopping cart to a user; it can be stored as <em>an aggregate identified by the user ID</em></li>
+</ul></li>
+</ul>
+</section>
+
+<section id="key-value-real-use-cases" class="title-slide slide level1 center">
+<h1>Key-Value: real use cases</h1>
+<p><strong>Crawling of web pages</strong></p>
+<ul>
+<li>The URL is the key, the whole page content (HTML, CSS, JS, images, …) is the value</li>
+</ul>
+<p><strong>Twitter timeline</strong></p>
+<ul>
+<li>The user ID is the key, the list of most recent tweets to be shown is the value</li>
+</ul>
+<p><strong>Amazon S3 (Simple Storage Service)</strong></p>
+<ul>
+<li>A cloud-based file system service</li>
+<li>Useful for personal backups, file sharing, website or app publication</li>
+<li>The more you store, the more you pay
+<ul>
+<li>Storage: approx. $0.03 per GB per month</li>
+<li>Uploading files: approx. $0.005 per 1000 items</li>
+<li>Downloading files: approx. $0.004 per 10,000 files* PLUS $0.09 per GB (first GB free)</li>
+</ul></li>
+</ul>
+
+<img data-src="img/slides89.png" class="r-stretch quarto-figure-center"><p class="caption">Key-value</p></section>
+
+<section id="key-value-when-to-avoid" class="title-slide slide level1 center">
+<h1>Key-Value: when to avoid</h1>
+<p><strong>Data with many relationships</strong></p>
+<ul>
+<li>When relationships between data (in the same or in different collections) must be followed</li>
+<li>Some systems offer limited link-walking mechanisms</li>
+</ul>
+<p><strong>Multi-record operations</strong></p>
+<ul>
+<li>Because operations (mostly) involve one record at a time</li>
+</ul>
+<p><strong>Querying the data</strong></p>
+<ul>
+<li>If it is necessary to query the values, not just the key</li>
+<li>Few systems offer limited functionalities (e.g., Riak Search)</li>
+</ul>
+</section>
+
+<section id="wide-column-popular-dbs" class="title-slide slide level1 center">
+<h1>Wide column: popular DBs</h1>
+<p><strong>Cassandra</strong>: <a href="http://cassandra.apache.org/">http://cassandra.apache.org</a></p>
+<p><strong>HBase</strong>: <a href="https://hbase.apache.org/">https://hbase.apache.org</a></p>
+<p><strong>Google BigTable</strong>: <a href="https://cloud.google.com/bigtable/">https://cloud.google.com/bigtable</a></p>
+</section>
+
+<section id="wide-column-when-to-use" class="title-slide slide level1 center">
+<h1>Wide column: when to use</h1>
+<p>Compromise between expressiveness and simplicity</p>
+<ul>
+<li>Limited (but some) requirements in terms of data model</li>
+<li>Limited (but some) requirements in terms of querying records</li>
+</ul>
+<p>Examples</p>
+<ul>
+<li><strong>Event logs; CMS, blogging platforms</strong>
+<ul>
+<li>Similarly to document databases, <em>different applications may use different columns</em></li>
+</ul></li>
+<li><strong>Sparse matrixes</strong>
+<ul>
+<li>While an RDBMS would store <em>null </em> values, a wide column <em>stores only the columns for which a value is specified</em></li>
+</ul></li>
+<li><strong>GIS applications</strong>
+<ul>
+<li>Pieces of a map (tiles) can be stored as <em>couples of latitude and longitude</em></li>
+</ul></li>
+</ul>
+</section>
+
+<section id="wide-column-real-use-cases" class="title-slide slide level1 center">
+<h1>Wide column: real use cases</h1>
+<p><strong>Google applications</strong></p>
+<ul>
+<li>BigTable is the DB used by Google for most of its applications, including Search, Analytics, Maps, and Gmail</li>
+</ul>
+<p><strong>User profiles and preferences</strong></p>
+<ul>
+<li>Spotify uses Cassandra to store metadata about users, artists, songs, playlists, etc.</li>
+</ul>
+<p><strong>Manhattan</strong></p>
+<ul>
+<li>After using Cassandra, Twitter has developed its own proprietary NoSQL system to support most of its services</li>
+</ul>
+</section>
+
+<section id="wide-column-when-to-avoid" class="title-slide slide level1 center">
+<h1>Wide column: when to avoid</h1>
+<p><strong>Same as for document model</strong></p>
+<ul>
+<li>ACID transactions requirement</li>
+<li>Queries on high-variety data</li>
+</ul>
+<p><strong>Need for full query expressiveness</strong></p>
+<ul>
+<li>Joins are highly discouraged</li>
+<li>Limited support for filters and group bys</li>
+</ul>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-DBLP:conf/icde/Angles12" class="csl-entry" role="listitem">
+Angles, Renzo. 2012. <span>“A Comparison of Current Graph Database Models.”</span> In <em>Workshops Proceedings of the <span>IEEE</span> 28th International Conference on Data Engineering, <span>ICDE</span> 2012, Arlington, VA, USA, April 1-5, 2012</em>, edited by Anastasios Kementsietsidis and Marcos Antonio Vaz Salles, 171–77. <span>IEEE</span> Computer Society. <a href="https://doi.org/10.1109/ICDEW.2012.31">https://doi.org/10.1109/ICDEW.2012.31</a>.
+</div>
+<div id="ref-DBLP:journals/tocs/ChangDGHWBCFG08" class="csl-entry" role="listitem">
+Chang, Fay, Jeffrey Dean, Sanjay Ghemawat, Wilson C. Hsieh, Deborah A. Wallach, Michael Burrows, Tushar Chandra, Andrew Fikes, and Robert E. Gruber. 2008. <span>“Bigtable: <span>A</span> Distributed Storage System for Structured Data.”</span> <em><span>ACM</span> Trans. Comput. Syst.</em> 26 (2): 4:1–26. <a href="https://doi.org/10.1145/1365815.1365816">https://doi.org/10.1145/1365815.1365816</a>.
+</div>
+<div id="ref-DBLP:journals/cacm/Codd70" class="csl-entry" role="listitem">
+Codd, E. F. 1970. <span>“A Relational Model of Data for Large Shared Data Banks.”</span> <em>Commun. <span>ACM</span></em> 13 (6): 377–87. <a href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a>.
+</div>
+<div id="ref-sivasubramanian2012amazon" class="csl-entry" role="listitem">
+Sivasubramanian, Swaminathan. 2012. <span>“Amazon dynamoDB: A Seamlessly Scalable Non-Relational Database Service.”</span> In <em>Proceedings of the 2012 ACM SIGMOD International Conference on Management of Data</em>, 729–30.
+</div>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Matteo Francia - Big Data and Cloud Platforms (Module 2) - A.Y. 2026/27</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="03-nosql_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="03-nosql_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="03-nosql_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="03-nosql_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': true,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="174.01239mm"
+   height="124.1981mm"
+   viewBox="0 0 174.01239 124.1981"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e94, 2025-05-08)"
+   sodipodi:docname="lattice.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.6168981"
+     inkscape:cx="130.80601"
+     inkscape:cy="60.300644"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="2869"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <clipPath
+       id="clip0">
+      <rect
+         x="60"
+         y="48"
+         width="704"
+         height="516"
+         id="rect1" />
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-70.308716,-132.6224)">
+    <g
+       clip-path="url(#clip0)"
+       transform="matrix(0.26458333,0,0,0.26458333,48.154167,114.3)"
+       id="g46">
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="36px"
+         transform="translate(397.074,533)"
+         id="text15">{ }<tspan
+   font-size="36px"
+   x="-142.64301"
+   y="-110"
+   id="tspan1">{ w }</tspan><tspan
+   font-size="36px"
+   x="-48.4734"
+   y="-110"
+   id="tspan2">{ x }</tspan><tspan
+   font-size="36px"
+   x="35.346298"
+   y="-110"
+   id="tspan3">{ y }</tspan><tspan
+   font-size="36px"
+   x="119.923"
+   y="-110"
+   id="tspan4">{ z }</tspan><tspan
+   font-size="36px"
+   x="-314.85199"
+   y="-220"
+   id="tspan5">{ w, x }</tspan><tspan
+   font-size="36px"
+   x="-196.608"
+   y="-220"
+   id="tspan6">{ w, y }</tspan><tspan
+   font-size="36px"
+   x="-77.605797"
+   y="-220"
+   id="tspan7">{ w, z }</tspan><tspan
+   font-size="36px"
+   x="39.376499"
+   y="-220"
+   id="tspan8">{ x, y }</tspan><tspan
+   font-size="36px"
+   x="151.14799"
+   y="-220"
+   id="tspan9">{ x, z }</tspan><tspan
+   font-size="36px"
+   x="260.901"
+   y="-220"
+   id="tspan10">{ y, z }</tspan><tspan
+   font-size="36px"
+   x="-280.23599"
+   y="-330"
+   id="tspan11">{ w, x, y }</tspan><tspan
+   font-size="36px"
+   x="-120.46"
+   y="-330"
+   id="tspan12">{ w, x, z }</tspan><tspan
+   font-size="36px"
+   x="37.295898"
+   y="-330"
+   id="tspan13">{ w, y, z }</tspan><tspan
+   font-size="36px"
+   x="193.214"
+   y="-330"
+   id="tspan14">{</tspan>x, y, z }<tspan
+   font-size="36px"
+   x="-63.660599"
+   y="-439"
+   id="tspan15">{ w, x, y, z }</tspan></text>
+      <path
+         d="M 0,0 51.5299,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,130.5,272.059)"
+         id="path15" />
+      <path
+         d="M 0,0 210.296,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,130.5,272.059)"
+         id="path16" />
+      <path
+         d="m 130.5,330.5 157.234,51.559"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path17" />
+      <path
+         d="m 130.5,330.5 246.229,51.559"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path18" />
+      <path
+         d="M 0,0 104.763,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(-1,0,0,1,481.263,330.5)"
+         id="path19" />
+      <path
+         d="M 0,0 215.526,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(-1,0,0,1,592.026,330.5)"
+         id="path20" />
+      <path
+         d="M 461.304,382.059 249.5,330.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path21" />
+      <path
+         d="M 288.111,382.059 249.5,330.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path22" />
+      <path
+         d="M 0,0 79.3811,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,287.5,382.059)"
+         id="path23" />
+      <path
+         d="M 544.879,382.059 367.5,330.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path24" />
+      <path
+         d="M 0,0 20.5652,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,460.5,382.059)"
+         id="path25" />
+      <path
+         d="M 0,0 47.76,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,544.5,382.059)"
+         id="path26" />
+      <path
+         d="M 0,0 156.593,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,544.5,382.059)"
+         id="path27" />
+      <path
+         d="M 0,0 240.161,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,460.5,382.059)"
+         id="path28" />
+      <path
+         d="M 0,0 131.283,51.5597"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,413.5,492.06)"
+         id="path29" />
+      <path
+         d="M 0,0 47.7159,51.5597"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,413.5,492.06)"
+         id="path30" />
+      <path
+         d="M 412.982,492.06 376.5,440.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path31" />
+      <path
+         d="M 412.977,492.06 287.5,440.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path32" />
+      <path
+         d="m 182.5,220.5 299.463,51.559"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path33" />
+      <path
+         d="M 249.593,272.059 182.5,220.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path34" />
+      <path
+         d="M 0,0 248.51,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,249.5,272.059)"
+         id="path35" />
+      <path
+         d="M 366.82,272.059 340.5,220.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path36" />
+      <path
+         d="M 0,0 130.518,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,367.5,272.059)"
+         id="path37" />
+      <path
+         d="M 0,0 168.444,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,481.5,272.059)"
+         id="path38" />
+      <path
+         d="m 340.5,220.5 251.459,51.559"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path39" />
+      <path
+         d="M 0,0 57.682,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(-1,0,0,1,650.182,220.5)"
+         id="path40" />
+      <path
+         d="m 649.5,220.5 51.151,51.559"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path41" />
+      <path
+         d="m 497.5,220.5 203.455,51.559"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path42" />
+      <path
+         d="M 0,0 231.182,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,182.5,163.059)"
+         id="path43" />
+      <path
+         d="M 0,0 72.4156,51.5594"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         transform="matrix(1,0,0,-1,340.5,163.059)"
+         id="path44" />
+      <path
+         d="M 497.922,163.059 413.5,111.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path45" />
+      <path
+         d="M 650.225,163.059 413.5,111.5"
+         stroke="#000000"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path46" />
+    </g>
+  </g>
+</svg>
