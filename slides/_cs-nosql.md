@@ -165,7 +165,7 @@ Each entity becomes a (JSON) **document** with customizable attributes.
 {
   "name": "customers_raw",
   "file_type": "csv",
-  "created_at": "2025-07-12",
+  "created_at": "2026-07-12",
   "agents": ["alice"],
   "activities": ["extract_sales_data"],
   "columns": 8,
@@ -182,7 +182,7 @@ Each entity becomes a (JSON) **document** with customizable attributes.
 {
   "name": "satellite_image",
   "file_type": "tiff",
-  "created_at": "2025-07-12",
+  "created_at": "2026-07-12",
   "agents": ["alice"],
   "activities": [],
   "tiff_resolution": "300dpi",
@@ -253,7 +253,7 @@ Which activities generated the entity?
 {
   "name": "a",
   "file_type": "csv",
-  "created_at": "2025-07-12",
+  "created_at": "2026-07-12",
   "agents": ["alice"],
   "activities": ["extract_sales_data"],
   "columns": 8,
