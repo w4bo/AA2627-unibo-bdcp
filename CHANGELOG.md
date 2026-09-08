@@ -1,3 +1,15 @@
+## 1.0.0 (2026-09-08)
+
+### Bug Fixes
+
+* add chalckboard ([151d879](https://github.com/w4bo/AA2627-unibo-bdcp/commit/151d8794b16c33faedf70e8d9e668b57e98e92cb))
+* add slide submodules ([efd93fc](https://github.com/w4bo/AA2627-unibo-bdcp/commit/efd93fc5f42ec89f304a26598b7771cfcc683ac3))
+
+### General maintenance
+
+* copy of last year ([5323f96](https://github.com/w4bo/AA2627-unibo-bdcp/commit/5323f9690304bc0691cf4dac7eb20c50480cff57))
+* update slides for 2026 academic year ([c51e250](https://github.com/w4bo/AA2627-unibo-bdcp/commit/c51e25043a0553c41b5370e211812b5cb8dee97f))
+
 ## [1.0.36](https://github.com/w4bo/AA2526-unibo-bigdataandcloudplatforms/compare/1.0.35...1.0.36) (2025-12-22)
 
 ### Dependency updates
