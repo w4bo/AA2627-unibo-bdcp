@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.0...1.0.1) (2026-09-09)
+
+### Bug Fixes
+
+* add images ([4fe65c9](https://github.com/w4bo/AA2627-unibo-bdcp/commit/4fe65c9786fc48375eeb26a780b5e8feec34d88a))
+
 ## 1.0.0 (2026-09-08)
 
 ### Bug Fixes
