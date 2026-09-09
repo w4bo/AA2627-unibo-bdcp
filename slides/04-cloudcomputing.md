@@ -427,7 +427,7 @@ Containerization isolates an application from its environment.
 - Built to handle failures
 - Fault-tolerant or highly available
 
-![Physical Server Pools](https://media.geeksforgeeks.org/wp-content/uploads/20230110160801/Physical-Node.png)
+![Physical Server Pools](img/physical-node.png)
 
 # Why moving to the cloud?
 

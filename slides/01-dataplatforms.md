@@ -521,7 +521,7 @@ A *data steward* is a role that ensures that data governance processes are follo
 
 # Data profiling
 
-![Data profiling](https://dataedo-website.s3.amazonaws.com/cartoon/data_analysis_vs_profiling.png?1680006037)
+![Data profiling](img/data-analysis-vs-profiling.png)
 
 # Data profiling
 
