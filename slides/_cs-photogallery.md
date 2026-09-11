@@ -135,5 +135,5 @@ db.images.find({"detections.label": "dog"})
 * Find images taken after a certain date:
 
 ```js
-db.images.find({"file_info.created_time": {"$gte": "2025-01-01"}})
+db.images.find({"file_info.created_time": {"$gte": "2026-01-01"}})
 ```

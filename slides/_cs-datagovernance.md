@@ -234,10 +234,10 @@ Given a *metric* to measure the distance between two elements of a set, we can u
 
 ::::{.columns}
 :::{.column width=40%}
-![](https://upload.wikimedia.org/wikipedia/commons/e/ee/A_diagram_of_the_structure_of_BK-tree.png)
+![](img/bk-tree-structure.png)
 :::
 :::{.column width=40%}
-![](https://upload.wikimedia.org/wikipedia/commons/d/de/Bk_tree.svg)
+![](img/bk-tree.svg)
 :::
 ::::
 

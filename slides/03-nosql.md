@@ -91,12 +91,12 @@ Today, *NoSQL* indicates *DBMSs* adopting a *different data model from the relat
 ::::{.columns}
 :::{.column width=50%}
 
-![Relational data model](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Relational_database_terms.svg/2880px-Relational_database_terms.svg.png)
+![Relational data model](img/relational-database-terms.svg)
 
 :::
 :::{.column width=50%}
 
-![Graph data model](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/PageRanks-Example.svg/2560px-PageRanks-Example.svg.png)
+![Graph data model](img/pageranks-example.svg)
 
 :::
 ::::
@@ -108,12 +108,12 @@ Today, *NoSQL* indicates *DBMSs* adopting a *different data model from the relat
 ::::{.columns}
 :::{.column width=50%}
 
-![SQL Join](https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Triangle-query-join-query-plan-r-st.svg/1920px-Triangle-query-join-query-plan-r-st.svg.png)
+![SQL Join](img/triangle-query-join.png)
 
 :::
 :::{.column width=50%}
 
-![Aggregate-oriented modeling](https://martinfowler.com/bliki/images/aggregateOrientedDatabase/aggregate-split.png)
+![Aggregate-oriented modeling](img/aggregate-split.png)
 
 :::
 ::::
@@ -126,7 +126,7 @@ Today, *NoSQL* indicates *DBMSs* adopting a *different data model from the relat
   - Nodes do not share (independently access) the same memory or storage. 
 - Trivial scalability in a distributed environment with no performance decay
 
-![Shared everything vs shared nothing](https://cloudian.com/wp-content/uploads/2024/02/Shared-Nothing-architecture.png)
+![Shared everything vs shared nothing](img/shared-nothing-architecture.png)
 
 # NoSQL common features
 
@@ -262,11 +262,11 @@ Graph processing time
 
 #
 
-![Implementing a graph as a relational database](https://dist.neo4j.com/wp-content/uploads/20181218005826/non-native-graph-database-relying-on-index.png)
+![Implementing a graph as a relational database](img/non-native-graph-database.png)
 
 #
 
-![Index-free adjacency](https://dist.neo4j.com/wp-content/uploads/20181218005743/native-graph-technology-index-free-adjacency.png)
+![Index-free adjacency](img/native-graph-technology.png)
 
 # Graph: querying
 
