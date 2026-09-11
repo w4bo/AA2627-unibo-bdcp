@@ -1,3 +1,13 @@
+## [1.0.2](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.1...1.0.2) (2026-09-11)
+
+### Bug Fixes
+
+* update the release ([b24129e](https://github.com/w4bo/AA2627-unibo-bdcp/commit/b24129e2e40ec24a6114e6fa36eb6bdc76e8ac43))
+
+### General maintenance
+
+* before the merge ([059840d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/059840d80655c66389b9b24524ed4202559acb9d))
+
 ## [1.0.1](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.0...1.0.1) (2026-09-09)
 
 ### Bug Fixes
