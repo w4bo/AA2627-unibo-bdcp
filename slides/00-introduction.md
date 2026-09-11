@@ -2,74 +2,88 @@
 subtitle: Module 2 (Cloud Platforms)
 ---
 
-# Hi!
+# Welcome!
 
-Matteo Francia, Ph.D.
+**Matteo Francia, Ph.D.**
 
-- Email: m.francia@unibo.it
-- Assistant Professor (junior) @ DISI, UniBO
-- www: [https://www.unibo.it/sitoweb/m.francia/en](https://www.unibo.it/sitoweb/m.francia/en)
+- Assistant Professor (junior) @ DISI, University of Bologna
+- Email: [m.francia@unibo.it](mailto:m.francia@unibo.it)
+- Web: [https://www.unibo.it/sitoweb/m.francia/en](https://www.unibo.it/sitoweb/m.francia/en)
 
-Teaching
+I teach:
 
 - [DTM] Big Data and Cloud Platforms (Module 2)
 - [DTM] Machine Learning and Data Mining (Module 2)
 
-Research topics
+I work on:
 
-- Big data / database / machine learning
+- Big data, databases, and machine learning
 - Precision agriculture and spatio-temporal analytics
 
-[BIG (Business Intelligence Group)](https://big.csr.unibo.it/)
+[BIG - Business Intelligence Group](https://big.csr.unibo.it/)
 
 - <img src="./img/biglogo.svg" class="title-icon" /> [https://big-unibo.github.io](https://big-unibo.github.io)
-- w/ Prof. Golfarelli, Prof. Gallinucci
-- You can check our thesis projects [here](https://big-unibo.github.io/thesis/)
+- With Prof. Golfarelli and Prof. Gallinucci
+- Thesis projects: [https://big-unibo.github.io/thesis/](https://big-unibo.github.io/thesis/)
 
 <img src="./img/unibo.svg" style="box-shadow: none !important; position: absolute !important; top: -250px !important; right: -250px !important; ; max-height: 500px !important; max-width: 500px !important" />
 
-# Table of Contents and Exam
+# What This Module Is About
 
-Handling data pipelines in the Cloud
+Handling data pipelines in the cloud means learning how data moves from raw sources to reliable analytical systems.
 
-* Introduction to *data platforms*: shifting from databases to well-integrated data ecosystems
-* Definition of *cloud computing* and taxonomy of cloud services
-* Introduction to the most *relevant cloud platforms*
-* Introduction to the *billing models* of cloud computing services
-* Cluster *migration*: on-premises vs on-cloud
-* Real *case studies + labs*
+In this module, we will discuss:
 
-Seminars by companies working with cloud and big data platforms
+* *Data platforms*: from databases to integrated data ecosystems
+* *Cloud computing*: service models, deployment models, and core terminology
+* *Cloud platforms*: the main services used to build modern data architectures
+* *Billing models*: how technical choices become economic choices
+* *Migration*: moving from on-premises clusters to cloud-based architectures
+* *Case studies and labs*: applying the concepts to realistic scenarios
 
-* Connect the dots
-* Information systems, BI, data mining, big data, and machine learning
+The goal is not to memorize a catalog of services.
 
-... **all these points** will be part of the oral examination! :)
+The goal is to understand how to **connect data needs, architectural choices, and business constraints**.
 
-# Table of Contents and Exam
+# Learning Outcomes
 
-Questions on all (**theoretical** and **practical**) aspects of the course
+At the end of the module, you should be able to:
 
-* A *single session* with both teachers
-* Exam covers *both modules*
+* Explain why modern organizations need *data platforms*
+* Compare *on-premises* and *cloud* architectures
+* Identify the main building blocks of a cloud data pipeline
+* Reason about scalability, reliability, governance, and cost
+* Read technical documentation and extract the architectural ideas that matter
+* Discuss case studies by connecting information systems, BI, data mining, big data, and machine learning
+
+Seminars by companies working with cloud and big data platforms are part of the course.
+
+... and **all these points** may be part of the oral examination! :)
+
+# Exam
+
+The exam covers all **theoretical** and **practical** aspects of the course.
+
+* A *single oral session* with both teachers
+* Covers *both modules*
 * *Seminars and labs* are included
-* *Interaction during the lectures/labs* is considered in the final evaluation
+* *Interaction during lectures/labs* contributes to the final evaluation
 
-The exam is not technical
+The exam is not a technical troubleshooting session.
 
-- However, you must be capable to explain the concepts and connect the dots
+- However, you must be able to explain the concepts, motivate design choices, and connect the dots
 
-No scheduled dates, just come **when you are ready**
+No scheduled dates: come **when you are ready**.
 
-* At least one week in advance
-* Link to the [Booking](https://outlook.office365.com/owa/calendar/BigDataandCloudPlatformsexams@live.unibo.it/bookings/) application
+* Book at least one week in advance
+* Use the [Booking](https://outlook.office365.com/owa/calendar/BigDataandCloudPlatformsexams@live.unibo.it/bookings/) application
 
-According to the University's regulation
+According to the University's regulation:
 
-* Exams must be in presence
-* **Cannot refuse a grade more than once**
+* Exams must be in person
+* You **cannot reject a grade more than once**
 
-Be prepared: you have to wait **1 month before trying again** (in any case)
+Be prepared: in any case, you must wait **1 month before trying again**.
 
 # Office hours
 
@@ -82,7 +96,7 @@ Office hours:
 - *Short questions*: before/after each lecture
 - *Longer questions*: send an email to book an appointment
 
-If you need help for coding and labs, *you can ask me and the designed tutor*
+If you need help with coding and labs, *you can ask me and the assigned tutor*.
 
 # Context
 
@@ -90,42 +104,42 @@ If you need help for coding and labs, *you can ask me and the designed tutor*
 
 # Context
 
-**Data Platforms as the Foundation**  
+**Data platforms as the foundation**
 
-- Provide *centralized, reliable, and scalable* access to enterprise data.  
-- Ensure *data quality, integration, and governance*, which are critical for accurate insights.  
-- Enable *real-time analytics* and advanced *I/ML models* that drive better decision-making.  
+- Provide *centralized, reliable, and scalable* access to enterprise data
+- Ensure *data quality, integration, and governance*
+- Enable *real-time analytics* and advanced *AI/ML models*
 
-**Why It Matters for Decision Support Systems (DSS)**  
+**Why this matters for Decision Support Systems (DSS)**
 
-- A DSS relies on *timely, consistent, and trustworthy data*.  
-- Without a robust data platform, insights may be *incomplete, delayed, or misleading*.  
+- A DSS relies on *timely, consistent, and trustworthy data*
+- Without a robust data platform, insights may be *incomplete, delayed, or misleading*
 
-**Role of the Data Architect**  
+**Role of the data architect**
 
-- Designs the *data platform's structure and flow* to ensure efficiency and scalability.  
-- Defines *data models, standards, and integration strategies* for optimal DSS performance.  
-- Bridges business needs with technical capabilities, ensuring the platform supports *strategic decision-making*.  
+- Designs the *structure and flow* of the data platform
+- Defines *data models, standards, and integration strategies*
+- Bridges business needs and technical capabilities
 
 **Data platform + skilled data architect** = reliable, actionable, and impactful decision support.
 
 # So far
 
-You have acquainted/practiced with *on-premises* solutions
+You have already practiced with *on-premises* solutions.
 
 * You were given a working hardware cluster
 * ... to deploy software applications on a Hadoop-based stack
 
 > **Digital transformation**: The process of using digital technologies to create new — or modify existing — business processes, culture, and customer experiences to meet changing business and market requirements
 
-In the perspective of digital transformation, let us guess
+From the perspective of digital transformation, let us ask:
 
 * How would you start from scratch?
 * How much time would it take?
 
 # So far
 
-No easy answers, big-data (distributed) architectures require a lot of skills
+There are no easy answers: big-data architectures require many skills.
 
 * *Configuration*: how do I set up dozens of new machines?
 * *Networking*: how do I cable dozens of machines?
@@ -137,11 +151,11 @@ No easy answers, big-data (distributed) architectures require a lot of skills
 
 # So far
 
-Two sides of the same coin, and your profile is a perfect? fit
+Cloud data platforms sit between two perspectives, and your profile is a good fit for both.
 
 * **Technological** perspective
   * How do we configure a distributed environment?
-  * How do we set up/integrate/control independent services?
+  * How do we set up, integrate, and control independent services?
   * How do we orchestrate data flows?
 * **Business** perspective
   * Can we afford to spend resources on tasks that are not mission-oriented?
@@ -189,7 +203,7 @@ Two sides of the same coin, and your profile is a perfect? fit
 
 # Teaching material
 
-You will find all you need in these slides
+You will find all you need in these slides.
 
 * However, keeping up the pace with data platforms and the cloud is hard
 * There is a rapid development of technologies, and not all of them will survive

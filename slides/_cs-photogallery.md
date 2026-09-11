@@ -95,7 +95,7 @@ Result: clean set of detected objects with labels, boxes, and confidence
 
 - Single forward pass per image → all objects detected at once  
 - No sliding windows or region proposals (unlike R-CNN)  
-- Real-time capable: 30–150 FPS depending on model
+- Real-time capable: 30-150 FPS depending on model
 
 # How YOLO Works in the Gallery
 

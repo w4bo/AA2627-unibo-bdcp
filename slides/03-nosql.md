@@ -44,7 +44,7 @@ After the relational model [@DBLP:journals/cacm/Codd70] new types of databases h
 
 *Consistency vs latency*
 
-- Consistency is a must – even at the expense of latency
+- Consistency is a must - even at the expense of latency
 - Today's applications require high reading/writing throughput with low latency
 
 *Schema rigidity*

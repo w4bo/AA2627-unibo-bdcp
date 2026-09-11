@@ -46,7 +46,7 @@ Where are we _collecting/processing_ data?
 
 > "It is a capital mistake to theorize before one has data. Insensibly, one begins to twist the facts to suit theories, instead of theories to suit facts."
 >
-> – Sherlock Holmes
+> - Sherlock Holmes
 
 Getting _value_ from data _is not_ (only) a matter of _storage_
 
@@ -1131,7 +1131,7 @@ It is a unified architecture with an integrated set of technologies and services
 **It is a design concept**
 
 - It optimizes data management by automating repetitive tasks
-- According to Gartner estimates, 25% of data management vendors will provide a complete framework for data fabric by 2024 – up from 5% today
+- According to Gartner estimates, 25% of data management vendors will provide a complete framework for data fabric by 2024 - up from 5% today
 
 ::::{.columns}
 :::{.column width=50%}
@@ -1343,7 +1343,7 @@ They are design concepts, not things.
 - They are not mutually exclusive
 - They are architectural frameworks, not architectures
   - The frameworks must be adapted and customized to your needs, data, processes, and terminology
-  - Gartner estimates 25% of data management vendors will provide a complete data fabric solution by 2024 – up from 5% today
+  - Gartner estimates 25% of data management vendors will provide a complete data fabric solution by 2024 - up from 5% today
 
 Alex Woodie, 2021 [https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/](https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/)
 
