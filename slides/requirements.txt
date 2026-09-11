@@ -1,7 +1,7 @@
 awswrangler==3.16.1
 flaml[automl]==2.6.0
 jupyter==1.1.1
-matplotlib==3.11.0
+matplotlib==3.11.1
 neo4j==6.2.0
 notebook==7.6.0
 openpyxl==3.1.5
