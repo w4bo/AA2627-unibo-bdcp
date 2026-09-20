@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="lab-03-DL2DWH.solution_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lab-03-DL2DWH.solution_files/libs/quarto-html/tabby.min.js"></script>
 <script src="lab-03-DL2DWH.solution_files/libs/quarto-html/popper.min.js"></script>
 <script src="lab-03-DL2DWH.solution_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="lab-03-DL2DWH.solution_files/libs/quarto-html/tippy.css" rel="stylesheet">
@@ -187,9 +187,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-  
-  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -217,7 +214,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </section>
 <section class="slide level2">
 
-<div id="0927b305" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;slide&quot;}" data-execution_count="2">
+<div id="0927b305" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;slide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -232,711 +229,54 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </section>
 <section class="slide level2">
 
-<div id="9ff64bba" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="3">
+<div id="9ff64bba" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># get the raw data</span></span>
 <span id="cb2-2"><a href=""></a>df <span class="op">=</span> pd.read_csv(<span class="st">'http://big.csr.unibo.it/projects/nosql-datasets/sales_fact_1997.orig.csv'</span>)</span>
 <span id="cb2-3"><a href=""></a>df</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Birthdate</th>
-<th data-quarto-table-cell-role="th">Brand Name</th>
-<th data-quarto-table-cell-role="th">C. City</th>
-<th data-quarto-table-cell-role="th">C. Country</th>
-<th data-quarto-table-cell-role="th">C. State</th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Coffee Bar</th>
-<th data-quarto-table-cell-role="th">Cost</th>
-<th data-quarto-table-cell-role="th">Customer (Birthdate)</th>
-<th data-quarto-table-cell-role="th">Customer (Card)</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">Subcategory</th>
-<th data-quarto-table-cell-role="th">Subcategory (Dep)</th>
-<th data-quarto-table-cell-role="th">Subcategory (Family)</th>
-<th data-quarto-table-cell-role="th">Type</th>
-<th data-quarto-table-cell-role="th">Video Store</th>
-<th data-quarto-table-cell-role="th">Yearly Income</th>
-<th data-quarto-table-cell-role="th">Number of Records</th>
-<th data-quarto-table-cell-role="th">Store Cost</th>
-<th data-quarto-table-cell-role="th">Store Sales</th>
-<th data-quarto-table-cell-role="th">Unit Sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>2/25/1954</td>
-<td>CDR</td>
-<td>Walla Walla</td>
-<td>USA</td>
-<td>WA</td>
-<td>Jams and Jellies</td>
-<td>0</td>
-<td>0</td>
-<td>3446</td>
-<td>3446</td>
-<td>...</td>
-<td>Jam</td>
-<td>Jam</td>
-<td>Jam</td>
-<td>Small Grocery</td>
-<td>0</td>
-<td>$30K - $50K</td>
-<td>1</td>
-<td>3.0480</td>
-<td>7.62</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2/25/1954</td>
-<td>Landslide</td>
-<td>Walla Walla</td>
-<td>USA</td>
-<td>WA</td>
-<td>Jams and Jellies</td>
-<td>0</td>
-<td>0</td>
-<td>3446</td>
-<td>3446</td>
-<td>...</td>
-<td>Peanut Butter</td>
-<td>Peanut Butter</td>
-<td>Peanut Butter</td>
-<td>Small Grocery</td>
-<td>0</td>
-<td>$30K - $50K</td>
-<td>1</td>
-<td>1.9740</td>
-<td>4.20</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>2/25/1954</td>
-<td>Fort West</td>
-<td>Walla Walla</td>
-<td>USA</td>
-<td>WA</td>
-<td>Snack Foods</td>
-<td>0</td>
-<td>0</td>
-<td>3446</td>
-<td>3446</td>
-<td>...</td>
-<td>Chips</td>
-<td>Chips</td>
-<td>Chips</td>
-<td>Small Grocery</td>
-<td>0</td>
-<td>$30K - $50K</td>
-<td>1</td>
-<td>5.2380</td>
-<td>11.64</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>2/25/1954</td>
-<td>Horatio</td>
-<td>Walla Walla</td>
-<td>USA</td>
-<td>WA</td>
-<td>Snack Foods</td>
-<td>0</td>
-<td>0</td>
-<td>3446</td>
-<td>3446</td>
-<td>...</td>
-<td>Dried Fruit</td>
-<td>Dried Fruit</td>
-<td>Dried Fruit</td>
-<td>Small Grocery</td>
-<td>0</td>
-<td>$30K - $50K</td>
-<td>1</td>
-<td>1.8744</td>
-<td>5.68</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>2/25/1954</td>
-<td>Red Wing</td>
-<td>Walla Walla</td>
-<td>USA</td>
-<td>WA</td>
-<td>Paper Products</td>
-<td>0</td>
-<td>0</td>
-<td>3446</td>
-<td>3446</td>
-<td>...</td>
-<td>Paper Wipes</td>
-<td>Paper Wipes</td>
-<td>Paper Wipes</td>
-<td>Small Grocery</td>
-<td>0</td>
-<td>$30K - $50K</td>
-<td>1</td>
-<td>1.7384</td>
-<td>4.24</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86832</td>
-<td>6/19/1915</td>
-<td>Super</td>
-<td>Downey</td>
-<td>USA</td>
-<td>CA</td>
-<td>Jams and Jellies</td>
-<td>1</td>
-<td>12820</td>
-<td>5566</td>
-<td>5566</td>
-<td>...</td>
-<td>Jelly</td>
-<td>Jelly</td>
-<td>Jelly</td>
-<td>Gourmet Supermarket</td>
-<td>1</td>
-<td>$50K - $70K</td>
-<td>1</td>
-<td>3.7152</td>
-<td>7.74</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86833</td>
-<td>6/19/1915</td>
-<td>Booker</td>
-<td>Downey</td>
-<td>USA</td>
-<td>CA</td>
-<td>Dairy</td>
-<td>1</td>
-<td>12820</td>
-<td>5566</td>
-<td>5566</td>
-<td>...</td>
-<td>Cheese</td>
-<td>Cheese</td>
-<td>Cheese</td>
-<td>Gourmet Supermarket</td>
-<td>1</td>
-<td>$50K - $70K</td>
-<td>1</td>
-<td>2.0535</td>
-<td>5.55</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86834</td>
-<td>6/19/1915</td>
-<td>Club</td>
-<td>Downey</td>
-<td>USA</td>
-<td>CA</td>
-<td>Dairy</td>
-<td>1</td>
-<td>12820</td>
-<td>5566</td>
-<td>5566</td>
-<td>...</td>
-<td>Cheese</td>
-<td>Cheese</td>
-<td>Cheese</td>
-<td>Gourmet Supermarket</td>
-<td>1</td>
-<td>$50K - $70K</td>
-<td>1</td>
-<td>5.9250</td>
-<td>11.85</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86835</td>
-<td>6/19/1915</td>
-<td>Imagine</td>
-<td>Downey</td>
-<td>USA</td>
-<td>CA</td>
-<td>Frozen Desserts</td>
-<td>1</td>
-<td>12820</td>
-<td>5566</td>
-<td>5566</td>
-<td>...</td>
-<td>Ice Cream</td>
-<td>Ice Cream</td>
-<td>Ice Cream</td>
-<td>Gourmet Supermarket</td>
-<td>1</td>
-<td>$50K - $70K</td>
-<td>1</td>
-<td>2.6322</td>
-<td>6.42</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86836</td>
-<td>6/19/1915</td>
-<td>Choice</td>
-<td>Downey</td>
-<td>USA</td>
-<td>CA</td>
-<td>Candy</td>
-<td>1</td>
-<td>12820</td>
-<td>5566</td>
-<td>5566</td>
-<td>...</td>
-<td>Chocolate Candy</td>
-<td>Chocolate Candy</td>
-<td>Chocolate Candy</td>
-<td>Gourmet Supermarket</td>
-<td>1</td>
-<td>$50K - $70K</td>
-<td>1</td>
-<td>2.1528</td>
-<td>5.52</td>
-<td>3</td>
-</tr>
-</tbody>
-</table>
-
-<p>86837 rows × 56 columns</p>
-</div>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="575f29b7" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="4">
+<div id="575f29b7" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># take a look at the columns</span></span>
 <span id="cb3-2"><a href=""></a>df.info()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-RangeIndex: 86837 entries, 0 to 86836
-Data columns (total 56 columns):
- #   Column                 Non-Null Count  Dtype  
----  ------                 --------------  -----  
- 0   Birthdate              86837 non-null  object 
- 1   Brand Name             86837 non-null  object 
- 2   C. City                86837 non-null  object 
- 3   C. Country             86837 non-null  object 
- 4   C. State               86837 non-null  object 
- 5   Category               86837 non-null  object 
- 6   Coffee Bar             86837 non-null  int64  
- 7   Cost                   86837 non-null  int64  
- 8   Customer (Birthdate)   86837 non-null  int64  
- 9   Customer (Card)        86837 non-null  int64  
- 10  Customer (Education)   86837 non-null  int64  
- 11  Customer (Income)      86837 non-null  int64  
- 12  Customer (Location)    86837 non-null  int64  
- 13  Customer (Occupation)  86837 non-null  int64  
- 14  Customer (Sex)         86837 non-null  int64  
- 15  Customer (Status)      86837 non-null  int64  
- 16  Department             86837 non-null  object 
- 17  Education              86837 non-null  object 
- 18  End Date               23181 non-null  object 
- 19  Family                 86837 non-null  object 
- 20  Florist                86837 non-null  int64  
- 21  Gender                 86837 non-null  object 
- 22  Marital Status         86837 non-null  object 
- 23  Media Type             86837 non-null  object 
- 24  Member Card            86837 non-null  object 
- 25  Occupation             86837 non-null  object 
- 26  Product (Brand)        86837 non-null  object 
- 27  Product (Category)     86837 non-null  object 
- 28  Product (Department)   86837 non-null  object 
- 29  Product (Family)       86837 non-null  object 
- 30  Promotion (Cost)       86837 non-null  int64  
- 31  Promotion (End)        86837 non-null  int64  
- 32  Promotion (Media)      86837 non-null  int64  
- 33  Promotion (Start)      86837 non-null  int64  
- 34  S. City                86837 non-null  object 
- 35  S. Country             86837 non-null  object 
- 36  S. State               86837 non-null  object 
- 37  Salad Bar              86837 non-null  int64  
- 38  Sales Date             86837 non-null  object 
- 39  Start Date             23181 non-null  object 
- 40  Store                  86837 non-null  int64  
- 41  Store (Coffee)         86837 non-null  int64  
- 42  Store (Florist)        86837 non-null  int64  
- 43  Store (Salad)          86837 non-null  int64  
- 44  Store (Type)           86837 non-null  int64  
- 45  Store (Video)          86837 non-null  int64  
- 46  Subcategory            86837 non-null  object 
- 47  Subcategory (Dep)      86837 non-null  object 
- 48  Subcategory (Family)   86837 non-null  object 
- 49  Type                   86837 non-null  object 
- 50  Video Store            86837 non-null  int64  
- 51  Yearly Income          86837 non-null  object 
- 52  Number of Records      86837 non-null  int64  
- 53  Store Cost             86837 non-null  float64
- 54  Store Sales            86837 non-null  float64
- 55  Unit Sales             86837 non-null  int64  
-dtypes: float64(2), int64(25), object(29)
-memory usage: 37.1+ MB</code></pre>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="b813dadb" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="5">
+<div id="b813dadb" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># select a subset of columns</span></span>
-<span id="cb5-2"><a href=""></a>columns <span class="op">=</span> [</span>
-<span id="cb5-3"><a href=""></a>    <span class="st">"C. City"</span>, <span class="st">"C. Country"</span>, <span class="st">"C. State"</span>, <span class="st">"Customer (Location)"</span>, <span class="st">"Yearly Income"</span>,</span>
-<span id="cb5-4"><a href=""></a>    <span class="st">"Category"</span>, <span class="st">"Subcategory"</span>, <span class="st">"Family"</span>, <span class="st">"Product (Category)"</span>,</span>
-<span id="cb5-5"><a href=""></a>    <span class="st">"S. City"</span>, <span class="st">"S. Country"</span>, <span class="st">"S. State"</span>, <span class="st">"Store"</span>, <span class="st">"Type"</span>,</span>
-<span id="cb5-6"><a href=""></a>    <span class="st">"Sales Date"</span></span>
-<span id="cb5-7"><a href=""></a>]</span>
-<span id="cb5-8"><a href=""></a>df <span class="op">=</span> df[columns <span class="op">+</span> [<span class="st">"Store Cost"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Unit Sales"</span>]].groupby(columns).first().reset_index()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># select a subset of columns</span></span>
+<span id="cb4-2"><a href=""></a>columns <span class="op">=</span> [</span>
+<span id="cb4-3"><a href=""></a>    <span class="st">"C. City"</span>, <span class="st">"C. Country"</span>, <span class="st">"C. State"</span>, <span class="st">"Customer (Location)"</span>, <span class="st">"Yearly Income"</span>,</span>
+<span id="cb4-4"><a href=""></a>    <span class="st">"Category"</span>, <span class="st">"Subcategory"</span>, <span class="st">"Family"</span>, <span class="st">"Product (Category)"</span>,</span>
+<span id="cb4-5"><a href=""></a>    <span class="st">"S. City"</span>, <span class="st">"S. Country"</span>, <span class="st">"S. State"</span>, <span class="st">"Store"</span>, <span class="st">"Type"</span>,</span>
+<span id="cb4-6"><a href=""></a>    <span class="st">"Sales Date"</span></span>
+<span id="cb4-7"><a href=""></a>]</span>
+<span id="cb4-8"><a href=""></a>df <span class="op">=</span> df[columns <span class="op">+</span> [<span class="st">"Store Cost"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Unit Sales"</span>]].groupby(columns).first().reset_index()</span></code></pre></div>
 </details>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="1f614399" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="6">
+<div id="1f614399" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># rename some columns</span></span>
-<span id="cb6-2"><a href=""></a><span class="cf">if</span> <span class="st">"Customer (Location)"</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb6-3"><a href=""></a>    df <span class="op">=</span> df.rename(columns<span class="op">=</span>{</span>
-<span id="cb6-4"><a href=""></a>        <span class="st">'Customer (Location)'</span>: <span class="st">'Customer'</span>,</span>
-<span id="cb6-5"><a href=""></a>        <span class="st">'Product (Category)'</span>: <span class="st">'Product'</span></span>
-<span id="cb6-6"><a href=""></a>    })</span>
-<span id="cb6-7"><a href=""></a>df</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># rename some columns</span></span>
+<span id="cb5-2"><a href=""></a><span class="cf">if</span> <span class="st">"Customer (Location)"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb5-3"><a href=""></a>    df <span class="op">=</span> df.rename(columns<span class="op">=</span>{</span>
+<span id="cb5-4"><a href=""></a>        <span class="st">'Customer (Location)'</span>: <span class="st">'Customer'</span>,</span>
+<span id="cb5-5"><a href=""></a>        <span class="st">'Product (Category)'</span>: <span class="st">'Product'</span></span>
+<span id="cb5-6"><a href=""></a>    })</span>
+<span id="cb5-7"><a href=""></a>df</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">C. City</th>
-<th data-quarto-table-cell-role="th">C. Country</th>
-<th data-quarto-table-cell-role="th">C. State</th>
-<th data-quarto-table-cell-role="th">Customer</th>
-<th data-quarto-table-cell-role="th">Yearly Income</th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Subcategory</th>
-<th data-quarto-table-cell-role="th">Family</th>
-<th data-quarto-table-cell-role="th">Product</th>
-<th data-quarto-table-cell-role="th">S. City</th>
-<th data-quarto-table-cell-role="th">S. Country</th>
-<th data-quarto-table-cell-role="th">S. State</th>
-<th data-quarto-table-cell-role="th">Store</th>
-<th data-quarto-table-cell-role="th">Type</th>
-<th data-quarto-table-cell-role="th">Sales Date</th>
-<th data-quarto-table-cell-role="th">Store Cost</th>
-<th data-quarto-table-cell-role="th">Store Sales</th>
-<th data-quarto-table-cell-role="th">Unit Sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Cooking Oil</td>
-<td>Food</td>
-<td>Super Corn Oil</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>2.1177</td>
-<td>5.43</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Sauces</td>
-<td>Food</td>
-<td>Landslide Tomato Sauce</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>1.6500</td>
-<td>5.00</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Sugar</td>
-<td>Food</td>
-<td>Landslide Brown Sugar</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>5.3760</td>
-<td>11.20</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Bathroom Products</td>
-<td>Conditioner</td>
-<td>Non-Consumable</td>
-<td>Consolidated Silky Smooth Hair Conditioner</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>1.1466</td>
-<td>2.94</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Beer and Wine</td>
-<td>Wine</td>
-<td>Drink</td>
-<td>Pearl Merlot Wine</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>0.9288</td>
-<td>2.16</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86824</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Jams and Jellies</td>
-<td>Peanut Butter</td>
-<td>Food</td>
-<td>Plato Chunky Peanut Butter</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>6/30/1997 12:00:00 AM</td>
-<td>1.9600</td>
-<td>4.90</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86825</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Meat</td>
-<td>Hot Dogs</td>
-<td>Food</td>
-<td>Cutting Edge Chicken Hot Dogs</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>6/30/1997 12:00:00 AM</td>
-<td>1.4229</td>
-<td>4.59</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86826</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Pizza</td>
-<td>Pizza</td>
-<td>Food</td>
-<td>PigTail Frozen Pepperoni Pizza</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>3/1/1997 12:00:00 AM</td>
-<td>1.0752</td>
-<td>3.36</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86827</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Vegetables</td>
-<td>Fresh Vegetables</td>
-<td>Food</td>
-<td>Ebony Garlic</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>2/11/1997 12:00:00 AM</td>
-<td>4.3680</td>
-<td>10.40</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86828</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Vegetables</td>
-<td>Fresh Vegetables</td>
-<td>Food</td>
-<td>Hermanos Green Pepper</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>2/11/1997 12:00:00 AM</td>
-<td>6.0216</td>
-<td>15.44</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-
-<p>86829 rows × 18 columns</p>
-</div>
-</div>
 </div>
 </section>
 <section id="data-ingestion" class="slide level2">
@@ -958,611 +298,51 @@ memory usage: 37.1+ MB</code></pre>
 </section>
 <section class="slide level2">
 
-<div id="5e84224b" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="8">
+<div id="5e84224b" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>landing_bucket <span class="op">=</span> <span class="st">"s3://landing-raw-sales-123/"</span></span>
-<span id="cb7-2"><a href=""></a>staging_bucket <span class="op">=</span> <span class="st">"s3://staging-clean-sales-123/"</span></span>
-<span id="cb7-3"><a href=""></a></span>
-<span id="cb7-4"><a href=""></a>file_names <span class="op">=</span> [<span class="st">"sales_fact_1997.slice-0-1.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-1-2.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-2-3.v0.0.1.csv"</span>,]</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>landing_bucket <span class="op">=</span> <span class="st">"s3://landing-raw-sales-123/"</span></span>
+<span id="cb6-2"><a href=""></a>staging_bucket <span class="op">=</span> <span class="st">"s3://staging-clean-sales-123/"</span></span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a>file_names <span class="op">=</span> [<span class="st">"sales_fact_1997.slice-0-1.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-1-2.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-2-3.v0.0.1.csv"</span>,]</span></code></pre></div>
 </details>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="3cd74c82" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="9">
+<div id="3cd74c82" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="co"># import from S3</span></span>
-<span id="cb8-2"><a href=""></a>df <span class="op">=</span> wr.s3.read_csv(landing_bucket <span class="op">+</span> file_names[<span class="dv">0</span>])</span>
-<span id="cb8-3"><a href=""></a><span class="cf">for</span> file_name <span class="kw">in</span> file_names[<span class="dv">1</span>:]:</span>
-<span id="cb8-4"><a href=""></a>    df <span class="op">=</span> df.append(wr.s3.read_csv(landing_bucket <span class="op">+</span> file_name), ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-5"><a href=""></a>df</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># import from S3</span></span>
+<span id="cb7-2"><a href=""></a>df <span class="op">=</span> wr.s3.read_csv(landing_bucket <span class="op">+</span> file_names[<span class="dv">0</span>])</span>
+<span id="cb7-3"><a href=""></a><span class="cf">for</span> file_name <span class="kw">in</span> file_names[<span class="dv">1</span>:]:</span>
+<span id="cb7-4"><a href=""></a>    df <span class="op">=</span> df.append(wr.s3.read_csv(landing_bucket <span class="op">+</span> file_name), ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-5"><a href=""></a>df</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">C. City</th>
-<th data-quarto-table-cell-role="th">C. Country</th>
-<th data-quarto-table-cell-role="th">C. State</th>
-<th data-quarto-table-cell-role="th">Customer</th>
-<th data-quarto-table-cell-role="th">Yearly Income</th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Subcategory</th>
-<th data-quarto-table-cell-role="th">Family</th>
-<th data-quarto-table-cell-role="th">Product</th>
-<th data-quarto-table-cell-role="th">S. City</th>
-<th data-quarto-table-cell-role="th">S. Country</th>
-<th data-quarto-table-cell-role="th">S. State</th>
-<th data-quarto-table-cell-role="th">Store</th>
-<th data-quarto-table-cell-role="th">Type</th>
-<th data-quarto-table-cell-role="th">Sales Date</th>
-<th data-quarto-table-cell-role="th">Store Cost</th>
-<th data-quarto-table-cell-role="th">Store Sales</th>
-<th data-quarto-table-cell-role="th">Unit Sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Cooking Oil</td>
-<td>Food</td>
-<td>Super Corn Oil</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>2.1177</td>
-<td>5.43</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Sauces</td>
-<td>Food</td>
-<td>Landslide Tomato Sauce</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>1.6500</td>
-<td>5.00</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Sugar</td>
-<td>Food</td>
-<td>Landslide Brown Sugar</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>5.3760</td>
-<td>11.20</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Bathroom Products</td>
-<td>Conditioner</td>
-<td>Non-Consumable</td>
-<td>Consolidated Silky Smooth Hair Conditioner</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>1.1466</td>
-<td>2.94</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Beer and Wine</td>
-<td>Wine</td>
-<td>Drink</td>
-<td>Pearl Merlot Wine</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>0.9288</td>
-<td>2.16</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86824</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Jams and Jellies</td>
-<td>Peanut Butter</td>
-<td>Food</td>
-<td>Plato Chunky Peanut Butter</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>6/30/1997 12:00:00 AM</td>
-<td>1.9600</td>
-<td>4.90</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86825</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Meat</td>
-<td>Hot Dogs</td>
-<td>Food</td>
-<td>Cutting Edge Chicken Hot Dogs</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>6/30/1997 12:00:00 AM</td>
-<td>1.4229</td>
-<td>4.59</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86826</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Pizza</td>
-<td>Pizza</td>
-<td>Food</td>
-<td>PigTail Frozen Pepperoni Pizza</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>3/1/1997 12:00:00 AM</td>
-<td>1.0752</td>
-<td>3.36</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86827</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Vegetables</td>
-<td>Fresh Vegetables</td>
-<td>Food</td>
-<td>Ebony Garlic</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>2/11/1997 12:00:00 AM</td>
-<td>4.3680</td>
-<td>10.40</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86828</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Vegetables</td>
-<td>Fresh Vegetables</td>
-<td>Food</td>
-<td>Hermanos Green Pepper</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>2/11/1997 12:00:00 AM</td>
-<td>6.0216</td>
-<td>15.44</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-
-<p>86829 rows × 18 columns</p>
-</div>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="15ae01ef" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="10">
+<div id="15ae01ef" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="co"># import directly from the sources</span></span>
-<span id="cb9-2"><a href=""></a>url <span class="op">=</span> <span class="st">"http://big.csr.unibo.it/projects/nosql-datasets/"</span></span>
-<span id="cb9-3"><a href=""></a>df <span class="op">=</span> pd.read_csv(url <span class="op">+</span> file_names[<span class="dv">0</span>])</span>
-<span id="cb9-4"><a href=""></a><span class="cf">for</span> file_name <span class="kw">in</span> file_names[<span class="dv">1</span>:]:</span>
-<span id="cb9-5"><a href=""></a>    df <span class="op">=</span> df.append(pd.read_csv(url <span class="op">+</span> file_name), ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb9-6"><a href=""></a>df</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="co"># import directly from the sources</span></span>
+<span id="cb8-2"><a href=""></a>url <span class="op">=</span> <span class="st">"http://big.csr.unibo.it/projects/nosql-datasets/"</span></span>
+<span id="cb8-3"><a href=""></a>df <span class="op">=</span> pd.read_csv(url <span class="op">+</span> file_names[<span class="dv">0</span>])</span>
+<span id="cb8-4"><a href=""></a><span class="cf">for</span> file_name <span class="kw">in</span> file_names[<span class="dv">1</span>:]:</span>
+<span id="cb8-5"><a href=""></a>    df <span class="op">=</span> df.append(pd.read_csv(url <span class="op">+</span> file_name), ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-6"><a href=""></a>df</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">C. City</th>
-<th data-quarto-table-cell-role="th">C. Country</th>
-<th data-quarto-table-cell-role="th">C. State</th>
-<th data-quarto-table-cell-role="th">Customer</th>
-<th data-quarto-table-cell-role="th">Yearly Income</th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Subcategory</th>
-<th data-quarto-table-cell-role="th">Family</th>
-<th data-quarto-table-cell-role="th">Product</th>
-<th data-quarto-table-cell-role="th">S. City</th>
-<th data-quarto-table-cell-role="th">S. Country</th>
-<th data-quarto-table-cell-role="th">S. State</th>
-<th data-quarto-table-cell-role="th">Store</th>
-<th data-quarto-table-cell-role="th">Type</th>
-<th data-quarto-table-cell-role="th">Sales Date</th>
-<th data-quarto-table-cell-role="th">Store Cost</th>
-<th data-quarto-table-cell-role="th">Store Sales</th>
-<th data-quarto-table-cell-role="th">Unit Sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Cooking Oil</td>
-<td>Food</td>
-<td>Super Corn Oil</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>2.1177</td>
-<td>5.43</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Sauces</td>
-<td>Food</td>
-<td>Landslide Tomato Sauce</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>1.6500</td>
-<td>5.00</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Baking Goods</td>
-<td>Sugar</td>
-<td>Food</td>
-<td>Landslide Brown Sugar</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>5.3760</td>
-<td>11.20</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Bathroom Products</td>
-<td>Conditioner</td>
-<td>Non-Consumable</td>
-<td>Consolidated Silky Smooth Hair Conditioner</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>1.1466</td>
-<td>2.94</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>Albany</td>
-<td>USA</td>
-<td>OR</td>
-<td>117</td>
-<td>$90K - $110K</td>
-<td>Beer and Wine</td>
-<td>Wine</td>
-<td>Drink</td>
-<td>Pearl Merlot Wine</td>
-<td>Salem</td>
-<td>USA</td>
-<td>OR</td>
-<td>13</td>
-<td>Deluxe Supermarket</td>
-<td>1/21/1997 12:00:00 AM</td>
-<td>0.9288</td>
-<td>2.16</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86824</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Jams and Jellies</td>
-<td>Peanut Butter</td>
-<td>Food</td>
-<td>Plato Chunky Peanut Butter</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>6/30/1997 12:00:00 AM</td>
-<td>1.9600</td>
-<td>4.90</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86825</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Meat</td>
-<td>Hot Dogs</td>
-<td>Food</td>
-<td>Cutting Edge Chicken Hot Dogs</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>6/30/1997 12:00:00 AM</td>
-<td>1.4229</td>
-<td>4.59</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86826</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Pizza</td>
-<td>Pizza</td>
-<td>Food</td>
-<td>PigTail Frozen Pepperoni Pizza</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>3/1/1997 12:00:00 AM</td>
-<td>1.0752</td>
-<td>3.36</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">86827</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Vegetables</td>
-<td>Fresh Vegetables</td>
-<td>Food</td>
-<td>Ebony Garlic</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>2/11/1997 12:00:00 AM</td>
-<td>4.3680</td>
-<td>10.40</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">86828</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>10226</td>
-<td>$10K - $30K</td>
-<td>Vegetables</td>
-<td>Fresh Vegetables</td>
-<td>Food</td>
-<td>Hermanos Green Pepper</td>
-<td>Yakima</td>
-<td>USA</td>
-<td>WA</td>
-<td>23</td>
-<td>Mid-Size Grocery</td>
-<td>2/11/1997 12:00:00 AM</td>
-<td>6.0216</td>
-<td>15.44</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-
-<p>86829 rows × 18 columns</p>
-</div>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Save the processed dataset into S3</p>
-<div id="3cfff29a" class="cell" data-execution_count="11">
+<div id="3cfff29a" class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>wr.s3.to_csv(df, path<span class="op">=</span>staging_bucket <span class="op">+</span> <span class="st">"sales_fact_1997.v0.0.1.csv"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>wr.s3.to_csv(df, path<span class="op">=</span>staging_bucket <span class="op">+</span> <span class="st">"sales_fact_1997.v0.0.1.csv"</span>)</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>{'paths': ['s3://staging-clean-sales-123/sales_fact_1997.v0.0.1.csv'],
- 'partitions_values': {}}</code></pre>
-</div>
 </div>
 </section>
 <section id="data-understanding" class="slide level2">
@@ -1597,63 +377,21 @@ memory usage: 37.1+ MB</code></pre>
 <li><code>Store Cost</code>, <code>Store Sales</code>, <code>Unit Sales</code> are candidate measures, the others are candidate levels</li>
 </ul></li>
 </ul>
-<div id="4574a046" class="cell" data-execution_count="12">
+<div id="4574a046" class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>df.info()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>df.info()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-RangeIndex: 86829 entries, 0 to 86828
-Data columns (total 18 columns):
- #   Column         Non-Null Count  Dtype  
----  ------         --------------  -----  
- 0   C. City        86829 non-null  object 
- 1   C. Country     86829 non-null  object 
- 2   C. State       86829 non-null  object 
- 3   Customer       86829 non-null  int64  
- 4   Yearly Income  86829 non-null  object 
- 5   Category       86829 non-null  object 
- 6   Subcategory    86829 non-null  object 
- 7   Family         86829 non-null  object 
- 8   Product        86829 non-null  object 
- 9   S. City        86829 non-null  object 
- 10  S. Country     86829 non-null  object 
- 11  S. State       86829 non-null  object 
- 12  Store          86829 non-null  int64  
- 13  Type           86829 non-null  object 
- 14  Sales Date     86829 non-null  object 
- 15  Store Cost     86829 non-null  float64
- 16  Store Sales    86829 non-null  float64
- 17  Unit Sales     86829 non-null  int64  
-dtypes: float64(2), int64(3), object(13)
-memory usage: 11.9+ MB</code></pre>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>How many products have been sold?</p>
-<div id="b9d83c5a" class="cell" data-execution_count="13">
+<div id="b9d83c5a" class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>df[[<span class="st">"Product"</span>]].value_counts()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>df[[<span class="st">"Product"</span>]].value_counts()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>Product                   
-Special Wheat Puffs           89
-Hermanos Broccoli             82
-Big Time Ice Cream            80
-Red Wing 60 Watt Lightbulb    80
-Fast Beef Jerky               79
-                              ..
-Choice Bubble Gum             33
-High Top Honey Dew            32
-CDR Oregano                   31
-CDR Apple Preserves           27
-Washington Berry Juice        26
-Length: 1559, dtype: int64</code></pre>
-</div>
 </div>
 </section>
 <section class="slide level2">
@@ -1666,358 +404,57 @@ Length: 1559, dtype: int64</code></pre>
 </section>
 <section class="slide level2">
 
-<div id="161bdadc" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="14">
+<div id="161bdadc" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>df.groupby([<span class="st">"Product"</span>])[<span class="st">"Subcategory"</span>, <span class="st">"Category"</span>, <span class="st">"Family"</span>].nunique()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>df.groupby([<span class="st">"Product"</span>])[<span class="st">"Subcategory"</span>, <span class="st">"Category"</span>, <span class="st">"Family"</span>].nunique()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Subcategory</th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Family</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Product</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">ADJ Rosy Sunglasses</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Akron City Map</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Akron Eyeglass Screwdriver</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">American Beef Bologna</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">American Chicken Hot Dogs</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Washington Diet Cola</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Washington Diet Soda</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Washington Mango Drink</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Washington Orange Juice</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Washington Strawberry Drink</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-<p>1559 rows × 3 columns</p>
-</div>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="ad8e8e1e" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="15">
+<div id="ad8e8e1e" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>df.groupby([<span class="st">"Subcategory"</span>])[<span class="st">"Category"</span>, <span class="st">"Family"</span>].nunique()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>df.groupby([<span class="st">"Subcategory"</span>])[<span class="st">"Category"</span>, <span class="st">"Family"</span>].nunique()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Family</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Subcategory</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Acetominifen</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Anchovies</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Aspirin</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Auto Magazines</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Bagels</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Toothbrushes</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Tuna</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Waffles</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Wine</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Yogurt</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-<p>102 rows × 2 columns</p>
-</div>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="da6c5e9f" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="16">
+<div id="da6c5e9f" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>df.groupby([<span class="st">"Category"</span>])[<span class="st">"Family"</span>].nunique()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>df.groupby([<span class="st">"Category"</span>])[<span class="st">"Family"</span>].nunique()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>Category
-Baking Goods            1
-Bathroom Products       1
-Beer and Wine           1
-Bread                   1
-Breakfast Foods         1
-Candles                 1
-Candy                   1
-Canned Anchovies        1
-Canned Clams            1
-Canned Oysters          1
-Canned Sardines         1
-Canned Shrimp           1
-Canned Soup             1
-Canned Tuna             1
-Carbonated Beverages    1
-Cleaning Supplies       1
-Cold Remedies           1
-Dairy                   2
-Decongestants           1
-Drinks                  1
-Eggs                    1
-Electrical              1
-Frozen Desserts         1
-Frozen Entrees          1
-Fruit                   1
-Hardware                1
-Hot Beverages           1
-Hygiene                 1
-Jams and Jellies        1
-Kitchen Products        1
-Magazines               1
-Meat                    1
-Miscellaneous           1
-Packaged Vegetables     1
-Pain Relievers          1
-Paper Products          1
-Pizza                   1
-Plastic Products        1
-Pure Juice Beverages    1
-Seafood                 1
-Side Dishes             1
-Snack Foods             1
-Specialty               2
-Starchy Foods           1
-Vegetables              1
-Name: Family, dtype: int64</code></pre>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="ea084847" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="17">
+<div id="ea084847" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>df.groupby([<span class="st">"Family"</span>])[<span class="st">"Category"</span>].nunique()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>df.groupby([<span class="st">"Family"</span>])[<span class="st">"Category"</span>].nunique()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>Family
-Drink              6
-Food              26
-Non-Consumable    15
-Name: Category, dtype: int64</code></pre>
-</div>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Are there relationships between measures?</p>
-<div id="c970088d" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="18">
+<div id="c970088d" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb22-1"><a href=""></a>sns.pairplot(df[[<span class="st">"Store Cost"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Unit Sales"</span>]])</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>sns.pairplot(df[[<span class="st">"Store Cost"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Unit Sales"</span>]])</span></code></pre></div>
 </details>
-
 </div>
-<img data-src="lab-03-DL2DWH.solution_files/figure-revealjs/cell-17-output-1.png" class="r-stretch"></section>
+</section>
 <section class="slide level2">
 
-<div id="5fb9a2f3" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="19">
+<div id="5fb9a2f3" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb23-1"><a href=""></a>df[[<span class="st">"Store Cost"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Unit Sales"</span>]].corr()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb17-1"><a href=""></a>df[[<span class="st">"Store Cost"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Unit Sales"</span>]].corr()</span></code></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Store Cost</th>
-<th data-quarto-table-cell-role="th">Store Sales</th>
-<th data-quarto-table-cell-role="th">Unit Sales</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Store Cost</td>
-<td>1.000000</td>
-<td>0.954650</td>
-<td>0.492843</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Store Sales</td>
-<td>0.954650</td>
-<td>1.000000</td>
-<td>0.516071</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Unit Sales</td>
-<td>0.492843</td>
-<td>0.516071</td>
-<td>1.000000</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
 </div>
 </section>
 <section id="design-and-build-a-relational-dwh" class="slide level2">
@@ -2030,69 +467,69 @@ Name: Category, dtype: int64</code></pre>
 </section>
 <section class="slide level2">
 
-<div id="1651354b" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="20">
+<div id="1651354b" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>host <span class="op">=</span> <span class="st">"sensor-dwh.cd97tkze3ics.us-east-1.rds.amazonaws.com"</span></span>
-<span id="cb24-2"><a href=""></a>port <span class="op">=</span> <span class="dv">5432</span></span>
-<span id="cb24-3"><a href=""></a>user <span class="op">=</span> <span class="st">"postgres"</span></span>
-<span id="cb24-4"><a href=""></a>pwd <span class="op">=</span> <span class="st">"bigdata2022"</span></span>
-<span id="cb24-5"><a href=""></a>db <span class="op">=</span> <span class="st">"postgres"</span></span>
-<span id="cb24-6"><a href=""></a></span>
-<span id="cb24-7"><a href=""></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
-<span id="cb24-8"><a href=""></a>s <span class="op">=</span> <span class="st">'postgresql://</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">@</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(user, pwd, host, <span class="bu">str</span>(port), db)</span>
-<span id="cb24-9"><a href=""></a>engine <span class="op">=</span> create_engine(s)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>host <span class="op">=</span> <span class="st">"sensor-dwh.cd97tkze3ics.us-east-1.rds.amazonaws.com"</span></span>
+<span id="cb18-2"><a href=""></a>port <span class="op">=</span> <span class="dv">5432</span></span>
+<span id="cb18-3"><a href=""></a>user <span class="op">=</span> <span class="st">"postgres"</span></span>
+<span id="cb18-4"><a href=""></a>pwd <span class="op">=</span> <span class="st">"bigdata2022"</span></span>
+<span id="cb18-5"><a href=""></a>db <span class="op">=</span> <span class="st">"postgres"</span></span>
+<span id="cb18-6"><a href=""></a></span>
+<span id="cb18-7"><a href=""></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
+<span id="cb18-8"><a href=""></a>s <span class="op">=</span> <span class="st">'postgresql://</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">@</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(user, pwd, host, <span class="bu">str</span>(port), db)</span>
+<span id="cb18-9"><a href=""></a>engine <span class="op">=</span> create_engine(s)</span></code></pre></div>
 </details>
 </div>
 </section>
 <section class="slide level2">
 
 <p>Doing some ETL</p>
-<div id="23dd43dd" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="21">
+<div id="23dd43dd" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb25-1"><a href=""></a><span class="co"># DT_customer</span></span>
-<span id="cb25-2"><a href=""></a>df[[<span class="st">"C. City"</span>, <span class="st">"C. Country"</span>, <span class="st">"C. State"</span>, <span class="st">"Customer"</span>, <span class="st">"Yearly Income"</span>]] <span class="op">\</span></span>
-<span id="cb25-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
-<span id="cb25-4"><a href=""></a>    .to_sql(<span class="st">'customer'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb19-1"><a href=""></a><span class="co"># DT_customer</span></span>
+<span id="cb19-2"><a href=""></a>df[[<span class="st">"C. City"</span>, <span class="st">"C. Country"</span>, <span class="st">"C. State"</span>, <span class="st">"Customer"</span>, <span class="st">"Yearly Income"</span>]] <span class="op">\</span></span>
+<span id="cb19-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
+<span id="cb19-4"><a href=""></a>    .to_sql(<span class="st">'customer'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
 </details>
 </div>
-<div id="958b0a06" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="22">
+<div id="958b0a06" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb26-1"><a href=""></a><span class="co"># DT_store</span></span>
-<span id="cb26-2"><a href=""></a>df[[<span class="st">"S. City"</span>, <span class="st">"S. Country"</span>, <span class="st">"S. State"</span>, <span class="st">"Store"</span>, <span class="st">"Type"</span>]] <span class="op">\</span></span>
-<span id="cb26-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
-<span id="cb26-4"><a href=""></a>    .to_sql(<span class="st">'store'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb20-1"><a href=""></a><span class="co"># DT_store</span></span>
+<span id="cb20-2"><a href=""></a>df[[<span class="st">"S. City"</span>, <span class="st">"S. Country"</span>, <span class="st">"S. State"</span>, <span class="st">"Store"</span>, <span class="st">"Type"</span>]] <span class="op">\</span></span>
+<span id="cb20-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
+<span id="cb20-4"><a href=""></a>    .to_sql(<span class="st">'store'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
 </details>
 </div>
 </section>
 <section class="slide level2">
 
-<div id="d99e6e56" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="23">
+<div id="d99e6e56" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># DT_product</span></span>
-<span id="cb27-2"><a href=""></a>df[[<span class="st">"Category"</span>, <span class="st">"Subcategory"</span>, <span class="st">"Family"</span>, <span class="st">"Product"</span>]] <span class="op">\</span></span>
-<span id="cb27-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
-<span id="cb27-4"><a href=""></a>    .to_sql(<span class="st">'product'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb21-1"><a href=""></a><span class="co"># DT_product</span></span>
+<span id="cb21-2"><a href=""></a>df[[<span class="st">"Category"</span>, <span class="st">"Subcategory"</span>, <span class="st">"Family"</span>, <span class="st">"Product"</span>]] <span class="op">\</span></span>
+<span id="cb21-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
+<span id="cb21-4"><a href=""></a>    .to_sql(<span class="st">'product'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
 </details>
 </div>
-<div id="a30dbecc" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="24">
+<div id="a30dbecc" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb28-1"><a href=""></a><span class="co"># DT_date</span></span>
-<span id="cb28-2"><a href=""></a>df[[<span class="st">"Sales Date"</span>]] <span class="op">\</span></span>
-<span id="cb28-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
-<span id="cb28-4"><a href=""></a>    .to_sql(<span class="st">'date'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb22-1"><a href=""></a><span class="co"># DT_date</span></span>
+<span id="cb22-2"><a href=""></a>df[[<span class="st">"Sales Date"</span>]] <span class="op">\</span></span>
+<span id="cb22-3"><a href=""></a>    .drop_duplicates() <span class="op">\</span></span>
+<span id="cb22-4"><a href=""></a>    .to_sql(<span class="st">'date'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
 </details>
 </div>
-<div id="7be078b4" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}" data-execution_count="25">
+<div id="7be078b4" class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;-&quot;}">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb29-1"><a href=""></a><span class="co"># FT</span></span>
-<span id="cb29-2"><a href=""></a>df[[<span class="st">"Customer"</span>, <span class="st">"Store"</span>, <span class="st">"Product"</span>, <span class="st">"Sales Date"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Store Cost"</span>, <span class="st">"Unit Sales"</span>]] <span class="op">\</span></span>
-<span id="cb29-3"><a href=""></a>    .to_sql(<span class="st">'sales'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb23-1"><a href=""></a><span class="co"># FT</span></span>
+<span id="cb23-2"><a href=""></a>df[[<span class="st">"Customer"</span>, <span class="st">"Store"</span>, <span class="st">"Product"</span>, <span class="st">"Sales Date"</span>, <span class="st">"Store Sales"</span>, <span class="st">"Store Cost"</span>, <span class="st">"Unit Sales"</span>]] <span class="op">\</span></span>
+<span id="cb23-3"><a href=""></a>    .to_sql(<span class="st">'sales'</span>, engine, index<span class="op">=</span><span class="va">False</span>, if_exists<span class="op">=</span><span class="st">'replace'</span>)</span></code></pre></div>
 </details>
 </div>
 </section>
@@ -2172,15 +609,14 @@ Name: Category, dtype: int64</code></pre>
 <ul>
 <li>Plot the provenance graph representing the previous transformations using the PROV standard</li>
 </ul>
-<div id="48e8df41" class="cell" data-execution_count="27">
+<div id="48e8df41" class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb30-1"><a href=""></a>plot()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb24-1"><a href=""></a>plot()</span></code></pre></div>
 </details>
-
 </div>
 
-<img data-src="lab-03-DL2DWH.solution_files/figure-revealjs/cell-25-output-1.png" class="r-stretch"></section></section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
