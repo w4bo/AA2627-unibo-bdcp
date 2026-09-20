@@ -5,8 +5,8 @@
 <script src="lab-03-DL2DWH_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="lab-03-DL2DWH_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="lab-03-DL2DWH_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="lab-03-DL2DWH_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+<link href="lab-03-DL2DWH_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Matteo Francia   DISI — University of Bologna   m.francia@unibo.it">
   <title>DL2DWH Lab</title>
@@ -16,10 +16,16 @@
   <link rel="stylesheet" href="lab-03-DL2DWH_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="lab-03-DL2DWH_files/libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -28,8 +34,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -40,7 +47,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -93,7 +100,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="lab-03-DL2DWH_files/libs/revealjs/dist/theme/quarto-631d64cbe8f93e46e3d9b034de013131.css">
+  <link rel="stylesheet" href="lab-03-DL2DWH_files/libs/revealjs/dist/theme/quarto-2a4b070768aef88e7992984127cace11.css">
   <link href="lab-03-DL2DWH_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="lab-03-DL2DWH_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="lab-03-DL2DWH_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -198,29 +205,311 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it 
+Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div>
 </div>
 </div>
-
-</section>
-<section class="slide level2">
 
 </section>
 <section>
 <section id="dl2dwh-lab" class="title-slide slide level1 center">
 <h1>DL2DWH Lab</h1>
 <p>In this lab you are asked to cover the following points: 1. Data ingestion 2. Data understanding 3. Design and build a relational DWH 4. Query the DWH with Tableau (Desktop) 5. (Bonus) Plot the provenance graph</p>
-</section>
-<section class="slide level2">
-
-<div id="0927b305" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2026-09-20T18:04:06.482735Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T18:04:06.482540Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T18:04:08.056658Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T18:04:08.055790Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;slide&quot;}" data-execution_count="2">
+<div id="c62c8a60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;skip&quot;}}" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href=""></a><span class="im">import</span> awswrangler <span class="im">as</span> wr</span>
-<span id="cb1-3"><a href=""></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href=""></a><span class="im">import</span> prov</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb1-1"><a href="" aria-label="1"></a><span class="op">!</span>pip install awswrangler</span>
+<span id="cb1-2"><a href="" aria-label="2"></a><span class="op">!</span>pip install pandas</span>
+<span id="cb1-3"><a href="" aria-label="3"></a><span class="op">!</span>pip install sklearn</span>
+<span id="cb1-4"><a href="" aria-label="4"></a><span class="op">!</span>pip install prov</span>
+<span id="cb1-5"><a href="" aria-label="5"></a><span class="op">!</span>pip install seaborn</span>
+<span id="cb1-6"><a href="" aria-label="6"></a><span class="op">!</span>pip install pydot</span>
+<span id="cb1-7"><a href="" aria-label="7"></a><span class="op">!</span>pip install graphviz</span>
+<span id="cb1-8"><a href="" aria-label="8"></a><span class="im">import</span> warnings</span>
+<span id="cb1-9"><a href="" aria-label="9"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre>Collecting awswrangler
+
+  Downloading awswrangler-3.17.1-py3-none-any.whl.metadata (17 kB)
+
+Collecting boto3&lt;2,&gt;=1.20.32 (from awswrangler)
+
+  Downloading boto3-1.43.98-py3-none-any.whl.metadata (6.6 kB)
+
+Collecting botocore&lt;2,&gt;=1.23.32 (from awswrangler)
+
+  Downloading botocore-1.43.98-py3-none-any.whl.metadata (5.6 kB)
+
+Requirement already satisfied: numpy&lt;3.0,&gt;=1.26 in /usr/local/lib/python3.14/site-packages (from awswrangler) (2.4.2)
+
+Requirement already satisfied: packaging&lt;27.0,&gt;=21.1 in /usr/local/lib/python3.14/site-packages (from awswrangler) (25.0)
+
+Requirement already satisfied: pandas&lt;4.0.0,&gt;=1.2.0 in /usr/local/lib/python3.14/site-packages (from awswrangler) (3.0.1)
+
+Collecting pyarrow&lt;26.0.0,&gt;=8.0.0 (from awswrangler)
+
+  Downloading pyarrow-25.0.1-cp314-cp314-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+
+Requirement already satisfied: setuptools in /usr/local/lib/python3.14/site-packages (from awswrangler) (81.0.0)
+
+Requirement already satisfied: typing-extensions&lt;5,&gt;=4.4.0 in /usr/local/lib/python3.14/site-packages (from awswrangler) (4.15.0)
+
+Collecting jmespath&lt;2.0.0,&gt;=0.7.1 (from boto3&lt;2,&gt;=1.20.32-&gt;awswrangler)
+
+  Downloading jmespath-1.1.0-py3-none-any.whl.metadata (7.6 kB)
+
+Collecting s3transfer&lt;0.20.0,&gt;=0.19.0 (from boto3&lt;2,&gt;=1.20.32-&gt;awswrangler)
+
+  Downloading s3transfer-0.19.2-py3-none-any.whl.metadata (1.7 kB)
+
+Requirement already satisfied: python-dateutil&lt;3.0.0,&gt;=2.1 in /usr/local/lib/python3.14/site-packages (from botocore&lt;2,&gt;=1.23.32-&gt;awswrangler) (2.9.0.post0)
+
+Requirement already satisfied: urllib3!=2.2.0,&lt;3,&gt;=1.25.4 in /usr/local/lib/python3.14/site-packages (from botocore&lt;2,&gt;=1.23.32-&gt;awswrangler) (2.6.3)
+
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.14/site-packages (from python-dateutil&lt;3.0.0,&gt;=2.1-&gt;botocore&lt;2,&gt;=1.23.32-&gt;awswrangler) (1.17.0)
+
+Downloading awswrangler-3.17.1-py3-none-any.whl (396 kB)
+
+Downloading boto3-1.43.98-py3-none-any.whl (140 kB)
+
+Downloading botocore-1.43.98-py3-none-any.whl (15.8 MB)
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0.0/15.8 MB</span> <span class="ansi-red-fg">?</span> eta <span class="ansi-cyan-fg">-:--:--</span>
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-red-fg">╸</span> <span class="ansi-green-fg">15.7/15.8 MB</span> <span class="ansi-red-fg">100.3 MB/s</span> eta <span class="ansi-cyan-fg">0:00:01</span>
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">15.8/15.8 MB</span> <span class="ansi-red-fg">61.3 MB/s</span>  <span class="ansi-yellow-fg">0:00:00</span>
+
+Downloading jmespath-1.1.0-py3-none-any.whl (20 kB)
+
+Downloading pyarrow-25.0.1-cp314-cp314-manylinux_2_28_x86_64.whl (50.1 MB)
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0.0/50.1 MB</span> <span class="ansi-red-fg">?</span> eta <span class="ansi-cyan-fg">-:--:--</span>
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━</span> <span class="ansi-green-fg">35.7/50.1 MB</span> <span class="ansi-red-fg">179.0 MB/s</span> eta <span class="ansi-cyan-fg">0:00:01</span>
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-red-fg">╸</span> <span class="ansi-green-fg">50.1/50.1 MB</span> <span class="ansi-red-fg">176.5 MB/s</span> eta <span class="ansi-cyan-fg">0:00:01</span>
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-red-fg">╸</span> <span class="ansi-green-fg">50.1/50.1 MB</span> <span class="ansi-red-fg">176.5 MB/s</span> eta <span class="ansi-cyan-fg">0:00:01</span>
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">50.1/50.1 MB</span> <span class="ansi-red-fg">81.6 MB/s</span>  <span class="ansi-yellow-fg">0:00:00</span>
+
+Downloading s3transfer-0.19.2-py3-none-any.whl (90 kB)
+
+Installing collected packages: pyarrow, jmespath, botocore, s3transfer, boto3, awswrangler
+
+
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━</span> <span class="ansi-green-fg">5/6</span> [awswrangler]
+
+   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━</span> <span class="ansi-green-fg">5/6</span> [awswrangler]
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">6/6</span> [awswrangler]
+
+
+
+Successfully installed awswrangler-3.17.1 boto3-1.43.98 botocore-1.43.98 jmespath-1.1.0 pyarrow-25.0.1 s3transfer-0.19.2
+
+<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+
+</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+Requirement already satisfied: pandas in /usr/local/lib/python3.14/site-packages (3.0.1)
+
+Requirement already satisfied: numpy&gt;=2.3.3 in /usr/local/lib/python3.14/site-packages (from pandas) (2.4.2)
+
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.14/site-packages (from pandas) (2.9.0.post0)
+
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.14/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+
+<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+
+</span>
+
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+Collecting sklearn
+
+  Downloading sklearn-0.0.post12.tar.gz (2.6 kB)
+
+  Installing build dependencies ... -
+ \
+ |
+ /
+ done
+
+  Getting requirements to build wheel ... - error
+
+  <span class="ansi-red-fg ansi-bold">error</span>: <span class="ansi-bold">subprocess-exited-with-error</span>
+
+  
+
+  <span class="ansi-red-fg">×</span> <span class="ansi-green-fg">Getting requirements to build wheel</span> did not run successfully.
+
+  <span class="ansi-red-fg">│</span> exit code: <span class="ansi-cyan-fg ansi-bold">1</span>
+
+  <span class="ansi-red-fg">╰─&gt;</span> <span class="ansi-red-fg">[15 lines of output]</span>
+
+  <span class="ansi-red-fg">   </span> The 'sklearn' PyPI package is deprecated, use 'scikit-learn'
+
+  <span class="ansi-red-fg">   </span> rather than 'sklearn' for pip commands.
+
+  <span class="ansi-red-fg">   </span> 
+
+  <span class="ansi-red-fg">   </span> Here is how to fix this error in the main use cases:
+
+  <span class="ansi-red-fg">   </span> - use 'pip install scikit-learn' rather than 'pip install sklearn'
+
+  <span class="ansi-red-fg">   </span> - replace 'sklearn' by 'scikit-learn' in your pip requirements files
+
+  <span class="ansi-red-fg">   </span>   (requirements.txt, setup.py, setup.cfg, Pipfile, etc ...)
+
+  <span class="ansi-red-fg">   </span> - if the 'sklearn' package is used by one of your dependencies,
+
+  <span class="ansi-red-fg">   </span>   it would be great if you take some time to track which package uses
+
+  <span class="ansi-red-fg">   </span>   'sklearn' instead of 'scikit-learn' and report it to their issue tracker
+
+  <span class="ansi-red-fg">   </span> - as a last resort, set the environment variable
+
+  <span class="ansi-red-fg">   </span>   SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True to avoid this error
+
+  <span class="ansi-red-fg">   </span> 
+
+  <span class="ansi-red-fg">   </span> More information is available at
+
+  <span class="ansi-red-fg">   </span> https://github.com/scikit-learn/sklearn-pypi-package
+
+  <span class="ansi-red-fg">   </span> <span class="ansi-red-fg">[end of output]</span>
+
+  
+
+  <span class="ansi-magenta-fg ansi-bold">note</span>: This error originates from a subprocess, and is likely not a problem with pip.
+
+
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+<span class="ansi-red-fg">ERROR: Failed to build 'sklearn' when getting requirements to build wheel</span><span class="ansi-red-fg">
+
+</span>
+Requirement already satisfied: prov in /usr/local/lib/python3.14/site-packages (3.2.2)
+
+<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+
+</span>
+
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+Requirement already satisfied: seaborn in /usr/local/lib/python3.14/site-packages (0.13.2)
+
+Requirement already satisfied: numpy!=1.24.0,&gt;=1.20 in /usr/local/lib/python3.14/site-packages (from seaborn) (2.4.2)
+
+Requirement already satisfied: pandas&gt;=1.2 in /usr/local/lib/python3.14/site-packages (from seaborn) (3.0.1)
+
+Requirement already satisfied: matplotlib!=3.6.1,&gt;=3.4 in /usr/local/lib/python3.14/site-packages (from seaborn) (3.10.8)
+
+Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.3.3)
+
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (0.12.1)
+
+Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (4.61.1)
+
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.4.9)
+
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (25.0)
+
+Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (12.1.1)
+
+Requirement already satisfied: pyparsing&gt;=3 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (3.3.2)
+
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (2.9.0.post0)
+
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.14/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.17.0)
+
+<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+
+</span>
+
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+Requirement already satisfied: pydot in /usr/local/lib/python3.14/site-packages (4.0.1)
+
+Requirement already satisfied: pyparsing&gt;=3.1.0 in /usr/local/lib/python3.14/site-packages (from pydot) (3.3.2)
+
+<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+
+</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+Collecting graphviz
+
+  Downloading graphviz-0.21-py3-none-any.whl.metadata (12 kB)
+
+Downloading graphviz-0.21-py3-none-any.whl (47 kB)
+
+Installing collected packages: graphviz
+
+Successfully installed graphviz-0.21
+
+<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+
+</span>
+
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+
+<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="0927b305" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;slide&quot;}}" data-execution_count="2">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb2-1"><a href="" aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="" aria-label="2"></a><span class="im">import</span> awswrangler <span class="im">as</span> wr</span>
+<span id="cb2-3"><a href="" aria-label="3"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-4"><a href="" aria-label="4"></a><span class="im">import</span> prov</span></code></pre></div>
 </details>
 </div>
 </section>
@@ -240,18 +529,15 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul></li>
 <li>Save the processed dataset into S3</li>
 </ul>
-</section>
-<section class="slide level2">
-
-<div id="5e84224b" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2026-09-20T18:04:08.058994Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T18:04:08.058623Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T18:04:08.061933Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T18:04:08.061207Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="3">
+<div id="5e84224b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>landing_bucket <span class="op">=</span> <span class="st">"s3://landing-raw-sales-123/"</span></span>
-<span id="cb2-2"><a href=""></a>staging_bucket <span class="op">=</span> <span class="st">"s3://staging-clean-sales-123/"</span></span>
-<span id="cb2-3"><a href=""></a></span>
-<span id="cb2-4"><a href=""></a>file_names <span class="op">=</span> [<span class="st">"sales_fact_1997.slice-0-1.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-1-2.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-2-3.v0.0.1.csv"</span>,]</span>
-<span id="cb2-5"><a href=""></a></span>
-<span id="cb2-6"><a href=""></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb3-1"><a href="" aria-label="1"></a>landing_bucket <span class="op">=</span> <span class="st">"s3://landing-raw-sales-123/"</span></span>
+<span id="cb3-2"><a href="" aria-label="2"></a>staging_bucket <span class="op">=</span> <span class="st">"s3://staging-clean-sales-123/"</span></span>
+<span id="cb3-3"><a href="" aria-label="3"></a></span>
+<span id="cb3-4"><a href="" aria-label="4"></a>file_names <span class="op">=</span> [<span class="st">"sales_fact_1997.slice-0-1.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-1-2.v0.0.1.csv"</span>, <span class="st">"sales_fact_1997.slice-2-3.v0.0.1.csv"</span>,]</span>
+<span id="cb3-5"><a href="" aria-label="5"></a></span>
+<span id="cb3-6"><a href="" aria-label="6"></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
 </details>
 </div>
 </section>
@@ -277,10 +563,10 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>See <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a></li>
 </ul></li>
 </ul>
-<div id="1420f887" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2026-09-20T18:04:08.063747Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T18:04:08.063570Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T18:04:08.066274Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T18:04:08.065552Z&quot;}" data-execution_count="4">
+<div id="1420f887" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-20T21:41:15.625958Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T21:41:15.625776Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T21:41:15.628607Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T21:41:15.627710Z&quot;}}" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb4-1"><a href="" aria-label="1"></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
 </details>
 </div>
 </section>
@@ -291,23 +577,20 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Design the relational schema of the DWH (which are the functional dependencies?)</li>
 <li>Upload the tables into rhw DWH</li>
 </ul>
-</section>
-<section class="slide level2">
-
-<div id="4b474591" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2026-09-20T18:04:08.068115Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T18:04:08.067918Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T18:04:08.223986Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T18:04:08.223103Z&quot;}" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}" data-execution_count="5">
+<div id="4b474591" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb4-1"><a href=""></a>host <span class="op">=</span> <span class="st">"sensor-dwh.cd97tkze3ics.us-east-1.rds.amazonaws.com"</span></span>
-<span id="cb4-2"><a href=""></a>port <span class="op">=</span> <span class="dv">5432</span></span>
-<span id="cb4-3"><a href=""></a>user <span class="op">=</span> <span class="st">"postgres"</span></span>
-<span id="cb4-4"><a href=""></a>pwd <span class="op">=</span> <span class="st">"bigdata2022"</span></span>
-<span id="cb4-5"><a href=""></a>db <span class="op">=</span> <span class="st">"postgres"</span></span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
-<span id="cb4-8"><a href=""></a>s <span class="op">=</span> <span class="st">'postgresql://</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">@</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(user, pwd, host, <span class="bu">str</span>(port), db)</span>
-<span id="cb4-9"><a href=""></a>engine <span class="op">=</span> create_engine(s)</span>
-<span id="cb4-10"><a href=""></a></span>
-<span id="cb4-11"><a href=""></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb5-1"><a href="" aria-label="1"></a>host <span class="op">=</span> <span class="st">"sensor-dwh.cd97tkze3ics.us-east-1.rds.amazonaws.com"</span></span>
+<span id="cb5-2"><a href="" aria-label="2"></a>port <span class="op">=</span> <span class="dv">5432</span></span>
+<span id="cb5-3"><a href="" aria-label="3"></a>user <span class="op">=</span> <span class="st">"postgres"</span></span>
+<span id="cb5-4"><a href="" aria-label="4"></a>pwd <span class="op">=</span> <span class="st">"bigdata2022"</span></span>
+<span id="cb5-5"><a href="" aria-label="5"></a>db <span class="op">=</span> <span class="st">"postgres"</span></span>
+<span id="cb5-6"><a href="" aria-label="6"></a></span>
+<span id="cb5-7"><a href="" aria-label="7"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
+<span id="cb5-8"><a href="" aria-label="8"></a>s <span class="op">=</span> <span class="st">'postgresql://</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">@</span><span class="sc">{}</span><span class="st">:</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(user, pwd, host, <span class="bu">str</span>(port), db)</span>
+<span id="cb5-9"><a href="" aria-label="9"></a>engine <span class="op">=</span> create_engine(s)</span>
+<span id="cb5-10"><a href="" aria-label="10"></a></span>
+<span id="cb5-11"><a href="" aria-label="11"></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
 </details>
 </div>
 </section>
@@ -320,9 +603,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Build the dimensions and hierarchies in Tableau</li>
 <li>Complete the following exercises</li>
 </ul>
-</section>
-<section class="slide level2">
-
 <h3 id="exercise-1">Exercise 1</h3>
 <ol type="1">
 <li>Using a bar chart, display the <code>sum</code> of <code>Store Sales</code> for each <code>S. State</code>
@@ -342,9 +622,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Display sales at the <code>S. City</code> level (as done above) and associate the color property with the number of distinct stores (<code>COUNTD(store)</code>)</li>
 </ul></li>
 </ol>
-</section>
-<section class="slide level2">
-
 <h3 id="exercise-2">Exercise 2</h3>
 <ol start="5" type="1">
 <li>Given the last visualization, associate the <code>S. Type</code> field with the color property.
@@ -360,9 +637,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>What caused the discrepancy between the previous two visualizations?</li>
 </ul></li>
 </ol>
-</section>
-<section class="slide level2">
-
 <h3 id="exercise-3">Exercise 3</h3>
 <ol start="8" type="1">
 <li>Using a line chart, visualize the monthly sales trend
@@ -387,15 +661,39 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>Plot the provenance graph representing the previous transformations using the PROV standard</li>
 </ul>
-<div id="5ea20bb7" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2026-09-20T18:04:08.353625Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T18:04:08.353181Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T18:04:08.367807Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T18:04:08.366758Z&quot;}" data-execution_count="7">
+<div id="d0995306" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;skip&quot;}}" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>plot()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a><span class="im">from</span> prov.model <span class="im">import</span> ProvDocument</span>
+<span id="cb6-2"><a href="" aria-label="2"></a><span class="im">from</span> prov.dot <span class="im">import</span> prov_to_dot</span>
+<span id="cb6-3"><a href="" aria-label="3"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
+<span id="cb6-4"><a href="" aria-label="4"></a></span>
+<span id="cb6-5"><a href="" aria-label="5"></a><span class="kw">def</span> plot():</span>
+<span id="cb6-6"><a href="" aria-label="6"></a>    <span class="co"># Create a new provenance document</span></span>
+<span id="cb6-7"><a href="" aria-label="7"></a>    d1 <span class="op">=</span> ProvDocument()  <span class="co"># d1 is now an empty provenance document</span></span>
+<span id="cb6-8"><a href="" aria-label="8"></a>    </span>
+<span id="cb6-9"><a href="" aria-label="9"></a>    d1.add_namespace(<span class="st">'s3'</span>, <span class="st">'https://s3.console.aws.amazon.com/s3'</span>)</span>
+<span id="cb6-10"><a href="" aria-label="10"></a>    d1.add_namespace(<span class="st">'rds'</span>, <span class="st">'https://us-east-1.console.aws.amazon.com/rds'</span>)</span>
+<span id="cb6-11"><a href="" aria-label="11"></a>    d1.add_namespace(<span class="st">'unibo'</span>, <span class="st">'https://www.unibo.it'</span>)</span>
+<span id="cb6-12"><a href="" aria-label="12"></a>    d1.add_namespace(<span class="st">'pd'</span>, <span class="st">'https://pandas.pydata.org/'</span>)</span>
+<span id="cb6-13"><a href="" aria-label="13"></a>    </span>
+<span id="cb6-14"><a href="" aria-label="14"></a>    <span class="co"># </span><span class="al">TODO</span></span>
+<span id="cb6-15"><a href="" aria-label="15"></a></span>
+<span id="cb6-16"><a href="" aria-label="16"></a>    <span class="co"># visualize the graph</span></span>
+<span id="cb6-17"><a href="" aria-label="17"></a>    dot <span class="op">=</span> prov_to_dot(d1)</span>
+<span id="cb6-18"><a href="" aria-label="18"></a>    dot.write_png(<span class="st">'prov.png'</span>)</span>
+<span id="cb6-19"><a href="" aria-label="19"></a>    <span class="cf">return</span> Image(<span class="st">'prov.png'</span>)</span></code></pre></div>
+</details>
+</div>
+<div id="5ea20bb7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-20T21:41:15.865276Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-20T21:41:15.864907Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-20T21:41:15.877435Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-20T21:41:15.876402Z&quot;}}" data-execution_count="7">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb7-1"><a href="" aria-label="1"></a>plot()</span></code></pre></div>
 </details>
 
 </div>
 
-<img data-src="lab-03-DL2DWH_files/figure-revealjs/cell-6-output-1.png" class="r-stretch"></section></section>
+<img data-src="lab-03-DL2DWH_files/figure-revealjs/cell-8-output-1.png" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -587,7 +885,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -614,129 +912,111 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

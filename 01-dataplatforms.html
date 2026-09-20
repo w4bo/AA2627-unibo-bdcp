@@ -5,8 +5,8 @@
 <script src="01-dataplatforms_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="01-dataplatforms_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="01-dataplatforms_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="01-dataplatforms_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.40">
+<link href="01-dataplatforms_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Matteo Francia   DISI — University of Bologna   m.francia@unibo.it">
   <title>Big Data and Cloud Platforms (Module 2)</title>
@@ -16,10 +16,16 @@
   <link rel="stylesheet" href="01-dataplatforms_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="01-dataplatforms_files/libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -28,8 +34,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -40,7 +47,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -96,7 +103,6 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
-      margin-bottom: 0em;
     }
     .hanging-indent div.csl-entry {
       margin-left:2em;
@@ -113,7 +119,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="01-dataplatforms_files/libs/revealjs/dist/theme/quarto-631d64cbe8f93e46e3d9b034de013131.css">
+  <link rel="stylesheet" href="01-dataplatforms_files/libs/revealjs/dist/theme/quarto-2a4b070768aef88e7992984127cace11.css">
   <link href="01-dataplatforms_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="01-dataplatforms_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="01-dataplatforms_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -219,7 +225,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it 
+Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div>
 </div>
 </div>
@@ -457,10 +463,10 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Generate per-image JSON metadata</li>
 </ol>
 <p>Example JSON snippet:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb1-1"><a href=""></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href=""></a>  <span class="dt">"filename"</span><span class="fu">:</span> <span class="st">"dog.jpg"</span><span class="fu">,</span></span>
-<span id="cb1-3"><a href=""></a>  <span class="dt">"detections"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"dog"</span><span class="fu">,</span> <span class="dt">"conf"</span><span class="fu">:</span> <span class="dv">0</span><span class="er">.</span><span class="dv">87</span><span class="fu">}</span><span class="ot">]</span></span>
-<span id="cb1-4"><a href=""></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb1-1"><a href="" aria-label="1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="" aria-label="2"></a>  <span class="dt">"filename"</span><span class="fu">:</span> <span class="st">"dog.jpg"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="" aria-label="3"></a>  <span class="dt">"detections"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"dog"</span><span class="fu">,</span> <span class="dt">"conf"</span><span class="fu">:</span> <span class="fl">0.87</span><span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb1-4"><a href="" aria-label="4"></a><span class="fu">}</span></span></code></pre></div>
 </section>
 
 <section id="mongodb-for-accessible-metadata" class="title-slide slide level1 center">
@@ -483,11 +489,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>Find all images containing “dog”:</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb2-1"><a href=""></a>db<span class="op">.</span><span class="at">images</span><span class="op">.</span><span class="fu">find</span>({<span class="st">"detections.label"</span><span class="op">:</span> <span class="st">"dog"</span>})</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb2-1"><a href="" aria-label="1"></a>db<span class="op">.</span><span class="at">images</span><span class="op">.</span><span class="fu">find</span>({<span class="st">"detections.label"</span><span class="op">:</span> <span class="st">"dog"</span>})</span></code></pre></div>
 <ul>
 <li>Find images taken after a certain date:</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb3-1"><a href=""></a>db<span class="op">.</span><span class="at">images</span><span class="op">.</span><span class="fu">find</span>({<span class="st">"file_info.created_time"</span><span class="op">:</span> {<span class="st">"$gte"</span><span class="op">:</span> <span class="st">"2026-01-01"</span>}})</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource js number-lines"><code class="sourceCode javascript"><span id="cb3-1"><a href="" aria-label="1"></a>db<span class="op">.</span><span class="at">images</span><span class="op">.</span><span class="fu">find</span>({<span class="st">"file_info.created_time"</span><span class="op">:</span> {<span class="st">"$gte"</span><span class="op">:</span> <span class="st">"2026-01-01"</span>}})</span></code></pre></div>
 </section>
 
 <section id="end-of-the-case-study" class="title-slide slide level1 center" data-background-color="#121011">
@@ -695,7 +701,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="data-platform-14" class="title-slide slide level1 center">
 <h1>Data platform</h1>
-<p>The <strong>Dimensional Fact Model</strong> <span class="citation" data-cites="DBLP:journals/ijcis/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli, Maio, and Rizzi 1998b</a>)</span> is a graphical conceptual model for DWH design, devised to:</p>
+<p>The <strong>Dimensional Fact Model</strong> <span class="citation" data-cites="DBLP:journals/ijcis/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli et al. 1998b</a>)</span> is a graphical conceptual model for DWH design, devised to:</p>
 <ul>
 <li>create an environment in which user queries may be formulated intuitively</li>
 <li>make communication possible between designers and end users with the goal of formalizing requirement specifications</li>
@@ -723,7 +729,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/cube-dfm.png"></p>
-<figcaption>Corresponding Entity-Relationsip representation <span class="citation" data-cites="DBLP:conf/hicss/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli, Maio, and Rizzi 1998a</a>)</span></figcaption>
+<figcaption>Corresponding Entity-Relationsip representation <span class="citation" data-cites="DBLP:conf/hicss/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli et al. 1998a</a>)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -1253,7 +1259,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="step-0-what-do-we-have-in-the-data-lake" class="title-slide slide level1 center">
 <h1>Step 0: What do we have in the data lake?</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">ls</span> <span class="at">-R</span> /home/datalake/data/bronze/</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb5-1"><a href="" aria-label="1"></a><span class="fu">ls</span> <span class="at">-R</span> /home/datalake/data/bronze/</span></code></pre></div>
 <pre><code>/home/datalake/data/bronze/:
 department_a  department_b
 
@@ -1294,9 +1300,9 @@ product_reviews.csv</code></pre>
 <li>For each file, read the first rows to collect column names</li>
 </ul>
 <p>Examples:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/customers/customers_part1.csv</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb7-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/customers/customers_part1.csv</span></code></pre></div>
 <pre><code>customer_id,first_name,email,country,telephone</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/sales/sales_part1.csv</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb9-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/sales/sales_part1.csv</span></code></pre></div>
 <pre><code>order_key,cust_id,product_id,quantity,date,amount_usd</code></pre>
 <p>What about <code>.json</code> and <code>.xlsx</code> files?</p>
 </section>
@@ -1305,9 +1311,9 @@ product_reviews.csv</code></pre>
 <h1>Step 1: Schema Extraction</h1>
 <p>For each file, read the first rows to collect column names</p>
 <p>Examples:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/customers/customers_part1.csv</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb11-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/customers/customers_part1.csv</span></code></pre></div>
 <pre><code>customer_id,first_name,email,country,telephone</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb13-1"><a href=""></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/sales/sales_part1.csv </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb13-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/sales/sales_part1.csv </span></code></pre></div>
 <pre><code>order_key,cust_id,product_id,quantity,date,amount_usd</code></pre>
 <div class="fragment">
 <p>Problems:</p>
@@ -1507,15 +1513,15 @@ product_reviews.csv</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Computing the embeddings:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>{</span>
-<span id="cb15-2"><a href=""></a>  <span class="st">'telephone'</span>: [<span class="op">-</span><span class="fl">0.11484879</span>  <span class="fl">0.06089507</span>  <span class="fl">0.01468573</span> ... ],</span>
-<span id="cb15-3"><a href=""></a>  <span class="st">'first_name'</span>: [<span class="op">-</span><span class="fl">0.11216891</span>  <span class="fl">0.04061386</span> <span class="op">-</span><span class="fl">0.01322238</span> ... ],</span>
-<span id="cb15-4"><a href=""></a>  <span class="st">'customer_id'</span>: [<span class="op">-</span><span class="fl">0.06831077</span>  <span class="fl">0.03470041</span> <span class="op">-</span><span class="fl">0.02761879</span> ... ],</span>
-<span id="cb15-5"><a href=""></a>... }</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb15-1"><a href="" aria-label="1"></a>{</span>
+<span id="cb15-2"><a href="" aria-label="2"></a>  <span class="st">'telephone'</span>: [<span class="op">-</span><span class="fl">0.11484879</span>  <span class="fl">0.06089507</span>  <span class="fl">0.01468573</span> ... ],</span>
+<span id="cb15-3"><a href="" aria-label="3"></a>  <span class="st">'first_name'</span>: [<span class="op">-</span><span class="fl">0.11216891</span>  <span class="fl">0.04061386</span> <span class="op">-</span><span class="fl">0.01322238</span> ... ],</span>
+<span id="cb15-4"><a href="" aria-label="4"></a>  <span class="st">'customer_id'</span>: [<span class="op">-</span><span class="fl">0.06831077</span>  <span class="fl">0.03470041</span> <span class="op">-</span><span class="fl">0.02761879</span> ... ],</span>
+<span id="cb15-5"><a href="" aria-label="5"></a>... }</span></code></pre></div>
 <p>Computing the similarity between embeddings:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>sim_cos(<span class="st">'country'</span>, <span class="st">'location'</span>): <span class="fl">0.63932264</span>,</span>
-<span id="cb16-2"><a href=""></a>sim_cos(<span class="st">'location'</span>, <span class="st">'name'</span>): <span class="fl">0.39198124</span>,</span>
-<span id="cb16-3"><a href=""></a>sim_cos(<span class="st">'name'</span>, <span class="st">'first_name'</span>): <span class="fl">0.6186802</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb16-1"><a href="" aria-label="1"></a>sim_cos(<span class="st">'country'</span>, <span class="st">'location'</span>): <span class="fl">0.63932264</span>,</span>
+<span id="cb16-2"><a href="" aria-label="2"></a>sim_cos(<span class="st">'location'</span>, <span class="st">'name'</span>): <span class="fl">0.39198124</span>,</span>
+<span id="cb16-3"><a href="" aria-label="3"></a>sim_cos(<span class="st">'name'</span>, <span class="st">'first_name'</span>): <span class="fl">0.6186802</span></span></code></pre></div>
 <p>Example:</p>
 <ul>
 <li><span class="math inline">\(Schema_A = \{`id', `name', `email', `country'\}\)</span></li>
@@ -2075,7 +2081,7 @@ memory usage: 6.0 KB</code></pre>
 </section>
 
 <section id="data-provenance-herschel2017survey" class="title-slide slide level1 center">
-<h1>Data provenance <span class="citation" data-cites="herschel2017survey">(<a href="#/references" role="doc-biblioref" onclick="">Herschel, Diestelkämper, and Ben Lahmar 2017</a>)</span></h1>
+<h1>Data provenance <span class="citation" data-cites="herschel2017survey">(<a href="#/references" role="doc-biblioref" onclick="">Herschel et al. 2017</a>)</span></h1>
 <blockquote>
 <p><strong>Provenance</strong> (also referred to as lineage, pedigree, parentage, genealogy)</p>
 <ul>
@@ -2089,7 +2095,7 @@ memory usage: 6.0 KB</code></pre>
 <h1>Data provenance: astronomers</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>Examples of use cases <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick="">Simmhan et al. 2005</a>)</span></p>
+<p>Examples of use cases <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Simmhan et al.</span> 2005</a>)</span></p>
 <ul>
 <li>Astronomy changed from being an individualistic to a <em>collective enterprise</em></li>
 <li>Telescope time is devoted/allocated to systematic sky surveys, and analysis is performed using data from the archives</li>
@@ -2172,11 +2178,11 @@ memory usage: 6.0 KB</code></pre>
 <section id="data-provenance-2" class="title-slide slide level1 center">
 <h1>Data provenance</h1>
 
-<img data-src="img/slides15.png" class="r-stretch quarto-figure-center"><p class="caption">Characteristics of data provenance <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick="">Simmhan et al. 2005</a>)</span></p></section>
+<img data-src="img/slides15.png" class="r-stretch quarto-figure-center"><p class="caption">Characteristics of data provenance <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Simmhan et al.</span> 2005</a>)</span></p></section>
 
 <section id="data-provenance-3" class="title-slide slide level1 center">
 <h1>Data provenance</h1>
-<p>Granularity <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick="">Simmhan et al. 2005</a>)</span></p>
+<p>Granularity <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Simmhan et al.</span> 2005</a>)</span></p>
 <ul>
 <li><em>Fine-grained</em> (instance level): tracking data items (e.g., a tuple in a dataset) transformations</li>
 <li><em>Coarse-grained</em> (schema-level): tracking dataset transformations</li>
@@ -3170,18 +3176,18 @@ memory usage: 6.0 KB</code></pre>
 <section id="references" class="title-slide slide level1 smaller scrollable">
 <h1>References</h1>
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-ahmed2019data" class="csl-entry" role="listitem">
 Ahmed, Mohiuddin. 2019. <span>“Data Summarization: A Survey.”</span> <em>Knowledge and Information Systems</em> 58 (2): 249–73.
 </div>
 <div id="ref-armbrust2021lakehouse" class="csl-entry" role="listitem">
-Armbrust, Michael, Ali Ghodsi, Reynold Xin, and Matei Zaharia. 2021. <span>“Lakehouse: A New Generation of Open Platforms That Unify Data Warehousing and Advanced Analytics.”</span> In <em>Proceedings of CIDR</em>, 8:28.
+Armbrust, Michael, Ali Ghodsi, Reynold Xin, and Matei Zaharia. 2021. <span>“Lakehouse: A New Generation of Open Platforms That Unify Data Warehousing and Advanced Analytics.”</span> <em>Proceedings of CIDR</em> 8: 28.
 </div>
 <div id="ref-barika2019orchestrating" class="csl-entry" role="listitem">
 Barika, Mutaz, Saurabh Garg, Albert Y Zomaya, Lizhe Wang, Aad Van Moorsel, and Rajiv Ranjan. 2019. <span>“Orchestrating Big Data Analysis Workflows in the Cloud: Research Challenges, Survey, and Future Directions.”</span> <em>ACM Computing Surveys (CSUR)</em> 52 (5): 1–41.
 </div>
 <div id="ref-bruno2002exploiting" class="csl-entry" role="listitem">
-Bruno, Nicolas, and Surajit Chaudhuri. 2002. <span>“Exploiting Statistics on Query Expressions for Optimization.”</span> In <em>Proceedings of the 2002 ACM SIGMOD International Conference on Management of Data</em>, 263–74.
+Bruno, Nicolas, and Surajit Chaudhuri. 2002. <span>“Exploiting Statistics on Query Expressions for Optimization.”</span> <em>Proceedings of the 2002 ACM SIGMOD International Conference on Management of Data</em>, 263–74.
 </div>
 <div id="ref-burkhard1973some" class="csl-entry" role="listitem">
 Burkhard, Walter A., and Robert M. Keller. 1973. <span>“Some Approaches to Best-Match File Searching.”</span> <em>Communications of the ACM</em> 16 (4): 230–36.
@@ -3190,16 +3196,16 @@ Burkhard, Walter A., and Robert M. Keller. 1973. <span>“Some Approaches to Bes
 Codd, E. F. 1970. <span>“A Relational Model of Data for Large Shared Data Banks.”</span> <em>Commun. <span>ACM</span></em> 13 (6): 377–87. <a href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a>.
 </div>
 <div id="ref-couto2019mapping" class="csl-entry" role="listitem">
-Couto, Julia, Olimar Teixeira Borges, Duncan D Ruiz, Sabrina Marczak, and Rafael Prikladnicki. 2019. <span>“A Mapping Study about Data Lakes: An Improved Definition and Possible Architectures.”</span> In <em>SEKE</em>, 453–578.
+Couto, Julia, Olimar Teixeira Borges, Duncan D Ruiz, Sabrina Marczak, and Rafael Prikladnicki. 2019. <span>“A Mapping Study about Data Lakes: An Improved Definition and Possible Architectures.”</span> <em>SEKE</em>, 453–578.
 </div>
 <div id="ref-DBLP:journals/vldb/ForresiGGH21" class="csl-entry" role="listitem">
 Forresi, Chiara, Enrico Gallinucci, Matteo Golfarelli, and Hamdi Ben Hamadou. 2021. <span>“A Dataspace-Based Framework for <span>OLAP</span> Analyses in a High-Variety Multistore.”</span> <em>The VLDB Journal</em> 30 (6): 1017–40. <a href="https://doi.org/10.1007/S00778-021-00682-5">https://doi.org/10.1007/S00778-021-00682-5</a>.
 </div>
 <div id="ref-DBLP:conf/hicss/GolfarelliMR98" class="csl-entry" role="listitem">
-Golfarelli, Matteo, Dario Maio, and Stefano Rizzi. 1998a. <span>“Conceptual Design of Data Warehouses from <span>E/R</span> Schema.”</span> In <em>Thirty-First Annual Hawaii International Conference on System Sciences, Kohala Coast, Hawaii, USA, January 6-9, 1998</em>, 334–43. <span>IEEE</span> Computer Society. <a href="https://doi.org/10.1109/HICSS.1998.649228">https://doi.org/10.1109/HICSS.1998.649228</a>.
+Golfarelli, Matteo, Dario Maio, and Stefano Rizzi. 1998a. <span>“Conceptual Design of Data Warehouses from <span>E/R</span> Schema.”</span> <em>Thirty-First Annual Hawaii International Conference on System Sciences, Kohala Coast, Hawaii, USA, January 6-9, 1998</em>, 334–43. <a href="https://doi.org/10.1109/HICSS.1998.649228">https://doi.org/10.1109/HICSS.1998.649228</a>.
 </div>
 <div id="ref-DBLP:journals/ijcis/GolfarelliMR98" class="csl-entry" role="listitem">
-———. 1998b. <span>“The Dimensional Fact Model: <span>A</span> Conceptual Model for Data Warehouses.”</span> <em>Int. J. Cooperative Inf. Syst.</em> 7 (2-3): 215–47. <a href="https://doi.org/10.1142/S0218843098000118">https://doi.org/10.1142/S0218843098000118</a>.
+Golfarelli, Matteo, Dario Maio, and Stefano Rizzi. 1998b. <span>“The Dimensional Fact Model: <span>A</span> Conceptual Model for Data Warehouses.”</span> <em>Int. J. Cooperative Inf. Syst.</em> 7 (2-3): 215–47. <a href="https://doi.org/10.1142/S0218843098000118">https://doi.org/10.1142/S0218843098000118</a>.
 </div>
 <div id="ref-golfarelli2009data" class="csl-entry" role="listitem">
 Golfarelli, Matteo, and Stefano Rizzi. 2009. <em>Data Warehouse Design: Modern Principles and Methodologies</em>. McGraw-Hill, Inc.
@@ -3208,34 +3214,34 @@ Golfarelli, Matteo, and Stefano Rizzi. 2009. <em>Data Warehouse Design: Modern P
 Herschel, Melanie, Ralf Diestelkämper, and Houssem Ben Lahmar. 2017. <span>“A Survey on Provenance: What for? What Form? What From?”</span> <em>The VLDB Journal</em> 26 (6): 881–906.
 </div>
 <div id="ref-ikeda2009data" class="csl-entry" role="listitem">
-Ikeda, Robert, and Jennifer Widom. 2009. <span>“Data Lineage: A Survey.”</span> Stanford InfoLab.
+Ikeda, Robert, and Jennifer Widom. 2009. <em>Data Lineage: A Survey</em>. Stanford InfoLab.
 </div>
 <div id="ref-lcvenshtcin1966binary" class="csl-entry" role="listitem">
-Lcvenshtcin, VI. 1966. <span>“Binary Coors Capable or ‘Correcting Deletions, Insertions, and Reversals.”</span> In <em>Soviet Physics-Doklady</em>. Vol. 10. 8.
+Lcvenshtcin, VI. 1966. <span>“Binary Coors Capable or ‘Correcting Deletions, Insertions, and Reversals.”</span> <em>Soviet Physics-Doklady</em> 10.
 </div>
 <div id="ref-mann2002some" class="csl-entry" role="listitem">
-Mann, Bob. 2002. <span>“Some Data Derivation and Provenance Issues in Astronomy.”</span> In <em>Workshop on Data Derivation and Provenance, Chicago</em>.
+Mann, Bob. 2002. <span>“Some Data Derivation and Provenance Issues in Astronomy.”</span> <em>Workshop on Data Derivation and Provenance, Chicago</em>.
 </div>
 <div id="ref-moreau2022provenance" class="csl-entry" role="listitem">
 Moreau, Luc, and Paul Groth. 2022. <em>Provenance: An Introduction to PROV</em>. Springer Nature.
 </div>
 <div id="ref-munappy2020ad" class="csl-entry" role="listitem">
-Munappy, Aiswarya Raj, David Issa Mattos, Jan Bosch, Helena Holmström Olsson, and Anas Dakkak. 2020. <span>“From Ad-Hoc Data Analytics to Dataops.”</span> In <em>Proceedings of the International Conference on Software and System Processes</em>, 165–74.
+Munappy, Aiswarya Raj, David Issa Mattos, Jan Bosch, Helena Holmström Olsson, and Anas Dakkak. 2020. <span>“From Ad-Hoc Data Analytics to Dataops.”</span> <em>Proceedings of the International Conference on Software and System Processes</em>, 165–74.
 </div>
 <div id="ref-naumann2014data" class="csl-entry" role="listitem">
 Naumann, Felix. 2014. <span>“Data Profiling Revisited.”</span> <em>ACM SIGMOD Record</em> 42 (4): 40–49.
 </div>
 <div id="ref-olesen2023enterprise" class="csl-entry" role="listitem">
-Olesen-Bagneux, Ole. 2023. <em>The Enterprise Data Catalog</em>. "O’Reilly Media, Inc.".
+Olesen-Bagneux, Ole. 2023. <em>The Enterprise Data Catalog</em>. "O’Reilly Media, Inc."
 </div>
 <div id="ref-ozsu2018" class="csl-entry" role="listitem">
-Özsu, M. Tamer. 2018. <span>“Database.”</span> In <em>Encyclopedia of Database Systems</em>, edited by Ling Liu and M. Tamer Özsu, 931–32. New York, NY: Springer New York. <a href="https://doi.org/10.1007/978-1-4614-8265-9_80734">https://doi.org/10.1007/978-1-4614-8265-9_80734</a>.
+Özsu, M. Tamer. 2018. <span>“Database.”</span> In <em>Encyclopedia of Database Systems</em>, edited by Ling Liu and M. Tamer Özsu. Springer New York. <a href="https://doi.org/10.1007/978-1-4614-8265-9_80734">https://doi.org/10.1007/978-1-4614-8265-9_80734</a>.
 </div>
 <div id="ref-papadakis2020blocking" class="csl-entry" role="listitem">
 Papadakis, George, Dimitrios Skoutas, Emmanouil Thanos, and Themis Palpanas. 2020. <span>“Blocking and Filtering Techniques for Entity Resolution: A Survey.”</span> <em>ACM Computing Surveys (CSUR)</em> 53 (2): 1–42.
 </div>
 <div id="ref-simmhan2005survey" class="csl-entry" role="listitem">
-Simmhan, Yogesh L, Beth Plale, Dennis Gannon, et al. 2005. <span>“A Survey of Data Provenance Techniques.”</span> <em>Computer Science Department, Indiana University, Bloomington IN</em> 47405: 69.
+<span class="nocase">Simmhan, Yogesh L, Beth Plale, Dennis Gannon, et al.</span> 2005. <span>“A Survey of Data Provenance Techniques.”</span> <em>Computer Science Department, Indiana University, Bloomington IN</em> 47405: 69.
 </div>
 </div>
 </section>
@@ -3430,7 +3436,7 @@ Simmhan, Yogesh L, Beth Plale, Dennis Gannon, et al. 2005. <span>“A Survey of 
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -3457,129 +3463,111 @@ Simmhan, Yogesh L, Beth Plale, Dennis Gannon, et al. 2005. <span>“A Survey of 
       });
     </script>
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-        }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
