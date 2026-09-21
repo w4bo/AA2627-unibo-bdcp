@@ -238,7 +238,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="setup-library-versioning" class="title-slide slide level1 center">
 <h1>Setup (&amp; library versioning)</h1>
 <p>First of all, we need to setup the Python environment by installing and importing the necessary Python dependencies.</p>
-<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:23.000330Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:23.000193Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:32.325008Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:32.324357Z&quot;}}" data-outputid="cfb85ad7-1e21-4806-e457-682013a988b5" data-execution_count="1">
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:40.141906Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:40.141725Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:46.903156Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:46.902165Z&quot;}}" data-outputid="cfb85ad7-1e21-4806-e457-682013a988b5" data-execution_count="1">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb1-1"><a href="" aria-label="1"></a><span class="op">!</span>pip install prov pydot</span>
@@ -269,7 +269,7 @@ Requirement already satisfied: pyparsing&gt;=3.1.0 in /usr/local/lib/python3.14/
 Downloading prov-3.2.2-py3-none-any.whl (967 kB)
 
    <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0.0/967.2 kB</span> <span class="ansi-red-fg">?</span> eta <span class="ansi-cyan-fg">-:--:--</span>
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">967.2/967.2 kB</span> <span class="ansi-red-fg">56.2 MB/s</span>  <span class="ansi-yellow-fg">0:00:00</span>
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">967.2/967.2 kB</span> <span class="ansi-red-fg">83.4 MB/s</span>  <span class="ansi-yellow-fg">0:00:00</span>
 
 Downloading pydot-4.0.1-py3-none-any.whl (37 kB)
 
@@ -295,15 +295,18 @@ Successfully installed prov-3.2.2 pydot-4.0.1
 <span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
 
 <span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+
+3.0.1
+
+1.8.0
+
+2.4.2
+
+0.13.2
+
+3.2.2
 </pre>
 </div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>3.0.1
-1.8.0
-2.4.2
-0.13.2
-3.2.2</code></pre>
 </div>
 </div>
 <p>Why should we track the libraries imported in the coding environment?</p>
@@ -312,11 +315,11 @@ Successfully installed prov-3.2.2 pydot-4.0.1
 <section id="data-collection" class="title-slide slide level1 center">
 <h1>Data collection</h1>
 <p>Import the dataset. In this case, there is no need for ETL/integration since the dataset is ready for elaboration.</p>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:32.326879Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:32.326616Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:32.462684Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:32.461980Z&quot;}}" data-outputid="f35e6b70-3545-446e-ce67-d62f2f81fb4b" data-execution_count="2">
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:46.905815Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:46.905499Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:47.116266Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:47.115385Z&quot;}}" data-outputid="f35e6b70-3545-446e-ce67-d62f2f81fb4b" data-execution_count="2">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb3-1"><a href="" aria-label="1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://w4bo.github.io/AA2324-unibo-bigdataandcloudplatforms/housing.csv"</span>)</span>
-<span id="cb3-2"><a href="" aria-label="2"></a>df</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb2-1"><a href="" aria-label="1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://w4bo.github.io/AA2324-unibo-bigdataandcloudplatforms/housing.csv"</span>)</span>
+<span id="cb2-2"><a href="" aria-label="2"></a>df</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -505,10 +508,10 @@ Successfully installed prov-3.2.2 pydot-4.0.1
 
 <section id="profiling-schema" class="title-slide slide level1 center">
 <h1>Profiling: Schema</h1>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:32.464098Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:32.463961Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:32.467109Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:32.466603Z&quot;}}" data-execution_count="3">
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:47.118586Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:47.118392Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:47.122988Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:47.122033Z&quot;}}" data-execution_count="3">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb4-1"><a href="" aria-label="1"></a>df.columns</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb3-1"><a href="" aria-label="1"></a>df.columns</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>Index(['longitude', 'latitude', 'housing_median_age', 'total_rooms',
@@ -534,10 +537,10 @@ Successfully installed prov-3.2.2 pydot-4.0.1
 
 <section id="profiling-schema-1" class="title-slide slide level1 center">
 <h1>Profiling: Schema</h1>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:32.468587Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:32.468445Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:32.474818Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:32.474201Z&quot;}}" data-outputid="ba0c0411-41df-44ff-9a89-4ecfcd40077c" data-execution_count="4">
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:47.124934Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:47.124739Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:47.134206Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:47.133351Z&quot;}}" data-outputid="ba0c0411-41df-44ff-9a89-4ecfcd40077c" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb6-1"><a href="" aria-label="1"></a>df.info()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb5-1"><a href="" aria-label="1"></a>df.info()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.DataFrame'&gt;
@@ -563,10 +566,10 @@ memory usage: 1.6 MB</code></pre>
 
 <section id="profiling-distribution-and-statistics" class="title-slide slide level1 center">
 <h1>Profiling: Distribution and statistics</h1>
-<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:32.476181Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:32.476052Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:32.496834Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:32.496250Z&quot;}}" data-outputid="c70f48cf-1080-487a-922e-488b3252f5dd" data-execution_count="5">
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:47.136383Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:47.136178Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:47.167000Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:47.166074Z&quot;}}" data-outputid="c70f48cf-1080-487a-922e-488b3252f5dd" data-execution_count="5">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb8-1"><a href="" aria-label="1"></a>df.describe(include<span class="op">=</span><span class="st">'all'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb7-1"><a href="" aria-label="1"></a>df.describe(include<span class="op">=</span><span class="st">'all'</span>)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -754,12 +757,12 @@ memory usage: 1.6 MB</code></pre>
 
 <section id="profiling-distribution" class="title-slide slide level1 center">
 <h1>Profiling: Distribution</h1>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:32.498160Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:32.498026Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:33.311998Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:33.311289Z&quot;}}" data-outputid="3850aafe-7d6f-4c20-a0a9-e404780b524c" data-execution_count="6">
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:47.168930Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:47.168745Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:48.212139Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:48.211160Z&quot;}}" data-outputid="3850aafe-7d6f-4c20-a0a9-e404780b524c" data-execution_count="6">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb9-1"><a href="" aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-2"><a href="" aria-label="2"></a>df.hist(bins<span class="op">=</span><span class="dv">50</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">9</span>))</span>
-<span id="cb9-3"><a href="" aria-label="3"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb8-1"><a href="" aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-2"><a href="" aria-label="2"></a>df.hist(bins<span class="op">=</span><span class="dv">50</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">9</span>))</span>
+<span id="cb8-3"><a href="" aria-label="3"></a>plt.show()</span></code></pre></div>
 </details>
 
 </div>
@@ -767,12 +770,12 @@ memory usage: 1.6 MB</code></pre>
 
 <section id="profiling-are-there-relationships-between-variables" class="title-slide slide level1 center">
 <h1>Profiling: are there relationships between variables?</h1>
-<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:33.313537Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:33.313370Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:35.618434Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:35.617765Z&quot;}}" data-outputid="04297e5d-6e1d-4b41-9964-05fdb55cf746" data-execution_count="7">
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:48.214321Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:48.214128Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:51.682730Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:51.681700Z&quot;}}" data-outputid="04297e5d-6e1d-4b41-9964-05fdb55cf746" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb10-1"><a href="" aria-label="1"></a>tmp <span class="op">=</span> df[[<span class="st">"median_income"</span>, <span class="st">"housing_median_age"</span>, <span class="st">"median_house_value"</span>, <span class="st">"households"</span>, <span class="st">"population"</span>, <span class="st">"total_rooms"</span>]]</span>
-<span id="cb10-2"><a href="" aria-label="2"></a>sns.pairplot(tmp.sample(n<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>), markers<span class="op">=</span><span class="st">'o'</span>) <span class="co"># hue="median_house_value",</span></span>
-<span id="cb10-3"><a href="" aria-label="3"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb9-1"><a href="" aria-label="1"></a>tmp <span class="op">=</span> df[[<span class="st">"median_income"</span>, <span class="st">"housing_median_age"</span>, <span class="st">"median_house_value"</span>, <span class="st">"households"</span>, <span class="st">"population"</span>, <span class="st">"total_rooms"</span>]]</span>
+<span id="cb9-2"><a href="" aria-label="2"></a>sns.pairplot(tmp.sample(n<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>), markers<span class="op">=</span><span class="st">'o'</span>) <span class="co"># hue="median_house_value",</span></span>
+<span id="cb9-3"><a href="" aria-label="3"></a>plt.show()</span></code></pre></div>
 </details>
 
 </div>
@@ -781,13 +784,13 @@ memory usage: 1.6 MB</code></pre>
 <section id="compression-memory-usage" class="title-slide slide level1 center">
 <h1>Compression: Memory usage</h1>
 <p>What if I change float64 to float32?</p>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:35.622682Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:35.622484Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:35.632387Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:35.631802Z&quot;}}" data-outputid="2ab1a8d0-f625-43f6-9133-13cde54fcc4a" data-execution_count="8">
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:51.687232Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:51.686928Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:51.699545Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:51.698317Z&quot;}}" data-outputid="2ab1a8d0-f625-43f6-9133-13cde54fcc4a" data-execution_count="8">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb11-1"><a href="" aria-label="1"></a>dff <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>) <span class="co"># copy the dataframe</span></span>
-<span id="cb11-2"><a href="" aria-label="2"></a><span class="cf">for</span> x <span class="kw">in</span> df.columns: <span class="co"># iterate over the columns</span></span>
-<span id="cb11-3"><a href="" aria-label="3"></a>    <span class="cf">if</span> dff[x].dtype <span class="op">==</span> <span class="st">'float64'</span>: dff[x] <span class="op">=</span> dff[x].astype(<span class="st">'float32'</span>) <span class="co"># ... change it to `float32`</span></span>
-<span id="cb11-4"><a href="" aria-label="4"></a>dff.info() <span class="co"># show some statistics on the dataframe</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb10-1"><a href="" aria-label="1"></a>dff <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>) <span class="co"># copy the dataframe</span></span>
+<span id="cb10-2"><a href="" aria-label="2"></a><span class="cf">for</span> x <span class="kw">in</span> df.columns: <span class="co"># iterate over the columns</span></span>
+<span id="cb10-3"><a href="" aria-label="3"></a>    <span class="cf">if</span> dff[x].dtype <span class="op">==</span> <span class="st">'float64'</span>: dff[x] <span class="op">=</span> dff[x].astype(<span class="st">'float32'</span>) <span class="co"># ... change it to `float32`</span></span>
+<span id="cb10-4"><a href="" aria-label="4"></a>dff.info() <span class="co"># show some statistics on the dataframe</span></span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.DataFrame'&gt;
@@ -814,13 +817,13 @@ memory usage: 887.0 KB</code></pre>
 <section id="compression-memory-usage-1" class="title-slide slide level1 center">
 <h1>Compression: Memory usage</h1>
 <p>What if I change float64 to float16?</p>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:35.634165Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:35.633994Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:35.645414Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:35.644806Z&quot;}}" data-execution_count="9">
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:51.701425Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:51.701240Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:51.716065Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:51.714837Z&quot;}}" data-execution_count="9">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb13-1"><a href="" aria-label="1"></a>dff <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>) <span class="co"># copy the dataframe</span></span>
-<span id="cb13-2"><a href="" aria-label="2"></a><span class="cf">for</span> x <span class="kw">in</span> df.columns: <span class="co"># iterate over the columns</span></span>
-<span id="cb13-3"><a href="" aria-label="3"></a>    <span class="cf">if</span> dff[x].dtype <span class="op">==</span> <span class="st">'float64'</span>: dff[x] <span class="op">=</span> dff[x].astype(<span class="st">'float16'</span>) <span class="co"># ... change it to `float16`</span></span>
-<span id="cb13-4"><a href="" aria-label="4"></a>dff.info() <span class="co"># show some statistics on the dataframe</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb12-1"><a href="" aria-label="1"></a>dff <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>) <span class="co"># copy the dataframe</span></span>
+<span id="cb12-2"><a href="" aria-label="2"></a><span class="cf">for</span> x <span class="kw">in</span> df.columns: <span class="co"># iterate over the columns</span></span>
+<span id="cb12-3"><a href="" aria-label="3"></a>    <span class="cf">if</span> dff[x].dtype <span class="op">==</span> <span class="st">'float64'</span>: dff[x] <span class="op">=</span> dff[x].astype(<span class="st">'float16'</span>) <span class="co"># ... change it to `float16`</span></span>
+<span id="cb12-4"><a href="" aria-label="4"></a>dff.info() <span class="co"># show some statistics on the dataframe</span></span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.DataFrame'&gt;
@@ -846,10 +849,10 @@ memory usage: 524.2 KB</code></pre>
 
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
-<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:35.647234Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:35.647081Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:35.672410Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:35.671712Z&quot;}}" data-execution_count="10">
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:51.717897Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:51.717712Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:51.750069Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:51.749079Z&quot;}}" data-execution_count="10">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb15-1"><a href="" aria-label="1"></a>dff.describe()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb14-1"><a href="" aria-label="1"></a>dff.describe()</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -1039,45 +1042,45 @@ memory usage: 524.2 KB</code></pre>
 
 <section id="alternative-pre-processing-pipelines" class="title-slide slide level1 center">
 <h1>Alternative pre-processing pipelines</h1>
-<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:35.673984Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:35.673834Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:35.691150Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:35.690505Z&quot;}}" data-execution_count="11">
+<div id="cell-30" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:51.752347Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:51.752145Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:51.773815Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:51.772859Z&quot;}}" data-execution_count="11">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb16-1"><a href="" aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb16-2"><a href="" aria-label="2"></a></span>
-<span id="cb16-3"><a href="" aria-label="3"></a><span class="cf">if</span> <span class="st">"ocean_proximity"</span> <span class="kw">in</span> df.columns:  <span class="co"># For now we simply drop "ocean_proximity"</span></span>
-<span id="cb16-4"><a href="" aria-label="4"></a>  df <span class="op">=</span> df.drop(<span class="st">"ocean_proximity"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-5"><a href="" aria-label="5"></a></span>
-<span id="cb16-6"><a href="" aria-label="6"></a><span class="co"># Let's create some dataset variations</span></span>
-<span id="cb16-7"><a href="" aria-label="7"></a><span class="co"># dataset1: drop the rows containing the null values and the columns `latitude` and `longitude`</span></span>
-<span id="cb16-8"><a href="" aria-label="8"></a>dataset_v1 <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>).dropna().drop([<span class="st">"longitude"</span>, <span class="st">"latitude"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-9"><a href="" aria-label="9"></a><span class="co"># dataset2: impute missing values with the average number of bedrooms</span></span>
-<span id="cb16-10"><a href="" aria-label="10"></a>dataset_v2 <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-11"><a href="" aria-label="11"></a>dataset_v2[<span class="st">"total_bedrooms"</span>] <span class="op">=</span> dataset_v2[<span class="st">"total_bedrooms"</span>].fillna(dataset_v2[<span class="st">"total_bedrooms"</span>].mean())</span>
-<span id="cb16-12"><a href="" aria-label="12"></a><span class="co"># dataset3: also standardize dataset_v2</span></span>
-<span id="cb16-13"><a href="" aria-label="13"></a>numerical_features <span class="op">=</span> dataset_v2.select_dtypes(include<span class="op">=</span>np.number)  <span class="co"># select numerical features</span></span>
-<span id="cb16-14"><a href="" aria-label="14"></a>scaler <span class="op">=</span> StandardScaler()  <span class="co"># Create a StandardScaler object</span></span>
-<span id="cb16-15"><a href="" aria-label="15"></a>scaled_features <span class="op">=</span> scaler.fit_transform(numerical_features)  <span class="co"># Fit and transform the numerical features</span></span>
-<span id="cb16-16"><a href="" aria-label="16"></a>dataset_v3 <span class="op">=</span> pd.DataFrame(scaled_features, columns<span class="op">=</span>numerical_features.columns)  <span class="co"># Convert the scaled features back to a DataFrame</span></span>
-<span id="cb16-17"><a href="" aria-label="17"></a></span>
-<span id="cb16-18"><a href="" aria-label="18"></a><span class="co"># Create the list of datasets</span></span>
-<span id="cb16-19"><a href="" aria-label="19"></a>datasets <span class="op">=</span> [(dataset_v1, <span class="st">"dataset_v1"</span>), (dataset_v2, <span class="st">"dataset_v2"</span>), (dataset_v3, <span class="st">"dataset_v3"</span>)]</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb15-1"><a href="" aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb15-2"><a href="" aria-label="2"></a></span>
+<span id="cb15-3"><a href="" aria-label="3"></a><span class="cf">if</span> <span class="st">"ocean_proximity"</span> <span class="kw">in</span> df.columns:  <span class="co"># For now we simply drop "ocean_proximity"</span></span>
+<span id="cb15-4"><a href="" aria-label="4"></a>  df <span class="op">=</span> df.drop(<span class="st">"ocean_proximity"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-5"><a href="" aria-label="5"></a></span>
+<span id="cb15-6"><a href="" aria-label="6"></a><span class="co"># Let's create some dataset variations</span></span>
+<span id="cb15-7"><a href="" aria-label="7"></a><span class="co"># dataset1: drop the rows containing the null values and the columns `latitude` and `longitude`</span></span>
+<span id="cb15-8"><a href="" aria-label="8"></a>dataset_v1 <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>).dropna().drop([<span class="st">"longitude"</span>, <span class="st">"latitude"</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-9"><a href="" aria-label="9"></a><span class="co"># dataset2: impute missing values with the average number of bedrooms</span></span>
+<span id="cb15-10"><a href="" aria-label="10"></a>dataset_v2 <span class="op">=</span> df.copy(deep<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-11"><a href="" aria-label="11"></a>dataset_v2[<span class="st">"total_bedrooms"</span>] <span class="op">=</span> dataset_v2[<span class="st">"total_bedrooms"</span>].fillna(dataset_v2[<span class="st">"total_bedrooms"</span>].mean())</span>
+<span id="cb15-12"><a href="" aria-label="12"></a><span class="co"># dataset3: also standardize dataset_v2</span></span>
+<span id="cb15-13"><a href="" aria-label="13"></a>numerical_features <span class="op">=</span> dataset_v2.select_dtypes(include<span class="op">=</span>np.number)  <span class="co"># select numerical features</span></span>
+<span id="cb15-14"><a href="" aria-label="14"></a>scaler <span class="op">=</span> StandardScaler()  <span class="co"># Create a StandardScaler object</span></span>
+<span id="cb15-15"><a href="" aria-label="15"></a>scaled_features <span class="op">=</span> scaler.fit_transform(numerical_features)  <span class="co"># Fit and transform the numerical features</span></span>
+<span id="cb15-16"><a href="" aria-label="16"></a>dataset_v3 <span class="op">=</span> pd.DataFrame(scaled_features, columns<span class="op">=</span>numerical_features.columns)  <span class="co"># Convert the scaled features back to a DataFrame</span></span>
+<span id="cb15-17"><a href="" aria-label="17"></a></span>
+<span id="cb15-18"><a href="" aria-label="18"></a><span class="co"># Create the list of datasets</span></span>
+<span id="cb15-19"><a href="" aria-label="19"></a>datasets <span class="op">=</span> [(dataset_v1, <span class="st">"dataset_v1"</span>), (dataset_v2, <span class="st">"dataset_v2"</span>), (dataset_v3, <span class="st">"dataset_v3"</span>)]</span></code></pre></div>
 </details>
 </div>
 </section>
 
 <section id="alternative-machine-learning-algorithms" class="title-slide slide level1 center">
 <h1>Alternative machine learning algorithms</h1>
-<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:35.693094Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:35.692920Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:35.756130Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:35.755497Z&quot;}}" data-execution_count="12">
+<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:51.775784Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:51.775599Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:51.856511Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:51.855507Z&quot;}}" data-execution_count="12">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb17-1"><a href="" aria-label="1"></a><span class="co"># Let's import some machine learning models (here we are not addressing hyper-parameter tuning)</span></span>
-<span id="cb17-2"><a href="" aria-label="2"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
-<span id="cb17-3"><a href="" aria-label="3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression, Lasso</span>
-<span id="cb17-4"><a href="" aria-label="4"></a>dt_3 <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">3</span>)  <span class="co"># initialize decision tree regressor model</span></span>
-<span id="cb17-5"><a href="" aria-label="5"></a>dt_5 <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">5</span>)  <span class="co"># initialize decision tree regressor model</span></span>
-<span id="cb17-6"><a href="" aria-label="6"></a>lr <span class="op">=</span> LinearRegression()  <span class="co"># initialize a linear regressor model</span></span>
-<span id="cb17-7"><a href="" aria-label="7"></a><span class="co"># Create the list of algorithms</span></span>
-<span id="cb17-8"><a href="" aria-label="8"></a>ml_algorithms <span class="op">=</span> [(lr, <span class="st">"lr"</span>), (dt_3, <span class="st">"dt_3"</span>), (dt_5, <span class="st">"dt_5"</span>)]</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb16-1"><a href="" aria-label="1"></a><span class="co"># Let's import some machine learning models (here we are not addressing hyper-parameter tuning)</span></span>
+<span id="cb16-2"><a href="" aria-label="2"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb16-3"><a href="" aria-label="3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression, Lasso</span>
+<span id="cb16-4"><a href="" aria-label="4"></a>dt_3 <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">3</span>)  <span class="co"># initialize decision tree regressor model</span></span>
+<span id="cb16-5"><a href="" aria-label="5"></a>dt_5 <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">5</span>)  <span class="co"># initialize decision tree regressor model</span></span>
+<span id="cb16-6"><a href="" aria-label="6"></a>lr <span class="op">=</span> LinearRegression()  <span class="co"># initialize a linear regressor model</span></span>
+<span id="cb16-7"><a href="" aria-label="7"></a><span class="co"># Create the list of algorithms</span></span>
+<span id="cb16-8"><a href="" aria-label="8"></a>ml_algorithms <span class="op">=</span> [(lr, <span class="st">"lr"</span>), (dt_3, <span class="st">"dt_3"</span>), (dt_5, <span class="st">"dt_5"</span>)]</span></code></pre></div>
 </details>
 </div>
 </section>
@@ -1085,24 +1088,24 @@ memory usage: 524.2 KB</code></pre>
 <section id="train-the-models" class="title-slide slide level1 center">
 <h1>Train the models</h1>
 <p>What are the insights?</p>
-<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:35.758160Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:35.758006Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:38.151901Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:38.151179Z&quot;}}" data-outputid="3940b1a7-1d26-40a6-e423-203e3c7cd50f" data-execution_count="13">
+<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:51.859402Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:51.859024Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:54.753051Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:54.751938Z&quot;}}" data-outputid="3940b1a7-1d26-40a6-e423-203e3c7cd50f" data-execution_count="13">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb18-1"><a href="" aria-label="1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb18-2"><a href="" aria-label="2"></a>instances, i <span class="op">=</span> [], <span class="dv">0</span></span>
-<span id="cb18-3"><a href="" aria-label="3"></a><span class="cf">for</span> dataset, dataset_version <span class="kw">in</span> datasets:  <span class="co"># For each dataset version...</span></span>
-<span id="cb18-4"><a href="" aria-label="4"></a>  X <span class="op">=</span> dataset.drop(columns<span class="op">=</span>[<span class="st">"median_house_value"</span>]).to_numpy()  <span class="co"># Get the training set</span></span>
-<span id="cb18-5"><a href="" aria-label="5"></a>  y <span class="op">=</span> dataset[<span class="st">"median_house_value"</span>].to_numpy()  <span class="co"># Get the label array</span></span>
-<span id="cb18-6"><a href="" aria-label="6"></a>  <span class="cf">for</span> ml_algorithm, ml_algorithm_version <span class="kw">in</span> ml_algorithms:  <span class="co"># For each machine learning algorithm...</span></span>
-<span id="cb18-7"><a href="" aria-label="7"></a>    instance <span class="op">=</span> {}  <span class="co"># Run the machine learning algorithm on the given dataset</span></span>
-<span id="cb18-8"><a href="" aria-label="8"></a>    instance[<span class="st">"id"</span>] <span class="op">=</span> i  <span class="co"># store the id of the instance</span></span>
-<span id="cb18-9"><a href="" aria-label="9"></a>    instance[<span class="st">"dataset"</span>] <span class="op">=</span> dataset_version  <span class="co"># store the version of the dataset</span></span>
-<span id="cb18-10"><a href="" aria-label="10"></a>    instance[<span class="st">"algorithm"</span>] <span class="op">=</span> ml_algorithm_version  <span class="co"># store the version of the ml algorithm</span></span>
-<span id="cb18-11"><a href="" aria-label="11"></a>    instance[<span class="st">"score"</span>] <span class="op">=</span> cross_val_score(ml_algorithm, X, y, cv<span class="op">=</span><span class="dv">10</span>).mean()  <span class="co"># store the performance of the pipeline instance</span></span>
-<span id="cb18-12"><a href="" aria-label="12"></a>    instances <span class="op">=</span> instances <span class="op">+</span> [instance]</span>
-<span id="cb18-13"><a href="" aria-label="13"></a>    i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb18-14"><a href="" aria-label="14"></a>result <span class="op">=</span> pd.DataFrame.from_dict(instances, orient<span class="op">=</span><span class="st">'columns'</span>)  <span class="co"># Collect the results</span></span>
-<span id="cb18-15"><a href="" aria-label="15"></a>sns.catplot(x <span class="op">=</span> <span class="st">"dataset"</span>, y <span class="op">=</span> <span class="st">"score"</span>, hue <span class="op">=</span> <span class="st">"algorithm"</span>, data <span class="op">=</span> result, kind <span class="op">=</span> <span class="st">"bar"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb17-1"><a href="" aria-label="1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb17-2"><a href="" aria-label="2"></a>instances, i <span class="op">=</span> [], <span class="dv">0</span></span>
+<span id="cb17-3"><a href="" aria-label="3"></a><span class="cf">for</span> dataset, dataset_version <span class="kw">in</span> datasets:  <span class="co"># For each dataset version...</span></span>
+<span id="cb17-4"><a href="" aria-label="4"></a>  X <span class="op">=</span> dataset.drop(columns<span class="op">=</span>[<span class="st">"median_house_value"</span>]).to_numpy()  <span class="co"># Get the training set</span></span>
+<span id="cb17-5"><a href="" aria-label="5"></a>  y <span class="op">=</span> dataset[<span class="st">"median_house_value"</span>].to_numpy()  <span class="co"># Get the label array</span></span>
+<span id="cb17-6"><a href="" aria-label="6"></a>  <span class="cf">for</span> ml_algorithm, ml_algorithm_version <span class="kw">in</span> ml_algorithms:  <span class="co"># For each machine learning algorithm...</span></span>
+<span id="cb17-7"><a href="" aria-label="7"></a>    instance <span class="op">=</span> {}  <span class="co"># Run the machine learning algorithm on the given dataset</span></span>
+<span id="cb17-8"><a href="" aria-label="8"></a>    instance[<span class="st">"id"</span>] <span class="op">=</span> i  <span class="co"># store the id of the instance</span></span>
+<span id="cb17-9"><a href="" aria-label="9"></a>    instance[<span class="st">"dataset"</span>] <span class="op">=</span> dataset_version  <span class="co"># store the version of the dataset</span></span>
+<span id="cb17-10"><a href="" aria-label="10"></a>    instance[<span class="st">"algorithm"</span>] <span class="op">=</span> ml_algorithm_version  <span class="co"># store the version of the ml algorithm</span></span>
+<span id="cb17-11"><a href="" aria-label="11"></a>    instance[<span class="st">"score"</span>] <span class="op">=</span> cross_val_score(ml_algorithm, X, y, cv<span class="op">=</span><span class="dv">10</span>).mean()  <span class="co"># store the performance of the pipeline instance</span></span>
+<span id="cb17-12"><a href="" aria-label="12"></a>    instances <span class="op">=</span> instances <span class="op">+</span> [instance]</span>
+<span id="cb17-13"><a href="" aria-label="13"></a>    i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb17-14"><a href="" aria-label="14"></a>result <span class="op">=</span> pd.DataFrame.from_dict(instances, orient<span class="op">=</span><span class="st">'columns'</span>)  <span class="co"># Collect the results</span></span>
+<span id="cb17-15"><a href="" aria-label="15"></a>sns.catplot(x <span class="op">=</span> <span class="st">"dataset"</span>, y <span class="op">=</span> <span class="st">"score"</span>, hue <span class="op">=</span> <span class="st">"algorithm"</span>, data <span class="op">=</span> result, kind <span class="op">=</span> <span class="st">"bar"</span>)</span></code></pre></div>
 </details>
 
 </div>
@@ -1115,29 +1118,29 @@ memory usage: 524.2 KB</code></pre>
 
 <section id="creating-and-plotting-the-provenance-graph" class="title-slide slide level1 center">
 <h1>Creating and plotting the provenance graph</h1>
-<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:43.440764Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:43.440598Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:43.653572Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:43.653003Z&quot;}}" data-outputid="bbd3f2da-7d24-47b0-b152-1bfce6166bd4" data-execution_count="15">
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:59.410144Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:59.409890Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:59.676801Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:59.675800Z&quot;}}" data-outputid="bbd3f2da-7d24-47b0-b152-1bfce6166bd4" data-execution_count="15">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb19-1"><a href="" aria-label="1"></a><span class="im">from</span> prov.model <span class="im">import</span> ProvDocument</span>
-<span id="cb19-2"><a href="" aria-label="2"></a><span class="im">from</span> prov.dot <span class="im">import</span> prov_to_dot</span>
-<span id="cb19-3"><a href="" aria-label="3"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
-<span id="cb19-4"><a href="" aria-label="4"></a>d1 <span class="op">=</span> ProvDocument()  <span class="co"># Create an empty provenance document</span></span>
-<span id="cb19-5"><a href="" aria-label="5"></a>d1.add_namespace(<span class="st">'unibo'</span>, <span class="st">'https://www.unibo.it'</span>)  <span class="co"># add the namespace</span></span>
-<span id="cb19-6"><a href="" aria-label="6"></a>d1.add_namespace(<span class="st">'sk'</span>, <span class="st">'https://scikit-learn.org/stable/'</span>)  <span class="co"># add the namespace</span></span>
-<span id="cb19-7"><a href="" aria-label="7"></a>agent <span class="op">=</span> d1.agent(<span class="st">'unibo:mfrancia'</span>)  <span class="co"># add an agent</span></span>
-<span id="cb19-8"><a href="" aria-label="8"></a>d1.wasDerivedFrom(<span class="st">"unibo:dataset_v3"</span>, <span class="st">"unibo:dataset_v2"</span>)</span>
-<span id="cb19-9"><a href="" aria-label="9"></a><span class="cf">for</span> dataset, dataset_version <span class="kw">in</span> datasets:  <span class="co"># For each dataset version...</span></span>
-<span id="cb19-10"><a href="" aria-label="10"></a>  original_dataset <span class="op">=</span> d1.entity(<span class="st">'unibo:'</span> <span class="op">+</span> dataset_version)  <span class="co"># register the dataset</span></span>
-<span id="cb19-11"><a href="" aria-label="11"></a>  d1.wasAttributedTo(original_dataset, agent)  <span class="co"># attribute the dataset to the agent who created it</span></span>
-<span id="cb19-12"><a href="" aria-label="12"></a>  <span class="cf">for</span> ml_algorithm, ml_algorithm_version <span class="kw">in</span> ml_algorithms:  <span class="co"># For each machine learning algorithm...</span></span>
-<span id="cb19-13"><a href="" aria-label="13"></a>    algo <span class="op">=</span> d1.activity(<span class="st">'sk:'</span> <span class="op">+</span> ml_algorithm_version)  <span class="co"># register the algorithm as a (processing) activity</span></span>
-<span id="cb19-14"><a href="" aria-label="14"></a>    processed_dataset <span class="op">=</span> d1.entity(<span class="st">'unibo:'</span> <span class="op">+</span> ml_algorithm_version <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> dataset_version, {<span class="st">'sk:cv-score'</span>: <span class="st">'...'</span>})  <span class="co"># create an activity represented the processed dataset</span></span>
-<span id="cb19-15"><a href="" aria-label="15"></a>    d1.used(algo, original_dataset)  <span class="co"># the activity used the dataset as input</span></span>
-<span id="cb19-16"><a href="" aria-label="16"></a>    d1.wasGeneratedBy(processed_dataset, algo)  <span class="co"># the processed dataset has been created by the algorithm</span></span>
-<span id="cb19-17"><a href="" aria-label="17"></a>    d1.wasDerivedFrom(processed_dataset, original_dataset)  <span class="co"># the processed dataset has been derived from the original one</span></span>
-<span id="cb19-18"><a href="" aria-label="18"></a>dot <span class="op">=</span> prov_to_dot(d1)  <span class="co"># visualize the graph</span></span>
-<span id="cb19-19"><a href="" aria-label="19"></a>dot.write_png(<span class="st">'prov.png'</span>)</span>
-<span id="cb19-20"><a href="" aria-label="20"></a>Image(<span class="st">'prov.png'</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb18-1"><a href="" aria-label="1"></a><span class="im">from</span> prov.model <span class="im">import</span> ProvDocument</span>
+<span id="cb18-2"><a href="" aria-label="2"></a><span class="im">from</span> prov.dot <span class="im">import</span> prov_to_dot</span>
+<span id="cb18-3"><a href="" aria-label="3"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
+<span id="cb18-4"><a href="" aria-label="4"></a>d1 <span class="op">=</span> ProvDocument()  <span class="co"># Create an empty provenance document</span></span>
+<span id="cb18-5"><a href="" aria-label="5"></a>d1.add_namespace(<span class="st">'unibo'</span>, <span class="st">'https://www.unibo.it'</span>)  <span class="co"># add the namespace</span></span>
+<span id="cb18-6"><a href="" aria-label="6"></a>d1.add_namespace(<span class="st">'sk'</span>, <span class="st">'https://scikit-learn.org/stable/'</span>)  <span class="co"># add the namespace</span></span>
+<span id="cb18-7"><a href="" aria-label="7"></a>agent <span class="op">=</span> d1.agent(<span class="st">'unibo:mfrancia'</span>)  <span class="co"># add an agent</span></span>
+<span id="cb18-8"><a href="" aria-label="8"></a>d1.wasDerivedFrom(<span class="st">"unibo:dataset_v3"</span>, <span class="st">"unibo:dataset_v2"</span>)</span>
+<span id="cb18-9"><a href="" aria-label="9"></a><span class="cf">for</span> dataset, dataset_version <span class="kw">in</span> datasets:  <span class="co"># For each dataset version...</span></span>
+<span id="cb18-10"><a href="" aria-label="10"></a>  original_dataset <span class="op">=</span> d1.entity(<span class="st">'unibo:'</span> <span class="op">+</span> dataset_version)  <span class="co"># register the dataset</span></span>
+<span id="cb18-11"><a href="" aria-label="11"></a>  d1.wasAttributedTo(original_dataset, agent)  <span class="co"># attribute the dataset to the agent who created it</span></span>
+<span id="cb18-12"><a href="" aria-label="12"></a>  <span class="cf">for</span> ml_algorithm, ml_algorithm_version <span class="kw">in</span> ml_algorithms:  <span class="co"># For each machine learning algorithm...</span></span>
+<span id="cb18-13"><a href="" aria-label="13"></a>    algo <span class="op">=</span> d1.activity(<span class="st">'sk:'</span> <span class="op">+</span> ml_algorithm_version)  <span class="co"># register the algorithm as a (processing) activity</span></span>
+<span id="cb18-14"><a href="" aria-label="14"></a>    processed_dataset <span class="op">=</span> d1.entity(<span class="st">'unibo:'</span> <span class="op">+</span> ml_algorithm_version <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> dataset_version, {<span class="st">'sk:cv-score'</span>: <span class="st">'...'</span>})  <span class="co"># create an activity represented the processed dataset</span></span>
+<span id="cb18-15"><a href="" aria-label="15"></a>    d1.used(algo, original_dataset)  <span class="co"># the activity used the dataset as input</span></span>
+<span id="cb18-16"><a href="" aria-label="16"></a>    d1.wasGeneratedBy(processed_dataset, algo)  <span class="co"># the processed dataset has been created by the algorithm</span></span>
+<span id="cb18-17"><a href="" aria-label="17"></a>    d1.wasDerivedFrom(processed_dataset, original_dataset)  <span class="co"># the processed dataset has been derived from the original one</span></span>
+<span id="cb18-18"><a href="" aria-label="18"></a>dot <span class="op">=</span> prov_to_dot(d1)  <span class="co"># visualize the graph</span></span>
+<span id="cb18-19"><a href="" aria-label="19"></a>dot.write_png(<span class="st">'prov.png'</span>)</span>
+<span id="cb18-20"><a href="" aria-label="20"></a>Image(<span class="st">'prov.png'</span>)</span></code></pre></div>
 </details>
 
 </div>
@@ -1145,10 +1148,10 @@ memory usage: 524.2 KB</code></pre>
 
 <section id="can-you-build-and-track-a-better-model" class="title-slide slide level1 center">
 <h1>Can you build and track a better model?</h1>
-<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T11:54:43.656124Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T11:54:43.655534Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T11:54:43.658941Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T11:54:43.658298Z&quot;}}" data-execution_count="16">
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-09-21T20:14:59.679390Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-09-21T20:14:59.678768Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-09-21T20:14:59.682269Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-09-21T20:14:59.681390Z&quot;}}" data-execution_count="16">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb20-1"><a href="" aria-label="1"></a><span class="co"># Try your sk-learn model here</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb19-1"><a href="" aria-label="1"></a><span class="co"># Try your sk-learn model here</span></span></code></pre></div>
 </details>
 </div>
 
