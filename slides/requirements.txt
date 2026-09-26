@@ -8,7 +8,7 @@ openpyxl==3.1.5
 pandas==3.0.6
 paretoset==1.2.5
 pptx2md==2.0.6
-prov[dot]==2.5.3
+prov[dot]==3.2.2
 pydot==4.0.1
 pymongo==4.18.2
 scikit-learn==1.9.1
