@@ -1,12 +1,12 @@
 ---
-subtitle: Module 2 (Cloud Platforms)
+subtitle: Module II (Cloud Platforms)
 ---
 
 # Welcome!
 
 **Matteo Francia, Ph.D.**
 
-- Assistant Professor (junior) @ DISI, University of Bologna
+- Assistant Professor @ DISI, University of Bologna
 - Email: [m.francia@unibo.it](mailto:m.francia@unibo.it)
 - Web: [https://www.unibo.it/sitoweb/m.francia/en](https://www.unibo.it/sitoweb/m.francia/en)
 
