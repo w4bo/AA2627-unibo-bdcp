@@ -13,7 +13,7 @@ format:
     progress: true
     slide-number: true
     default-image-extension: ""
-    footer: "M. Francia - BDCP (Module II) - A.Y. 2026/27"
+    footer: "BDCP Module II - M. Francia - A.Y. 2026/27"
     # navigation-mode: vertical
     controls-layout: bottom-right
     controls-tutorial: true
