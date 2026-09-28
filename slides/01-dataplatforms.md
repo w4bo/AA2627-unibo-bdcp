@@ -1,5 +1,5 @@
 ---
-subtitle: Towards data platforms
+title: Towards data platforms
 ---
 
 # How did we get here?

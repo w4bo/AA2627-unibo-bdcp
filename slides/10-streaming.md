@@ -1,5 +1,5 @@
 ---
-subtitle: Data pipelines on cloud (Streaming)
+title: Data pipelines on cloud (Streaming)
 ---
 
 #

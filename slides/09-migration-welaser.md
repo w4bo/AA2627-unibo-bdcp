@@ -1,5 +1,5 @@
 ---
-subtitle: Cluster migration - WeLASER
+title: Cluster migration - WeLASER
 ---
 
 # The WeLASER project

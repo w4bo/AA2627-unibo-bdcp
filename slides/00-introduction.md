@@ -1,5 +1,5 @@
 ---
-subtitle: Module II (Cloud Platforms)
+title: Module II (Cloud Platforms)
 ---
 
 # Welcome!

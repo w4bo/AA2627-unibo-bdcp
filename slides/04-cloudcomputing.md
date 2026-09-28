@@ -1,5 +1,5 @@
 ---
-subtitle: Cloud computing
+title: Cloud computing
 ---
 
 # 

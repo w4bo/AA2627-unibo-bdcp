@@ -1,5 +1,5 @@
 ---
-subtitle: NoSQL DBMS
+title: NoSQL DBMS
 ---
 
 # Not only SQL

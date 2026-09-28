@@ -1,5 +1,5 @@
 ---
-subtitle: Building data pipelines
+title: Building data pipelines
 ---
 
 # A necessary introduction
