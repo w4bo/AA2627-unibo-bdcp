@@ -1,3 +1,38 @@
+## [1.0.3](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.2...1.0.3) (2026-09-28)
+
+### Dependency updates
+
+* **deps:** update dependency awswrangler to v3.17.1 ([#11](https://github.com/w4bo/AA2627-unibo-bdcp/issues/11)) ([84ab38d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/84ab38d4c2a9a3b0773f51344210ea61122b8dad))
+* **deps:** update dependency flaml to v2.7.0 ([#28](https://github.com/w4bo/AA2627-unibo-bdcp/issues/28)) ([88f1545](https://github.com/w4bo/AA2627-unibo-bdcp/commit/88f1545ab150e967382d102400002dbf541fd15c))
+* **deps:** update dependency matplotlib to v3.11.2 ([#16](https://github.com/w4bo/AA2627-unibo-bdcp/issues/16)) ([ac2151e](https://github.com/w4bo/AA2627-unibo-bdcp/commit/ac2151ee621061d80f6beb69970a493f22556970))
+* **deps:** update dependency neo4j to v6.3.1 ([#23](https://github.com/w4bo/AA2627-unibo-bdcp/issues/23)) ([eda1965](https://github.com/w4bo/AA2627-unibo-bdcp/commit/eda1965fe4036fbb73bcdf37436ff0ff41f25204))
+* **deps:** update dependency notebook to v7.6.2 ([#17](https://github.com/w4bo/AA2627-unibo-bdcp/issues/17)) ([401584c](https://github.com/w4bo/AA2627-unibo-bdcp/commit/401584cd718bf209671b1ff6502408a7b62c0641))
+* **deps:** update dependency notebook to v7.6.3 ([#30](https://github.com/w4bo/AA2627-unibo-bdcp/issues/30)) ([eeb95d4](https://github.com/w4bo/AA2627-unibo-bdcp/commit/eeb95d4f1b3b03c9a692a06ca77857b7d8e49b5c))
+* **deps:** update dependency pandas to v3.0.6 ([#18](https://github.com/w4bo/AA2627-unibo-bdcp/issues/18)) ([e2da7a9](https://github.com/w4bo/AA2627-unibo-bdcp/commit/e2da7a9e2c55f655abfa01f0752f01fb7fdf8337))
+* **deps:** update dependency prov to v2.5.3 ([#12](https://github.com/w4bo/AA2627-unibo-bdcp/issues/12)) ([ce797cf](https://github.com/w4bo/AA2627-unibo-bdcp/commit/ce797cf4a2a4bf91f81618f49ff5bcb31972a1d1))
+* **deps:** update dependency prov to v3 ([#19](https://github.com/w4bo/AA2627-unibo-bdcp/issues/19)) ([a697765](https://github.com/w4bo/AA2627-unibo-bdcp/commit/a697765f60516466c2741a97c3eb388f752eb5f4))
+* **deps:** update dependency pymongo to v4.18.1 ([#24](https://github.com/w4bo/AA2627-unibo-bdcp/issues/24)) ([d5cad9a](https://github.com/w4bo/AA2627-unibo-bdcp/commit/d5cad9ac56b895b3179afc3c81146ed30b8cfb9e))
+* **deps:** update dependency pymongo to v4.18.2 ([#32](https://github.com/w4bo/AA2627-unibo-bdcp/issues/32)) ([b326c2d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/b326c2dc65010df62e073d695089f88e1760bd5c))
+* **deps:** update dependency scikit-learn to v1.9.1 ([#26](https://github.com/w4bo/AA2627-unibo-bdcp/issues/26)) ([51de8be](https://github.com/w4bo/AA2627-unibo-bdcp/commit/51de8beafb896f0e7c9318921b956ef7a8f5734d))
+* **deps:** update dependency scipy to v1.18.1 ([#9](https://github.com/w4bo/AA2627-unibo-bdcp/issues/9)) ([a3a5417](https://github.com/w4bo/AA2627-unibo-bdcp/commit/a3a54177a82bd1043907f2325c774cb07cb63760))
+* **deps:** update dependency traitlets to v5.16.1 ([#20](https://github.com/w4bo/AA2627-unibo-bdcp/issues/20)) ([eed5892](https://github.com/w4bo/AA2627-unibo-bdcp/commit/eed5892049216e7086735fe08f73379b3375c21e))
+* **deps:** update node.js to 24.21 ([#10](https://github.com/w4bo/AA2627-unibo-bdcp/issues/10)) ([000d914](https://github.com/w4bo/AA2627-unibo-bdcp/commit/000d9148083155f03399663e15b9470dfcaf5969))
+* **deps:** update slides/refs digest to c19f647 ([#31](https://github.com/w4bo/AA2627-unibo-bdcp/issues/31)) ([b20ce60](https://github.com/w4bo/AA2627-unibo-bdcp/commit/b20ce60a697b56ad6c3b807520e869a806cad0cd))
+* **deps:** update slides/utils digest to d04452e ([#25](https://github.com/w4bo/AA2627-unibo-bdcp/issues/25)) ([3998237](https://github.com/w4bo/AA2627-unibo-bdcp/commit/399823785f44aa7fe748897dff98a46b9c6f3d17))
+* **deps:** update w4bo/python docker tag to v1.0.7 ([#1](https://github.com/w4bo/AA2627-unibo-bdcp/issues/1)) ([c8c7661](https://github.com/w4bo/AA2627-unibo-bdcp/commit/c8c76615ee4cdccad96ad4291809c06e37db92f1))
+* **deps:** update w4bo/quarto-slides docker tag to v1.0.31 ([#2](https://github.com/w4bo/AA2627-unibo-bdcp/issues/2)) ([7912049](https://github.com/w4bo/AA2627-unibo-bdcp/commit/7912049b5204c1d7f8ae606c97818887df09e687))
+
+### Bug Fixes
+
+* working on the introduction ([9672e46](https://github.com/w4bo/AA2627-unibo-bdcp/commit/9672e46dbbd715c2cb8aec5020a9c04332817396))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6.5.0 ([#14](https://github.com/w4bo/AA2627-unibo-bdcp/issues/14)) ([bb77b5f](https://github.com/w4bo/AA2627-unibo-bdcp/commit/bb77b5fb332a287bab910e4fbf175a0948bad8cc))
+* **deps:** update actions/setup-node action to v7 ([#15](https://github.com/w4bo/AA2627-unibo-bdcp/issues/15)) ([a312839](https://github.com/w4bo/AA2627-unibo-bdcp/commit/a312839491ab81a401e0249529bd3fd206a4b417))
+* **deps:** update dependency ubuntu to v26 ([#29](https://github.com/w4bo/AA2627-unibo-bdcp/issues/29)) ([26b6066](https://github.com/w4bo/AA2627-unibo-bdcp/commit/26b6066d52bb187ef1bc085fc89c361c09b58c0f))
+* **deps:** update jamesives/github-pages-deploy-action action to v4.9.0 ([#21](https://github.com/w4bo/AA2627-unibo-bdcp/issues/21)) ([d60aab0](https://github.com/w4bo/AA2627-unibo-bdcp/commit/d60aab044b2fe573cd5473651fe95a04372a1a6a))
+
 ## [1.0.2](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.1...1.0.2) (2026-09-11)
 
 ### Bug Fixes
