@@ -1,3 +1,13 @@
+## [1.0.4](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.3...1.0.4) (2026-09-28)
+
+### Bug Fixes
+
+* working on the introduction ([b37691f](https://github.com/w4bo/AA2627-unibo-bdcp/commit/b37691f48a06321454072a539d300b15c395c312))
+* working on the introduction ([ac5024b](https://github.com/w4bo/AA2627-unibo-bdcp/commit/ac5024b0ad04868da955e99eb83fb46d61093c34))
+* working on the introduction ([595383d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/595383d43eb6f206b3dd226ab55b25a1ecf83979))
+* working on the introduction ([f807efb](https://github.com/w4bo/AA2627-unibo-bdcp/commit/f807efbf8642b9c39715d25fa1224febb84c8d04))
+* working on the introduction ([01b2947](https://github.com/w4bo/AA2627-unibo-bdcp/commit/01b2947b48d1024d97acd23353be41d86f6451ae))
+
 ## [1.0.3](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.2...1.0.3) (2026-09-28)
 
 ### Dependency updates
