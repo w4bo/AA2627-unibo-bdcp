@@ -21,10 +21,9 @@ I work on:
 - Big data, databases, and machine learning
 - Precision agriculture and spatio-temporal analytics
 
-[BIG - Business Intelligence Group](https://big.csr.unibo.it/)
+[BIG - Business Intelligence Group](https://big.csr.unibo.it/) with Prof. Golfarelli and Prof. Gallinucci
 
 - <img src="./img/biglogo.svg" class="title-icon" /> [https://big-unibo.github.io](https://big-unibo.github.io)
-- With Prof. Golfarelli and Prof. Gallinucci
 - Thesis projects: [https://big-unibo.github.io/thesis/](https://big-unibo.github.io/thesis/)
 
 <img src="./img/unibo.svg" style="box-shadow: none !important; position: absolute !important; top: -250px !important; right: -250px !important; ; max-height: 500px !important; max-width: 500px !important" />
