@@ -13,7 +13,7 @@ format:
     progress: true
     slide-number: true
     default-image-extension: ""
-    footer: "Matteo Francia - Big Data and Cloud Platforms (Module 2) - A.Y. 2026/27"
+    footer: "M. Francia - BDCP (Module II) - A.Y. 2026/27"
     # navigation-mode: vertical
     controls-layout: bottom-right
     controls-tutorial: true
@@ -46,7 +46,7 @@ format:
       caption: none
 
 author: Matteo Francia <br/> DISI --- University of Bologna <br/> m.francia@unibo.it
-title: Big Data and Cloud Platforms (Module 2)
+title: Big Data and Cloud Platforms (Module II)
 bibliography:
   - refs/refs.bib
 

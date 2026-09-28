@@ -12,8 +12,9 @@ subtitle: Module 2 (Cloud Platforms)
 
 I teach:
 
-- [DTM] Big Data and Cloud Platforms (Module 2)
-- [DTM] Machine Learning and Data Mining (Module 2)
+- [DTM] Big Data and Cloud Platforms (Module II)
+- [DTM] Machine Learning and Data Mining (Module I)
+- [CSE] Data-Centric AI (Module II)
 
 I work on:
 
@@ -71,7 +72,7 @@ The exam covers all **theoretical** and **practical** aspects of the course.
 
 The exam is not a technical troubleshooting session.
 
-- However, you must be able to explain the concepts, motivate design choices, and connect the dots
+- However, you should be able to explain the concepts, motivate design choices, and connect the dots
 
 No scheduled dates: come **when you are ready**.
 
