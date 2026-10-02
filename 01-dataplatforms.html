@@ -364,7 +364,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="using-yolo-for-metadata-extraction" class="title-slide slide level1 center">
 <h1>Using YOLO for Metadata Extraction</h1>
-<p>YOLO (You Only Look Once) is a state-of-the-art object detection system.</p>
+<p>YOLO (You Only Look Once) is an object detection system.</p>
 <ul>
 <li>Automatically detects objects in images<br>
 </li>
@@ -385,49 +385,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="what-each-cell-predicts" class="title-slide slide level1 center">
-<h1>What Each Cell Predicts</h1>
-<p>For each bounding box:</p>
-<ul>
-<li><strong>Coordinates:</strong> (x, y, width, height)<br>
-</li>
-<li><strong>Confidence:</strong> probability an object exists × IoU with ground truth<br>
-</li>
-<li><strong>Class probabilities:</strong> likelihood of each object class</li>
-</ul>
-</section>
 
-<section id="how-bounding-boxes-are-calculated" class="title-slide slide level1 center">
-<h1>How Bounding Boxes Are Calculated</h1>
-<ul>
-<li>Each cell predicts offsets relative to the cell<br>
-</li>
-<li>Uses <strong>anchor boxes</strong> for different object sizes<br>
-</li>
-<li>Confidence score = Pr(object) × IOU(predicted box, ground truth)</li>
-</ul>
-</section>
 
-<section id="yolo-neural-network" class="title-slide slide level1 center">
-<h1>YOLO Neural Network</h1>
-<ul>
-<li><strong>CNN backbone</strong> extracts features from the image<br>
-</li>
-<li><strong>Detection layers</strong> predict boxes and class probabilities for all grid cells<br>
-</li>
-<li>Outputs a single tensor containing all predictions</li>
-</ul>
-</section>
 
-<section id="post-processing-predictions" class="title-slide slide level1 center">
-<h1>Post-Processing Predictions</h1>
-<ol type="1">
-<li><strong>Thresholding:</strong> Remove boxes with confidence &lt; threshold<br>
-</li>
-<li><strong>Non-Maximum Suppression (NMS):</strong> Remove overlapping boxes that predict the same object</li>
-</ol>
-<p>Result: clean set of detected objects with labels, boxes, and confidence</p>
-</section>
+
+
+
+
 
 <section id="yolo-versions" class="title-slide slide level1 center">
 <h1>YOLO Versions</h1>
@@ -1192,38 +1156,30 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="problem-how-can-we-manage-a-datalake" class="title-slide slide level1 center">
 <h1><img src="./img/cs.svg" class="title-icon"> <strong>Problem</strong>: how can we manage a datalake?</h1>
-<p><strong>Context</strong>:</p>
+<p>You are working for a consultancy company specialized in data engineering (this is a typical use cases of internships or thesis projects).</p>
 <ul>
-<li>You are working for a consultancy company specialized in data engineering.
-<ul>
-<li>This is a typical use cases of internships or thesis projects in DTM or ISI.</li>
-</ul></li>
 <li>Your client is a large enterprise that has accumulated massive amounts of heterogeneous data across departments.</li>
 </ul>
-<pre><code>            ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-            │                                                DATA LAKE                                                        │
-            └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-            ┌──────────────────────────┐    ┌────────────────────────────┐    ┌───────────────────────────┐   ┌───────────────┐
-            │  bucket: dept-a          │    │  bucket: dept-b            │    │  bucket: shared           │   │  bucket: ...  │
-            │  (sales)                 │    │  (support)                 │    │  (reference)              │   │               │
-            │                          │    │                            │    │                           │   │               │
-            │  /customers/             │    │  /customers/               │    │  /geo/                    │   │               │
-            │   ├─ customers_part1.csv |    │   ├─ customers_v2.json     │    │   ├─ countries.xlsx       │   │               │
-            │   ├─ customers_part2.csv |    │   └─ preferences.csv       │    │   └─ continents.parquet   │   │               │
-            │   └─ README.md           │    │                            │    │                           │   │               │
-            │                          │    │  /tickets/                 │    │  /products/               │   │               │
-            │  /sales/                 │    │   ├─ tickets_2023.csv      │    │   ├─ products_v1.json     │   │               │
-            │   ├─ sales_part1.csv     │    │   └─ tickets_2024.csv      │    │   └─ products_v2.json     │   │               │
-            │   ├─ sales_part2.csv     │    │                            │    │                           │   │               │
-            │   ├─ sales_part3.csv     │    │  /exports/                 │    │  /dictionaries/           │   │               │
-            │   └─ sales_part4.csv     │    │   └─ customer_dump.parquet |    |   └─ country_codes.csv    │   |               │
-            │                          │    │                            │    │                           │   │               │
-            │  /.../                   │    │  /.../                     │    │  /.../                    │   │               │
-            │   └─ ...                 │    │   └─ ...                   │    |    └─ ...                 |   |               |  
-            │                          │    │                            │    │                           │   │               │
-            │  /logs/                  │    │  /logs/                    │    │  /schemas/                │   │               │
-            │   └─ ingestion.log       │    │   └─ api_events.log        │    │   └─ inferred_schema.yaml |   │               |
-            └──────────────────────────┘    └────────────────────────────┘    └───────────────────────────┘   └───────────────┘</code></pre>
+<pre><code>    ┌─────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                       DATA LAKE                                         │
+    ┌──────────────────────────┐  ┌────────────────────────────┐  ┌───────────────────────────┐
+    │  bucket: dept-a          │  │  bucket: dept-b            │  │  bucket: shared           │
+    │  (sales)                 │  │  (support)                 │  │  (reference)              │
+    │                          │  │                            │  │                           │
+    │  /customers/             │  │  /customers/               │  │  /geo/                    │
+    │   ├─ customers_part1.csv |  │   ├─ customers_v2.json     │  │   ├─ countries.xlsx       │
+    │   ├─ customers_part2.csv |  │   └─ preferences.csv       │  │   └─ continents.parquet   │
+    │   └─ README.md           │  │                            │  │                           │
+    │                          │  │  /tickets/                 │  │  /products/               │
+    │  /sales/                 │  │   ├─ tickets_2023.csv      │  │   ├─ products_v1.json     │
+    │   ├─ sales_part1.csv     │  │   └─ tickets_2024.csv      │  │   └─ products_v2.json     │
+    │   ├─ sales_part2.csv     │  │                            │  │                           │
+    │   ├─ sales_part3.csv     │  │  /exports/                 │  │  /dictionaries/           │
+    │   └─ sales_part4.csv     │  │   └─ customer_dump.parquet |  |   └─ country_codes.csv    │
+    │                          │  │                            │  │                           │
+    │  /logs/                  │  │  /logs/                    │  │  /schemas/                │
+    │   └─ ingestion.log       │  │   └─ api_events.log        │  │   └─ inferred_schema.yaml |
+    └──────────────────────────┘  └────────────────────────────┘  └───────────────────────────┘</code></pre>
 <p><strong>Objectives</strong>: assess and organize the data lake to produce unified data assets ready for downstream analytics.</p>
 </section>
 
