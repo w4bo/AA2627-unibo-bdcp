@@ -4,3 +4,6 @@
 [submodule "slides/utils"]
 	path = slides/utils
 	url = git@github.com:w4bo/slides-markdown-utils.git
+[submodule "data-governance-demo"]
+	path = data-governance-demo
+	url = git@github.com:w4bo/data-governance-demo.git

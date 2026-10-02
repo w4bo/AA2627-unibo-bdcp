@@ -46,7 +46,7 @@ Well-structured metadata enables:
 
 # Using YOLO for Metadata Extraction
 
-YOLO (You Only Look Once) is a state-of-the-art object detection system.
+YOLO (You Only Look Once) is an object detection system.
 
 - Automatically detects objects in images  
 - Provides labels, bounding boxes, and confidence scores  
@@ -58,7 +58,7 @@ YOLO (You Only Look Once) is a state-of-the-art object detection system.
 - Each grid cell is responsible for objects **whose center falls in the cell**  
 - Each cell predicts **bounding boxes + confidence + class probabilities**
 
-# What Each Cell Predicts
+# What Each Cell Predicts {visibility="hidden"}
 
 For each bounding box:
 
@@ -66,19 +66,19 @@ For each bounding box:
 - **Confidence:** probability an object exists × IoU with ground truth  
 - **Class probabilities:** likelihood of each object class
 
-# How Bounding Boxes Are Calculated
+# How Bounding Boxes Are Calculated {visibility="hidden"}
 
 - Each cell predicts offsets relative to the cell  
 - Uses **anchor boxes** for different object sizes  
 - Confidence score = Pr(object) × IOU(predicted box, ground truth)
 
-# YOLO Neural Network
+# YOLO Neural Network {visibility="hidden"}
 
 - **CNN backbone** extracts features from the image  
 - **Detection layers** predict boxes and class probabilities for all grid cells  
 - Outputs a single tensor containing all predictions
 
-# Post-Processing Predictions
+# Post-Processing Predictions {visibility="hidden"}
 
 1. **Thresholding:** Remove boxes with confidence < threshold  
 2. **Non-Maximum Suppression (NMS):** Remove overlapping boxes that predict the same object  

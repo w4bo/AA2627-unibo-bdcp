@@ -1,5 +1,6 @@
 ---
-title: Module II (Cloud Platforms)
+title: Big Data and Cloud Platforms (Module II)
+subtitle: ""
 ---
 
 # Welcome!

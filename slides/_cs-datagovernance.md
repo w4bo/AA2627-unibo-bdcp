@@ -1,36 +1,30 @@
 # <img src="./img/cs.svg" class="title-icon" /> **Problem**: how can we manage a datalake?
 
-**Context**:
+You are working for a consultancy company specialized in data engineering (this is a typical use cases of internships or thesis projects).
 
-- You are working for a consultancy company specialized in data engineering.
-    - This is a typical use cases of internships or thesis projects in DTM or ISI.
 - Your client is a large enterprise that has accumulated massive amounts of heterogeneous data across departments.
 
 ```
-            ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-            │                                                DATA LAKE                                                        │
-            └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-            ┌──────────────────────────┐    ┌────────────────────────────┐    ┌───────────────────────────┐   ┌───────────────┐
-            │  bucket: dept-a          │    │  bucket: dept-b            │    │  bucket: shared           │   │  bucket: ...  │
-            │  (sales)                 │    │  (support)                 │    │  (reference)              │   │               │
-            │                          │    │                            │    │                           │   │               │
-            │  /customers/             │    │  /customers/               │    │  /geo/                    │   │               │
-            │   ├─ customers_part1.csv |    │   ├─ customers_v2.json     │    │   ├─ countries.xlsx       │   │               │
-            │   ├─ customers_part2.csv |    │   └─ preferences.csv       │    │   └─ continents.parquet   │   │               │
-            │   └─ README.md           │    │                            │    │                           │   │               │
-            │                          │    │  /tickets/                 │    │  /products/               │   │               │
-            │  /sales/                 │    │   ├─ tickets_2023.csv      │    │   ├─ products_v1.json     │   │               │
-            │   ├─ sales_part1.csv     │    │   └─ tickets_2024.csv      │    │   └─ products_v2.json     │   │               │
-            │   ├─ sales_part2.csv     │    │                            │    │                           │   │               │
-            │   ├─ sales_part3.csv     │    │  /exports/                 │    │  /dictionaries/           │   │               │
-            │   └─ sales_part4.csv     │    │   └─ customer_dump.parquet |    |   └─ country_codes.csv    │   |               │
-            │                          │    │                            │    │                           │   │               │
-            │  /.../                   │    │  /.../                     │    │  /.../                    │   │               │
-            │   └─ ...                 │    │   └─ ...                   │    |    └─ ...                 |   |               |  
-            │                          │    │                            │    │                           │   │               │
-            │  /logs/                  │    │  /logs/                    │    │  /schemas/                │   │               │
-            │   └─ ingestion.log       │    │   └─ api_events.log        │    │   └─ inferred_schema.yaml |   │               |
-            └──────────────────────────┘    └────────────────────────────┘    └───────────────────────────┘   └───────────────┘
+    ┌─────────────────────────────────────────────────────────────────────────────────────────┐
+    │                                       DATA LAKE                                         │
+    ┌──────────────────────────┐  ┌────────────────────────────┐  ┌───────────────────────────┐
+    │  bucket: dept-a          │  │  bucket: dept-b            │  │  bucket: shared           │
+    │  (sales)                 │  │  (support)                 │  │  (reference)              │
+    │                          │  │                            │  │                           │
+    │  /customers/             │  │  /customers/               │  │  /geo/                    │
+    │   ├─ customers_part1.csv |  │   ├─ customers_v2.json     │  │   ├─ countries.xlsx       │
+    │   ├─ customers_part2.csv |  │   └─ preferences.csv       │  │   └─ continents.parquet   │
+    │   └─ README.md           │  │                            │  │                           │
+    │                          │  │  /tickets/                 │  │  /products/               │
+    │  /sales/                 │  │   ├─ tickets_2023.csv      │  │   ├─ products_v1.json     │
+    │   ├─ sales_part1.csv     │  │   └─ tickets_2024.csv      │  │   └─ products_v2.json     │
+    │   ├─ sales_part2.csv     │  │                            │  │                           │
+    │   ├─ sales_part3.csv     │  │  /exports/                 │  │  /dictionaries/           │
+    │   └─ sales_part4.csv     │  │   └─ customer_dump.parquet |  |   └─ country_codes.csv    │
+    │                          │  │                            │  │                           │
+    │  /logs/                  │  │  /logs/                    │  │  /schemas/                │
+    │   └─ ingestion.log       │  │   └─ api_events.log        │  │   └─ inferred_schema.yaml |
+    └──────────────────────────┘  └────────────────────────────┘  └───────────────────────────┘
 ```
 
 **Objectives**: assess and organize the data lake to produce unified data assets ready for downstream analytics.
