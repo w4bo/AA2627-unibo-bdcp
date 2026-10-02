@@ -2,6 +2,20 @@
 title: Towards data platforms
 ---
 
+# Roadmap
+
+Today's question:
+
+> Why did databases evolve into data platforms?
+
+We will move through the main architectural pressures:
+
+- **Operational data**: databases and OLTP
+- **Analytical data**: DWHs and OLAP
+- **Heterogeneous data**: NoSQL and data lakes
+- **Unified analytics**: lakehouses
+- **Managed complexity**: governance, metadata, fabric, mesh, and DataOps
+
 # How did we get here?
 
 **Data-Driven Innovation**
@@ -23,13 +37,13 @@ title: Towards data platforms
 
 - Use of technologies such as machine learning and AI to assist with data preparation, insight generation, and insight explanation to augment how people explore and analyze data
 
-[https://www.gartner.com/en/information-technology/glossary](https://www.gartner.com/en/information-technology/glossary) (accessed 2022-08-01)
+[https://www.gartner.com/en/information-technology/glossary](https://www.gartner.com/en/information-technology/glossary)
 
 # How did we get here?
 
 ![From descriptive to prescriptive analytics](img/slides6.png)
 
-# Data platform
+# Data platform: why storage is not enough
 
 Companies are collecting tons of data to enable advanced analytics.
 
@@ -42,7 +56,7 @@ Where are we _collecting/processing_ data?
 - Getting _value_ from data _is not_ (only) a matter of _storage_
 - Need integrated and multilevel analytical skills and techniques
 
-# Data platform
+# Data platform: value needs context
 
 > "It is a capital mistake to theorize before one has data. Insensibly, one begins to twist the facts to suit theories, instead of theories to suit facts."
 >
@@ -60,7 +74,7 @@ Getting _value_ from data _is not_ (only) a matter of _storage_
 
 # From databases to data platforms
 
-# Data platform
+# Data platform: what is a database?
 
 ::::{.columns}
 :::{.column width=50%}
@@ -77,7 +91,7 @@ Getting _value_ from data _is not_ (only) a matter of _storage_
 :::
 ::::
 
-# Data platform
+# Data platform: operational data
 
 At the beginning, computer science was seen as a *subsidiary discipline* that makes information management *faster* and *cheaper*
 
@@ -92,7 +106,7 @@ The main goal of databases in companies has been that of storing **operational d
 - "Online" refers to the fact that such systems are expected to respond to user requests and process them in real-time.
 - Large number of database transactions (writing and reading data) in real-time
 
-# Data platform
+# Data platform: decision support
 
 An exponential increase in operational data has made computers the only tools suitable for *decision-making performed by business users*
 
@@ -105,7 +119,7 @@ The role of computer science in companies has radically changed since the early 
 
 # Problem: how do we manage **data heterogeneity**?
 
-# Data platform
+# Data platform: schemaless data
 
 ::::{.columns}
 :::{.column width=50%}
@@ -125,7 +139,7 @@ The role of computer science in companies has radically changed since the early 
 
 # Problem: how do we transform data into **actionable business insights**?
 
-# Data platform
+# Data platform: from big data to small data
 
 *Big Data* must be transformed into *Small Data* so that it can be exploited for decision-making purposes
 
@@ -134,7 +148,7 @@ The role of computer science in companies has radically changed since the early 
 
 ![Big vs small data](img/phdslides_72.jpg)
 
-# Data platform
+# Data platform: analytical scenario
 
 Scenario: 
 
@@ -143,15 +157,15 @@ Scenario:
 
 ![Typical scenario](img/pre-dwh.svg)
 
-# Data platform
+# Data platform: data warehouse
 
 ![Data Warehouse](img/dwh.svg)
 
-# Data platform
+# Data platform: platform generations
 
 ![Evolving generations of data platforms](img/slides26a.png)
 
-# Data platform 
+# Data platform: DWH definition
 
 ::::{.columns}
 :::{.column width=50%}
@@ -168,7 +182,7 @@ Scenario:
 :::
 ::::
 
-# Data platform
+# Data platform: multidimensional analysis
 
 A DWH is a collection of data that supports decision-making processes. It provides the following features:
 
@@ -187,7 +201,7 @@ The **multidimensional model** is the key for representing and querying informat
 
 - Interactive sessions of analysis reading large amounts of data. 
 
-# Data platform
+# Data platform: OLAP roll up
 
 Querying the cube with OLAP operators: *roll up*
 
@@ -205,7 +219,7 @@ Querying the cube with OLAP operators: *roll up*
 :::
 ::::
 
-# Data platform
+# Data platform: OLAP drill down
 
 Querying the cube with OLAP operators: *drill down*
 
@@ -222,7 +236,7 @@ Querying the cube with OLAP operators: *drill down*
 :::
 ::::
 
-# Data platform
+# Data platform: dimensional fact model
 
 The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphical conceptual model for DWH design, devised to:
 
@@ -235,7 +249,7 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 
 ![DFM](img/cube-dfm.svg)
 
-# Data platform
+# Data platform: DFM to ER
 
 ::::{.columns}
 :::{.column width=50%}
@@ -246,7 +260,7 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 :::{.column width=50%}
 
 :::{.fragment}
-![Corresponding Entity-Relationsip representation [@DBLP:conf/hicss/GolfarelliMR98]](img/cube-dfm.png)
+![Corresponding Entity-Relationship representation [@DBLP:conf/hicss/GolfarelliMR98]](img/cube-dfm.png)
 :::
 :::
 ::::
@@ -264,11 +278,11 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 | Storage | Gigabytes (GB) | Terabytes (TB) / Petabytes (PB) |
 | Users | Many | Few |
 
-# Data platform
+# Data platform: platform generations
 
 ![Evolving generations of data platforms](img/slides26b.png)
 
-# Data platform
+# Data platform: data lake definition
 
 ::::{.columns}
 :::{.column width=50%}
@@ -285,11 +299,11 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 :::
 ::::
 
-# Data platform
+# Data platform: data lake architecture
 
 ![Data lake](img/26.svg)
 
-# Data platform
+# Data platform: data lake limitations
 
 The data lake started with the Apache Hadoop movement, using the Hadoop File System (HDFS) for cheap storage
 
@@ -324,7 +338,7 @@ It is often said that the *lake* easily turns into a *swamp*
 | Users | Business analysts | Data scientists, developers, and business analysts |
 | Analytics | Batch reporting, BI, and visualizations | Machine learning, predictive analytics, data discovery, and profiling. |
 
-# Data platform
+# Data platform: two-tier architecture
 
 A two-tier data lake + DWH architecture is dominant in the industry
 
@@ -336,7 +350,7 @@ While the data lake and DWH architecture is ostensibly cheap, a two-tier archite
 
 - *Problems*?
 
-# Data platform
+# Data platform: two-tier limitations
 
 (Some) main problems:
 
@@ -345,10 +359,10 @@ While the data lake and DWH architecture is ostensibly cheap, a two-tier archite
   - *Data staleness*. The data in the DWH is stale compared to that of the data lake, with new data frequently taking days to load
 - *Limited support for advanced analytics*.
   - Businesses want to ask predictive questions using their DWHs
-  - Machine learning systems does not work well on (directly) top of DWHs
+  - Machine learning systems do not work well directly on top of DWHs
 - *Process large datasets using complex non-SQL code*
 
-# Data platform
+# Data platform: towards lakehouses
 
 ![Evolving generations of data platforms](img/slides26.png)
 
@@ -379,7 +393,7 @@ Key technologies used to implement Data Lakehouses
 
 [https://www.databricks.com/glossary/data-lakehouse](https://www.databricks.com/glossary/data-lakehouse)
 
-# Data lakehouse
+# Data lakehouse: main features
 
 Main features:
 
@@ -394,7 +408,7 @@ Challenges:
   - Storing hot data on fast devices such as SSDs, maintaining statistics, building efficient indexes, etc.
 - In a Lakehouse it is not possible to change the format, but it is possible to implement other optimizations that leave the data files unchanged
 
-# Data lakehouse
+# Data lakehouse: metadata challenges
 
 **Challenges:**
 
@@ -421,7 +435,7 @@ Challenges:
 :::
 ::::
 
-# Data lakehouse
+# Data lakehouse: comparison
 
 |  | Data Warehouse | Data Lake | Data Lakehouse |
 |:-:|:-:|:-:|:-:|
@@ -434,7 +448,7 @@ Challenges:
 | Scalability | Expensive at scale | Scales cheaply for any data type | Scales cheaply for any data type |
 | Use case | BI | Machine learning | Unified for BI and ML |
 
-# Data platform
+# Data platform: data hub
 
 *Data lakes (or lakehouses)* have increasingly taken the role of *data hubs*
 
@@ -451,7 +465,7 @@ Challenges:
 - DL is often replaced by "data platform" or "data ecosystem"
 - Encompass systems supporting data-intensive storage, computation, analysis
 
-# Data platform
+# Data platform: final definition
 
 > **Data platform**
 >
@@ -467,7 +481,7 @@ Rationale: relieve users from the complexity of administration and provision
 - Not only technological skills, but also privacy, access control, etc.
 - Users should only focus on functional aspects
 
-# Data platform
+# Data platform: governance pressure
 
 Are we done? No!
 
@@ -481,6 +495,8 @@ Are we done? No!
 ![Data governance](img/data-gov/dgvsds.jpg)
 
 # Managing data platforms
+
+Each governance capability answers a practical platform question.
 
 - *Tracking data pipelines*: Data provenance
 - *Tracking changes*: Data versioning
@@ -519,11 +535,13 @@ A *data steward* is a role that ensures that data governance processes are follo
 
 # Data governance: data profiling
 
-# Data profiling
+Can we understand the content, structure, and quality of a dataset before using it?
+
+# Data profiling: analysis vs profiling
 
 ![Data profiling](img/data-analysis-vs-profiling.png)
 
-# Data profiling
+# Data profiling: definition
 
 ::::{.columns}
 :::{.column width=60%}
@@ -604,7 +622,7 @@ df.corr(method='pearson', numeric_only=True)
 > | petal length (cm) |            0.862175 |          -0.432089 |            1        |           0.962577 |
 > | petal width (cm)  |            0.80148  |          -0.369509 |            0.962577 |           1        |
 
-# Data profiling
+# Data profiling: computational cost
 
 The results of data profiling are _computationally heavy_ to discover
 
@@ -619,7 +637,7 @@ The results of data profiling are _computationally heavy_ to discover
 | 1 | 1 | 2 | 2 |
 | 1 | 2 | 1 | 4 |
 
-# Data profiling
+# Data profiling: column groups
 
 ::::{.columns}
 :::{.column width=50%}
@@ -646,7 +664,7 @@ Given a table with four columns $\{w, x, y, z\}$
 - Extracting the relationships among all possible groups of columns generalizes to $\sum_{n=1}^{|C|}\binom{|C|}{n}=2^{|C|}−1$ groups
     - 3 columns → 7 groups, 4 columns → 15 groups, 5 columns → 31 groups, 10 columns → 1023 groups, ...
 
-# Data profiling
+# Data profiling: use cases
 
 Use cases
 
@@ -686,6 +704,8 @@ No need to access `R.a`, `min(R.a) >= 10`
 
 # Data governance: data provenance
 
+Can we explain where data came from and which transformations produced it?
+
 # Data provenance [@herschel2017survey]
 
 > **Provenance** (also referred to as lineage, pedigree, parentage, genealogy)
@@ -714,7 +734,7 @@ Examples of use cases [@simmhan2005survey]
 :::
 ::::
 
-# Data provenance
+# Data provenance: PROV model
 
 Provenance is a graph, for which we have a standard: [PROV-DM](https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/) [@moreau2022provenance]
 
@@ -743,7 +763,7 @@ _Agent_
 :::
 ::::
 
-# Data provenance
+# Data provenance: graph analysis
 
 ::::{.columns}
 :::{.column width=70%}
@@ -763,11 +783,11 @@ Measures of centrality
 :::
 ::::
 
-# Data provenance 
+# Data provenance: characteristics
 
 ![Characteristics of data provenance [@simmhan2005survey]](img/slides15.png)
 
-# Data provenance
+# Data provenance: granularity
 
 Granularity [@simmhan2005survey]
 
@@ -849,7 +869,7 @@ Choosing a granularity is the *result of a trade-off between accuracy and comput
 * Storing only the name and the version of a clustering algorithm enables an approximate reproducibility of the results
 * Storing all its parameters makes this functionality much more accurate
 
-# Data provenance
+# Data provenance: query types
 
 Queries [@ikeda2009data]
 
@@ -860,7 +880,7 @@ Queries [@ikeda2009data]
 
 ![Fine grained](img/finegrained.png)
 
-# Data provenance
+# Data provenance: use cases
 
 Use cases for data provenance.
 
@@ -874,7 +894,9 @@ Use cases for data provenance.
 
 # Data governance: data versioning
 
-# Data versioning
+Can we reproduce an analysis by recovering the exact state of code, models, and data?
+
+# Data versioning: definition
 
 ::::{.columns}
 :::{.column width=50%}
@@ -899,7 +921,7 @@ However, data pipelines are not only about code but also about
 :::
 ::::
 
-# Data versioning
+# Data versioning: CRUD operations
 
 Support CRUD (Create, Read, Update, Delete) operations with versions.
 
@@ -927,7 +949,9 @@ What about updating?
 
 # Data governance: data compression
 
-# Compression
+Can we reduce storage and scan costs without losing the information needed by downstream tasks?
+
+# Compression: definition
 
 **Data compression** is the process of encoding data using fewer bits than the original representation
 
@@ -936,11 +960,11 @@ What about updating?
 - *Lossy*: reduces bits by removing less important information
   - Examples?
 
-# Compression
+# Compression: Parquet
 
 ![Data compression](img/parquet.png)
 
-# Compression
+# Compression: summarization
 
 ::::{.columns}
 :::{.column width=60%}
@@ -983,6 +1007,8 @@ What about updating?
 
 # Data governance: entity resolution
 
+Can we recognize when different records refer to the same real-world entity?
+
 # Entity resolution
 
 Entity resolution [@papadakis2020blocking], also known as entity matching or linking
@@ -1005,7 +1031,9 @@ Entity resolution [@papadakis2020blocking], also known as entity matching or lin
 
 # Data governance: data catalog
 
-# Data catalog
+Can users discover, understand, and request access to data assets without inspecting raw data first?
+
+# Data catalog: definition
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1014,7 +1042,7 @@ A **data catalog** is an organized inventory of the company's data [@olesen2023e
 
 - The data catalog provides an overview at a metadata level only
 - No actual data values are exposed.
-- Everyone see everything without fear of exposing confidential or sensitive data.
+- Everyone sees the metadata they need without exposing confidential or sensitive data.
 
 :::
 :::{.column width=40%}
@@ -1024,7 +1052,7 @@ A **data catalog** is an organized inventory of the company's data [@olesen2023e
 :::
 ::::
 
-# Data catalog
+# Data catalog: domains
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1067,7 +1095,7 @@ Metadata is organized into **domains**.
 
 Check Colab
 
-<a href="https://colab.research.google.com/github/w4bo/AA2526-unibo-bigdataandcloudplatforms/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://colab.research.google.com/github/w4bo/AA2627-unibo-bdcp/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 # <img src="./img/cs.svg" class="title-icon" /> Case study: data catalog {background-color="#121011"}
 
@@ -1077,17 +1105,17 @@ Check Colab
 
 # Data governance: meta-metadata management
 
-# Data platform
+# Data platform: meta-metadata
 
 Are we done? No!
 
 - Metadata can become bigger than the data itself
 
-We need meta meta-data (or models)...
+We need meta-metadata (or models)...
 
 - ... chasing our own tails
 
-Data management is still a (research) issue in data platforms.
+Data management is still a research issue in data platforms.
 
 # Data platform {visibility="hidden"}
 
@@ -1104,7 +1132,7 @@ No, in a data platform, you also need to manage (streams of) operational data an
 
 # How do we build data platforms?
 
-# Data fabric
+# Data fabric: definition
 
 **Data fabric** is a "vision for data management [...] that seamlessly connects different clouds, whether they are private or public environments." ([2016](https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf))
 
@@ -1126,12 +1154,12 @@ It is a unified architecture with an integrated set of technologies and services
 
 ![Cloudera SDX](img/CDP-diagram-sm.png)
 
-# Data fabric
+# Data fabric: design concept
 
 **It is a design concept**
 
 - It optimizes data management by automating repetitive tasks
-- According to Gartner estimates, 25% of data management vendors will provide a complete framework for data fabric by 2024 - up from 5% today
+- Gartner framed data fabric as a maturing vendor framework for automating data management tasks
 
 ::::{.columns}
 :::{.column width=50%}
@@ -1148,7 +1176,7 @@ It is a unified architecture with an integrated set of technologies and services
 
 [Gartner (2021). Data fabric is key to modernizing data management](https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration)
 
-# Data fabric
+# Data fabric: capabilities
 
 * *Catalog all data*: Cover business glossary, design-time, and runtime metadata.
 * *Enable self-service capabilities*: Support data discovery, profiling, exploration, quality checks, and consumption.
@@ -1156,7 +1184,7 @@ It is a unified architecture with an integrated set of technologies and services
 * *Deliver automatic integration*: Help IT and business users with data integration, transformation, virtualization, and federation.
 * *Manage unified lifecycle*: Maintain a consistent end-to-end Data Fabric lifecycle across platforms and teams.
 
-# Data fabric
+# Data fabric: active metadata
 
 ::::{.columns}
 :::{.column width=55%}
@@ -1190,7 +1218,7 @@ It is a unified architecture with an integrated set of technologies and services
 
 [Gartner (2021). Data fabric is key to modernizing data management](https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration)
 
-# Automation through orchestration
+# Automation through orchestration: role
 
 The orchestrator is the component in charge of controlling the execution of computation activities
 
@@ -1199,7 +1227,7 @@ The orchestrator is the component in charge of controlling the execution of comp
 
 Several entities (either processes or human beings) can cover this role to activate some data processes
 
-# Automation through orchestration
+# Automation through orchestration: decisions
 
 Dynamic/condition-based behavior
 
@@ -1219,7 +1247,7 @@ Resource estimation or prediction (based on previous executions and current sett
 * Decide the optimal amount of resources required to terminate successfully while leaving sufficient resources to the other concurrent process
 * Negotiate the resources with the cluster's resource manager
 
-# Automation through orchestration
+# Automation through orchestration: resources
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1249,7 +1277,7 @@ R4 Synchronization and asynchronization
 :::
 ::::
 
-# Automation through orchestration
+# Automation through orchestration: execution guarantees
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1279,7 +1307,7 @@ R8 Monitoring and Failure-Tolerance
 :::
 ::::
 
-# Data mesh
+# Data mesh: principles
 
 Distributed data architecture under centralized governance for interoperability, enabled by a shared and harmonized self-serve data infrastructure
 
@@ -1299,7 +1327,7 @@ Distributed data architecture under centralized governance for interoperability,
 
 [Zhamak Dehghani (2021). Introduction to Data Mesh](https://www.youtube.com/watch?v=_bmYXWCxF_Q)
 
-# Data mesh
+# Data mesh: domains and data products
 
 ::::{.columns}
 :::{.column width=50%}
@@ -1336,20 +1364,20 @@ Check the seminars from HERA.
 
 # End of the case study {background-color="#121011"}
 
-# Data mesh vs data fabric
+# Data mesh vs data fabric: frameworks
 
 They are design concepts, not things.
 
 - They are not mutually exclusive
 - They are architectural frameworks, not architectures
   - The frameworks must be adapted and customized to your needs, data, processes, and terminology
-  - Gartner estimates 25% of data management vendors will provide a complete data fabric solution by 2024 - up from 5% today
+  - Vendor frameworks keep evolving, so treat product claims as implementation choices rather than definitions
 
 Alex Woodie, 2021 [https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/](https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/)
 
 Dave Wells, 2021 [https://www.eckerson.com/articles/data-architecture-complex-vs-complicated](https://www.eckerson.com/articles/data-architecture-complex-vs-complicated)
 
-# Data mesh vs data fabric
+# Data mesh vs data fabric: emphasis
 
 Both provide an architectural framework to access data across multiple technologies and platforms.
 
@@ -1369,11 +1397,11 @@ Alex Woodie, 2021 [https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-
 
 Dave Wells, 2021 [https://www.eckerson.com/articles/data-architecture-complex-vs-complicated](https://www.eckerson.com/articles/data-architecture-complex-vs-complicated)
 
-# Data mesh vs data fabric
+# Data mesh vs data fabric: visual comparison
 
 ![Data mesh vs data fabric](img/slides39.png)
 
-# Data mesh vs data fabric
+# Data mesh vs data fabric: takeaway
 
 Data Fabric and Mesh are the results of the data architecture evolution.
 
@@ -1384,7 +1412,7 @@ Takeaway:
 - Abstract the "building blocks" of such platforms
 - Let them evolve according to scalability and flexibility requirements
 
-# Data mesh
+# Data mesh: hype-cycle positioning
 
 ::::{.columns}
 :::{.column width=50%}
@@ -1401,7 +1429,7 @@ Takeaway:
 
 As new technologies and solutions mature to support a centralized approach to data access, distributed approaches like Data Mesh are expected to fall increasingly out of favor in enterprise IT.
 
-# Data mesh
+# Data mesh: hype-cycle trend
 
 ::::{.columns}
 :::{.column width=50%}
@@ -1422,7 +1450,7 @@ As new technologies and solutions mature to support a centralized approach to da
 
 <iframe allowfullscreen frameborder="0" height="100%" mozallowfullscreen src="https://app.wooclap.com/LKDKIY/questionnaires/670e89be981e282b0b69ee7c" style="min-height: 550px; min-width: 300px" width="100%"></iframe>
 
-# (Some) References
+# Further reading: architecture patterns
 
 ::::{.columns}
 :::{.column width=33%}
@@ -1441,6 +1469,12 @@ As new technologies and solutions mature to support a centralized approach to da
 
 :::
 ::::
+
+# From platform concepts to deployment
+
+So far, we have discussed what a data platform must support.
+
+Now we ask how difficult it is to deploy and operate one in practice.
 
 # Example of data platform: Hadoop-based
 
@@ -1522,7 +1556,7 @@ DevOps practices enable software development (dev) and operations (ops) teams to
 
 ![DevOps](img/slides29.png)
 
-[https://about.gitlab.com/topics/devops/](https://about.gitlab.com/topics/devops/) (accessed 2023-06-03)
+[https://about.gitlab.com/topics/devops/](https://about.gitlab.com/topics/devops/)
 
 # ... to DataOps
 
