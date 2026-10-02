@@ -1,3 +1,9 @@
+## [1.0.6](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.5...1.0.6) (2026-10-02)
+
+### Bug Fixes
+
+* working on the demo ([0d9725d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/0d9725d4fcf76cf5904424f14e79d017865f1406))
+
 ## [1.0.5](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.4...1.0.5) (2026-10-02)
 
 ### Bug Fixes
