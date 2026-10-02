@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.6...1.0.7) (2026-10-02)
+
+### Bug Fixes
+
+* improve the reading ([3a79cf6](https://github.com/w4bo/AA2627-unibo-bdcp/commit/3a79cf656592b2b2d7f771e1b67e23fda39fd3d5))
+* remove datahub, too complex for teaching ([c7e0829](https://github.com/w4bo/AA2627-unibo-bdcp/commit/c7e0829d3ae27bbc6f6f51d8e5a974a92d63208e))
+
 ## [1.0.6](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.5...1.0.6) (2026-10-02)
 
 ### Bug Fixes
