@@ -231,6 +231,22 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div>
 
 </section>
+<section id="roadmap" class="title-slide slide level1 center">
+<h1>Roadmap</h1>
+<p>Today’s question:</p>
+<blockquote>
+<p>Why did databases evolve into data platforms?</p>
+</blockquote>
+<p>We will move through the main architectural pressures:</p>
+<ul>
+<li><strong>Operational data</strong>: databases and OLTP</li>
+<li><strong>Analytical data</strong>: DWHs and OLAP</li>
+<li><strong>Heterogeneous data</strong>: NoSQL and data lakes</li>
+<li><strong>Unified analytics</strong>: lakehouses</li>
+<li><strong>Managed complexity</strong>: governance, metadata, fabric, mesh, and DataOps</li>
+</ul>
+</section>
+
 <section id="how-did-we-get-here" class="title-slide slide level1 center">
 <h1>How did we get here?</h1>
 <p><strong>Data-Driven Innovation</strong></p>
@@ -254,7 +270,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>Use of technologies such as machine learning and AI to assist with data preparation, insight generation, and insight explanation to augment how people explore and analyze data</li>
 </ul>
-<p><a href="https://www.gartner.com/en/information-technology/glossary">https://www.gartner.com/en/information-technology/glossary</a> (accessed 2022-08-01)</p>
+<p><a href="https://www.gartner.com/en/information-technology/glossary">https://www.gartner.com/en/information-technology/glossary</a></p>
 </section>
 
 <section id="how-did-we-get-here-1" class="title-slide slide level1 center">
@@ -262,8 +278,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <img data-src="img/slides6.png" class="r-stretch quarto-figure-center"><p class="caption">From descriptive to prescriptive analytics</p></section>
 
-<section id="data-platform" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-why-storage-is-not-enough" class="title-slide slide level1 center">
+<h1>Data platform: why storage is not enough</h1>
 <p>Companies are collecting tons of data to enable advanced analytics.</p>
 <ul>
 <li>Raw data is difficult to obtain, interpret, and maintain</li>
@@ -277,8 +293,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-platform-1" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-value-needs-context" class="title-slide slide level1 center">
+<h1>Data platform: value needs context</h1>
 <blockquote>
 <p>“It is a capital mistake to theorize before one has data. Insensibly, one begins to twist the facts to suit theories, instead of theories to suit facts.”</p>
 <ul>
@@ -470,8 +486,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 </section>
 
-<section id="data-platform-2" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-what-is-a-database" class="title-slide slide level1 center">
+<h1>Data platform: what is a database?</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <blockquote>
@@ -488,8 +504,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="data-platform-3" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-operational-data" class="title-slide slide level1 center">
+<h1>Data platform: operational data</h1>
 <p>At the beginning, computer science was seen as a <em>subsidiary discipline</em> that makes information management <em>faster</em> and <em>cheaper</em></p>
 <ul>
 <li>… but <em>did not create (new) profits in itself</em></li>
@@ -505,8 +521,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-platform-4" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-decision-support" class="title-slide slide level1 center">
+<h1>Data platform: decision support</h1>
 <p>An exponential increase in operational data has made computers the only tools suitable for <em>decision-making performed by business users</em></p>
 <ul>
 <li>The massive use of techniques for analyzing enterprise data made information systems a key factor to achieve business goals</li>
@@ -523,8 +539,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 </section>
 
-<section id="data-platform-5" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-schemaless-data" class="title-slide slide level1 center">
+<h1>Data platform: schemaless data</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <blockquote>
@@ -546,8 +562,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 </section>
 
-<section id="data-platform-6" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-from-big-data-to-small-data" class="title-slide slide level1 center">
+<h1>Data platform: from big data to small data</h1>
 <p><em>Big Data</em> must be transformed into <em>Small Data</em> so that it can be exploited for decision-making purposes</p>
 <ul>
 <li>Small data is data that is “small” enough for human comprehension.</li>
@@ -556,8 +572,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <img data-src="img/phdslides_72.jpg" class="r-stretch quarto-figure-center"><p class="caption">Big vs small data</p></section>
 
-<section id="data-platform-7" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-analytical-scenario" class="title-slide slide level1 center">
+<h1>Data platform: analytical scenario</h1>
 <p>Scenario:</p>
 <ul>
 <li>Large company, with several branches</li>
@@ -566,18 +582,18 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <img data-src="img/pre-dwh.svg" class="r-stretch quarto-figure-center"><p class="caption">Typical scenario</p></section>
 
-<section id="data-platform-8" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-data-warehouse" class="title-slide slide level1 center">
+<h1>Data platform: data warehouse</h1>
 
 <img data-src="img/dwh.svg" class="r-stretch quarto-figure-center"><p class="caption">Data Warehouse</p></section>
 
-<section id="data-platform-9" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-platform-generations" class="title-slide slide level1 center">
+<h1>Data platform: platform generations</h1>
 
 <img data-src="img/slides26a.png" class="r-stretch quarto-figure-center"><p class="caption">Evolving generations of data platforms</p></section>
 
-<section id="data-platform-10" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-dwh-definition" class="title-slide slide level1 center">
+<h1>Data platform: DWH definition</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <blockquote>
@@ -594,8 +610,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="data-platform-11" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-multidimensional-analysis" class="title-slide slide level1 center">
+<h1>Data platform: multidimensional analysis</h1>
 <p>A DWH is a collection of data that supports decision-making processes. It provides the following features:</p>
 <ul>
 <li>It is <em>subject-oriented</em>;</li>
@@ -617,8 +633,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-platform-12" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-olap-roll-up" class="title-slide slide level1 center">
+<h1>Data platform: OLAP roll up</h1>
 <p>Querying the cube with OLAP operators: <em>roll up</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -640,8 +656,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="data-platform-13" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-olap-drill-down" class="title-slide slide level1 center">
+<h1>Data platform: OLAP drill down</h1>
 <p>Querying the cube with OLAP operators: <em>drill down</em></p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -663,8 +679,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="data-platform-14" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-dimensional-fact-model" class="title-slide slide level1 center">
+<h1>Data platform: dimensional fact model</h1>
 <p>The <strong>Dimensional Fact Model</strong> <span class="citation" data-cites="DBLP:journals/ijcis/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli et al. 1998b</a>)</span> is a graphical conceptual model for DWH design, devised to:</p>
 <ul>
 <li>create an environment in which user queries may be formulated intuitively</li>
@@ -678,8 +694,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <img data-src="img/cube-dfm.svg" class="r-stretch quarto-figure-center"><p class="caption">DFM</p></section>
 
-<section id="data-platform-15" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-dfm-to-er" class="title-slide slide level1 center">
+<h1>Data platform: DFM to ER</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -693,7 +709,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/cube-dfm.png"></p>
-<figcaption>Corresponding Entity-Relationsip representation <span class="citation" data-cites="DBLP:conf/hicss/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli et al. 1998a</a>)</span></figcaption>
+<figcaption>Corresponding Entity-Relationship representation <span class="citation" data-cites="DBLP:conf/hicss/GolfarelliMR98">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli et al. 1998a</a>)</span></figcaption>
 </figure>
 </div>
 </div>
@@ -755,13 +771,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </table>
 </section>
 
-<section id="data-platform-16" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-platform-generations-1" class="title-slide slide level1 center">
+<h1>Data platform: platform generations</h1>
 
 <img data-src="img/slides26b.png" class="r-stretch quarto-figure-center"><p class="caption">Evolving generations of data platforms</p></section>
 
-<section id="data-platform-17" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-data-lake-definition" class="title-slide slide level1 center">
+<h1>Data platform: data lake definition</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <blockquote>
@@ -778,13 +794,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="data-platform-18" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-data-lake-architecture" class="title-slide slide level1 center">
+<h1>Data platform: data lake architecture</h1>
 
 <img data-src="img/26.svg" class="r-stretch quarto-figure-center"><p class="caption">Data lake</p></section>
 
-<section id="data-platform-19" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-data-lake-limitations" class="title-slide slide level1 center">
+<h1>Data platform: data lake limitations</h1>
 <p>The data lake started with the Apache Hadoop movement, using the Hadoop File System (HDFS) for cheap storage</p>
 <ul>
 <li><em>Schema-on-read</em> architecture</li>
@@ -867,8 +883,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </table>
 </section>
 
-<section id="data-platform-20" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-two-tier-architecture" class="title-slide slide level1 center">
+<h1>Data platform: two-tier architecture</h1>
 <p>A two-tier data lake + DWH architecture is dominant in the industry</p>
 <ul>
 <li>HDFS replaced by cloud data lakes (e.g., S3, ADLS, GCS)</li>
@@ -881,8 +897,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-platform-21" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-two-tier-limitations" class="title-slide slide level1 center">
+<h1>Data platform: two-tier limitations</h1>
 <p>(Some) main problems:</p>
 <ul>
 <li>Data is first ELTed into lakes, and then again ETLed into DWHs
@@ -893,14 +909,14 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li><em>Limited support for advanced analytics</em>.
 <ul>
 <li>Businesses want to ask predictive questions using their DWHs</li>
-<li>Machine learning systems does not work well on (directly) top of DWHs</li>
+<li>Machine learning systems do not work well directly on top of DWHs</li>
 </ul></li>
 <li><em>Process large datasets using complex non-SQL code</em></li>
 </ul>
 </section>
 
-<section id="data-platform-22" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-towards-lakehouses" class="title-slide slide level1 center">
+<h1>Data platform: towards lakehouses</h1>
 
 <img data-src="img/slides26.png" class="r-stretch quarto-figure-center"><p class="caption">Evolving generations of data platforms</p></section>
 
@@ -930,8 +946,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p><a href="https://www.databricks.com/glossary/data-lakehouse">https://www.databricks.com/glossary/data-lakehouse</a></p>
 </section>
 
-<section id="data-lakehouse" class="title-slide slide level1 center">
-<h1>Data lakehouse</h1>
+<section id="data-lakehouse-main-features" class="title-slide slide level1 center">
+<h1>Data lakehouse: main features</h1>
 <p>Main features:</p>
 <ul>
 <li>Store data in a low-cost object store using a standard file format such as Apache Parquet</li>
@@ -949,8 +965,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-lakehouse-1" class="title-slide slide level1 center">
-<h1>Data lakehouse</h1>
+<section id="data-lakehouse-metadata-challenges" class="title-slide slide level1 center">
+<h1>Data lakehouse: metadata challenges</h1>
 <p><strong>Challenges:</strong></p>
 <ul>
 <li>Most data lakes (e.g., cloud object stores) are simple key-value stores without cross-key consistency.<br>
@@ -988,8 +1004,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="data-lakehouse-2" class="title-slide slide level1 center">
-<h1>Data lakehouse</h1>
+<section id="data-lakehouse-comparison" class="title-slide slide level1 center">
+<h1>Data lakehouse: comparison</h1>
 <table class="caption-top">
 <colgroup>
 <col style="width: 25%">
@@ -1058,8 +1074,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </table>
 </section>
 
-<section id="data-platform-23" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-data-hub" class="title-slide slide level1 center">
+<h1>Data platform: data hub</h1>
 <p><em>Data lakes (or lakehouses)</em> have increasingly taken the role of <em>data hubs</em></p>
 <ul>
 <li>Eliminate up-front costs of ingestion and ETL since data are stored in the original format</li>
@@ -1077,8 +1093,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-platform-24" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-final-definition" class="title-slide slide level1 center">
+<h1>Data platform: final definition</h1>
 <blockquote>
 <p><strong>Data platform</strong></p>
 <p>A <em>unified</em> infrastructure that facilitates the ingestion, storage, management, and exploitation of large volumes of heterogeneous data. It provides a collection of <em>independent</em> and <em>well-integrated</em> services meeting <em>end-to-end</em> data needs.</p>
@@ -1096,8 +1112,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-platform-25" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-governance-pressure" class="title-slide slide level1 center">
+<h1>Data platform: governance pressure</h1>
 <p>Are we done? No!</p>
 <ul>
 <li>Lacking smart support to govern the complexity of data and transformations</li>
@@ -1116,6 +1132,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="managing-data-platforms" class="title-slide slide level1 center">
 <h1>Managing data platforms</h1>
+<p>Each governance capability answers a practical platform question.</p>
 <ul>
 <li><em>Tracking data pipelines</em>: Data provenance</li>
 <li><em>Tracking changes</em>: Data versioning</li>
@@ -1695,16 +1712,16 @@ product_reviews.csv</code></pre>
 
 <section id="data-governance-data-profiling" class="title-slide slide level1 center">
 <h1>Data governance: data profiling</h1>
-
+<p>Can we understand the content, structure, and quality of a dataset before using it?</p>
 </section>
 
-<section id="data-profiling" class="title-slide slide level1 center">
-<h1>Data profiling</h1>
+<section id="data-profiling-analysis-vs-profiling" class="title-slide slide level1 center">
+<h1>Data profiling: analysis vs profiling</h1>
 
 <img data-src="img/data-analysis-vs-profiling.png" class="r-stretch quarto-figure-center"><p class="caption">Data profiling</p></section>
 
-<section id="data-profiling-1" class="title-slide slide level1 center">
-<h1>Data profiling</h1>
+<section id="data-profiling-definition" class="title-slide slide level1 center">
+<h1>Data profiling: definition</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>Data profiling <span class="citation" data-cites="naumann2014data">(<a href="#/references" role="doc-biblioref" onclick="">Naumann 2014</a>)</span></p>
@@ -1889,8 +1906,8 @@ memory usage: 6.0 KB</code></pre>
 </blockquote>
 </section>
 
-<section id="data-profiling-2" class="title-slide slide level1 center">
-<h1>Data profiling</h1>
+<section id="data-profiling-computational-cost" class="title-slide slide level1 center">
+<h1>Data profiling: computational cost</h1>
 <p>The results of data profiling are <em>computationally heavy</em> to discover</p>
 <ul>
 <li>E.g., discovering keys/dependencies usually involves some sorting step for each considered column</li>
@@ -1923,8 +1940,8 @@ memory usage: 6.0 KB</code></pre>
 </table>
 </section>
 
-<section id="data-profiling-3" class="title-slide slide level1 center">
-<h1>Data profiling</h1>
+<section id="data-profiling-column-groups" class="title-slide slide level1 center">
+<h1>Data profiling: column groups</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Given a table with four columns <span class="math inline">\(\{w, x, y, z\}\)</span></p>
@@ -1972,8 +1989,8 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 </section>
 
-<section id="data-profiling-4" class="title-slide slide level1 center">
-<h1>Data profiling</h1>
+<section id="data-profiling-use-cases" class="title-slide slide level1 center">
+<h1>Data profiling: use cases</h1>
 <p>Use cases</p>
 <ul>
 <li><em>Query optimization</em>
@@ -2033,7 +2050,7 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-governance-data-provenance" class="title-slide slide level1 center">
 <h1>Data governance: data provenance</h1>
-
+<p>Can we explain where data came from and which transformations produced it?</p>
 </section>
 
 <section id="data-provenance-herschel2017survey" class="title-slide slide level1 center">
@@ -2069,8 +2086,8 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-provenance" class="title-slide slide level1 center">
-<h1>Data provenance</h1>
+<section id="data-provenance-prov-model" class="title-slide slide level1 center">
+<h1>Data provenance: PROV model</h1>
 <p>Provenance is a graph, for which we have a standard: <a href="https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/">PROV-DM</a> <span class="citation" data-cites="moreau2022provenance">(<a href="#/references" role="doc-biblioref" onclick="">Moreau and Groth 2022</a>)</span></p>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -2098,8 +2115,8 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-provenance-1" class="title-slide slide level1 center">
-<h1>Data provenance</h1>
+<section id="data-provenance-graph-analysis" class="title-slide slide level1 center">
+<h1>Data provenance: graph analysis</h1>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p>Measures of centrality</p>
@@ -2131,13 +2148,13 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-provenance-2" class="title-slide slide level1 center">
-<h1>Data provenance</h1>
+<section id="data-provenance-characteristics" class="title-slide slide level1 center">
+<h1>Data provenance: characteristics</h1>
 
 <img data-src="img/slides15.png" class="r-stretch quarto-figure-center"><p class="caption">Characteristics of data provenance <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Simmhan et al.</span> 2005</a>)</span></p></section>
 
-<section id="data-provenance-3" class="title-slide slide level1 center">
-<h1>Data provenance</h1>
+<section id="data-provenance-granularity" class="title-slide slide level1 center">
+<h1>Data provenance: granularity</h1>
 <p>Granularity <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Simmhan et al.</span> 2005</a>)</span></p>
 <ul>
 <li><em>Fine-grained</em> (instance level): tracking data items (e.g., a tuple in a dataset) transformations</li>
@@ -2267,8 +2284,8 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 </section>
 
-<section id="data-provenance-4" class="title-slide slide level1 center">
-<h1>Data provenance</h1>
+<section id="data-provenance-query-types" class="title-slide slide level1 center">
+<h1>Data provenance: query types</h1>
 <p>Queries <span class="citation" data-cites="ikeda2009data">(<a href="#/references" role="doc-biblioref" onclick="">Ikeda and Widom 2009</a>)</span></p>
 <ul>
 <li><em>Where</em> provenance: given some output, which inputs did the output come from?</li>
@@ -2281,8 +2298,8 @@ memory usage: 6.0 KB</code></pre>
 
 <img data-src="img/finegrained.png" class="r-stretch quarto-figure-center"><p class="caption">Fine grained</p></section>
 
-<section id="data-provenance-5" class="title-slide slide level1 center">
-<h1>Data provenance</h1>
+<section id="data-provenance-use-cases" class="title-slide slide level1 center">
+<h1>Data provenance: use cases</h1>
 <p>Use cases for data provenance.</p>
 <ul>
 <li>Accountability and auditing</li>
@@ -2301,11 +2318,11 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-governance-data-versioning" class="title-slide slide level1 center">
 <h1>Data governance: data versioning</h1>
-
+<p>Can we reproduce an analysis by recovering the exact state of code, models, and data?</p>
 </section>
 
-<section id="data-versioning" class="title-slide slide level1 center">
-<h1>Data versioning</h1>
+<section id="data-versioning-definition" class="title-slide slide level1 center">
+<h1>Data versioning: definition</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Version control</p>
@@ -2330,8 +2347,8 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-versioning-1" class="title-slide slide level1 center">
-<h1>Data versioning</h1>
+<section id="data-versioning-crud-operations" class="title-slide slide level1 center">
+<h1>Data versioning: CRUD operations</h1>
 <p>Support CRUD (Create, Read, Update, Delete) operations with versions.</p>
 <p>For example, on <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html">AWS (PUT, GET, DELETE)</a></p>
 <div class="columns">
@@ -2362,11 +2379,11 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-governance-data-compression" class="title-slide slide level1 center">
 <h1>Data governance: data compression</h1>
-
+<p>Can we reduce storage and scan costs without losing the information needed by downstream tasks?</p>
 </section>
 
-<section id="compression" class="title-slide slide level1 center">
-<h1>Compression</h1>
+<section id="compression-definition" class="title-slide slide level1 center">
+<h1>Compression: definition</h1>
 <p><strong>Data compression</strong> is the process of encoding data using fewer bits than the original representation</p>
 <ul>
 <li><em>Lossless</em>: reduces bits by identifying and eliminating redundancy (no information is lost)
@@ -2380,13 +2397,13 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 </section>
 
-<section id="compression-1" class="title-slide slide level1 center">
-<h1>Compression</h1>
+<section id="compression-parquet" class="title-slide slide level1 center">
+<h1>Compression: Parquet</h1>
 
 <img data-src="img/parquet.png" class="r-stretch quarto-figure-center"><p class="caption">Data compression</p></section>
 
-<section id="compression-2" class="title-slide slide level1 center">
-<h1>Compression</h1>
+<section id="compression-summarization" class="title-slide slide level1 center">
+<h1>Compression: summarization</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p><strong>Summarization</strong>: find a concise representation of a dataset in a comprehensible, informative manner</p>
@@ -2439,7 +2456,7 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-governance-entity-resolution" class="title-slide slide level1 center">
 <h1>Data governance: entity resolution</h1>
-
+<p>Can we recognize when different records refer to the same real-world entity?</p>
 </section>
 
 <section id="entity-resolution" class="title-slide slide level1 center">
@@ -2468,18 +2485,18 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-governance-data-catalog" class="title-slide slide level1 center">
 <h1>Data governance: data catalog</h1>
-
+<p>Can users discover, understand, and request access to data assets without inspecting raw data first?</p>
 </section>
 
-<section id="data-catalog" class="title-slide slide level1 center">
-<h1>Data catalog</h1>
+<section id="data-catalog-definition" class="title-slide slide level1 center">
+<h1>Data catalog: definition</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>A <strong>data catalog</strong> is an organized inventory of the company’s data <span class="citation" data-cites="olesen2023enterprise">(<a href="#/references" role="doc-biblioref" onclick="">Olesen-Bagneux 2023</a>)</span></p>
 <ul>
 <li>The data catalog provides an overview at a metadata level only</li>
 <li>No actual data values are exposed.</li>
-<li>Everyone see everything without fear of exposing confidential or sensitive data.</li>
+<li>Everyone sees the metadata they need without exposing confidential or sensitive data.</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -2491,8 +2508,8 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-catalog-1" class="title-slide slide level1 center">
-<h1>Data catalog</h1>
+<section id="data-catalog-domains" class="title-slide slide level1 center">
+<h1>Data catalog: domains</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>Metadata is organized into <strong>domains</strong>.</p>
@@ -2534,7 +2551,7 @@ memory usage: 6.0 KB</code></pre>
 <section id="case-study-data-governance-1" class="title-slide slide level1 center" data-background-color="#121011">
 <h1><img src="./img/cs.svg" class="title-icon"> Case study: data governance</h1>
 <p>Check Colab</p>
-<p><a href="https://colab.research.google.com/github/w4bo/AA2526-unibo-bigdataandcloudplatforms/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
+<p><a href="https://colab.research.google.com/github/w4bo/AA2627-unibo-bdcp/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 </section>
 
 <section id="case-study-data-catalog" class="title-slide slide level1 center" data-background-color="#121011">
@@ -2552,17 +2569,17 @@ memory usage: 6.0 KB</code></pre>
 
 </section>
 
-<section id="data-platform-26" class="title-slide slide level1 center">
-<h1>Data platform</h1>
+<section id="data-platform-meta-metadata" class="title-slide slide level1 center">
+<h1>Data platform: meta-metadata</h1>
 <p>Are we done? No!</p>
 <ul>
 <li>Metadata can become bigger than the data itself</li>
 </ul>
-<p>We need meta meta-data (or models)…</p>
+<p>We need meta-metadata (or models)…</p>
 <ul>
 <li>… chasing our own tails</li>
 </ul>
-<p>Data management is still a (research) issue in data platforms.</p>
+<p>Data management is still a research issue in data platforms.</p>
 </section>
 
 
@@ -2574,8 +2591,8 @@ memory usage: 6.0 KB</code></pre>
 
 </section>
 
-<section id="data-fabric" class="title-slide slide level1 center">
-<h1>Data fabric</h1>
+<section id="data-fabric-definition" class="title-slide slide level1 center">
+<h1>Data fabric: definition</h1>
 <p><strong>Data fabric</strong> is a “vision for data management […] that seamlessly connects different clouds, whether they are private or public environments.” (<a href="https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf">2016</a>)</p>
 <p>Frictionless access and sharing of data in a distributed data environment</p>
 <ul>
@@ -2596,12 +2613,12 @@ memory usage: 6.0 KB</code></pre>
 
 <img data-src="img/CDP-diagram-sm.png" class="r-stretch quarto-figure-center"><p class="caption">Cloudera SDX</p></section>
 
-<section id="data-fabric-1" class="title-slide slide level1 center">
-<h1>Data fabric</h1>
+<section id="data-fabric-design-concept" class="title-slide slide level1 center">
+<h1>Data fabric: design concept</h1>
 <p><strong>It is a design concept</strong></p>
 <ul>
 <li>It optimizes data management by automating repetitive tasks</li>
-<li>According to Gartner estimates, 25% of data management vendors will provide a complete framework for data fabric by 2024 - up from 5% today</li>
+<li>Gartner framed data fabric as a maturing vendor framework for automating data management tasks</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -2622,8 +2639,8 @@ memory usage: 6.0 KB</code></pre>
 <p><a href="https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration">Gartner (2021). Data fabric is key to modernizing data management</a></p>
 </section>
 
-<section id="data-fabric-2" class="title-slide slide level1 center">
-<h1>Data fabric</h1>
+<section id="data-fabric-capabilities" class="title-slide slide level1 center">
+<h1>Data fabric: capabilities</h1>
 <ul>
 <li><em>Catalog all data</em>: Cover business glossary, design-time, and runtime metadata.</li>
 <li><em>Enable self-service capabilities</em>: Support data discovery, profiling, exploration, quality checks, and consumption.</li>
@@ -2633,8 +2650,8 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 </section>
 
-<section id="data-fabric-3" class="title-slide slide level1 center">
-<h1>Data fabric</h1>
+<section id="data-fabric-active-metadata" class="title-slide slide level1 center">
+<h1>Data fabric: active metadata</h1>
 <div class="columns">
 <div class="column" style="width:55%;">
 <p><strong>Active metadata</strong>: leverage open APIs to connect platform services using metadata.</p>
@@ -2666,8 +2683,8 @@ memory usage: 6.0 KB</code></pre>
 <p><a href="https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration">Gartner (2021). Data fabric is key to modernizing data management</a></p>
 </section>
 
-<section id="automation-through-orchestration" class="title-slide slide level1 center">
-<h1>Automation through orchestration</h1>
+<section id="automation-through-orchestration-role" class="title-slide slide level1 center">
+<h1>Automation through orchestration: role</h1>
 <p>The orchestrator is the component in charge of controlling the execution of computation activities</p>
 <ul>
 <li>Either through a regular scheduling of the activities</li>
@@ -2676,8 +2693,8 @@ memory usage: 6.0 KB</code></pre>
 <p>Several entities (either processes or human beings) can cover this role to activate some data processes</p>
 </section>
 
-<section id="automation-through-orchestration-1" class="title-slide slide level1 center">
-<h1>Automation through orchestration</h1>
+<section id="automation-through-orchestration-decisions" class="title-slide slide level1 center">
+<h1>Automation through orchestration: decisions</h1>
 <p>Dynamic/condition-based behavior</p>
 <ul>
 <li>Decide <em>what</em> data process should be activated under different conditions</li>
@@ -2698,8 +2715,8 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 </section>
 
-<section id="automation-through-orchestration-2" class="title-slide slide level1 center">
-<h1>Automation through orchestration</h1>
+<section id="automation-through-orchestration-resources" class="title-slide slide level1 center">
+<h1>Automation through orchestration: resources</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
@@ -2729,8 +2746,8 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="automation-through-orchestration-3" class="title-slide slide level1 center">
-<h1>Automation through orchestration</h1>
+<section id="automation-through-orchestration-execution-guarantees" class="title-slide slide level1 center">
+<h1>Automation through orchestration: execution guarantees</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="quarto-figure quarto-figure-center">
@@ -2761,8 +2778,8 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-mesh" class="title-slide slide level1 center">
-<h1>Data mesh</h1>
+<section id="data-mesh-principles" class="title-slide slide level1 center">
+<h1>Data mesh: principles</h1>
 <p>Distributed data architecture under centralized governance for interoperability, enabled by a shared and harmonized self-serve data infrastructure</p>
 <ul>
 <li><em>Domain-oriented decentralized data ownership</em>
@@ -2788,8 +2805,8 @@ memory usage: 6.0 KB</code></pre>
 <p><a href="https://www.youtube.com/watch?v=_bmYXWCxF_Q">Zhamak Dehghani (2021). Introduction to Data Mesh</a></p>
 </section>
 
-<section id="data-mesh-1" class="title-slide slide level1 center">
-<h1>Data mesh</h1>
+<section id="data-mesh-domains-and-data-products" class="title-slide slide level1 center">
+<h1>Data mesh: domains and data products</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Data Mesh organizes data around <strong>business domain owners</strong> and transforms relevant data assets (data sources) to <strong>data products</strong> that can be consumed by distributed business users from various business domains or functions.</p>
@@ -2834,23 +2851,23 @@ memory usage: 6.0 KB</code></pre>
 
 </section>
 
-<section id="data-mesh-vs-data-fabric" class="title-slide slide level1 center">
-<h1>Data mesh vs data fabric</h1>
+<section id="data-mesh-vs-data-fabric-frameworks" class="title-slide slide level1 center">
+<h1>Data mesh vs data fabric: frameworks</h1>
 <p>They are design concepts, not things.</p>
 <ul>
 <li>They are not mutually exclusive</li>
 <li>They are architectural frameworks, not architectures
 <ul>
 <li>The frameworks must be adapted and customized to your needs, data, processes, and terminology</li>
-<li>Gartner estimates 25% of data management vendors will provide a complete data fabric solution by 2024 - up from 5% today</li>
+<li>Vendor frameworks keep evolving, so treat product claims as implementation choices rather than definitions</li>
 </ul></li>
 </ul>
 <p>Alex Woodie, 2021 <a href="https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/">https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/</a></p>
 <p>Dave Wells, 2021 <a href="https://www.eckerson.com/articles/data-architecture-complex-vs-complicated">https://www.eckerson.com/articles/data-architecture-complex-vs-complicated</a></p>
 </section>
 
-<section id="data-mesh-vs-data-fabric-1" class="title-slide slide level1 center">
-<h1>Data mesh vs data fabric</h1>
+<section id="data-mesh-vs-data-fabric-emphasis" class="title-slide slide level1 center">
+<h1>Data mesh vs data fabric: emphasis</h1>
 <p>Both provide an architectural framework to access data across multiple technologies and platforms.</p>
 <p><strong>Data fabric</strong></p>
 <ul>
@@ -2868,13 +2885,13 @@ memory usage: 6.0 KB</code></pre>
 <p>Dave Wells, 2021 <a href="https://www.eckerson.com/articles/data-architecture-complex-vs-complicated">https://www.eckerson.com/articles/data-architecture-complex-vs-complicated</a></p>
 </section>
 
-<section id="data-mesh-vs-data-fabric-2" class="title-slide slide level1 center">
-<h1>Data mesh vs data fabric</h1>
+<section id="data-mesh-vs-data-fabric-visual-comparison" class="title-slide slide level1 center">
+<h1>Data mesh vs data fabric: visual comparison</h1>
 
 <img data-src="img/slides39.png" class="r-stretch quarto-figure-center"><p class="caption">Data mesh vs data fabric</p></section>
 
-<section id="data-mesh-vs-data-fabric-3" class="title-slide slide level1 center">
-<h1>Data mesh vs data fabric</h1>
+<section id="data-mesh-vs-data-fabric-takeaway" class="title-slide slide level1 center">
+<h1>Data mesh vs data fabric: takeaway</h1>
 <p>Data Fabric and Mesh are the results of the data architecture evolution.</p>
 <ul>
 <li><strong>Many capabilities were in existence already long before</strong> the terms were coined</li>
@@ -2886,8 +2903,8 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 </section>
 
-<section id="data-mesh-2" class="title-slide slide level1 center">
-<h1>Data mesh</h1>
+<section id="data-mesh-hype-cycle-positioning" class="title-slide slide level1 center">
+<h1>Data mesh: hype-cycle positioning</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -2907,8 +2924,8 @@ memory usage: 6.0 KB</code></pre>
 <p>As new technologies and solutions mature to support a centralized approach to data access, distributed approaches like Data Mesh are expected to fall increasingly out of favor in enterprise IT.</p>
 </section>
 
-<section id="data-mesh-3" class="title-slide slide level1 center">
-<h1>Data mesh</h1>
+<section id="data-mesh-hype-cycle-trend" class="title-slide slide level1 center">
+<h1>Data mesh: hype-cycle trend</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -2934,8 +2951,8 @@ memory usage: 6.0 KB</code></pre>
 </iframe>
 </section>
 
-<section id="some-references" class="title-slide slide level1 center">
-<h1>(Some) References</h1>
+<section id="further-reading-architecture-patterns" class="title-slide slide level1 center">
+<h1>Further reading: architecture patterns</h1>
 <div class="columns">
 <div class="column" style="width:33%;">
 <div class="quarto-figure quarto-figure-center">
@@ -2959,6 +2976,12 @@ memory usage: 6.0 KB</code></pre>
 </figure>
 </div>
 </div></div>
+</section>
+
+<section id="from-platform-concepts-to-deployment" class="title-slide slide level1 center">
+<h1>From platform concepts to deployment</h1>
+<p>So far, we have discussed what a data platform must support.</p>
+<p>Now we ask how difficult it is to deploy and operate one in practice.</p>
 </section>
 
 <section id="example-of-data-platform-hadoop-based" class="title-slide slide level1 center">
@@ -3041,7 +3064,7 @@ memory usage: 6.0 KB</code></pre>
 <p><strong>DevOps</strong> combines development and operations to increase the efficiency, speed, and security of software development and delivery compared to traditional processes.</p>
 <p>DevOps practices enable software development (dev) and operations (ops) teams to accelerate delivery through automation, collaboration, fast feedback, and iterative improvement.</p>
 
-<img data-src="img/slides29.png" class="r-stretch quarto-figure-center"><p class="caption">DevOps</p><p><a href="https://about.gitlab.com/topics/devops/">https://about.gitlab.com/topics/devops/</a> (accessed 2023-06-03)</p>
+<img data-src="img/slides29.png" class="r-stretch quarto-figure-center"><p class="caption">DevOps</p><p><a href="https://about.gitlab.com/topics/devops/">https://about.gitlab.com/topics/devops/</a></p>
 </section>
 
 <section id="to-dataops" class="title-slide slide level1 center">
