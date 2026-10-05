@@ -1,3 +1,9 @@
+## [1.0.8](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.7...1.0.8) (2026-10-05)
+
+### Bug Fixes
+
+* linux version and error handling ([bbc15fd](https://github.com/w4bo/AA2627-unibo-bdcp/commit/bbc15fdbb2a3f35440fa23aeb2b6356f100f5171))
+
 ## [1.0.7](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.6...1.0.7) (2026-10-02)
 
 ### Bug Fixes
