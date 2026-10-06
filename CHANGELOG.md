@@ -1,3 +1,13 @@
+## [1.0.9](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.8...1.0.9) (2026-10-06)
+
+### Dependency updates
+
+* **deps:** update dependency neo4j to v6.4.0 ([#36](https://github.com/w4bo/AA2627-unibo-bdcp/issues/36)) ([00274b1](https://github.com/w4bo/AA2627-unibo-bdcp/commit/00274b1de1011207114275f3b0d04ee9ca6b4b51))
+
+### Bug Fixes
+
+* update nosql ([85507f3](https://github.com/w4bo/AA2627-unibo-bdcp/commit/85507f358c9c2e73f4ca4a44018b97d7f71bb034))
+
 ## [1.0.8](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.7...1.0.8) (2026-10-05)
 
 ### Bug Fixes
