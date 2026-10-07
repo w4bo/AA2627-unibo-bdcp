@@ -1131,7 +1131,7 @@ Database-as-a-service
 
 # <img src="./img/cs.svg" class="title-icon" /> Case study: data governance {background-color="#121011"}
 
-{{< include _cs-nosql.md >}}
+{{< include _cs-nosql.qmd >}}
 
 # End of the case study {background-color="#121011"}
 

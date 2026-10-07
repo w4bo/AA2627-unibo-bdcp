@@ -557,7 +557,6 @@ How do we choose the Cloud Service Providers?
 ![Magic Quadrant 2023](img/gartner_mq_2023.png)
 
 :::
-:::
 :::{.column width=33%}
 
 ![Magic Quadrant 2025](img/gartner-mq-2025.png)

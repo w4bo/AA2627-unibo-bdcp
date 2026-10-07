@@ -66,7 +66,7 @@ Getting _value_ from data _is not_ (only) a matter of _storage_. *Examples*?
 
 # <img src="./img/cs.svg" class="title-icon" /> Case study: photo gallery {background-color="#121011"}
 
-{{< include _cs-photogallery.md >}} 
+{{< include _cs-photogallery.qmd >}} 
 
 # End of the case study {background-color="#121011"}
 
@@ -182,22 +182,26 @@ Scenario:
 
 # Data platform: multidimensional analysis
 
-A DWH is a collection of data that supports decision-making processes. It provides the following features:
+A **DWH** is a collection of data that supports decision-making processes. It provides the following features:
 
 - It is *subject-oriented*;
 - It is *integrated and consistent*;
 - It shows its *evolution over time and it is not volatile*
 
+:::{.fragment}
 The **multidimensional model** is the key for representing and querying information in a DW
 
 - (Business) *Facts* of interest are represented in *(hyper) cubes* where:
   - Each cell stores *numerical measures* that quantify the fact from different points of view;
   - Each axis is a *dimension* for analyzing measure values;
   - Each *dimension can be the root of a hierarchy* of attributes used to aggregated measure values
+:::
 
+:::{.fragment}
 **Online analytical processing (OLAP)** to answer multi-dimensional analytical queries.
 
 - Interactive sessions of analysis reading large amounts of data. 
+:::
 
 # Data platform: OLAP roll up
 
@@ -527,7 +531,7 @@ A *data steward* is a role that ensures that data governance processes are follo
 
 # <img src="./img/cs.svg" class="title-icon" /> Case study: data governance {background-color="#121011"}
 
-{{< include _cs-datagovernance.md >}}
+{{< include _cs-datagovernance.qmd >}}
 
 # End of the case study {background-color="#121011"}
 
