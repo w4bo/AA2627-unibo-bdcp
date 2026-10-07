@@ -1,3 +1,13 @@
+## [1.0.10](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.9...1.0.10) (2026-10-07)
+
+### Dependency updates
+
+* **deps:** update w4bo/quarto-slides docker tag to v1.0.32 ([#37](https://github.com/w4bo/AA2627-unibo-bdcp/issues/37)) ([2ec3ac9](https://github.com/w4bo/AA2627-unibo-bdcp/commit/2ec3ac962e755505b5c640a53af7b5c9fffd496d))
+
+### Bug Fixes
+
+* moving to qmd ([27b52ac](https://github.com/w4bo/AA2627-unibo-bdcp/commit/27b52acfc4cd0af5e4b2417413e27432b66e804e))
+
 ## [1.0.9](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.8...1.0.9) (2026-10-06)
 
 ### Dependency updates
