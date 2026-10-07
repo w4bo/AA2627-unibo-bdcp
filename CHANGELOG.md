@@ -1,3 +1,9 @@
+## [1.0.11](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.10...1.0.11) (2026-10-07)
+
+### Bug Fixes
+
+* reworking the introduction ([3fb92f4](https://github.com/w4bo/AA2627-unibo-bdcp/commit/3fb92f4e094b0f32520691f163d5d33169a56d2b))
+
 ## [1.0.10](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.9...1.0.10) (2026-10-07)
 
 ### Dependency updates
