@@ -141,4 +141,4 @@ Building data pipelines
 
 # In action
 
-![<a href="https://colab.research.google.com/github/w4bo/AA2627-unibo-bigdataandcloudplatforms/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>](img/slides68.png)
+![<a href="https://colab.research.google.com/github/w4bo/AA2627-unibo-bdcp/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>](img/slides68.png)
