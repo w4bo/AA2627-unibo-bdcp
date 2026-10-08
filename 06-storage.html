@@ -119,7 +119,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="06-storage_files/libs/revealjs/dist/theme/quarto-2a4b070768aef88e7992984127cace11.css">
+  <link rel="stylesheet" href="06-storage_files/libs/revealjs/dist/theme/quarto-b328c055d9dc1f3c009edd90f416a34b.css">
   <link href="06-storage_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="06-storage_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="06-storage_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -632,6 +632,83 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li><code>/landing/ETL/sales_oracle_ingest/customers/01DFTFX89YDFAXREPJTR94</code></li>
 </ul>
+</section>
+
+<section id="data-lake-storage-compression" class="title-slide slide level1 center">
+<h1>Data lake storage: compression</h1>
+<p>Can we reduce storage and scan costs without losing the information needed by downstream tasks?</p>
+</section>
+
+<section id="compression-definition" class="title-slide slide level1 center">
+<h1>Compression: definition</h1>
+<p><strong>Data compression</strong> is the process of encoding data using fewer bits than the original representation</p>
+<ul>
+<li><em>Lossless</em>: reduces bits by identifying and eliminating redundancy
+<ul>
+<li>Useful for data files that must preserve exact values</li>
+</ul></li>
+<li><em>Lossy</em>: reduces bits by removing less important information
+<ul>
+<li>Useful when approximate representations are acceptable</li>
+</ul></li>
+</ul>
+</section>
+
+<section id="compression-parquet" class="title-slide slide level1 center">
+<h1>Compression: Parquet</h1>
+
+<img data-src="img/parquet.png" class="r-stretch quarto-figure-center"><p class="caption">Data compression</p></section>
+
+<section id="compression-summarization" class="title-slide slide level1 center">
+<h1>Compression: summarization</h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Summarization</strong>: find a concise representation of a dataset in a comprehensible, informative manner</p>
+<blockquote>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Transaction dataset</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>TID</th>
+<th>Products</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T1</td>
+<td>Beer, Diapers, Cola</td>
+</tr>
+<tr class="even">
+<td>T2</td>
+<td>Cola, Fanta</td>
+</tr>
+<tr class="odd">
+<td>T3</td>
+<td>Beer, Cola</td>
+</tr>
+<tr class="even">
+<td>T3</td>
+<td>Beer, Diapers</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<p>Frequent itemset mining</p>
+<p>Itemset 1: {Cola}</p>
+<p>Itemset 2: {Beer}</p>
+<p>Itemset 3: {Beer, Diapers}</p>
+</div></div>
+</blockquote>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides18.png"></p>
+<figcaption>Characteristics of data summarization <span class="citation" data-cites="ahmed2019data">(<a href="#/references" role="doc-biblioref" onclick="">Ahmed 2019</a>)</span></figcaption>
+</figure>
+</div>
+</div></div>
 </section>
 
 <section id="data-lakehouse" class="title-slide slide level1 center">
@@ -1161,6 +1238,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>References</h1>
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-ahmed2019data" class="csl-entry" role="listitem">
+Ahmed, Mohiuddin. 2019. <span>“Data Summarization: A Survey.”</span> <em>Knowledge and Information Systems</em> 58 (2): 249–73.
+</div>
 <div id="ref-armbrust2020delta" class="csl-entry" role="listitem">
 <span class="nocase">Armbrust, Michael, Tathagata Das, Liwen Sun, et al.</span> 2020. <span>“Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores.”</span> <em>Proceedings of the VLDB Endowment</em> 13 (12): 3411–24.
 </div>

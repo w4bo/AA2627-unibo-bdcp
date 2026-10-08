@@ -119,7 +119,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="01-dataplatforms_files/libs/revealjs/dist/theme/quarto-2a4b070768aef88e7992984127cace11.css">
+  <link rel="stylesheet" href="01-dataplatforms_files/libs/revealjs/dist/theme/quarto-b328c055d9dc1f3c009edd90f416a34b.css">
   <link href="01-dataplatforms_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="01-dataplatforms_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="01-dataplatforms_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -956,44 +956,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="data-lakehouse-metadata-challenges" class="title-slide slide level1 center">
-<h1>Data lakehouse: metadata challenges</h1>
-<p><strong>Challenges:</strong></p>
-<ul>
-<li>Most data lakes (e.g., cloud object stores) are simple key-value stores without cross-key consistency.<br>
-</li>
-<li>Multi-object updates aren’t atomic, and there’s no isolation between queries.
-<ul>
-<li>Queries updating multiple objects can expose readers to partial updates as each object is written individually.<br>
-</li>
-</ul></li>
-<li>For large tables with millions of objects, metadata operations are costly.
-<ul>
-<li>The latency of cloud object stores can make data-skipping checks slower than the query itself.</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Delta Lake</strong> uses a transaction log compacted into Apache Parquet for much faster metadata operations on large tabular datasets.</p>
-<ul>
-<li>The log resides in the <code>_delta_log</code> subdirectory.<br>
-</li>
-<li>It contains:
-<ul>
-<li>JSON objects with sequential IDs for log records (i.e., commits)</li>
-<li>Periodic checkpoints summarizing the log up to that point<br>
-</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/deltalake.png"></p>
-<figcaption>Delta lake</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
+
 
 <section id="data-lakehouse-comparison" class="title-slide slide level1 center">
 <h1>Data lakehouse: comparison</h1>
@@ -1021,7 +984,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tr>
 <tr class="even">
 <td style="text-align: center;">Types of data</td>
-<td style="text-align: center;">Structured, limited semi-structured</td>
+<td style="text-align: center;">Structured</td>
 <td style="text-align: center;">*</td>
 <td style="text-align: center;">*</td>
 </tr>
@@ -1103,6 +1066,80 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
+<section id="example-of-data-platform-hadoop-based" class="title-slide slide level1 center">
+<h1>Example of data platform: Hadoop-based</h1>
+<p>A data platform on the Hadoop stack requires several tools.</p>
+
+<img data-src="img/74.svg" class="r-stretch quarto-figure-center"><p class="caption">Hadoop-based data platform</p><p>How many levels of complexity are hidden here?</p>
+<p>How do you provision it?</p>
+<ul>
+<li>Manual provisioning on-premises</li>
+<li>Semi-automatic provisioning on-premises</li>
+<li>Automatic provisioning in the cloud</li>
+</ul>
+</section>
+
+<section id="on-premises-manual-provisioning" class="title-slide slide level1 center">
+<h1>On-premises manual provisioning</h1>
+<p>It is hardly advisable, if not for small and local tests.</p>
+<p><strong>Technical challenges</strong></p>
+<ul>
+<li>Installation: how do I set up a new machine?</li>
+<li>Networking: how do I cable dozens of machines?</li>
+<li>Management: how do I replace a broken disk?</li>
+<li>Upgrade: how do I extend the cluster with new services/machines?</li>
+<li>(energy and cooling, software licenses, insurance…)</li>
+</ul>
+<p><strong>Technological challenges</strong></p>
+<ul>
+<li>How do we configure a distributed environment?</li>
+<li>How do we set up/integrate/control independent services?</li>
+<li>How do we orchestrate data flows?</li>
+</ul>
+<p><strong>Business challenges</strong></p>
+<ul>
+<li>Can we afford to spend resources on tasks that are not mission-oriented?</li>
+<li>No free lunch, each choice has a cost/benefit</li>
+<li>How much time does it take to master a technology?</li>
+<li>How many people do I need?</li>
+</ul>
+</section>
+
+<section id="data-platform-related-job-positions" class="title-slide slide level1 center">
+<h1>Data platform: related job positions</h1>
+
+<img data-src="img/slides28.png" class="r-stretch quarto-figure-center"><p class="caption">(Big) data pipeline</p></section>
+
+<section id="data-platform-related-job-positions-1" class="title-slide slide level1 center">
+<h1>Data platform: related job positions</h1>
+<p><em>Data platform engineer</em></p>
+<ul>
+<li>Orchestrate the successful implementation of cloud technologies within the data infrastructure of their business</li>
+<li>Solid understanding of impact database types and implementation</li>
+<li>Responsible for purchasing decisions for cloud services and approval of data architectures</li>
+</ul>
+<p><em>Data architect</em></p>
+<ul>
+<li>Team members who understand all aspects of a data platform’s architecture</li>
+<li>Work closely with the data platform engineers to create data workflows</li>
+</ul>
+<p><em>Data scientist</em></p>
+<ul>
+<li>Analyze and interpret complex digital data</li>
+<li>Work with new technologies (e.g., machine learning) to deepen the business’s understanding and gain new insights</li>
+</ul>
+<p><em>Data analyst</em></p>
+<ul>
+<li>Analyze data systems, creating automated systems for retrieving data from the data platform</li>
+<li>Cloud data analysts are more commonly members of the business user population</li>
+</ul>
+</section>
+
+<section id="governing-data-platforms" class="title-slide slide level1 center">
+<h1>Governing data platforms</h1>
+
+</section>
+
 <section id="data-platform-governance-pressure" class="title-slide slide level1 center">
 <h1>Data platform: governance pressure</h1>
 <p>Are we done? No!</p>
@@ -1127,7 +1164,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li><em>Tracking data pipelines</em>: Data provenance</li>
 <li><em>Tracking changes</em>: Data versioning</li>
-<li><em>Saving storage</em>: Compression</li>
 <li><em>Understanding the data</em>: Data profiling</li>
 <li><em>Integrating data sources</em>: Entity resolution</li>
 <li>…</li>
@@ -1728,7 +1764,8 @@ product_reviews.csv</code></pre>
 
 <section id="data-profiling-single-column-iris-dataset" class="title-slide slide level1 center">
 <h1>Data profiling: single column (Iris dataset)</h1>
-<p>Schema and statistics</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <pre><code>df.info()</code></pre>
 <blockquote>
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -1744,11 +1781,7 @@ Data columns (total 5 columns):
 dtypes: float64(4), int64(1)
 memory usage: 6.0 KB</code></pre>
 </blockquote>
-</section>
-
-<section id="data-profiling-single-columns-iris-dataset" class="title-slide slide level1 center">
-<h1>Data profiling: single columns (Iris dataset)</h1>
-<p>Statistics</p>
+</div><div class="column" style="width:50%;">
 <pre><code>df.describe()</code></pre>
 <blockquote>
 <table class="caption-top">
@@ -1828,6 +1861,7 @@ memory usage: 6.0 KB</code></pre>
 </tbody>
 </table>
 </blockquote>
+</div></div>
 <p>How much metadata are we producing?</p>
 <div class="fragment">
 <ul>
@@ -1838,8 +1872,13 @@ memory usage: 6.0 KB</code></pre>
 </div>
 </section>
 
-<section id="data-profiling-multiple-columns-iris-dataset" class="title-slide slide level1 center">
-<h1>Data profiling: multiple columns (Iris dataset)</h1>
+<section id="data-profiling-computational-cost" class="title-slide slide level1 center">
+<h1>Data profiling: computational cost</h1>
+<p>The results of data profiling are <em>computationally heavy</em> to discover</p>
+<ul>
+<li>E.g., discovering keys/dependencies usually involves some sorting step for each considered column</li>
+</ul>
+<p>… and we need to verify them <em>for groups of columns</em> in a database</p>
 <pre><code>df.corr(method='pearson', numeric_only=True)</code></pre>
 <blockquote>
 <table class="caption-top">
@@ -1891,40 +1930,7 @@ memory usage: 6.0 KB</code></pre>
 </tbody>
 </table>
 </blockquote>
-</section>
-
-<section id="data-profiling-computational-cost" class="title-slide slide level1 center">
-<h1>Data profiling: computational cost</h1>
-<p>The results of data profiling are <em>computationally heavy</em> to discover</p>
-<ul>
-<li>E.g., discovering keys/dependencies usually involves some sorting step for each considered column</li>
-</ul>
-<p>… and we need to verify them <em>for groups of columns</em> in a database</p>
 <p><strong>Complexity</strong>: given a table with four columns <span class="math inline">\(\{w, x, y, z\}\)</span>, how many groups of columns?</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;">w</th>
-<th style="text-align: center;">x</th>
-<th style="text-align: center;">y</th>
-<th style="text-align: center;">z</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">4</td>
-</tr>
-</tbody>
-</table>
 </section>
 
 <section id="data-profiling-column-groups" class="title-slide slide level1 center">
@@ -1958,43 +1964,30 @@ memory usage: 6.0 KB</code></pre>
 </tbody>
 </table>
 </div>
+<ul>
+<li>Cardinality of each column, consider <span class="math inline">\(\binom{|C|}{1}=|C|\)</span> columns <span class="math inline">\(\{(w), (x), (y), (z)\}\)</span></li>
+<li>Correlations between pairs of columns, consider <span class="math inline">\(\binom{|C|}{2}\)</span> groups <span class="math inline">\(\{(w, x), (w, y), (w, z), (x, y), ...\}\)</span></li>
+</ul>
 </div><div class="column" style="width:50%;">
+<div class="fragment">
+<p>Extracting the relationships among all possible groups of columns generalizes to <span class="math inline">\(\sum_{n=1}^{|C|}\binom{|C|}{n}=2^{|C|}−1\)</span> groups</p>
+<ul>
+<li>3 columns → 7 groups, 5 columns → 31, 10 columns → 1023, …</li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/lattice.svg"></p>
 <figcaption>Powerset of four columns</figcaption>
 </figure>
 </div>
+</div>
 </div></div>
-<ul>
-<li>To extract the (distinct) cardinality of each column, I will consider <span class="math inline">\(\binom{|C|}{1}=|C|\)</span> columns <span class="math inline">\(\{(w), (x), (y), (z)\}\)</span></li>
-<li>To extract the correlations between pairs of columns, I will consider <span class="math inline">\(\binom{|C|}{2}\)</span> groups <span class="math inline">\(\{(w, x), (w, y), (w, z), (x, y), ...\}\)</span></li>
-<li>Extracting the relationships among all possible groups of columns generalizes to <span class="math inline">\(\sum_{n=1}^{|C|}\binom{|C|}{n}=2^{|C|}−1\)</span> groups
-<ul>
-<li>3 columns → 7 groups, 4 columns → 15 groups, 5 columns → 31 groups, 10 columns → 1023 groups, …</li>
-</ul></li>
-</ul>
 </section>
 
-<section id="data-profiling-use-cases" class="title-slide slide level1 center">
-<h1>Data profiling: use cases</h1>
-<p>Use cases</p>
-<ul>
-<li><em>Query optimization</em>
-<ul>
-<li>Performed by DBMS to support query optimization with statistics about tables and columns</li>
-<li>Profiling results can be used to estimate the selectivity of operators and the cost of a query plan</li>
-</ul></li>
-<li><em>Data cleansing</em> (typical use case is profiling data)
-<ul>
-<li>Prepare a cleansing process by revealing errors (e.g., in formatting), missing values, or outliers</li>
-</ul></li>
-<li><em>Data integration and analytics</em></li>
-</ul>
-</section>
 
-<section id="data-profiling-statistic-query-optimization" class="title-slide slide level1 center">
-<h1>Data profiling: statistic query optimization</h1>
+
+<section id="example-of-use-case-for-data-profiling-statistic-query-optimization" class="title-slide slide level1 center">
+<h1>Example of use case for data profiling: statistic query optimization</h1>
 <div class="columns">
 <div class="column" style="width:30%;">
 <blockquote>
@@ -2102,38 +2095,7 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-provenance-graph-analysis" class="title-slide slide level1 center">
-<h1>Data provenance: graph analysis</h1>
-<div class="columns">
-<div class="column" style="width:70%;">
-<p>Measures of centrality</p>
-<ul>
-<li><strong>Betweenness centrality (A)</strong>
-<ul>
-<li>Number of shortest paths between two nodes that pass from a certain node</li>
-</ul></li>
-<li><strong>Closeness centrality (B)</strong>
-<ul>
-<li>Sum of distances to all other nodes.</li>
-</ul></li>
-<li><strong>Eigenvector centrality (C)</strong>
-<ul>
-<li>The score of a node is influenced by score of adjacent nodes (Page rank)</li>
-</ul></li>
-<li><strong>Degree centrality (D)</strong>
-<ul>
-<li>Number of adjacent nodes</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:30%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/phdslides_208.png"></p>
-<figcaption>Centrality measures</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
+
 
 <section id="data-provenance-characteristics" class="title-slide slide level1 center">
 <h1>Data provenance: characteristics</h1>
@@ -2285,23 +2247,7 @@ memory usage: 6.0 KB</code></pre>
 
 <img data-src="img/finegrained.png" class="r-stretch quarto-figure-center"><p class="caption">Fine grained</p></section>
 
-<section id="data-provenance-use-cases" class="title-slide slide level1 center">
-<h1>Data provenance: use cases</h1>
-<p>Use cases for data provenance.</p>
-<ul>
-<li>Accountability and auditing</li>
-<li>Data quality
-<ul>
-<li>Monitoring of the quality (e.g., accuracy) of the objects produced</li>
-<li>Notify when a transformation pipeline is not behaving as expected</li>
-</ul></li>
-<li>Debugging
-<ul>
-<li>Inferring the cause of pipeline failures is challenging</li>
-<li>Store inputs of each operation with versions and environmental settings (RAM, CPUs, etc.)</li>
-</ul></li>
-</ul>
-</section>
+
 
 <section id="data-governance-data-versioning" class="title-slide slide level1 center">
 <h1>Data governance: data versioning</h1>
@@ -2364,111 +2310,9 @@ memory usage: 6.0 KB</code></pre>
 <p>What about updating?</p>
 </section>
 
-<section id="data-governance-data-compression" class="title-slide slide level1 center">
-<h1>Data governance: data compression</h1>
-<p>Can we reduce storage and scan costs without losing the information needed by downstream tasks?</p>
-</section>
 
-<section id="compression-definition" class="title-slide slide level1 center">
-<h1>Compression: definition</h1>
-<p><strong>Data compression</strong> is the process of encoding data using fewer bits than the original representation</p>
-<ul>
-<li><em>Lossless</em>: reduces bits by identifying and eliminating redundancy (no information is lost)
-<ul>
-<li>Examples?</li>
-</ul></li>
-<li><em>Lossy</em>: reduces bits by removing less important information
-<ul>
-<li>Examples?</li>
-</ul></li>
-</ul>
-</section>
 
-<section id="compression-parquet" class="title-slide slide level1 center">
-<h1>Compression: Parquet</h1>
 
-<img data-src="img/parquet.png" class="r-stretch quarto-figure-center"><p class="caption">Data compression</p></section>
-
-<section id="compression-summarization" class="title-slide slide level1 center">
-<h1>Compression: summarization</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><strong>Summarization</strong>: find a concise representation of a dataset in a comprehensible, informative manner</p>
-<blockquote>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Transaction dataset</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>TID</th>
-<th>Products</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>T1</td>
-<td>Beer, Diapers, Cola</td>
-</tr>
-<tr class="even">
-<td>T2</td>
-<td>Cola, Fanta</td>
-</tr>
-<tr class="odd">
-<td>T3</td>
-<td>Beer, Cola</td>
-</tr>
-<tr class="even">
-<td>T3</td>
-<td>Beer, Diapers</td>
-</tr>
-</tbody>
-</table>
-</div><div class="column" style="width:50%;">
-<p>Frequent itemset mining</p>
-<p>Itemset 1: {Cola}</p>
-<p>Itemset 2: {Beer}</p>
-<p>Itemset 3: {Beer, Diapers}</p>
-</div></div>
-</blockquote>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides18.png"></p>
-<figcaption>Characteristics of data summarization <span class="citation" data-cites="ahmed2019data">(<a href="#/references" role="doc-biblioref" onclick="">Ahmed 2019</a>)</span></figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-
-<section id="data-governance-entity-resolution" class="title-slide slide level1 center">
-<h1>Data governance: entity resolution</h1>
-<p>Can we recognize when different records refer to the same real-world entity?</p>
-</section>
-
-<section id="entity-resolution" class="title-slide slide level1 center">
-<h1>Entity resolution</h1>
-<p>Entity resolution <span class="citation" data-cites="papadakis2020blocking">(<a href="#/references" role="doc-biblioref" onclick="">Papadakis et al. 2020</a>)</span>, also known as entity matching or linking</p>
-<ul>
-<li>Find records that refer to the same entity across different data sources</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides20.png"></p>
-<figcaption>Example of intra-source entity resolution</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/entityresolution.png"></p>
-<figcaption>Example of inter-source entity resolution</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
 
 <section id="data-governance-data-catalog" class="title-slide slide level1 center">
 <h1>Data governance: data catalog</h1>
@@ -2495,45 +2339,9 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="data-catalog-domains" class="title-slide slide level1 center">
-<h1>Data catalog: domains</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>Metadata is organized into <strong>domains</strong>.</p>
-<ul>
-<li>A domain is a group of entities sharing knowledge, goals, methods of operation, and communication</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/datacatalog-domain.PNG"></p>
-<figcaption>Organization of domains</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
 
-<section id="data-catalog-processes-vs-capabilities" class="title-slide slide level1 center">
-<h1>Data catalog: processes vs capabilities</h1>
-<div class="columns">
-<p><em>Processes</em> describe how a company performs its tasks.</p><p><em>Capabilities</em> describe what tasks a company performs.</p><ul>
-<li>Neither processes nor capabilities reflect the business units of your company 1:1.</li>
-</ul><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/datacatalog-domain1.PNG"></p>
-<figcaption>Process oriented</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/datacatalog-domain2.PNG"></p>
-<figcaption>Capability oriented</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
+
+
 
 <section id="case-study-data-governance-1" class="title-slide slide level1 center" data-background-color="#121011">
 <h1><img src="./img/cs.svg" class="title-icon"> Case study: data governance</h1>
@@ -2541,46 +2349,64 @@ memory usage: 6.0 KB</code></pre>
 <p><a href="https://colab.research.google.com/github/w4bo/AA2627-unibo-bdcp/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
 </section>
 
-<section id="case-study-data-catalog" class="title-slide slide level1 center" data-background-color="#121011">
-<h1><img src="./img/cs.svg" class="title-icon"> Case study: data catalog</h1>
-<p><a href="http://localhost:9002/">Link to the DataHub catalog</a></p>
-</section>
+
 
 <section id="end-of-the-case-study-2" class="title-slide slide level1 center" data-background-color="#121011">
 <h1>End of the case study</h1>
 
 </section>
 
-<section id="data-governance-meta-metadata-management" class="title-slide slide level1 center">
-<h1>Data governance: meta-metadata management</h1>
+
+
+
+
+<section id="designing-data-platforms" class="title-slide slide level1 center">
+<h1>Designing data platforms</h1>
 
 </section>
 
-<section id="data-platform-meta-metadata" class="title-slide slide level1 center">
-<h1>Data platform: meta-metadata</h1>
-<p>Are we done? No!</p>
-<ul>
-<li>Metadata can become bigger than the data itself</li>
-</ul>
-<p>We need meta-metadata (or models)…</p>
-<ul>
-<li>… chasing our own tails</li>
-</ul>
-<p>Data management is still a research issue in data platforms.</p>
-</section>
-
-
-
-
-
-<section id="how-do-we-build-data-platforms" class="title-slide slide level1 center">
-<h1>How do we build data platforms?</h1>
-
+<section id="three-layers-for-modern-data-platforms" class="title-slide slide level1 center">
+<h1>Three layers for modern data platforms</h1>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Main question</th>
+<th>Main mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Data fabric</strong></td>
+<td>How do we connect and govern distributed data assets?</td>
+<td>Active metadata, integration, orchestration</td>
+</tr>
+<tr class="even">
+<td><strong>Data mesh</strong></td>
+<td>Who owns data products, quality, and access?</td>
+<td>Domains, data products, federated governance</td>
+</tr>
+<tr class="odd">
+<td><strong>AI-powered platform</strong></td>
+<td>How do humans and agents understand and use the platform?</td>
+<td>Semantic layer, RAG, GraphRAG, LLM wiki</td>
+</tr>
+</tbody>
+</table>
+<p>Takeaway:</p>
+<blockquote>
+<p>Fabric connects the platform. Mesh assigns responsibility. AI makes the platform understandable.</p>
+</blockquote>
 </section>
 
 <section id="data-fabric-definition" class="title-slide slide level1 center">
 <h1>Data fabric: definition</h1>
-<p><strong>Data fabric</strong> is a “vision for data management […] that seamlessly connects different clouds, whether they are private or public environments.” (<a href="https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf">2016</a>)</p>
+<p><strong>Data fabric</strong> is a design concept “for data management […] that seamlessly connects different clouds environments.” (<a href="https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf">2016</a>)</p>
 <p>Frictionless access and sharing of data in a distributed data environment</p>
 <ul>
 <li>Enables a <em>single and consistent data management framework</em></li>
@@ -2600,31 +2426,7 @@ memory usage: 6.0 KB</code></pre>
 
 <img data-src="img/CDP-diagram-sm.png" class="r-stretch quarto-figure-center"><p class="caption">Cloudera SDX</p></section>
 
-<section id="data-fabric-design-concept" class="title-slide slide level1 center">
-<h1>Data fabric: design concept</h1>
-<p><strong>It is a design concept</strong></p>
-<ul>
-<li>It optimizes data management by automating repetitive tasks</li>
-<li>Gartner framed data fabric as a maturing vendor framework for automating data management tasks</li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides34.png"></p>
-<figcaption>Providers</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides35.png"></p>
-<figcaption>Providers</figcaption>
-</figure>
-</div>
-</div></div>
-<p><a href="https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration">Gartner (2021). Data fabric is key to modernizing data management</a></p>
-</section>
+
 
 <section id="data-fabric-capabilities" class="title-slide slide level1 center">
 <h1>Data fabric: capabilities</h1>
@@ -2670,100 +2472,18 @@ memory usage: 6.0 KB</code></pre>
 <p><a href="https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration">Gartner (2021). Data fabric is key to modernizing data management</a></p>
 </section>
 
-<section id="automation-through-orchestration-role" class="title-slide slide level1 center">
-<h1>Automation through orchestration: role</h1>
-<p>The orchestrator is the component in charge of controlling the execution of computation activities</p>
-<ul>
-<li>Either through a regular scheduling of the activities</li>
-<li>Or by triggering a process in response to a certain event</li>
-</ul>
-<p>Several entities (either processes or human beings) can cover this role to activate some data processes</p>
-</section>
 
-<section id="automation-through-orchestration-decisions" class="title-slide slide level1 center">
-<h1>Automation through orchestration: decisions</h1>
-<p>Dynamic/condition-based behavior</p>
-<ul>
-<li>Decide <em>what</em> data process should be activated under different conditions</li>
-<li>Decide <em>how</em> to tune the parameters in case of parametric data processes</li>
-</ul>
-<p>Triggering</p>
-<ul>
-<li>Decide <em>when</em> to trigger a certain data process</li>
-</ul>
-<p>Scoping</p>
-<ul>
-<li>Assess the trustworthiness of objects to decide <em>if</em> a certain data process should be activated or not</li>
-</ul>
-<p>Resource estimation or prediction (based on previous executions and current settings)</p>
-<ul>
-<li>Decide the optimal amount of resources required to terminate successfully while leaving sufficient resources to the other concurrent process</li>
-<li>Negotiate the resources with the cluster’s resource manager</li>
-</ul>
-</section>
 
-<section id="automation-through-orchestration-resources" class="title-slide slide level1 center">
-<h1>Automation through orchestration: resources</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/phdslides_209.png"></p>
-<figcaption><span class="citation" data-cites="barika2019orchestrating">(<a href="#/references" role="doc-biblioref" onclick="">Barika et al. 2019</a>)</span></figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<p>R1 Compute/CPU resource provisioning</p>
-<ul>
-<li>Determine the right amount of resources</li>
-<li>Continuous management in a dynamic environment</li>
-</ul>
-<p>R2 Storage</p>
-<ul>
-<li>Choose the right cloud storage resource, data location, and format (if the application is parametric)</li>
-</ul>
-<p>R3 Data movement</p>
-<ul>
-<li>Dynamically transfer large datasets between compute and storage resources</li>
-</ul>
-<p>R4 Synchronization and asynchronization</p>
-<ul>
-<li>Manage data flow dependencies across analytics tasks</li>
-</ul>
-</div></div>
-</section>
 
-<section id="automation-through-orchestration-execution-guarantees" class="title-slide slide level1 center">
-<h1>Automation through orchestration: execution guarantees</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/phdslides_209.png"></p>
-<figcaption><span class="citation" data-cites="barika2019orchestrating">(<a href="#/references" role="doc-biblioref" onclick="">Barika et al. 2019</a>)</span></figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<p>R5 Analytic Task Scheduling and Execution</p>
-<ul>
-<li>Coordinate workflows across diverse big data models</li>
-<li>Track and capture data provenance</li>
-</ul>
-<p>R6 Service Level Agreement</p>
-<ul>
-<li>Meet user-defined QoS, such as strict deadlines</li>
-</ul>
-<p>R7 Security</p>
-<ul>
-<li>Support anonymous computation, verify outcomes in multi-party settings, etc.</li>
-</ul>
-<p>R8 Monitoring and Failure-Tolerance</p>
-<ul>
-<li>Ensure streamlined execution</li>
-<li>Handle or predict failures as they occur</li>
-</ul>
-</div></div>
-</section>
+
+<section id="automation-through-orchestration" class="title-slide slide level1 center">
+<h1>Automation through orchestration</h1>
+
+<img data-src="img/phdslides_209.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="barika2019orchestrating">(<a href="#/references" role="doc-biblioref" onclick="">Barika et al. 2019</a>)</span></p></section>
+
+
+
+
 
 <section id="data-mesh-principles" class="title-slide slide level1 center">
 <h1>Data mesh: principles</h1>
@@ -2838,21 +2558,6 @@ memory usage: 6.0 KB</code></pre>
 
 </section>
 
-<section id="data-mesh-vs-data-fabric-frameworks" class="title-slide slide level1 center">
-<h1>Data mesh vs data fabric: frameworks</h1>
-<p>They are design concepts, not things.</p>
-<ul>
-<li>They are not mutually exclusive</li>
-<li>They are architectural frameworks, not architectures
-<ul>
-<li>The frameworks must be adapted and customized to your needs, data, processes, and terminology</li>
-<li>Vendor frameworks keep evolving, so treat product claims as implementation choices rather than definitions</li>
-</ul></li>
-</ul>
-<p>Alex Woodie, 2021 <a href="https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/">https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/</a></p>
-<p>Dave Wells, 2021 <a href="https://www.eckerson.com/articles/data-architecture-complex-vs-complicated">https://www.eckerson.com/articles/data-architecture-complex-vs-complicated</a></p>
-</section>
-
 <section id="data-mesh-vs-data-fabric-emphasis" class="title-slide slide level1 center">
 <h1>Data mesh vs data fabric: emphasis</h1>
 <p>Both provide an architectural framework to access data across multiple technologies and platforms.</p>
@@ -2877,40 +2582,6 @@ memory usage: 6.0 KB</code></pre>
 
 <img data-src="img/slides39.png" class="r-stretch quarto-figure-center"><p class="caption">Data mesh vs data fabric</p></section>
 
-<section id="data-mesh-vs-data-fabric-takeaway" class="title-slide slide level1 center">
-<h1>Data mesh vs data fabric: takeaway</h1>
-<p>Data Fabric and Mesh are the results of the data architecture evolution.</p>
-<ul>
-<li><strong>Many capabilities were in existence already long before</strong> the terms were coined</li>
-</ul>
-<p>Takeaway:</p>
-<ul>
-<li>Abstract the “building blocks” of such platforms</li>
-<li>Let them evolve according to scalability and flexibility requirements</li>
-</ul>
-</section>
-
-<section id="data-mesh-hype-cycle-positioning" class="title-slide slide level1 center">
-<h1>Data mesh: hype-cycle positioning</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/hypecycle-dm-2024.png"></p>
-<figcaption>2024</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/hypecycle-dm-2025.png"></p>
-<figcaption>2025</figcaption>
-</figure>
-</div>
-</div></div>
-<p>As new technologies and solutions mature to support a centralized approach to data access, distributed approaches like Data Mesh are expected to fall increasingly out of favor in enterprise IT.</p>
-</section>
-
 <section id="data-mesh-hype-cycle-trend" class="title-slide slide level1 center">
 <h1>Data mesh: hype-cycle trend</h1>
 <div class="columns">
@@ -2932,182 +2603,187 @@ memory usage: 6.0 KB</code></pre>
 <p>As new technologies and solutions mature to support a centralized approach to data access, distributed approaches like Data Mesh are expected to fall increasingly out of favor in enterprise IT.</p>
 </section>
 
-<section id="wooclap-examples-of-exam-questions" class="title-slide slide level1 center">
-<h1>Wooclap (examples of exam questions)</h1>
-<iframe allowfullscreen="" frameborder="0" height="100%" mozallowfullscreen="" src="https://app.wooclap.com/LKDKIY/questionnaires/670e89be981e282b0b69ee7c" style="min-height: 550px; min-width: 300px" width="100%">
-</iframe>
-</section>
-
-<section id="further-reading-architecture-patterns" class="title-slide slide level1 center">
-<h1>Further reading: architecture patterns</h1>
+<section id="data-mesh-hype-cycle-positioning" class="title-slide slide level1 center">
+<h1>Data mesh: hype-cycle positioning</h1>
 <div class="columns">
-<div class="column" style="width:33%;">
+<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/slides40.jpg"></p>
-<figcaption>Ref 1</figcaption>
+<p><img data-src="img/hypecycle-dm-2025.png"></p>
+<figcaption>2025</figcaption>
 </figure>
 </div>
-</div><div class="column" style="width:33%;">
+</div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="img/slides41.png"></p>
-<figcaption>Ref 2</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:33%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides42.png"></p>
-<figcaption>Ref 3</figcaption>
+<p><img data-src="img/hypecycle-dm-2026.png"></p>
+<figcaption>2024</figcaption>
 </figure>
 </div>
 </div></div>
 </section>
 
-<section id="from-platform-concepts-to-deployment" class="title-slide slide level1 center">
-<h1>From platform concepts to deployment</h1>
-<p>So far, we have discussed what a data platform must support.</p>
-<p>Now we ask how difficult it is to deploy and operate one in practice.</p>
-</section>
-
-<section id="example-of-data-platform-hadoop-based" class="title-slide slide level1 center">
-<h1>Example of data platform: Hadoop-based</h1>
-<p>A data platform on the Hadoop stack requires several tools.</p>
-
-<img data-src="img/74.svg" class="r-stretch quarto-figure-center"><p class="caption">Hadoop-based data platform</p><p>How many levels of complexity are hidden here?</p>
-<p>How do you provision it?</p>
+<section id="ai-powered-data-platforms" class="title-slide slide level1 center">
+<h1>AI-powered data platforms</h1>
+<p>What changes with generative AI?</p>
+<pre><code>Catalog + Lineage + Metadata -&gt; Semantic Layer -&gt; RAG / GraphRAG / LLM Wiki</code></pre>
+<p>The main shift:</p>
 <ul>
-<li>Manual provisioning on-premises</li>
-<li>Semi-automatic provisioning on-premises</li>
-<li>Automatic provisioning in the cloud</li>
+<li>A data platform does not only store and process data</li>
+<li>It also explains data assets, relationships, and usage constraints</li>
+<li>Metadata becomes context for both humans and AI agents</li>
 </ul>
 </section>
+
+<section id="semantic-layer" class="title-slide slide level1 center">
+<h1>Semantic layer</h1>
+<p>A <strong>semantic layer</strong> maps technical assets to business concepts.</p>
+<ul>
+<li>Tables become business entities</li>
+<li>Columns become metrics, dimensions, policies, and definitions</li>
+<li>Queries can use business language instead of physical schemas</li>
+</ul>
+<p>This idea is close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="bienvenu2018ontology">(<a href="#/references" role="doc-biblioref" onclick=""><strong>bienvenu2018ontology?</strong></a>)</span>.</p>
+<p>Example:</p>
+<ul>
+<li>User asks: “monthly active customers by region”</li>
+<li>Semantic layer defines: customer, active, month, region, allowed filters</li>
+<li>Engine generates SQL against DWH/lakehouse tables</li>
+</ul>
+</section>
+
+<section id="rag-over-platform-knowledge" class="title-slide slide level1 center">
+<h1>RAG over platform knowledge</h1>
+<p><strong>Retrieval-Augmented Generation (RAG)</strong> retrieves external evidence before the LLM generates an answer <span class="citation" data-cites="lewis2020retrieval">(<a href="#/references" role="doc-biblioref" onclick="">Lewis et al. 2020</a>)</span>.</p>
+<p>In a data platform, the retrievable corpus can include:</p>
+<ul>
+<li>catalog descriptions and data-product documentation</li>
+<li>lineage graphs and pipeline logs</li>
+<li>notebooks, dashboards, tickets, and incident reports</li>
+<li>access policies and data-quality checks</li>
+</ul>
+<p>Example question:</p>
+<blockquote>
+<p>Which datasets feed the churn dashboard, and which upstream pipeline failed last week?</p>
+</blockquote>
+</section>
+
+<section id="graphrag-for-connected-metadata" class="title-slide slide level1 center">
+<h1>GraphRAG for connected metadata</h1>
+<p>Plain RAG retrieves similar chunks.</p>
+<p><strong>GraphRAG</strong> builds a graph of entities and relationships, then retrieves from that graph for local and global questions <span class="citation" data-cites="hogan2021knowledge edge2025graphrag">(<a href="#/references" role="doc-biblioref" onclick=""><strong>hogan2021knowledge?</strong></a>; <a href="#/references" role="doc-biblioref" onclick="">Edge et al. 2025</a>)</span>.</p>
+<p>Why this fits data platforms:</p>
+<ul>
+<li>lineage is already a graph</li>
+<li>catalogs connect datasets, owners, domains, dashboards, and policies</li>
+<li>provenance connects outputs to transformations and inputs</li>
+</ul>
+<p>Example question:</p>
+<blockquote>
+<p>Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?</p>
+</blockquote>
+</section>
+
+<section id="llm-wiki-for-data-products" class="title-slide slide level1 center">
+<h1>LLM wiki for data products</h1>
+<p>An <strong>LLM wiki</strong> is a curated, human-readable layer generated from governed platform metadata.</p>
+<p>It complements the catalog.</p>
+<p>It can summarize and organize:</p>
+<ul>
+<li>one page per data product</li>
+<li>owner, SLA, source systems, lineage, quality checks</li>
+<li>common questions, example queries, known limitations</li>
+<li>links to catalog entries, dashboards, notebooks, and runbooks</li>
+</ul>
+<p>Useful rule:</p>
+<blockquote>
+<p>Every generated page must cite catalog, lineage, or documentation sources.</p>
+</blockquote>
+</section>
+
+<section id="examples-in-cloud-data-platforms" class="title-slide slide level1 center">
+<h1>Examples in cloud data platforms</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Databricks</strong></p>
+<ul>
+<li><a href="https://www.databricks.com/product/unity-catalog/business-semantics">Unity Catalog semantics</a></li>
+<li><a href="https://docs.databricks.com/aws/en/ai-bi/">AI/BI Genie</a></li>
+</ul>
+<p><strong>Snowflake</strong></p>
+<ul>
+<li><a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst">Cortex Analyst</a></li>
+<li>semantic models for text-to-SQL</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Microsoft Fabric</strong></p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent">Fabric data agents</a></li>
+<li>conversational access to governed data</li>
+</ul>
+<p><strong>AWS</strong></p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html">Bedrock Knowledge Bases</a></li>
+<li>RAG over enterprise data</li>
+</ul>
+</div></div>
+</section>
+
+<section id="data-agents" class="title-slide slide level1 center">
+<h1>Data agents</h1>
+<p>A <strong>data agent</strong> is a governed conversational layer over a data platform.</p>
+<p>It combines an LLM with platform tools:</p>
+<ul>
+<li>semantic models, catalogs, schemas, and policies</li>
+<li>SQL, DAX, KQL, search, or code execution tools</li>
+<li>user permissions and governance checks</li>
+<li>readable answers with tables, charts, queries, or citations</li>
+</ul>
+<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management, preparation, and analysis <span class="citation" data-cites="sui2026dataagents">(<a href="#/references" role="doc-biblioref" onclick=""><strong>sui2026dataagents?</strong></a>)</span>.</p>
+<p>Examples:</p>
+<ul>
+<li>Microsoft Fabric Data Agent</li>
+<li>Databricks Genie Agents</li>
+<li>Snowflake Cortex Agents</li>
+</ul>
+</section>
+
+<section id="ai-powered-data-platforms-risks" class="title-slide slide level1 center">
+<h1>AI-powered data platforms: risks</h1>
+<p>The AI layer must inherit platform governance.</p>
+<ul>
+<li><strong>Grounding</strong>: answers must point to catalog, lineage, and source documents</li>
+<li><strong>Freshness</strong>: generated pages must expire or refresh when metadata changes</li>
+<li><strong>Access control</strong>: retrieval must respect user permissions</li>
+<li><strong>Evaluation</strong>: test answers on real platform questions, not generic prompts</li>
+<li><strong>Human review</strong>: generated documentation should be reviewed for critical data products</li>
+</ul>
+<p>Takeaway:</p>
+<blockquote>
+<p>AI makes metadata more usable, but it also makes metadata governance more important.</p>
+</blockquote>
+</section>
+
+
+
+
+
+
+
+
+
+
 
 <section id="example-of-architecture" class="title-slide slide level1 center">
 <h1>“Example” of architecture</h1>
 
-<img data-src="img/slides43.jpg" class="r-stretch quarto-figure-center"><p class="caption">https://xkcd.com/2347/</p><p>(*) “Ormai sta xkcd é una base troppo usata” A. Tappi</p>
+<img data-src="img/slides43.jpg" class="r-stretch quarto-figure-center"><p class="caption">https://xkcd.com/2347/</p><p>(*) “Ormai sta xkcd è una base troppo usata” A. Tappi</p>
 </section>
 
-<section id="on-premises-manual-provisioning" class="title-slide slide level1 center">
-<h1>On-premises manual provisioning</h1>
-<p>It is hardly advisable, if not for small and local tests.</p>
-<p><strong>Technical challenges</strong></p>
-<ul>
-<li>Installation: how do I set up a new machine?</li>
-<li>Networking: how do I cable dozens of machines?</li>
-<li>Management: how do I replace a broken disk?</li>
-<li>Upgrade: how do I extend the cluster with new services/machines?</li>
-<li>(energy and cooling, software licenses, insurance…)</li>
-</ul>
-<p><strong>Technological challenges</strong></p>
-<ul>
-<li>How do we configure a distributed environment?</li>
-<li>How do we set up/integrate/control independent services?</li>
-<li>How do we orchestrate data flows?</li>
-</ul>
-<p><strong>Business challenges</strong></p>
-<ul>
-<li>Can we afford to spend resources on tasks that are not mission-oriented?</li>
-<li>No free lunch, each choice has a cost/benefit</li>
-<li>How much time does it take to master a technology?</li>
-<li>How many people do I need?</li>
-</ul>
-</section>
+<section id="example-of-modern-architecture" class="title-slide slide level1 center">
+<h1>“Example” of modern architecture</h1>
 
-<section id="data-platform-related-job-positions" class="title-slide slide level1 center">
-<h1>Data platform: related job positions</h1>
-
-<img data-src="img/slides28.png" class="r-stretch quarto-figure-center"><p class="caption">(Big) data pipeline</p></section>
-
-<section id="data-platform-related-job-positions-1" class="title-slide slide level1 center">
-<h1>Data platform: related job positions</h1>
-<p><em>Data platform engineer</em></p>
-<ul>
-<li>Orchestrate the successful implementation of cloud technologies within the data infrastructure of their business</li>
-<li>Solid understanding of impact database types and implementation</li>
-<li>Responsible for purchasing decisions for cloud services and approval of data architectures</li>
-</ul>
-<p><em>Data architect</em></p>
-<ul>
-<li>Team members who understand all aspects of a data platform’s architecture</li>
-<li>Work closely with the data platform engineers to create data workflows</li>
-</ul>
-<p><em>Data scientist</em></p>
-<ul>
-<li>Analyze and interpret complex digital data</li>
-<li>Work with new technologies (e.g., machine learning) to deepen the business’s understanding and gain new insights</li>
-</ul>
-<p><em>Data analyst</em></p>
-<ul>
-<li>Analyze data systems, creating automated systems for retrieving data from the data platform</li>
-<li>Cloud data analysts are more commonly members of the business user population</li>
-</ul>
-</section>
-
-<section id="from-devops" class="title-slide slide level1 center">
-<h1>From DevOps…</h1>
-<p><strong>DevOps</strong> combines development and operations to increase the efficiency, speed, and security of software development and delivery compared to traditional processes.</p>
-<p>DevOps practices enable software development (dev) and operations (ops) teams to accelerate delivery through automation, collaboration, fast feedback, and iterative improvement.</p>
-
-<img data-src="img/slides29.png" class="r-stretch quarto-figure-center"><p class="caption">DevOps</p><p><a href="https://about.gitlab.com/topics/devops/">https://about.gitlab.com/topics/devops/</a></p>
-</section>
-
-<section id="to-dataops" class="title-slide slide level1 center">
-<h1>… to DataOps</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><strong>DataOps</strong> refers to a general process aimed at shortening the end-to-end data analytics life-cycle time by introducing automation in the data collection, validation, and verification process</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides30.png"></p>
-<figcaption>Evolution of DataOps <span class="citation" data-cites="munappy2020ad">(<a href="#/references" role="doc-biblioref" onclick="">Munappy et al. 2020</a>)</span></figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides31.png"></p>
-<figcaption>Evolution of DataOps</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-
-<section id="dataops" class="title-slide slide level1 center">
-<h1>DataOps</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>From DevOps to DataOps</p>
-<ul>
-<li>“A collaborative data management practice focused on improving the <em>communication, integration and automation of data flows between data managers and data consumers across an organization</em>”</li>
-<li>Data analytics improved in terms of velocity, quality, predictability, and scale of software engineering and deployment</li>
-</ul>
-<p>Some key rules</p>
-<ul>
-<li>Establish progress and performance measurements at every stage</li>
-<li>Automate as many stages of the data flow as possible</li>
-<li>Establish governance discipline (<em>governance-as-code</em>)</li>
-<li>Design process for growth and extensibility</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides32.png"></p>
-<figcaption>DevOps</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides33.png"></p>
-<figcaption>DataOps</figcaption>
-</figure>
-</div>
-</div></div>
-<p>Gartner, 2020 <a href="https://www.gartner.com/smarterwithgartner/how-dataops-amplifies-data-and-analytics-business-value">https://www.gartner.com/smarterwithgartner/how-dataops-amplifies-data-and-analytics-business-value</a></p>
-<p>Andy Palmer, 2015 <a href="https://www.tamr.com/blog/from-devops-to-dataops-by-andy-palmer/">https://www.tamr.com/blog/from-devops-to-dataops-by-andy-palmer/</a></p>
-<p>William Vorhies, 2017 <a href="https://www.datasciencecentral.com/profiles/blogs/dataops-it-s-a-secret">https://www.datasciencecentral.com/profiles/blogs/dataops-it-s-a-secret</a></p>
+<img data-src="img/slides43-bis.png" class="r-stretch quarto-figure-center"><p class="caption">https://xkcd.com/2347/</p><p>(*) “Per un totale di 4 crediti” N. Narducci</p>
 </section>
 
 <section id="summing-up" class="title-slide slide level1 center">
@@ -3143,9 +2819,6 @@ memory usage: 6.0 KB</code></pre>
 <h1>References</h1>
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-ahmed2019data" class="csl-entry" role="listitem">
-Ahmed, Mohiuddin. 2019. <span>“Data Summarization: A Survey.”</span> <em>Knowledge and Information Systems</em> 58 (2): 249–73.
-</div>
 <div id="ref-armbrust2021lakehouse" class="csl-entry" role="listitem">
 Armbrust, Michael, Ali Ghodsi, Reynold Xin, and Matei Zaharia. 2021. <span>“Lakehouse: A New Generation of Open Platforms That Unify Data Warehousing and Advanced Analytics.”</span> <em>Proceedings of CIDR</em> 8: 28.
 </div>
@@ -3163,6 +2836,9 @@ Codd, E. F. 1970. <span>“A Relational Model of Data for Large Shared Data Bank
 </div>
 <div id="ref-couto2019mapping" class="csl-entry" role="listitem">
 Couto, Julia, Olimar Teixeira Borges, Duncan D Ruiz, Sabrina Marczak, and Rafael Prikladnicki. 2019. <span>“A Mapping Study about Data Lakes: An Improved Definition and Possible Architectures.”</span> <em>SEKE</em>, 453–578.
+</div>
+<div id="ref-edge2025graphrag" class="csl-entry" role="listitem">
+Edge, Darren, Ha Trinh, Newman Cheng, et al. 2025. <span>“From Local to Global: A Graph <span>RAG</span> Approach to Query-Focused Summarization.”</span> <em>arXiv Preprint arXiv:2404.16130</em>.
 </div>
 <div id="ref-DBLP:journals/vldb/ForresiGGH21" class="csl-entry" role="listitem">
 Forresi, Chiara, Enrico Gallinucci, Matteo Golfarelli, and Hamdi Ben Hamadou. 2021. <span>“A Dataspace-Based Framework for <span>OLAP</span> Analyses in a High-Variety Multistore.”</span> <em>The VLDB Journal</em> 30 (6): 1017–40. <a href="https://doi.org/10.1007/S00778-021-00682-5">https://doi.org/10.1007/S00778-021-00682-5</a>.
@@ -3184,6 +2860,9 @@ Ikeda, Robert, and Jennifer Widom. 2009. <em>Data Lineage: A Survey</em>. Stanfo
 </div>
 <div id="ref-lcvenshtcin1966binary" class="csl-entry" role="listitem">
 Lcvenshtcin, VI. 1966. <span>“Binary Coors Capable or ‘Correcting Deletions, Insertions, and Reversals.”</span> <em>Soviet Physics-Doklady</em> 10.
+</div>
+<div id="ref-lewis2020retrieval" class="csl-entry" role="listitem">
+Lewis, Patrick, Ethan Perez, Aleksandra Piktus, et al. 2020. <span>“Retrieval-Augmented Generation for Knowledge-Intensive <span>NLP</span> Tasks.”</span> <em>Advances in Neural Information Processing Systems</em> 33: 9459–74.
 </div>
 <div id="ref-mann2002some" class="csl-entry" role="listitem">
 Mann, Bob. 2002. <span>“Some Data Derivation and Provenance Issues in Astronomy.”</span> <em>Workshop on Data Derivation and Provenance, Chicago</em>.
