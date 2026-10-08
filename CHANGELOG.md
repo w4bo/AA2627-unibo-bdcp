@@ -1,3 +1,17 @@
+## [1.0.12](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.11...1.0.12) (2026-10-08)
+
+### Bug Fixes
+
+* do not run AWS labsù on CI ([8fc6311](https://github.com/w4bo/AA2627-unibo-bdcp/commit/8fc6311edd7d734789f69b013cd348fd010a5ed3))
+* ignore case match ([5ca4d8b](https://github.com/w4bo/AA2627-unibo-bdcp/commit/5ca4d8b7fcb7fa03c956c2efc546351203f87204))
+* reworking the introduction ([a418036](https://github.com/w4bo/AA2627-unibo-bdcp/commit/a4180365b9f02cb02af3dcd19f763c26f363f22a))
+* update links ([6b39f55](https://github.com/w4bo/AA2627-unibo-bdcp/commit/6b39f55433a46586a9cfee17adfe767f7391b52e))
+* updatekernel name ([f1115a5](https://github.com/w4bo/AA2627-unibo-bdcp/commit/f1115a508c4b7062fb1a206a7b05528e55f02f02))
+
+### Build and continuous integration
+
+* working on ci ([ae72ab2](https://github.com/w4bo/AA2627-unibo-bdcp/commit/ae72ab2ddbcbba22a16255eac5e27e169dd290ad))
+
 ## [1.0.11](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.10...1.0.11) (2026-10-07)
 
 ### Bug Fixes
