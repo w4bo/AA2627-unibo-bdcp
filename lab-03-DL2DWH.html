@@ -231,271 +231,221 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </details>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
-<pre>Collecting awswrangler
+<pre>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
-  Downloading awswrangler-3.17.1-py3-none-any.whl.metadata (17 kB)
+Requirement already satisfied: awswrangler in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (2.17.0)
 
-Collecting boto3&lt;2,&gt;=1.20.32 (from awswrangler)
+Requirement already satisfied: botocore&lt;2.0.0,&gt;=1.27.11 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.29.14)
 
-  Downloading boto3-1.43.108-py3-none-any.whl.metadata (6.6 kB)
+Requirement already satisfied: numpy&lt;2.0.0,&gt;=1.21.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.23.5)
 
-Collecting botocore&lt;2,&gt;=1.23.32 (from awswrangler)
+Requirement already satisfied: opensearch-py&lt;3,&gt;=1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (2.0.0)
 
-  Downloading botocore-1.43.108-py3-none-any.whl.metadata (5.6 kB)
+Requirement already satisfied: boto3&lt;2.0.0,&gt;=1.24.11 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.26.13)
 
-Requirement already satisfied: numpy&lt;3.0,&gt;=1.26 in /usr/local/lib/python3.14/site-packages (from awswrangler) (2.4.2)
+Requirement already satisfied: pyarrow&lt;8.1.0,&gt;=2.0.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (7.0.0)
 
-Requirement already satisfied: packaging&lt;27.0,&gt;=21.1 in /usr/local/lib/python3.14/site-packages (from awswrangler) (25.0)
+Requirement already satisfied: gremlinpython&lt;4.0.0,&gt;=3.5.2 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (3.6.1)
 
-Requirement already satisfied: pandas&lt;4.0.0,&gt;=1.2.0 in /usr/local/lib/python3.14/site-packages (from awswrangler) (3.0.1)
+Requirement already satisfied: pymysql&lt;2.0.0,&gt;=1.0.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.0.2)
 
-Collecting pyarrow&lt;26.0.0,&gt;=8.0.0 (from awswrangler)
+Requirement already satisfied: pandas&lt;2.0.0,&gt;=1.2.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.3.4)
 
-  Downloading pyarrow-25.0.1-cp314-cp314-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Requirement already satisfied: pg8000&lt;2.0.0,&gt;=1.20.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.29.3)
 
-Requirement already satisfied: setuptools in /usr/local/lib/python3.14/site-packages (from awswrangler) (81.0.0)
+Requirement already satisfied: requests-aws4auth&lt;2.0.0,&gt;=1.1.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.1.2)
 
-Requirement already satisfied: typing-extensions&lt;5,&gt;=4.4.0 in /usr/local/lib/python3.14/site-packages (from awswrangler) (4.15.0)
+Requirement already satisfied: redshift-connector&lt;2.1.0,&gt;=2.0.889 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (2.0.909)
 
-Collecting jmespath&lt;2.0.0,&gt;=0.7.1 (from boto3&lt;2,&gt;=1.20.32-&gt;awswrangler)
+Requirement already satisfied: progressbar2&lt;5.0.0,&gt;=4.0.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (4.2.0)
 
-  Downloading jmespath-1.1.0-py3-none-any.whl.metadata (7.6 kB)
+Requirement already satisfied: jsonpath-ng&lt;2.0.0,&gt;=1.5.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (1.5.3)
 
-Collecting s3transfer&lt;0.20.0,&gt;=0.19.0 (from boto3&lt;2,&gt;=1.20.32-&gt;awswrangler)
+Requirement already satisfied: openpyxl&lt;3.1.0,&gt;=3.0.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (3.0.9)
 
-  Downloading s3transfer-0.19.2-py3-none-any.whl.metadata (1.7 kB)
+Requirement already satisfied: backoff&lt;3.0.0,&gt;=1.11.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from awswrangler) (2.2.1)
 
-Requirement already satisfied: python-dateutil&lt;3.0.0,&gt;=2.1 in /usr/local/lib/python3.14/site-packages (from botocore&lt;2,&gt;=1.23.32-&gt;awswrangler) (2.9.0.post0)
+Requirement already satisfied: jmespath&lt;2.0.0,&gt;=0.7.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from boto3&lt;2.0.0,&gt;=1.24.11-&gt;awswrangler) (0.10.0)
 
-Requirement already satisfied: urllib3!=2.2.0,&lt;3,&gt;=1.25.4 in /usr/local/lib/python3.14/site-packages (from botocore&lt;2,&gt;=1.23.32-&gt;awswrangler) (2.6.3)
+Requirement already satisfied: s3transfer&lt;0.7.0,&gt;=0.6.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from boto3&lt;2.0.0,&gt;=1.24.11-&gt;awswrangler) (0.6.0)
 
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.14/site-packages (from python-dateutil&lt;3.0.0,&gt;=2.1-&gt;botocore&lt;2,&gt;=1.23.32-&gt;awswrangler) (1.17.0)
+Requirement already satisfied: python-dateutil&lt;3.0.0,&gt;=2.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from botocore&lt;2.0.0,&gt;=1.27.11-&gt;awswrangler) (2.8.2)
 
-Downloading awswrangler-3.17.1-py3-none-any.whl (396 kB)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.25.4 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from botocore&lt;2.0.0,&gt;=1.27.11-&gt;awswrangler) (1.26.8)
 
-Downloading boto3-1.43.108-py3-none-any.whl (140 kB)
+Requirement already satisfied: isodate&lt;1.0.0,&gt;=0.6.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (0.6.1)
 
-Downloading botocore-1.43.108-py3-none-any.whl (16.0 MB)
+Requirement already satisfied: aiohttp&lt;=3.8.1,&gt;=3.8.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (3.8.1)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0.0/16.0 MB</span> <span class="ansi-red-fg">?</span> eta <span class="ansi-cyan-fg">-:--:--</span>
+Requirement already satisfied: aenum&lt;4.0.0,&gt;=1.4.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (3.1.11)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">16.0/16.0 MB</span> <span class="ansi-red-fg">200.5 MB/s</span>  <span class="ansi-yellow-fg">0:00:00</span>
+Requirement already satisfied: nest-asyncio in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (1.5.1)
 
-Downloading jmespath-1.1.0-py3-none-any.whl (20 kB)
+Requirement already satisfied: decorator in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from jsonpath-ng&lt;2.0.0,&gt;=1.5.3-&gt;awswrangler) (5.1.0)
 
-Downloading pyarrow-25.0.1-cp314-cp314-manylinux_2_28_x86_64.whl (50.1 MB)
+Requirement already satisfied: ply in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from jsonpath-ng&lt;2.0.0,&gt;=1.5.3-&gt;awswrangler) (3.11)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0.0/50.1 MB</span> <span class="ansi-red-fg">?</span> eta <span class="ansi-cyan-fg">-:--:--</span>
+Requirement already satisfied: six in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from jsonpath-ng&lt;2.0.0,&gt;=1.5.3-&gt;awswrangler) (1.16.0)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">50.1/50.1 MB</span> <span class="ansi-red-fg">319.7 MB/s</span>  <span class="ansi-yellow-fg">0:00:00</span>
+Requirement already satisfied: et-xmlfile in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from openpyxl&lt;3.1.0,&gt;=3.0.0-&gt;awswrangler) (1.0.1)
 
-Downloading s3transfer-0.19.2-py3-none-any.whl (90 kB)
+Requirement already satisfied: requests&lt;3.0.0,&gt;=2.4.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from opensearch-py&lt;3,&gt;=1-&gt;awswrangler) (2.26.0)
 
-Installing collected packages: pyarrow, jmespath, botocore, s3transfer, boto3, awswrangler
+Requirement already satisfied: certifi in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from opensearch-py&lt;3,&gt;=1-&gt;awswrangler) (2021.10.8)
 
+Requirement already satisfied: pytz&gt;=2017.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pandas&lt;2.0.0,&gt;=1.2.0-&gt;awswrangler) (2021.3)
 
+Requirement already satisfied: scramp&gt;=1.4.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pg8000&lt;2.0.0,&gt;=1.20.0-&gt;awswrangler) (1.4.4)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: python-utils&gt;=3.0.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from progressbar2&lt;5.0.0,&gt;=4.0.0-&gt;awswrangler) (3.4.5)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: packaging in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from redshift-connector&lt;2.1.0,&gt;=2.0.889-&gt;awswrangler) (21.3)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: beautifulsoup4&lt;5.0.0,&gt;=4.7.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from redshift-connector&lt;2.1.0,&gt;=2.0.889-&gt;awswrangler) (4.10.0)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: setuptools in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from redshift-connector&lt;2.1.0,&gt;=2.0.889-&gt;awswrangler) (59.4.0)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: lxml&gt;=4.6.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from redshift-connector&lt;2.1.0,&gt;=2.0.889-&gt;awswrangler) (4.8.0)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: aiosignal&gt;=1.1.2 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (1.2.0)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">0/6</span> [pyarrow]
+Requirement already satisfied: async-timeout&lt;5.0,&gt;=4.0.0a3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (4.0.1)
 
-   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (5.2.0)
 
-   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (1.7.2)
 
-   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (1.2.0)
 
-   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">2/6</span> [botocore]
+Requirement already satisfied: charset-normalizer&lt;3.0,&gt;=2.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (2.0.8)
 
-   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━</span> <span class="ansi-green-fg">5/6</span> [awswrangler]
+Requirement already satisfied: attrs&gt;=17.3.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (21.2.0)
 
-   <span class="ansi-bright-red-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span><span class="ansi-bright-black-fg">╺</span><span class="ansi-bright-black-fg">━━━━━━</span> <span class="ansi-green-fg">5/6</span> [awswrangler]
+Requirement already satisfied: soupsieve&gt;1.2 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from beautifulsoup4&lt;5.0.0,&gt;=4.7.0-&gt;redshift-connector&lt;2.1.0,&gt;=2.0.889-&gt;awswrangler) (2.3)
 
-   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">6/6</span> [awswrangler]
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from requests&lt;3.0.0,&gt;=2.4.0-&gt;opensearch-py&lt;3,&gt;=1-&gt;awswrangler) (3.1)
 
+Requirement already satisfied: asn1crypto&gt;=1.5.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from scramp&gt;=1.4.3-&gt;pg8000&lt;2.0.0,&gt;=1.20.0-&gt;awswrangler) (1.5.1)
 
-Successfully installed awswrangler-3.17.1 boto3-1.43.108 botocore-1.43.108 jmespath-1.1.0 pyarrow-25.0.1 s3transfer-0.19.2
+Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from packaging-&gt;redshift-connector&lt;2.1.0,&gt;=2.0.889-&gt;awswrangler) (3.0.6)
 
-<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+Requirement already satisfied: typing-extensions&gt;=3.6.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from async-timeout&lt;5.0,&gt;=4.0.0a3-&gt;aiohttp&lt;=3.8.1,&gt;=3.8.0-&gt;gremlinpython&lt;4.0.0,&gt;=3.5.2-&gt;awswrangler) (4.0.0)
 
-</span>
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+</span>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+Requirement already satisfied: pandas in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (1.3.4)
 
-Requirement already satisfied: pandas in /usr/local/lib/python3.14/site-packages (3.0.1)
+Requirement already satisfied: python-dateutil&gt;=2.7.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pandas) (2.8.2)
 
-Requirement already satisfied: numpy&gt;=2.3.3 in /usr/local/lib/python3.14/site-packages (from pandas) (2.4.2)
+Requirement already satisfied: pytz&gt;=2017.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pandas) (2021.3)
 
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.14/site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: numpy&gt;=1.17.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pandas) (1.23.5)
 
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.14/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+Requirement already satisfied: six&gt;=1.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from python-dateutil&gt;=2.7.3-&gt;pandas) (1.16.0)
 
-<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
-</span>
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
+</span>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+Requirement already satisfied: sklearn in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (0.0)
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+Requirement already satisfied: scikit-learn in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from sklearn) (1.0.1)
 
-Collecting sklearn
+Requirement already satisfied: numpy&gt;=1.14.6 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from scikit-learn-&gt;sklearn) (1.23.5)
 
-  Downloading sklearn-0.0.post12.tar.gz (2.6 kB)
+Requirement already satisfied: scipy&gt;=1.1.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from scikit-learn-&gt;sklearn) (1.5.3)
 
-  Installing build dependencies ... -
- \
- | done
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from scikit-learn-&gt;sklearn) (3.0.0)
 
-  Getting requirements to build wheel ... - error
+Requirement already satisfied: joblib&gt;=0.11 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from scikit-learn-&gt;sklearn) (1.1.0)
 
-  <span class="ansi-red-fg ansi-bold">error</span>: <span class="ansi-bold">subprocess-exited-with-error</span>
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
-  
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
-  <span class="ansi-red-fg">×</span> <span class="ansi-green-fg">Getting requirements to build wheel</span> did not run successfully.
+</span>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
-  <span class="ansi-red-fg">│</span> exit code: <span class="ansi-cyan-fg ansi-bold">1</span>
+Requirement already satisfied: prov in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (2.0.0)
 
-  <span class="ansi-red-fg">╰─&gt;</span> <span class="ansi-red-fg">[15 lines of output]</span>
+Requirement already satisfied: rdflib&gt;=4.2.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from prov) (6.2.0)
 
-  <span class="ansi-red-fg">   </span> The 'sklearn' PyPI package is deprecated, use 'scikit-learn'
+Requirement already satisfied: networkx&gt;=2.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from prov) (2.6.3)
 
-  <span class="ansi-red-fg">   </span> rather than 'sklearn' for pip commands.
+Requirement already satisfied: lxml&gt;=3.3.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from prov) (4.8.0)
 
-  <span class="ansi-red-fg">   </span> 
+Requirement already satisfied: python-dateutil&gt;=2.2 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from prov) (2.8.2)
 
-  <span class="ansi-red-fg">   </span> Here is how to fix this error in the main use cases:
+Requirement already satisfied: six&gt;=1.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from python-dateutil&gt;=2.2-&gt;prov) (1.16.0)
 
-  <span class="ansi-red-fg">   </span> - use 'pip install scikit-learn' rather than 'pip install sklearn'
+Requirement already satisfied: setuptools in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from rdflib&gt;=4.2.1-&gt;prov) (59.4.0)
 
-  <span class="ansi-red-fg">   </span> - replace 'sklearn' by 'scikit-learn' in your pip requirements files
+Requirement already satisfied: pyparsing in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from rdflib&gt;=4.2.1-&gt;prov) (3.0.6)
 
-  <span class="ansi-red-fg">   </span>   (requirements.txt, setup.py, setup.cfg, Pipfile, etc ...)
+Requirement already satisfied: isodate in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from rdflib&gt;=4.2.1-&gt;prov) (0.6.1)
 
-  <span class="ansi-red-fg">   </span> - if the 'sklearn' package is used by one of your dependencies,
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
-  <span class="ansi-red-fg">   </span>   it would be great if you take some time to track which package uses
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
-  <span class="ansi-red-fg">   </span>   'sklearn' instead of 'scikit-learn' and report it to their issue tracker
+</span>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
-  <span class="ansi-red-fg">   </span> - as a last resort, set the environment variable
+Requirement already satisfied: seaborn in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (0.11.2)
 
-  <span class="ansi-red-fg">   </span>   SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True to avoid this error
+Requirement already satisfied: numpy&gt;=1.15 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from seaborn) (1.23.5)
 
-  <span class="ansi-red-fg">   </span> 
+Requirement already satisfied: scipy&gt;=1.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from seaborn) (1.5.3)
 
-  <span class="ansi-red-fg">   </span> More information is available at
+Requirement already satisfied: pandas&gt;=0.23 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from seaborn) (1.3.4)
 
-  <span class="ansi-red-fg">   </span> https://github.com/scikit-learn/sklearn-pypi-package
+Requirement already satisfied: matplotlib&gt;=2.2 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from seaborn) (3.5.0)
 
-  <span class="ansi-red-fg">   </span> <span class="ansi-red-fg">[end of output]</span>
+Requirement already satisfied: cycler&gt;=0.10 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (0.11.0)
 
-  
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (1.3.2)
 
-  <span class="ansi-magenta-fg ansi-bold">note</span>: This error originates from a subprocess, and is likely not a problem with pip.
+Requirement already satisfied: packaging&gt;=20.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (21.3)
 
+Requirement already satisfied: python-dateutil&gt;=2.7 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (2.8.2)
 
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (3.0.6)
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (4.28.2)
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from matplotlib&gt;=2.2-&gt;seaborn) (9.0.1)
 
-<span class="ansi-red-fg">ERROR: Failed to build 'sklearn' when getting requirements to build wheel</span><span class="ansi-red-fg">
+Requirement already satisfied: pytz&gt;=2017.3 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pandas&gt;=0.23-&gt;seaborn) (2021.3)
 
-</span>
+Requirement already satisfied: six&gt;=1.5 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib&gt;=2.2-&gt;seaborn) (1.16.0)
 
-Requirement already satisfied: prov in /usr/local/lib/python3.14/site-packages (3.2.2)
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
-<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
-</span>
+</span>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
+Requirement already satisfied: pydot in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (1.4.2)
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
+Requirement already satisfied: pyparsing&gt;=2.1.4 in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (from pydot) (3.0.6)
 
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
-Requirement already satisfied: seaborn in /usr/local/lib/python3.14/site-packages (0.13.2)
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
-Requirement already satisfied: numpy!=1.24.0,&gt;=1.20 in /usr/local/lib/python3.14/site-packages (from seaborn) (2.4.2)
+</span>Looking in indexes: https://pypi.org/simple, https://pip.repos.neuron.amazonaws.com
 
-Requirement already satisfied: pandas&gt;=1.2 in /usr/local/lib/python3.14/site-packages (from seaborn) (3.0.1)
+Requirement already satisfied: graphviz in /home/ec2-user/anaconda3/envs/python3/lib/python3.8/site-packages (0.20.1)
 
-Requirement already satisfied: matplotlib!=3.6.1,&gt;=3.4 in /usr/local/lib/python3.14/site-packages (from seaborn) (3.10.8)
+<span class="ansi-yellow-fg">WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
 
-Requirement already satisfied: contourpy&gt;=1.0.1 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.3.3)
+You should consider upgrading via the '/home/ec2-user/anaconda3/envs/python3/bin/python -m pip install --upgrade pip' command.</span><span class="ansi-yellow-fg">
 
-Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (0.12.1)
-
-Requirement already satisfied: fonttools&gt;=4.22.0 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (4.61.1)
-
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.4.9)
-
-Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (25.0)
-
-Requirement already satisfied: pillow&gt;=8 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (12.1.1)
-
-Requirement already satisfied: pyparsing&gt;=3 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (3.3.2)
-
-Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.14/site-packages (from matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (2.9.0.post0)
-
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.14/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib!=3.6.1,&gt;=3.4-&gt;seaborn) (1.17.0)
-
-<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
-
-</span>
-
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
-
-Requirement already satisfied: pydot in /usr/local/lib/python3.14/site-packages (4.0.1)
-
-Requirement already satisfied: pyparsing&gt;=3.1.0 in /usr/local/lib/python3.14/site-packages (from pydot) (3.3.2)
-
-<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
-
-</span>
-
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
-
-Collecting graphviz
-
-  Downloading graphviz-0.21-py3-none-any.whl.metadata (12 kB)
-
-Downloading graphviz-0.21-py3-none-any.whl (47 kB)
-
-Installing collected packages: graphviz
-
-Successfully installed graphviz-0.21
-
-<span class="ansi-yellow-fg">WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.</span><span class="ansi-yellow-fg">
-
-</span>
-
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">26.0.1</span> -&gt; <span class="ansi-green-fg">26.2.1</span>
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">pip install --upgrade pip</span>
-</pre>
+</span></pre>
 </div>
 </div>
 </div>
@@ -559,7 +509,7 @@ Successfully installed graphviz-0.21
 <li>See <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.corr.html</a></li>
 </ul></li>
 </ul>
-<div id="1420f887" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-07T07:43:16.010895Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-07T07:43:16.010727Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-07T07:43:16.013651Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-07T07:43:16.012803Z&quot;}}" data-execution_count="4">
+<div id="1420f887" class="cell" data-execution_count="4">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb4-1"><a href="" aria-label="1"></a><span class="co"># </span><span class="al">TODO</span></span></code></pre></div>
@@ -681,7 +631,7 @@ Successfully installed graphviz-0.21
 <span id="cb6-19"><a href="" aria-label="19"></a>    <span class="cf">return</span> Image(<span class="st">'prov.png'</span>)</span></code></pre></div>
 </details>
 </div>
-<div id="5ea20bb7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-10-07T07:43:16.313716Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-10-07T07:43:16.313265Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-10-07T07:43:16.327501Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-10-07T07:43:16.326620Z&quot;}}" data-execution_count="7">
+<div id="5ea20bb7" class="cell" data-execution_count="7">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb7-1"><a href="" aria-label="1"></a>plot()</span></code></pre></div>
