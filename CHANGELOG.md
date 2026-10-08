@@ -1,3 +1,9 @@
+## [1.0.14](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.13...1.0.14) (2026-10-08)
+
+### Bug Fixes
+
+* working on AI-powered data platforms ([28e6b25](https://github.com/w4bo/AA2627-unibo-bdcp/commit/28e6b25aee5e80d5926e67463d8b72cbb5800cd2))
+
 ## [1.0.13](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.12...1.0.13) (2026-10-08)
 
 ### Bug Fixes
