@@ -410,7 +410,7 @@ Challenges:
   - Storing hot data on fast devices such as SSDs, maintaining statistics, building efficient indexes, etc.
 - In a Lakehouse it is not possible to change the format, but it is possible to implement other optimizations that leave the data files unchanged
 
-# Data lakehouse: metadata challenges
+# Data lakehouse: metadata challenges {visibility="hidden"}
 
 **Challenges:**
 
@@ -442,7 +442,7 @@ Challenges:
 |  | Data Warehouse | Data Lake | Data Lakehouse |
 |:-:|:-:|:-:|:-:|
 | Data format | Proprietary format | Open format | Open format |
-| Types of data | Structured, limited semi-structured | \* | \* |
+| Types of data | Structured | \* | \* |
 | Data access | SQL-only, no file access | File access | APIs for SQL, R, Python, etc. |
 | Reliability | High quality, ACID transactions | Low quality, "data swamp" | High quality, ACID transactions |
 | Governance & security | Fine-grained (row/column-level) | Weak governance; file-level security | Fine-grained (row/column-level) |
@@ -483,6 +483,74 @@ Rationale: relieve users from the complexity of administration and provision
 - Not only technological skills, but also privacy, access control, etc.
 - Users should only focus on functional aspects
 
+# Example of data platform: Hadoop-based
+
+A data platform on the Hadoop stack requires several tools.
+
+![Hadoop-based data platform](img/74.svg)
+
+How many levels of complexity are hidden here?
+
+How do you provision it?
+
+- Manual provisioning on-premises
+- Semi-automatic provisioning on-premises
+- Automatic provisioning in the cloud
+
+# On-premises manual provisioning
+
+It is hardly advisable, if not for small and local tests.
+
+**Technical challenges**
+
+- Installation: how do I set up a new machine?
+- Networking: how do I cable dozens of machines?
+- Management: how do I replace a broken disk?
+- Upgrade: how do I extend the cluster with new services/machines?
+- (energy and cooling, software licenses, insurance...)
+
+**Technological challenges**
+
+- How do we configure a distributed environment?
+- How do we set up/integrate/control independent services?
+- How do we orchestrate data flows?
+
+**Business challenges**
+
+- Can we afford to spend resources on tasks that are not mission-oriented?
+- No free lunch, each choice has a cost/benefit
+- How much time does it take to master a technology?
+- How many people do I need?
+
+# Data platform: related job positions
+
+![(Big) data pipeline](img/slides28.png)
+
+# Data platform: related job positions
+
+_Data platform engineer_
+
+- Orchestrate the successful implementation of cloud technologies within the data infrastructure of their business
+- Solid understanding of impact database types and implementation
+- Responsible for purchasing decisions for cloud services and approval of data architectures
+
+_Data architect_
+
+- Team members who understand all aspects of a data platform's architecture
+- Work closely with the data platform engineers to create data workflows
+
+_Data scientist_
+
+- Analyze and interpret complex digital data
+- Work with new technologies (e.g., machine learning) to deepen the business's understanding and gain new insights
+
+_Data analyst_
+
+- Analyze data systems, creating automated systems for retrieving data from the data platform
+- Cloud data analysts are more commonly members of the business user population
+
+# Governing data platforms
+
 # Data platform: governance pressure
 
 Are we done? No!
@@ -502,7 +570,6 @@ Each governance capability answers a practical platform question.
 
 - *Tracking data pipelines*: Data provenance
 - *Tracking changes*: Data versioning
-- *Saving storage*: Compression
 - *Understanding the data*: Data profiling
 - *Integrating data sources*: Entity resolution
 - ...
@@ -563,7 +630,9 @@ Data profiling [@naumann2014data]
 
 # Data profiling: single column (Iris dataset)
 
-Schema and statistics
+:::: {.columns}
+
+::: {.column width=50%}
 
 ```
 df.info()
@@ -584,9 +653,9 @@ df.info()
 > memory usage: 6.0 KB
 > ```
 
-# Data profiling: single columns (Iris dataset)
+:::
 
-Statistics
+::: {.column width=50%}
 
 ```
 df.describe()
@@ -603,6 +672,9 @@ df.describe()
 > | 75%   |            6.4      |           3.4      |             5.1     |           1.8      |
 > | max   |            7.7      |           4.4      |             6.7     |           2.5      |
 
+:::
+::::
+
 How much metadata are we producing?
 
 :::{.fragment}
@@ -611,7 +683,14 @@ How much metadata are we producing?
 - Metadata-to-data ratio: $\frac{32}{150} ≈ 21.3\%$
 :::
 
-# Data profiling: multiple columns (Iris dataset)
+
+# Data profiling: computational cost
+
+The results of data profiling are _computationally heavy_ to discover
+
+- E.g., discovering keys/dependencies usually involves some sorting step for each considered column
+
+... and we need to verify them _for groups of columns_ in a database
 
 ```
 df.corr(method='pearson', numeric_only=True)
@@ -624,20 +703,7 @@ df.corr(method='pearson', numeric_only=True)
 > | petal length (cm) |            0.862175 |          -0.432089 |            1        |           0.962577 |
 > | petal width (cm)  |            0.80148  |          -0.369509 |            0.962577 |           1        |
 
-# Data profiling: computational cost
-
-The results of data profiling are _computationally heavy_ to discover
-
-- E.g., discovering keys/dependencies usually involves some sorting step for each considered column
-
-... and we need to verify them _for groups of columns_ in a database
-
 **Complexity**: given a table with four columns $\{w, x, y, z\}$, how many groups of columns?
-
-| w | x | y | z |
-|:-: |:-: |:-: |:-: |
-| 1 | 1 | 2 | 2 |
-| 1 | 2 | 1 | 4 |
 
 # Data profiling: column groups
 
@@ -653,20 +719,23 @@ Given a table with four columns $\{w, x, y, z\}$
 | 1 | 2 | 1 | 4 |
 </div>
 
+- Cardinality of each column, consider $\binom{|C|}{1}=|C|$ columns $\{(w), (x), (y), (z)\}$
+- Correlations between pairs of columns, consider $\binom{|C|}{2}$ groups $\{(w, x), (w, y), (w, z), (x, y), ...\}$
+
 :::
 :::{.column width=50%}
 
-![Powerset of four columns](img/lattice.svg)
+:::{.fragment}
+Extracting the relationships among all possible groups of columns generalizes to $\sum_{n=1}^{|C|}\binom{|C|}{n}=2^{|C|}−1$ groups
 
+- 3 columns → 7 groups, 5 columns → 31, 10 columns → 1023, ...
+
+![Powerset of four columns](img/lattice.svg)
+:::
 :::
 ::::
 
-- To extract the (distinct) cardinality of each column, I will consider $\binom{|C|}{1}=|C|$ columns $\{(w), (x), (y), (z)\}$
-- To extract the correlations between pairs of columns, I will consider $\binom{|C|}{2}$ groups $\{(w, x), (w, y), (w, z), (x, y), ...\}$
-- Extracting the relationships among all possible groups of columns generalizes to $\sum_{n=1}^{|C|}\binom{|C|}{n}=2^{|C|}−1$ groups
-    - 3 columns → 7 groups, 4 columns → 15 groups, 5 columns → 31 groups, 10 columns → 1023 groups, ...
-
-# Data profiling: use cases
+# Data profiling {visibility="hidden"}
 
 Use cases
 
@@ -677,7 +746,7 @@ Use cases
   - Prepare a cleansing process by revealing errors (e.g., in formatting), missing values, or outliers
 - _Data integration and analytics_
 
-# Data profiling: statistic query optimization
+# Example of use case for data profiling: statistic query optimization
 
 ::::{.columns}
 :::{.column width=30%}
@@ -765,7 +834,7 @@ _Agent_
 :::
 ::::
 
-# Data provenance: graph analysis
+# Data provenance: graph analysis {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=70%}
@@ -882,7 +951,7 @@ Queries [@ikeda2009data]
 
 ![Fine grained](img/finegrained.png)
 
-# Data provenance: use cases
+# Data provenance: use cases {visibility="hidden"}
 
 Use cases for data provenance.
 
@@ -949,69 +1018,11 @@ For example, on [AWS (PUT, GET, DELETE)](https://docs.aws.amazon.com/AmazonS3/la
 
 What about updating?
 
-# Data governance: data compression
-
-Can we reduce storage and scan costs without losing the information needed by downstream tasks?
-
-# Compression: definition
-
-**Data compression** is the process of encoding data using fewer bits than the original representation
-
-- *Lossless*: reduces bits by identifying and eliminating redundancy (no information is lost)
-  - Examples?
-- *Lossy*: reduces bits by removing less important information
-  - Examples?
-
-# Compression: Parquet
-
-![Data compression](img/parquet.png)
-
-# Compression: summarization
-
-::::{.columns}
-:::{.column width=60%}
-
-**Summarization**: find a concise representation of a dataset in a comprehensible, informative manner
-
-> ::::{.columns}
-> :::{.column width=50%}
-> 
-> Transaction dataset
->
-> | TID | Products |
-> |-----|----------|
-> | T1  | Beer, Diapers, Cola |
-> | T2  | Cola, Fanta |
-> | T3  | Beer, Cola |
-> | T3  | Beer, Diapers |
->
->:::
->:::{.column width=50%}
->
-> Frequent itemset mining
->
-> Itemset 1: {Cola}
->
-> Itemset 2: {Beer}
->
-> Itemset 3: {Beer, Diapers}
-> 
-> :::
-> ::::
-
-:::
-:::{.column width=40%}
-
-![Characteristics of data summarization [@ahmed2019data]](img/slides18.png)
-
-:::
-::::
-
-# Data governance: entity resolution
+# Data governance: entity resolution {visibility="hidden"}
 
 Can we recognize when different records refer to the same real-world entity?
 
-# Entity resolution
+# Entity resolution {visibility="hidden"}
 
 Entity resolution [@papadakis2020blocking], also known as entity matching or linking
 
@@ -1054,7 +1065,7 @@ A **data catalog** is an organized inventory of the company's data [@olesen2023e
 :::
 ::::
 
-# Data catalog: domains
+# Data catalog: domains {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1071,7 +1082,7 @@ Metadata is organized into **domains**.
 :::
 ::::
 
-# Data catalog: processes vs capabilities
+# Data catalog: processes vs capabilities {visibility="hidden"}
 
 ::::{.columns}
 
@@ -1099,25 +1110,11 @@ Check Colab
 
 <a href="https://colab.research.google.com/github/w4bo/AA2627-unibo-bdcp/blob/main/slides/lab-01-Metadata.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-# <img src="./img/cs.svg" class="title-icon" /> Case study: data catalog {background-color="#121011"}
+# <img src="./img/cs.svg" class="title-icon" /> Case study: data catalog {background-color="#121011"} {visibility="hidden"}
 
 [Link to the DataHub catalog](http://localhost:9002/)
 
 # End of the case study {background-color="#121011"}
-
-# Data governance: meta-metadata management
-
-# Data platform: meta-metadata
-
-Are we done? No!
-
-- Metadata can become bigger than the data itself
-
-We need meta-metadata (or models)...
-
-- ... chasing our own tails
-
-Data management is still a research issue in data platforms.
 
 # Data platform {visibility="hidden"}
 
@@ -1132,11 +1129,23 @@ Data management is still a research issue in data platforms.
 
 No, in a data platform, you also need to manage (streams of) operational data and OLTP workloads.
 
-# How do we build data platforms?
+# Designing data platforms
+
+# Three layers for modern data platforms
+
+| Layer | Main question | Main mechanism |
+|---|---|---|
+| **Data fabric** | How do we connect and govern distributed data assets? | Active metadata, integration, orchestration |
+| **Data mesh** | Who owns data products, quality, and access? | Domains, data products, federated governance |
+| **AI-powered platform** | How do humans and agents understand and use the platform? | Semantic layer, RAG, GraphRAG, LLM wiki |
+
+Takeaway:
+
+> Fabric connects the platform. Mesh assigns responsibility. AI makes the platform understandable.
 
 # Data fabric: definition
 
-**Data fabric** is a "vision for data management [...] that seamlessly connects different clouds, whether they are private or public environments." ([2016](https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf))
+**Data fabric** is a design concept "for data management [...] that seamlessly connects different clouds environments." ([2016](https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf))
 
 Frictionless access and sharing of data in a distributed data environment
 
@@ -1156,7 +1165,7 @@ It is a unified architecture with an integrated set of technologies and services
 
 ![Cloudera SDX](img/CDP-diagram-sm.png)
 
-# Data fabric: design concept
+# Data fabric: design concept {visibility="hidden"}
 
 **It is a design concept**
 
@@ -1220,7 +1229,7 @@ It is a unified architecture with an integrated set of technologies and services
 
 [Gartner (2021). Data fabric is key to modernizing data management](https://www.gartner.com/smarterwithgartner/data-fabric-architecture-is-key-to-modernizing-data-management-and-integration)
 
-# Automation through orchestration: role
+# Automation through orchestration: role {visibility="hidden"}
 
 The orchestrator is the component in charge of controlling the execution of computation activities
 
@@ -1229,7 +1238,7 @@ The orchestrator is the component in charge of controlling the execution of comp
 
 Several entities (either processes or human beings) can cover this role to activate some data processes
 
-# Automation through orchestration: decisions
+# Automation through orchestration: decisions {visibility="hidden"}
 
 Dynamic/condition-based behavior
 
@@ -1249,7 +1258,11 @@ Resource estimation or prediction (based on previous executions and current sett
 * Decide the optimal amount of resources required to terminate successfully while leaving sufficient resources to the other concurrent process
 * Negotiate the resources with the cluster's resource manager
 
-# Automation through orchestration: resources
+# Automation through orchestration
+
+![[@barika2019orchestrating]](img/phdslides_209.png)
+
+# Automation through orchestration: resources {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1279,7 +1292,7 @@ R4 Synchronization and asynchronization
 :::
 ::::
 
-# Automation through orchestration: execution guarantees
+# Automation through orchestration: execution guarantees {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1366,19 +1379,6 @@ Check the seminars from HERA.
 
 # End of the case study {background-color="#121011"}
 
-# Data mesh vs data fabric: frameworks
-
-They are design concepts, not things.
-
-- They are not mutually exclusive
-- They are architectural frameworks, not architectures
-  - The frameworks must be adapted and customized to your needs, data, processes, and terminology
-  - Vendor frameworks keep evolving, so treat product claims as implementation choices rather than definitions
-
-Alex Woodie, 2021 [https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/](https://www.datanami.com/2021/10/25/data-mesh-vs-data-fabric-understanding-the-differences/)
-
-Dave Wells, 2021 [https://www.eckerson.com/articles/data-architecture-complex-vs-complicated](https://www.eckerson.com/articles/data-architecture-complex-vs-complicated)
-
 # Data mesh vs data fabric: emphasis
 
 Both provide an architectural framework to access data across multiple technologies and platforms.
@@ -1403,34 +1403,6 @@ Dave Wells, 2021 [https://www.eckerson.com/articles/data-architecture-complex-vs
 
 ![Data mesh vs data fabric](img/slides39.png)
 
-# Data mesh vs data fabric: takeaway
-
-Data Fabric and Mesh are the results of the data architecture evolution.
-
-- **Many capabilities were in existence already long before** the terms were coined
-
-Takeaway:
-
-- Abstract the "building blocks" of such platforms
-- Let them evolve according to scalability and flexibility requirements
-
-# Data mesh: hype-cycle positioning
-
-::::{.columns}
-:::{.column width=50%}
-
-![2024](img/hypecycle-dm-2024.png)
-
-:::
-:::{.column width=50%}
-
-![2025](img/hypecycle-dm-2025.png)
-
-:::
-::::
-
-As new technologies and solutions mature to support a centralized approach to data access, distributed approaches like Data Mesh are expected to fall increasingly out of favor in enterprise IT.
-
 # Data mesh: hype-cycle trend
 
 ::::{.columns}
@@ -1448,11 +1420,168 @@ As new technologies and solutions mature to support a centralized approach to da
 
 As new technologies and solutions mature to support a centralized approach to data access, distributed approaches like Data Mesh are expected to fall increasingly out of favor in enterprise IT.
 
-# Wooclap (examples of exam questions)
+# Data mesh: hype-cycle positioning
+
+::::{.columns}
+:::{.column width=50%}
+
+![2025](img/hypecycle-dm-2025.png)
+
+:::
+:::{.column width=50%}
+
+![2024](img/hypecycle-dm-2026.png)
+
+:::
+::::
+
+# AI-powered data platforms
+
+What changes with generative AI?
+
+```
+Catalog + Lineage + Metadata -> Semantic Layer -> RAG / GraphRAG / LLM Wiki
+```
+
+The main shift:
+
+- A data platform does not only store and process data
+- It also explains data assets, relationships, and usage constraints
+- Metadata becomes context for both humans and AI agents
+
+# Semantic layer
+
+A **semantic layer** maps technical assets to business concepts.
+
+- Tables become business entities
+- Columns become metrics, dimensions, policies, and definitions
+- Queries can use business language instead of physical schemas
+
+This idea is close to **ontology-based data access**, where users query a conceptual layer while mappings connect it to source data [@bienvenu2018ontology].
+
+Example:
+
+- User asks: "monthly active customers by region"
+- Semantic layer defines: customer, active, month, region, allowed filters
+- Engine generates SQL against DWH/lakehouse tables
+
+# RAG over platform knowledge
+
+**Retrieval-Augmented Generation (RAG)** retrieves external evidence before the LLM generates an answer [@lewis2020retrieval].
+
+In a data platform, the retrievable corpus can include:
+
+- catalog descriptions and data-product documentation
+- lineage graphs and pipeline logs
+- notebooks, dashboards, tickets, and incident reports
+- access policies and data-quality checks
+
+Example question:
+
+> Which datasets feed the churn dashboard, and which upstream pipeline failed last week?
+
+# GraphRAG for connected metadata
+
+Plain RAG retrieves similar chunks.
+
+**GraphRAG** builds a graph of entities and relationships, then retrieves from that graph for local and global questions [@hogan2021knowledge; @edge2025graphrag].
+
+Why this fits data platforms:
+
+- lineage is already a graph
+- catalogs connect datasets, owners, domains, dashboards, and policies
+- provenance connects outputs to transformations and inputs
+
+Example question:
+
+> Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?
+
+# LLM wiki for data products
+
+An **LLM wiki** is a curated, human-readable layer generated from governed platform metadata.
+
+It complements the catalog.
+
+It can summarize and organize:
+
+- one page per data product
+- owner, SLA, source systems, lineage, quality checks
+- common questions, example queries, known limitations
+- links to catalog entries, dashboards, notebooks, and runbooks
+
+Useful rule:
+
+> Every generated page must cite catalog, lineage, or documentation sources.
+
+# Examples in cloud data platforms
+
+::::{.columns}
+:::{.column width=50%}
+
+**Databricks**
+
+- [Unity Catalog semantics](https://www.databricks.com/product/unity-catalog/business-semantics)
+- [AI/BI Genie](https://docs.databricks.com/aws/en/ai-bi/)
+
+**Snowflake**
+
+- [Cortex Analyst](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst)
+- semantic models for text-to-SQL
+
+:::
+:::{.column width=50%}
+
+**Microsoft Fabric**
+
+- [Fabric data agents](https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent)
+- conversational access to governed data
+
+**AWS**
+
+- [Bedrock Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html)
+- RAG over enterprise data
+
+:::
+::::
+
+# Data agents
+
+A **data agent** is a governed conversational layer over a data platform.
+
+It combines an LLM with platform tools:
+
+- semantic models, catalogs, schemas, and policies
+- SQL, DAX, KQL, search, or code execution tools
+- user permissions and governance checks
+- readable answers with tables, charts, queries, or citations
+
+The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management, preparation, and analysis [@sui2026dataagents].
+
+Examples:
+
+- Microsoft Fabric Data Agent
+- Databricks Genie Agents
+- Snowflake Cortex Agents
+
+# AI-powered data platforms: risks
+
+The AI layer must inherit platform governance.
+
+- **Grounding**: answers must point to catalog, lineage, and source documents
+- **Freshness**: generated pages must expire or refresh when metadata changes
+- **Access control**: retrieval must respect user permissions
+- **Evaluation**: test answers on real platform questions, not generic prompts
+- **Human review**: generated documentation should be reviewed for critical data products
+
+Takeaway:
+
+> AI makes metadata more usable, but it also makes metadata governance more important.
+
+# Wooclap (examples of exam questions) {visibility="hidden"}
 
 <iframe allowfullscreen frameborder="0" height="100%" mozallowfullscreen src="https://app.wooclap.com/LKDKIY/questionnaires/670e89be981e282b0b69ee7c" style="min-height: 550px; min-width: 300px" width="100%"></iframe>
 
-# Further reading: architecture patterns
+# Further reading: architecture patterns {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=33%}
@@ -1472,85 +1601,7 @@ As new technologies and solutions mature to support a centralized approach to da
 :::
 ::::
 
-# From platform concepts to deployment
-
-So far, we have discussed what a data platform must support.
-
-Now we ask how difficult it is to deploy and operate one in practice.
-
-# Example of data platform: Hadoop-based
-
-A data platform on the Hadoop stack requires several tools.
-
-![Hadoop-based data platform](img/74.svg)
-
-How many levels of complexity are hidden here?
-
-How do you provision it?
-
-- Manual provisioning on-premises
-- Semi-automatic provisioning on-premises
-- Automatic provisioning in the cloud
-
-# "Example" of architecture
-
-![https://xkcd.com/2347/](img/slides43.jpg)
-
-(*) "Ormai sta xkcd é una base troppo usata" A. Tappi
-
-# On-premises manual provisioning
-
-It is hardly advisable, if not for small and local tests.
-
-**Technical challenges**
-
-- Installation: how do I set up a new machine?
-- Networking: how do I cable dozens of machines?
-- Management: how do I replace a broken disk?
-- Upgrade: how do I extend the cluster with new services/machines?
-- (energy and cooling, software licenses, insurance...)
-
-**Technological challenges**
-
-- How do we configure a distributed environment?
-- How do we set up/integrate/control independent services?
-- How do we orchestrate data flows?
-
-**Business challenges**
-
-- Can we afford to spend resources on tasks that are not mission-oriented?
-- No free lunch, each choice has a cost/benefit
-- How much time does it take to master a technology?
-- How many people do I need?
-
-# Data platform: related job positions
-
-![(Big) data pipeline](img/slides28.png)
-
-# Data platform: related job positions
-
-_Data platform engineer_
-
-- Orchestrate the successful implementation of cloud technologies within the data infrastructure of their business
-- Solid understanding of impact database types and implementation
-- Responsible for purchasing decisions for cloud services and approval of data architectures
-
-_Data architect_
-
-- Team members who understand all aspects of a data platform's architecture
-- Work closely with the data platform engineers to create data workflows
-
-_Data scientist_
-
-- Analyze and interpret complex digital data
-- Work with new technologies (e.g., machine learning) to deepen the business's understanding and gain new insights
-
-_Data analyst_
-
-- Analyze data systems, creating automated systems for retrieving data from the data platform
-- Cloud data analysts are more commonly members of the business user population
-
-# From DevOps...
+# From DevOps... {visibility="hidden"}
 
 **DevOps** combines development and operations to increase the efficiency, speed, and security of software development and delivery compared to traditional processes.
 
@@ -1560,7 +1611,7 @@ DevOps practices enable software development (dev) and operations (ops) teams to
 
 [https://about.gitlab.com/topics/devops/](https://about.gitlab.com/topics/devops/)
 
-# ... to DataOps
+# ... to DataOps {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1577,7 +1628,7 @@ DevOps practices enable software development (dev) and operations (ops) teams to
 :::
 ::::
 
-# DataOps
+# DataOps {visibility="hidden"}
 
 ::::{.columns}
 :::{.column width=60%}
@@ -1609,6 +1660,18 @@ Gartner, 2020 [https://www.gartner.com/smarterwithgartner/how-dataops-amplifies-
 Andy Palmer, 2015 [https://www.tamr.com/blog/from-devops-to-dataops-by-andy-palmer/](https://www.tamr.com/blog/from-devops-to-dataops-by-andy-palmer/)
 
 William Vorhies, 2017 [https://www.datasciencecentral.com/profiles/blogs/dataops-it-s-a-secret](https://www.datasciencecentral.com/profiles/blogs/dataops-it-s-a-secret)
+
+# "Example" of architecture
+
+![https://xkcd.com/2347/](img/slides43.jpg)
+
+(*) "Ormai sta xkcd è una base troppo usata" A. Tappi
+
+# "Example" of modern architecture
+
+![https://xkcd.com/2347/](img/slides43-bis.png)
+
+(*) "Per un totale di 4 crediti" N. Narducci
 
 # Summing up
 

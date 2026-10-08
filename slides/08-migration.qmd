@@ -479,7 +479,7 @@ Migrating cluster to EMR: *14710€/year*
 ::::{.columns}
 :::{.column width=60%}
 
-[Migrating cluster to EMR]((https://calculator.aws/#/estimate?id=c3780b12bb43b593d05def5a1d5218d9764b8a65)): *13445€/year*
+[Migrating cluster to EMR](https://calculator.aws/#/estimate?id=c3780b12bb43b593d05def5a1d5218d9764b8a65): *13445€/year*
 
 - S3 Infrequent Access storage (50 TB per month): 640€
 - 1 x Master EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€

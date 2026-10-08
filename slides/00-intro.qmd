@@ -221,13 +221,13 @@ Rule of thumb
 # Tentative outline
 
 - [Course and exam details](00-intro)
-- [(Towards Data Platforms)](01-dataplatforms)
+- [(Towards) Data Platforms](01-dataplatforms)
 - [Laboratory on Data Governance](02-integratedlab)
 - [NoSQL](03-nosql)
 - [Cloud Computing](04-cloudcomputing)
-- [Cloud Computing (storage)](06-storage)
-- [Cloud Computing (Computing)](07-computing)
-- [Migrating to the cloud](09-migration)
+- [Storage Models](06-storage)
+- [Computing on Cloud](07-computing)
+- [Migrating to the Cloud](08-migration)
 
 # "Oh, and keep an eye on the <s>staircases</s> slides. They like to change."
 

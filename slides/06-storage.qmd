@@ -314,6 +314,64 @@ Different areas will have slightly different folder structures
 
 - `/landing/ETL/sales_oracle_ingest/customers/01DFTFX89YDFAXREPJTR94`
 
+# Data lake storage: compression
+
+Can we reduce storage and scan costs without losing the information needed by downstream tasks?
+
+# Compression: definition
+
+**Data compression** is the process of encoding data using fewer bits than the original representation
+
+- *Lossless*: reduces bits by identifying and eliminating redundancy
+  - Useful for data files that must preserve exact values
+- *Lossy*: reduces bits by removing less important information
+  - Useful when approximate representations are acceptable
+
+# Compression: Parquet
+
+![Data compression](img/parquet.png)
+
+# Compression: summarization
+
+::::{.columns}
+:::{.column width=60%}
+
+**Summarization**: find a concise representation of a dataset in a comprehensible, informative manner
+
+> ::::{.columns}
+> :::{.column width=50%}
+>
+> Transaction dataset
+>
+> | TID | Products |
+> |-----|----------|
+> | T1  | Beer, Diapers, Cola |
+> | T2  | Cola, Fanta |
+> | T3  | Beer, Cola |
+> | T3  | Beer, Diapers |
+>
+>:::
+>:::{.column width=50%}
+>
+> Frequent itemset mining
+>
+> Itemset 1: {Cola}
+>
+> Itemset 2: {Beer}
+>
+> Itemset 3: {Beer, Diapers}
+>
+> :::
+> ::::
+
+:::
+:::{.column width=40%}
+
+![Characteristics of data summarization [@ahmed2019data]](img/slides18.png)
+
+:::
+::::
+
 # Data Lakehouse
 
 # Data Lakehouse
