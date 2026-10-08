@@ -213,6 +213,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="01-dataplatforms_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="01-dataplatforms_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="01-dataplatforms_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -2617,7 +2620,7 @@ memory usage: 6.0 KB</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/hypecycle-dm-2026.png"></p>
-<figcaption>2024</figcaption>
+<figcaption>2026</figcaption>
 </figure>
 </div>
 </div></div>
@@ -2633,6 +2636,27 @@ memory usage: 6.0 KB</code></pre>
 <li>It also explains data assets, relationships, and usage constraints</li>
 <li>Metadata becomes context for both humans and AI agents</li>
 </ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Catalog] --&gt; D[Semantic layer]
+  B[Lineage] --&gt; D
+  C[Metadata] --&gt; D
+  D --&gt; E[RAG]
+  D --&gt; F[GraphRAG]
+  D --&gt; G[LLM wiki]
+  E --&gt; H[Data agent]
+  F --&gt; H
+  G --&gt; H
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="semantic-layer" class="title-slide slide level1 center">
@@ -2650,6 +2674,24 @@ memory usage: 6.0 KB</code></pre>
 <li>Semantic layer defines: customer, active, month, region, allowed filters</li>
 <li>Engine generates SQL against DWH/lakehouse tables</li>
 </ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  U[Business question] --&gt; S[Semantic layer]
+  S --&gt; M[Metrics and dimensions]
+  S --&gt; P[Policies]
+  S --&gt; Q[Generated query]
+  Q --&gt; T[(Lakehouse / DWH tables)]
+  T --&gt; A[Answer in business terms]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="rag-over-platform-knowledge" class="title-slide slide level1 center">
@@ -2666,6 +2708,27 @@ memory usage: 6.0 KB</code></pre>
 <blockquote>
 <p>Which datasets feed the churn dashboard, and which upstream pipeline failed last week?</p>
 </blockquote>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Q[Question] --&gt; R[Retrieve]
+  R --&gt; C[Catalog docs]
+  R --&gt; L[Lineage logs]
+  R --&gt; N[Notebooks and dashboards]
+  C --&gt; P[Prompt with evidence]
+  L --&gt; P
+  N --&gt; P
+  P --&gt; M[LLM]
+  M --&gt; A[Answer with sources]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="graphrag-for-connected-metadata" class="title-slide slide level1 center">
@@ -2682,6 +2745,24 @@ memory usage: 6.0 KB</code></pre>
 <blockquote>
 <p>Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?</p>
 </blockquote>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  CRM[CRM ingestion] --&gt; Customer[Customer identifier]
+  Customer --&gt; Orders[Orders data product]
+  Customer --&gt; Churn[Churn dashboard]
+  Orders --&gt; Revenue[Revenue report]
+  Churn --&gt; Owner[Marketing domain]
+  Revenue --&gt; Owner2[Finance domain]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="llm-wiki-for-data-products" class="title-slide slide level1 center">
@@ -2746,6 +2827,30 @@ memory usage: 6.0 KB</code></pre>
 <li>Databricks Genie Agents</li>
 <li>Snowflake Cortex Agents</li>
 </ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  U[User] --&gt; A[Data agent]
+  A --&gt; C[Catalog and semantics]
+  A --&gt; G[Governance checks]
+  A --&gt; T{Tools}
+  T --&gt; SQL[SQL / DAX / KQL]
+  T --&gt; Search[Search / RAG]
+  T --&gt; Code[Code execution]
+  SQL --&gt; D[(Governed data)]
+  Search --&gt; D
+  Code --&gt; D
+  D --&gt; A
+  A --&gt; R[Answer, query, chart, citations]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 
 <section id="ai-powered-data-platforms-risks" class="title-slide slide level1 center">
