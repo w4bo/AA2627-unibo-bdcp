@@ -217,3 +217,20 @@ Rule of thumb
 * Understand the general concepts
 * Do not be afraid of change
 * *Connect the dots... and ask questions*!
+
+# Tentative outline
+
+- [Course and exam details](00-intro)
+- [(Towards Data Platforms)](01-dataplatforms)
+- [Laboratory on Data Governance](02-integratedlab)
+- [NoSQL](03-nosql)
+- [Cloud Computing](04-cloudcomputing)
+- [Cloud Computing (storage)](06-storage)
+- [Cloud Computing (Computing)](07-computing)
+- [Migrating to the cloud](09-migration)
+
+# "Oh, and keep an eye on the <s>staircases</s> slides. They like to change."
+
+During the lecture period, it is likely that slides will be frequently updated (even daily or right after classes). 
+
+- Please, (re)check the slides right before each lecture!
