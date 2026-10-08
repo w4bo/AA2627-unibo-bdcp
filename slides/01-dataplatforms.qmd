@@ -1430,7 +1430,7 @@ As new technologies and solutions mature to support a centralized approach to da
 :::
 :::{.column width=50%}
 
-![2024](img/hypecycle-dm-2026.png)
+![2026](img/hypecycle-dm-2026.png)
 
 :::
 ::::
@@ -1449,6 +1449,20 @@ The main shift:
 - It also explains data assets, relationships, and usage constraints
 - Metadata becomes context for both humans and AI agents
 
+```{mermaid}
+%%| echo: false
+flowchart LR
+  A[Catalog] --> D[Semantic layer]
+  B[Lineage] --> D
+  C[Metadata] --> D
+  D --> E[RAG]
+  D --> F[GraphRAG]
+  D --> G[LLM wiki]
+  E --> H[Data agent]
+  F --> H
+  G --> H
+```
+
 # Semantic layer
 
 A **semantic layer** maps technical assets to business concepts.
@@ -1465,6 +1479,17 @@ Example:
 - Semantic layer defines: customer, active, month, region, allowed filters
 - Engine generates SQL against DWH/lakehouse tables
 
+```{mermaid}
+%%| echo: false
+flowchart LR
+  U[Business question] --> S[Semantic layer]
+  S --> M[Metrics and dimensions]
+  S --> P[Policies]
+  S --> Q[Generated query]
+  Q --> T[(Lakehouse / DWH tables)]
+  T --> A[Answer in business terms]
+```
+
 # RAG over platform knowledge
 
 **Retrieval-Augmented Generation (RAG)** retrieves external evidence before the LLM generates an answer [@lewis2020retrieval].
@@ -1479,6 +1504,20 @@ In a data platform, the retrievable corpus can include:
 Example question:
 
 > Which datasets feed the churn dashboard, and which upstream pipeline failed last week?
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+  Q[Question] --> R[Retrieve]
+  R --> C[Catalog docs]
+  R --> L[Lineage logs]
+  R --> N[Notebooks and dashboards]
+  C --> P[Prompt with evidence]
+  L --> P
+  N --> P
+  P --> M[LLM]
+  M --> A[Answer with sources]
+```
 
 # GraphRAG for connected metadata
 
@@ -1495,6 +1534,17 @@ Why this fits data platforms:
 Example question:
 
 > Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+  CRM[CRM ingestion] --> Customer[Customer identifier]
+  Customer --> Orders[Orders data product]
+  Customer --> Churn[Churn dashboard]
+  Orders --> Revenue[Revenue report]
+  Churn --> Owner[Marketing domain]
+  Revenue --> Owner2[Finance domain]
+```
 
 # LLM wiki for data products
 
@@ -1562,6 +1612,23 @@ Examples:
 - Microsoft Fabric Data Agent
 - Databricks Genie Agents
 - Snowflake Cortex Agents
+
+```{mermaid}
+%%| echo: false
+flowchart LR
+  U[User] --> A[Data agent]
+  A --> C[Catalog and semantics]
+  A --> G[Governance checks]
+  A --> T{Tools}
+  T --> SQL[SQL / DAX / KQL]
+  T --> Search[Search / RAG]
+  T --> Code[Code execution]
+  SQL --> D[(Governed data)]
+  Search --> D
+  Code --> D
+  D --> A
+  A --> R[Answer, query, chart, citations]
+```
 
 # AI-powered data platforms: risks
 
@@ -1701,3 +1768,4 @@ Open a random slide, are you able to explain its content and connect it to the r
 :::
 
 # References
+
