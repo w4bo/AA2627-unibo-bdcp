@@ -1496,6 +1496,10 @@ Useful rule:
 
 ![LLM wiki](./img/llmwiki.png)
 
+# LLM wiki for data products
+
+{{< video vid/llmwiki.mp4 >}}
+
 # Data agents
 
 A **data agent** is a governed conversational layer over a data platform.
