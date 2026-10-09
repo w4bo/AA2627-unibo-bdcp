@@ -213,9 +213,6 @@
       margin-right: 0; 
     }
   </style>
-  <script src="01-dataplatforms_files/libs/quarto-diagram/mermaid.min.js"></script>
-  <script src="01-dataplatforms_files/libs/quarto-diagram/mermaid-init.js"></script>
-  <link href="01-dataplatforms_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -2626,37 +2623,15 @@ memory usage: 6.0 KB</code></pre>
 </div></div>
 </section>
 
-<section id="ai-powered-data-platforms" class="title-slide slide level1 center">
-<h1>AI-powered data platforms</h1>
-<p>What changes with generative AI?</p>
-<pre><code>Catalog + Lineage + Metadata -&gt; Semantic Layer -&gt; RAG / GraphRAG / LLM Wiki</code></pre>
-<p>The main shift:</p>
+<section id="what-changes-with-agents-llms-and-generative-ai" class="title-slide slide level1 center">
+<h1>What changes with Agents, LLMs, and generative AI?</h1>
+
+<img data-src="./img/dbrain.svg" class="r-stretch quarto-figure-center"><p class="caption">Digital brain</p><p>The main shift:</p>
 <ul>
 <li>A data platform does not only store and process data</li>
 <li>It also explains data assets, relationships, and usage constraints</li>
 <li>Metadata becomes context for both humans and AI agents</li>
 </ul>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  A[Catalog] --&gt; D[Semantic layer]
-  B[Lineage] --&gt; D
-  C[Metadata] --&gt; D
-  D --&gt; E[RAG]
-  D --&gt; F[GraphRAG]
-  D --&gt; G[LLM wiki]
-  E --&gt; H[Data agent]
-  F --&gt; H
-  G --&gt; H
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 </section>
 
 <section id="semantic-layer" class="title-slide slide level1 center">
@@ -2667,31 +2642,13 @@ memory usage: 6.0 KB</code></pre>
 <li>Columns become metrics, dimensions, policies, and definitions</li>
 <li>Queries can use business language instead of physical schemas</li>
 </ul>
-<p>This idea is close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="bienvenu2018ontology">(<a href="#/references" role="doc-biblioref" onclick=""><strong>bienvenu2018ontology?</strong></a>)</span>.</p>
+<p>Close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="bienvenu2018ontology">(<a href="#/references" role="doc-biblioref" onclick=""><strong>bienvenu2018ontology?</strong></a>)</span>.</p>
 <p>Example:</p>
 <ul>
 <li>User asks: “monthly active customers by region”</li>
 <li>Semantic layer defines: customer, active, month, region, allowed filters</li>
 <li>Engine generates SQL against DWH/lakehouse tables</li>
 </ul>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  U[Business question] --&gt; S[Semantic layer]
-  S --&gt; M[Metrics and dimensions]
-  S --&gt; P[Policies]
-  S --&gt; Q[Generated query]
-  Q --&gt; T[(Lakehouse / DWH tables)]
-  T --&gt; A[Answer in business terms]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 </section>
 
 <section id="rag-over-platform-knowledge" class="title-slide slide level1 center">
@@ -2699,116 +2656,33 @@ memory usage: 6.0 KB</code></pre>
 <p><strong>Retrieval-Augmented Generation (RAG)</strong> retrieves external evidence before the LLM generates an answer <span class="citation" data-cites="lewis2020retrieval">(<a href="#/references" role="doc-biblioref" onclick="">Lewis et al. 2020</a>)</span>.</p>
 <p>In a data platform, the retrievable corpus can include:</p>
 <ul>
-<li>catalog descriptions and data-product documentation</li>
+<li>catalog descriptions, data-product documentation, access policies and data-quality checks</li>
 <li>lineage graphs and pipeline logs</li>
 <li>notebooks, dashboards, tickets, and incident reports</li>
-<li>access policies and data-quality checks</li>
 </ul>
-<p>Example question:</p>
-<blockquote>
-<p>Which datasets feed the churn dashboard, and which upstream pipeline failed last week?</p>
-</blockquote>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  Q[Question] --&gt; R[Retrieve]
-  R --&gt; C[Catalog docs]
-  R --&gt; L[Lineage logs]
-  R --&gt; N[Notebooks and dashboards]
-  C --&gt; P[Prompt with evidence]
-  L --&gt; P
-  N --&gt; P
-  P --&gt; M[LLM]
-  M --&gt; A[Answer with sources]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
+
+<img data-src="./img/hipporag2.png" class="r-stretch quarto-figure-center"><p class="caption">HippoRAG2</p></section>
 
 <section id="graphrag-for-connected-metadata" class="title-slide slide level1 center">
 <h1>GraphRAG for connected metadata</h1>
 <p>Plain RAG retrieves similar chunks.</p>
 <p><strong>GraphRAG</strong> builds a graph of entities and relationships, then retrieves from that graph for local and global questions <span class="citation" data-cites="hogan2021knowledge edge2025graphrag">(<a href="#/references" role="doc-biblioref" onclick=""><strong>hogan2021knowledge?</strong></a>; <a href="#/references" role="doc-biblioref" onclick="">Edge et al. 2025</a>)</span>.</p>
-<p>Why this fits data platforms:</p>
-<ul>
-<li>lineage is already a graph</li>
-<li>catalogs connect datasets, owners, domains, dashboards, and policies</li>
-<li>provenance connects outputs to transformations and inputs</li>
-</ul>
 <p>Example question:</p>
 <blockquote>
 <p>Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?</p>
 </blockquote>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  CRM[CRM ingestion] --&gt; Customer[Customer identifier]
-  Customer --&gt; Orders[Orders data product]
-  Customer --&gt; Churn[Churn dashboard]
-  Orders --&gt; Revenue[Revenue report]
-  Churn --&gt; Owner[Marketing domain]
-  Revenue --&gt; Owner2[Finance domain]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
+
+<img data-src="./img/graphrag.png" class="r-stretch quarto-figure-center"><p class="caption">GraphRAG</p></section>
 
 <section id="llm-wiki-for-data-products" class="title-slide slide level1 center">
 <h1>LLM wiki for data products</h1>
 <p>An <strong>LLM wiki</strong> is a curated, human-readable layer generated from governed platform metadata.</p>
-<p>It complements the catalog.</p>
-<p>It can summarize and organize:</p>
-<ul>
-<li>one page per data product</li>
-<li>owner, SLA, source systems, lineage, quality checks</li>
-<li>common questions, example queries, known limitations</li>
-<li>links to catalog entries, dashboards, notebooks, and runbooks</li>
-</ul>
 <p>Useful rule:</p>
 <blockquote>
 <p>Every generated page must cite catalog, lineage, or documentation sources.</p>
 </blockquote>
-</section>
 
-<section id="examples-in-cloud-data-platforms" class="title-slide slide level1 center">
-<h1>Examples in cloud data platforms</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Databricks</strong></p>
-<ul>
-<li><a href="https://www.databricks.com/product/unity-catalog/business-semantics">Unity Catalog semantics</a></li>
-<li><a href="https://docs.databricks.com/aws/en/ai-bi/">AI/BI Genie</a></li>
-</ul>
-<p><strong>Snowflake</strong></p>
-<ul>
-<li><a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst">Cortex Analyst</a></li>
-<li>semantic models for text-to-SQL</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<p><strong>Microsoft Fabric</strong></p>
-<ul>
-<li><a href="https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent">Fabric data agents</a></li>
-<li>conversational access to governed data</li>
-</ul>
-<p><strong>AWS</strong></p>
-<ul>
-<li><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html">Bedrock Knowledge Bases</a></li>
-<li>RAG over enterprise data</li>
-</ul>
-</div></div>
-</section>
+<img data-src="./img/llmwiki.png" class="r-stretch quarto-figure-center"><p class="caption">LLM wiki</p></section>
 
 <section id="data-agents" class="title-slide slide level1 center">
 <h1>Data agents</h1>
@@ -2820,37 +2694,13 @@ memory usage: 6.0 KB</code></pre>
 <li>user permissions and governance checks</li>
 <li>readable answers with tables, charts, queries, or citations</li>
 </ul>
-<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management, preparation, and analysis <span class="citation" data-cites="sui2026dataagents">(<a href="#/references" role="doc-biblioref" onclick=""><strong>sui2026dataagents?</strong></a>)</span>.</p>
+<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis <span class="citation" data-cites="sui2026dataagents">(<a href="#/references" role="doc-biblioref" onclick=""><strong>sui2026dataagents?</strong></a>)</span>.</p>
 <p>Examples:</p>
 <ul>
 <li>Microsoft Fabric Data Agent</li>
 <li>Databricks Genie Agents</li>
 <li>Snowflake Cortex Agents</li>
 </ul>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">flowchart LR
-  U[User] --&gt; A[Data agent]
-  A --&gt; C[Catalog and semantics]
-  A --&gt; G[Governance checks]
-  A --&gt; T{Tools}
-  T --&gt; SQL[SQL / DAX / KQL]
-  T --&gt; Search[Search / RAG]
-  T --&gt; Code[Code execution]
-  SQL --&gt; D[(Governed data)]
-  Search --&gt; D
-  Code --&gt; D
-  D --&gt; A
-  A --&gt; R[Answer, query, chart, citations]
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
 </section>
 
 <section id="ai-powered-data-platforms-risks" class="title-slide slide level1 center">
