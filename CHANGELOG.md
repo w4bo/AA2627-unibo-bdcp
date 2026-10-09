@@ -1,3 +1,17 @@
+## [1.0.15](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.14...1.0.15) (2026-10-09)
+
+### Dependency updates
+
+* **deps:** update dependency pymongo to v4.18.3 ([#39](https://github.com/w4bo/AA2627-unibo-bdcp/issues/39)) ([a6b1a66](https://github.com/w4bo/AA2627-unibo-bdcp/commit/a6b1a662c992db7931d401db15f62ee52853c2f2))
+
+### Bug Fixes
+
+* update ai-enhanced data platforms ([45226fe](https://github.com/w4bo/AA2627-unibo-bdcp/commit/45226fefc655a29d6b3dcf751c0123eec274f926))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v7.1.0 ([#38](https://github.com/w4bo/AA2627-unibo-bdcp/issues/38)) ([2e877b8](https://github.com/w4bo/AA2627-unibo-bdcp/commit/2e877b8ac901f946182375f4ab4ca53155cc50de))
+
 ## [1.0.14](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.13...1.0.14) (2026-10-08)
 
 ### Bug Fixes
