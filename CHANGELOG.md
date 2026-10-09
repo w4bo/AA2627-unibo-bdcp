@@ -1,3 +1,10 @@
+## [1.0.16](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.15...1.0.16) (2026-10-09)
+
+### Bug Fixes
+
+* update llmwiki ([449593d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/449593d675d7d614fdf8fd1de89e483523fe83a5))
+* update llmwiki ([bc37b7d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/bc37b7d0175236b94f05ccff4e2168fe912fa250))
+
 ## [1.0.15](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.14...1.0.15) (2026-10-09)
 
 ### Dependency updates
