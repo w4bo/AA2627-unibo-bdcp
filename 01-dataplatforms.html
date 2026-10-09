@@ -5,7 +5,9 @@
 <script src="01-dataplatforms_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="01-dataplatforms_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="01-dataplatforms_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="01-dataplatforms_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="01-dataplatforms_files/libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="01-dataplatforms_files/libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="01-dataplatforms_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.10.19">
 
   <meta name="author" content="Matteo Francia   DISI — University of Bologna   m.francia@unibo.it">
@@ -2642,7 +2644,7 @@ memory usage: 6.0 KB</code></pre>
 <li>Columns become metrics, dimensions, policies, and definitions</li>
 <li>Queries can use business language instead of physical schemas</li>
 </ul>
-<p>Close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="bienvenu2018ontology">(<a href="#/references" role="doc-biblioref" onclick=""><strong>bienvenu2018ontology?</strong></a>)</span>.</p>
+<p>Close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="bienvenu2018ontology">(<a href="#/references" role="doc-biblioref" onclick="">Bienvenu and Ortiz 2018</a>)</span>.</p>
 <p>Example:</p>
 <ul>
 <li>User asks: “monthly active customers by region”</li>
@@ -2666,7 +2668,7 @@ memory usage: 6.0 KB</code></pre>
 <section id="graphrag-for-connected-metadata" class="title-slide slide level1 center">
 <h1>GraphRAG for connected metadata</h1>
 <p>Plain RAG retrieves similar chunks.</p>
-<p><strong>GraphRAG</strong> builds a graph of entities and relationships, then retrieves from that graph for local and global questions <span class="citation" data-cites="hogan2021knowledge edge2025graphrag">(<a href="#/references" role="doc-biblioref" onclick=""><strong>hogan2021knowledge?</strong></a>; <a href="#/references" role="doc-biblioref" onclick="">Edge et al. 2025</a>)</span>.</p>
+<p><strong>GraphRAG</strong> builds a graph of entities and relationships, then retrieves from that graph for local and global questions <span class="citation" data-cites="hogan2021knowledge edge2025graphrag">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Hogan et al.</span> 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Edge et al. 2025</a>)</span>.</p>
 <p>Example question:</p>
 <blockquote>
 <p>Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?</p>
@@ -2684,6 +2686,11 @@ memory usage: 6.0 KB</code></pre>
 
 <img data-src="./img/llmwiki.png" class="r-stretch quarto-figure-center"><p class="caption">LLM wiki</p></section>
 
+<section id="llm-wiki-for-data-products-1" class="title-slide slide level1 center">
+<h1>LLM wiki for data products</h1>
+<video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="vid/llmwiki.mp4"></video>
+</section>
+
 <section id="data-agents" class="title-slide slide level1 center">
 <h1>Data agents</h1>
 <p>A <strong>data agent</strong> is a governed conversational layer over a data platform.</p>
@@ -2694,7 +2701,7 @@ memory usage: 6.0 KB</code></pre>
 <li>user permissions and governance checks</li>
 <li>readable answers with tables, charts, queries, or citations</li>
 </ul>
-<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis <span class="citation" data-cites="sui2026dataagents">(<a href="#/references" role="doc-biblioref" onclick=""><strong>sui2026dataagents?</strong></a>)</span>.</p>
+<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis <span class="citation" data-cites="sui2026dataagents">(<a href="#/references" role="doc-biblioref" onclick="">Sui et al. 2026</a>)</span>.</p>
 <p>Examples:</p>
 <ul>
 <li>Microsoft Fabric Data Agent</li>
@@ -2780,6 +2787,9 @@ Armbrust, Michael, Ali Ghodsi, Reynold Xin, and Matei Zaharia. 2021. <span>“La
 <div id="ref-barika2019orchestrating" class="csl-entry" role="listitem">
 Barika, Mutaz, Saurabh Garg, Albert Y Zomaya, Lizhe Wang, Aad Van Moorsel, and Rajiv Ranjan. 2019. <span>“Orchestrating Big Data Analysis Workflows in the Cloud: Research Challenges, Survey, and Future Directions.”</span> <em>ACM Computing Surveys (CSUR)</em> 52 (5): 1–41.
 </div>
+<div id="ref-bienvenu2018ontology" class="csl-entry" role="listitem">
+Bienvenu, Meghyn, and Magdalena Ortiz. 2018. <span>“Ontology-Based Data Access: A Survey.”</span> <em>Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence</em>, 5511–19. <a href="https://doi.org/10.24963/ijcai.2018/777">https://doi.org/10.24963/ijcai.2018/777</a>.
+</div>
 <div id="ref-bruno2002exploiting" class="csl-entry" role="listitem">
 Bruno, Nicolas, and Surajit Chaudhuri. 2002. <span>“Exploiting Statistics on Query Expressions for Optimization.”</span> <em>Proceedings of the 2002 ACM SIGMOD International Conference on Management of Data</em>, 263–74.
 </div>
@@ -2809,6 +2819,9 @@ Golfarelli, Matteo, and Stefano Rizzi. 2009. <em>Data Warehouse Design: Modern P
 </div>
 <div id="ref-herschel2017survey" class="csl-entry" role="listitem">
 Herschel, Melanie, Ralf Diestelkämper, and Houssem Ben Lahmar. 2017. <span>“A Survey on Provenance: What for? What Form? What From?”</span> <em>The VLDB Journal</em> 26 (6): 881–906.
+</div>
+<div id="ref-hogan2021knowledge" class="csl-entry" role="listitem">
+<span class="nocase">Hogan, Aidan, Eva Blomqvist, Michael Cochez, et al.</span> 2021. <span>“Knowledge Graphs.”</span> <em>ACM Computing Surveys</em> 54 (4): 1–37. <a href="https://doi.org/10.1145/3447772">https://doi.org/10.1145/3447772</a>.
 </div>
 <div id="ref-ikeda2009data" class="csl-entry" role="listitem">
 Ikeda, Robert, and Jennifer Widom. 2009. <em>Data Lineage: A Survey</em>. Stanford InfoLab.
@@ -2842,6 +2855,9 @@ Papadakis, George, Dimitrios Skoutas, Emmanouil Thanos, and Themis Palpanas. 202
 </div>
 <div id="ref-simmhan2005survey" class="csl-entry" role="listitem">
 <span class="nocase">Simmhan, Yogesh L, Beth Plale, Dennis Gannon, et al.</span> 2005. <span>“A Survey of Data Provenance Techniques.”</span> <em>Computer Science Department, Indiana University, Bloomington IN</em> 47405: 69.
+</div>
+<div id="ref-sui2026dataagents" class="csl-entry" role="listitem">
+Sui, Yuan, Yaqi Wang, Zheng Lin, et al. 2026. <em>Data Agents: Levels, State of the Art, and Open Problems</em>. <a href="https://arxiv.org/abs/2602.04261">https://arxiv.org/abs/2602.04261</a>.
 </div>
 </div>
 </section>
@@ -3168,6 +3184,7 @@ Papadakis, George, Dimitrios Skoutas, Emmanouil Thanos, and Themis Palpanas. 202
         }
       });
       </script>
+    <script>videojs(video_shortcode_videojs_video1);</script>
     
 
 </body></html>
