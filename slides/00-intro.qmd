@@ -222,7 +222,8 @@ Rule of thumb
 
 - [Course and exam details](00-intro)
 - [(Towards) Data Platforms](01-dataplatforms)
-- [Laboratory on Data Governance](02-integratedlab)
+  - [Data governance demos](https://github.com/w4bo/data-governance-demo/)
+  - [Laboratory on Data Governance](02-integratedlab)
 - [NoSQL](03-nosql)
 - [Cloud Computing](04-cloudcomputing)
 - [Storage Models](06-storage)
