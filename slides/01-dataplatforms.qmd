@@ -1435,13 +1435,9 @@ As new technologies and solutions mature to support a centralized approach to da
 :::
 ::::
 
-# AI-powered data platforms
+# What changes with Agents, LLMs, and generative AI?
 
-What changes with generative AI?
-
-```
-Catalog + Lineage + Metadata -> Semantic Layer -> RAG / GraphRAG / LLM Wiki
-```
+![Digital brain](./img/dbrain.svg)
 
 The main shift:
 
@@ -1449,19 +1445,6 @@ The main shift:
 - It also explains data assets, relationships, and usage constraints
 - Metadata becomes context for both humans and AI agents
 
-```{mermaid}
-%%| echo: false
-flowchart LR
-  A[Catalog] --> D[Semantic layer]
-  B[Lineage] --> D
-  C[Metadata] --> D
-  D --> E[RAG]
-  D --> F[GraphRAG]
-  D --> G[LLM wiki]
-  E --> H[Data agent]
-  F --> H
-  G --> H
-```
 
 # Semantic layer
 
@@ -1471,7 +1454,7 @@ A **semantic layer** maps technical assets to business concepts.
 - Columns become metrics, dimensions, policies, and definitions
 - Queries can use business language instead of physical schemas
 
-This idea is close to **ontology-based data access**, where users query a conceptual layer while mappings connect it to source data [@bienvenu2018ontology].
+Close to **ontology-based data access**, where users query a conceptual layer while mappings connect it to source data [@bienvenu2018ontology].
 
 Example:
 
@@ -1479,45 +1462,17 @@ Example:
 - Semantic layer defines: customer, active, month, region, allowed filters
 - Engine generates SQL against DWH/lakehouse tables
 
-```{mermaid}
-%%| echo: false
-flowchart LR
-  U[Business question] --> S[Semantic layer]
-  S --> M[Metrics and dimensions]
-  S --> P[Policies]
-  S --> Q[Generated query]
-  Q --> T[(Lakehouse / DWH tables)]
-  T --> A[Answer in business terms]
-```
-
 # RAG over platform knowledge
 
 **Retrieval-Augmented Generation (RAG)** retrieves external evidence before the LLM generates an answer [@lewis2020retrieval].
 
 In a data platform, the retrievable corpus can include:
 
-- catalog descriptions and data-product documentation
+- catalog descriptions, data-product documentation, access policies and data-quality checks
 - lineage graphs and pipeline logs
 - notebooks, dashboards, tickets, and incident reports
-- access policies and data-quality checks
 
-Example question:
-
-> Which datasets feed the churn dashboard, and which upstream pipeline failed last week?
-
-```{mermaid}
-%%| echo: false
-flowchart LR
-  Q[Question] --> R[Retrieve]
-  R --> C[Catalog docs]
-  R --> L[Lineage logs]
-  R --> N[Notebooks and dashboards]
-  C --> P[Prompt with evidence]
-  L --> P
-  N --> P
-  P --> M[LLM]
-  M --> A[Answer with sources]
-```
+![HippoRAG2](./img/hipporag2.png)
 
 # GraphRAG for connected metadata
 
@@ -1525,74 +1480,21 @@ Plain RAG retrieves similar chunks.
 
 **GraphRAG** builds a graph of entities and relationships, then retrieves from that graph for local and global questions [@hogan2021knowledge; @edge2025graphrag].
 
-Why this fits data platforms:
-
-- lineage is already a graph
-- catalogs connect datasets, owners, domains, dashboards, and policies
-- provenance connects outputs to transformations and inputs
-
 Example question:
 
 > Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?
 
-```{mermaid}
-%%| echo: false
-flowchart LR
-  CRM[CRM ingestion] --> Customer[Customer identifier]
-  Customer --> Orders[Orders data product]
-  Customer --> Churn[Churn dashboard]
-  Orders --> Revenue[Revenue report]
-  Churn --> Owner[Marketing domain]
-  Revenue --> Owner2[Finance domain]
-```
+![GraphRAG](./img/graphrag.png)
 
 # LLM wiki for data products
 
 An **LLM wiki** is a curated, human-readable layer generated from governed platform metadata.
 
-It complements the catalog.
-
-It can summarize and organize:
-
-- one page per data product
-- owner, SLA, source systems, lineage, quality checks
-- common questions, example queries, known limitations
-- links to catalog entries, dashboards, notebooks, and runbooks
-
 Useful rule:
 
 > Every generated page must cite catalog, lineage, or documentation sources.
 
-# Examples in cloud data platforms
-
-::::{.columns}
-:::{.column width=50%}
-
-**Databricks**
-
-- [Unity Catalog semantics](https://www.databricks.com/product/unity-catalog/business-semantics)
-- [AI/BI Genie](https://docs.databricks.com/aws/en/ai-bi/)
-
-**Snowflake**
-
-- [Cortex Analyst](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst)
-- semantic models for text-to-SQL
-
-:::
-:::{.column width=50%}
-
-**Microsoft Fabric**
-
-- [Fabric data agents](https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent)
-- conversational access to governed data
-
-**AWS**
-
-- [Bedrock Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html)
-- RAG over enterprise data
-
-:::
-::::
+![LLM wiki](./img/llmwiki.png)
 
 # Data agents
 
@@ -1605,30 +1507,13 @@ It combines an LLM with platform tools:
 - user permissions and governance checks
 - readable answers with tables, charts, queries, or citations
 
-The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management, preparation, and analysis [@sui2026dataagents].
+The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis [@sui2026dataagents].
 
 Examples:
 
 - Microsoft Fabric Data Agent
 - Databricks Genie Agents
 - Snowflake Cortex Agents
-
-```{mermaid}
-%%| echo: false
-flowchart LR
-  U[User] --> A[Data agent]
-  A --> C[Catalog and semantics]
-  A --> G[Governance checks]
-  A --> T{Tools}
-  T --> SQL[SQL / DAX / KQL]
-  T --> Search[Search / RAG]
-  T --> Code[Code execution]
-  SQL --> D[(Governed data)]
-  Search --> D
-  Code --> D
-  D --> A
-  A --> R[Answer, query, chart, citations]
-```
 
 # AI-powered data platforms: risks
 
