@@ -1071,32 +1071,5 @@ William Vorhies, 2017 [https://www.datasciencecentral.com/profiles/blogs/dataops
 
 (*) "Per un totale di 4 crediti" N. Narducci
 
-# Summing up
-
-Storage should be flexible enough to support heterogeneous data models and raw data.
-
-- From operational databases to DWHs **(why?)**
-- From relational data models to NoSQL **(why?)**
-- Data lake to (directly) ingest raw data
-
-Storage,  _per se_, is insufficient to get value from the data **(examples?)**
-
-- We also need data processing and fruition
-- Data lakes are blurring into data platforms
-
-Data platforms support end-to-end data needs **(which ones?)**
-
-- Building data platforms is hard **(why?)**
-- Managing data platforms is hard; exploit metadata to ease this task
-- Data lineage, compression, profiling, resolution, etc.
-
-**Open question**: How do we deploy working data platforms?
-
-# How do I know if I am prepared for the exam?
-
-:::{.fragment}
-Open a random slide, are you able to explain its content and connect it to the rest of the topics?
-:::
-
 # References
 
