@@ -1,3 +1,10 @@
+## [1.0.19](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.18...1.0.19) (2026-10-13)
+
+### Bug Fixes
+
+* split slides on data platforms and governance ([33583dd](https://github.com/w4bo/AA2627-unibo-bdcp/commit/33583dd57c8066756a79acc577d4c2cce8aa4f70))
+* update structure ([70858d3](https://github.com/w4bo/AA2627-unibo-bdcp/commit/70858d35b63142714bbf21cc52e0c45cd1cfbbba))
+
 ## [1.0.18](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.17...1.0.18) (2026-10-13)
 
 ### Dependency updates
