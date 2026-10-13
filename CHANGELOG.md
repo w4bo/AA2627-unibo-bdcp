@@ -1,3 +1,9 @@
+## [1.0.20](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.19...1.0.20) (2026-10-13)
+
+### Bug Fixes
+
+* update structure ([b499c57](https://github.com/w4bo/AA2627-unibo-bdcp/commit/b499c577f559a0c3691ed40cf9bb5978bdd9e5d6))
+
 ## [1.0.19](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.18...1.0.19) (2026-10-13)
 
 ### Bug Fixes
