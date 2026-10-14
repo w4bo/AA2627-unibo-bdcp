@@ -31,7 +31,11 @@ I work on:
 
 # What This Module Is About
 
-Handling data pipelines in the cloud means learning how data moves from raw sources to reliable analytical systems.
+**Data platforms as the data backbone**
+
+- Provide *centralized, reliable, and scalable* access to enterprise data
+- Ensure *data quality, integration, and governance*
+- Enable *real-time analytics* and advanced *AI/ML models*
 
 In this module, we will discuss:
 
@@ -105,11 +109,7 @@ If you need help with coding and labs, *you can ask me and the assigned tutor*.
 
 # Context
 
-**Data platforms as the foundation**
 
-- Provide *centralized, reliable, and scalable* access to enterprise data
-- Ensure *data quality, integration, and governance*
-- Enable *real-time analytics* and advanced *AI/ML models*
 
 **Why this matters for Decision Support Systems (DSS)**
 

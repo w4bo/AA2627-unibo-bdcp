@@ -583,7 +583,7 @@ No, in a data platform, you also need to manage (streams of) operational data an
 
 Takeaway:
 
-> Fabric connects the platform. Mesh assigns responsibility. AI makes the platform understandable.
+> Fabric connects the platform. Mesh assigns responsibility. AI makes the platform more exploitable.
 
 # Data fabric: definition
 
