@@ -1,3 +1,13 @@
+## [1.0.21](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.20...1.0.21) (2026-10-14)
+
+### Dependency updates
+
+* **deps:** update data-governance-demo digest to 2a42cbc ([#42](https://github.com/w4bo/AA2627-unibo-bdcp/issues/42)) ([fe6b275](https://github.com/w4bo/AA2627-unibo-bdcp/commit/fe6b275f98c070696debf5cfbafcbb2ff30323ec))
+
+### Bug Fixes
+
+* update structure ([589c340](https://github.com/w4bo/AA2627-unibo-bdcp/commit/589c340b6b9cd8b374a012db9e349cf2a2635c71))
+
 ## [1.0.20](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.19...1.0.20) (2026-10-13)
 
 ### Bug Fixes
