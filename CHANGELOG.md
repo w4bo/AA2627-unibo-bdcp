@@ -1,3 +1,23 @@
+## [1.0.22](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.21...1.0.22) (2026-10-19)
+
+### Dependency updates
+
+* **deps:** update data-governance-demo digest to 09a4033 ([#53](https://github.com/w4bo/AA2627-unibo-bdcp/issues/53)) ([50eb7f8](https://github.com/w4bo/AA2627-unibo-bdcp/commit/50eb7f8c50e1193e55f56a9580c26d0e6ea25431))
+* **deps:** update data-governance-demo digest to 63c7976 ([#49](https://github.com/w4bo/AA2627-unibo-bdcp/issues/49)) ([fbe4f61](https://github.com/w4bo/AA2627-unibo-bdcp/commit/fbe4f616390768635d79d7c0ff9c907806555862))
+* **deps:** update data-governance-demo digest to 6ae31a8 ([#46](https://github.com/w4bo/AA2627-unibo-bdcp/issues/46)) ([0756c36](https://github.com/w4bo/AA2627-unibo-bdcp/commit/0756c36ef2f3bc1f430cb3c40fea2a341ed729cb))
+* **deps:** update data-governance-demo digest to 7eef476 ([#52](https://github.com/w4bo/AA2627-unibo-bdcp/issues/52)) ([e1ccd1a](https://github.com/w4bo/AA2627-unibo-bdcp/commit/e1ccd1a71c094d501c0393fe598e32cd8a44a857))
+* **deps:** update data-governance-demo digest to 8c5d951 ([#51](https://github.com/w4bo/AA2627-unibo-bdcp/issues/51)) ([923a41a](https://github.com/w4bo/AA2627-unibo-bdcp/commit/923a41a046e23b949f97317b43030d2af4df2d5b))
+* **deps:** update data-governance-demo digest to e9854eb ([#43](https://github.com/w4bo/AA2627-unibo-bdcp/issues/43)) ([90b9737](https://github.com/w4bo/AA2627-unibo-bdcp/commit/90b973731040bea161812b952f7ebea908c7aced))
+* **deps:** update dependency neo4j to v6.4.1 ([#48](https://github.com/w4bo/AA2627-unibo-bdcp/issues/48)) ([4d0aca9](https://github.com/w4bo/AA2627-unibo-bdcp/commit/4d0aca9a0ba50c07bc4327e415439e60bee4b5b0))
+* **deps:** update dependency pymongo to v4.19.0 ([#45](https://github.com/w4bo/AA2627-unibo-bdcp/issues/45)) ([127ac76](https://github.com/w4bo/AA2627-unibo-bdcp/commit/127ac76509e29168db222220373af82db37255ce))
+* **deps:** update node.js to 24.22 ([#44](https://github.com/w4bo/AA2627-unibo-bdcp/issues/44)) ([333efae](https://github.com/w4bo/AA2627-unibo-bdcp/commit/333efaeaf53a4081ea6a83b95a577554651586bc))
+* **deps:** update slides/refs digest to 7fc1ce4 ([#47](https://github.com/w4bo/AA2627-unibo-bdcp/issues/47)) ([36cc125](https://github.com/w4bo/AA2627-unibo-bdcp/commit/36cc125576da0970c515fada25d0a0d76a3127e6))
+* **deps:** update slides/refs digest to a5e468f ([#50](https://github.com/w4bo/AA2627-unibo-bdcp/issues/50)) ([cfaf96c](https://github.com/w4bo/AA2627-unibo-bdcp/commit/cfaf96c210211940d5db8a9db5bb2d17de857da9))
+
+### Bug Fixes
+
+* update dwh ([0fe960a](https://github.com/w4bo/AA2627-unibo-bdcp/commit/0fe960a599c83a15b77b7fef6a26ed8f738bcb04))
+
 ## [1.0.21](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.20...1.0.21) (2026-10-14)
 
 ### Dependency updates
