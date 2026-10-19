@@ -223,6 +223,22 @@ Querying the cube with OLAP operators: *roll up*
 :::
 ::::
 
+# Data platform: OLAP roll up
+
+::::{.columns}
+:::{.column width=50%}
+
+![Multidimensional cube](img/dwh-3.png)
+
+:::
+:::{.column width=50%}
+
+:::{.fragment}
+![Roll up](img/dwh-4.png)
+:::
+:::
+::::
+
 # Data platform: OLAP drill down
 
 Querying the cube with OLAP operators: *drill down*
@@ -230,12 +246,29 @@ Querying the cube with OLAP operators: *drill down*
 ::::{.columns}
 :::{.column width=50%}
 
-![Roll up](img/cube-rollup.svg)
+![Multidimensional cube](img/cube-rollup.svg)
 
 :::
 :::{.column width=50%}
 :::{.fragment}
 ![Drill down](img/cube-drilldown.svg)
+:::
+:::
+::::
+
+# Data platform: OLAP drill down
+
+Querying the cube with OLAP operators: *drill down*
+
+::::{.columns}
+:::{.column width=50%}
+
+![Multidimensional cube](img/dwh-4.png)
+
+:::
+:::{.column width=50%}
+:::{.fragment}
+![Drill down](img/dwh-5.png)
 :::
 :::
 ::::
