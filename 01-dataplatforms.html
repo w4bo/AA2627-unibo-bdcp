@@ -698,16 +698,12 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="data-platform-olap-drill-down-1" class="title-slide slide level1 center">
 <h1>Data platform: OLAP drill down</h1>
-<p>Querying the cube with OLAP operators: <em>drill down</em></p>
-<div class="columns">
-<div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/dwh-4.png"></p>
 <figcaption>Multidimensional cube</figcaption>
 </figure>
 </div>
-</div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -716,7 +712,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </figure>
 </div>
 </div>
-</div></div>
 </section>
 
 <section id="data-platform-dimensional-fact-model" class="title-slide slide level1 center">
@@ -731,11 +726,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div>
 
 </div>
-
-<img data-src="img/cube-dfm.svg" class="r-stretch quarto-figure-center"><p class="caption">DFM</p></section>
-
-<section id="data-platform-dfm-to-er" class="title-slide slide level1 center">
-<h1>Data platform: DFM to ER</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -843,29 +833,24 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Data platform: data lake limitations</h1>
 <p>The data lake started with the Apache Hadoop movement, using the Hadoop File System (HDFS) for cheap storage</p>
 <ul>
+<li>All the data is usually stored and managed as files</li>
+<li>Agility of storing any data at low cost; eludes the problems of quality and governance</li>
 <li><em>Schema-on-read</em> architecture</li>
-<li>Agility of storing any data at low cost</li>
-<li>Eludes the problems of quality and governance</li>
 </ul>
 <p>Downsides of data lakes</p>
 <ul>
-<li><em>Security</em>
-<ul>
-<li>All the data is stored and managed as files</li>
-<li>No fine-grained access control on the contents of files, but only coarse-grained access governing who can access what files or directories</li>
-</ul></li>
+<li><em>Security</em>: no fine-grained access control on the contents of files, but only coarse-grained access governing who can access files or directories</li>
 <li><em>Quality</em>
 <ul>
-<li>Hard to prevent data corruption and manage schema changes</li>
-<li>Challenging to ensure atomic operations when writing a group of files</li>
-<li>No roll-back mechanism</li>
+<li>Hard to manage schema changes</li>
+<li>Challenging to ensure atomic operations when writing a group of files; no roll-back mechanism</li>
 </ul></li>
 <li><em>Query performance</em>
 <ul>
 <li>Formats are not optimized for fast access</li>
 </ul></li>
 </ul>
-<p>It is often said that the <em>lake</em> easily turns into a <em>swamp</em></p>
+<p>The <em>lake</em> can easily turn into a <strong>swamp</strong></p>
 </section>
 
 <section id="dwh-vs-data-lake" class="title-slide slide level1 center">
