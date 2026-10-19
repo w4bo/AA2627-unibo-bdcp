@@ -190,20 +190,16 @@ Scenario:
 
 # Data platform: multidimensional analysis
 
-:::{.fragment}
 The **multidimensional model** is the key for representing and querying information in a DW
 
 - (Business) *Facts* of interest are represented in *(hyper) cubes* where:
   - Each cell stores *numerical measures* that quantify the fact from different points of view;
   - Each axis is a *dimension* for analyzing measure values;
   - Each *dimension can be the root of a hierarchy* of attributes used to aggregated measure values
-:::
 
-:::{.fragment}
 **Online analytical processing (OLAP)** to answer multi-dimensional analytical queries.
 
 - Interactive sessions of analysis reading large amounts of data. 
-:::
 
 # Data platform: OLAP roll up
 
