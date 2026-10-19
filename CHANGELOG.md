@@ -1,3 +1,9 @@
+## [1.0.26](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.25...1.0.26) (2026-10-19)
+
+### Bug Fixes
+
+* update automl ([403942a](https://github.com/w4bo/AA2627-unibo-bdcp/commit/403942a5abaf966aaf76788dbde541a0f8e293b8))
+
 ## [1.0.25](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.24...1.0.25) (2026-10-19)
 
 ### Bug Fixes
