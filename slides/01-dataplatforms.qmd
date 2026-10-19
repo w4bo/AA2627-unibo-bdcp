@@ -224,13 +224,13 @@ Querying the cube with OLAP operators: *roll up*
 ::::{.columns}
 :::{.column width=50%}
 
-![`SALES` by `City`](img/dwh-3.png)
+![`SUM(QUANTITY)` by `City`](img/dwh-3.png)
 
 :::
 :::{.column width=50%}
 
 :::{.fragment}
-![`SALES` by `Country`](img/dwh-4.png)
+![`SUM(QUANTITY)` by `Country`](img/dwh-4.png)
 :::
 :::
 ::::
@@ -254,10 +254,10 @@ Querying the cube with OLAP operators: *drill down*
 
 # Data platform: OLAP drill down
 
-![`SALES` by `Country`](img/dwh-4.png)
+![`SUM(QUANTITY)` by `Country`](img/dwh-4.png)
 
 :::{.fragment}
-![`SALES` by `Country` and `Quarter`](img/dwh-5.png)
+![`SUM(QUANTITY)` by `Country` and `Quarter`](img/dwh-5.png)
 :::
 
 # Data platform: dimensional fact model
