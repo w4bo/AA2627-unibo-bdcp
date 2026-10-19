@@ -258,20 +258,11 @@ Querying the cube with OLAP operators: *drill down*
 
 # Data platform: OLAP drill down
 
-Querying the cube with OLAP operators: *drill down*
-
-::::{.columns}
-:::{.column width=50%}
-
 ![Multidimensional cube](img/dwh-4.png)
 
-:::
-:::{.column width=50%}
 :::{.fragment}
 ![Drill down](img/dwh-5.png)
 :::
-:::
-::::
 
 # Data platform: dimensional fact model
 
@@ -340,23 +331,20 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 
 The data lake started with the Apache Hadoop movement, using the Hadoop File System (HDFS) for cheap storage
 
+- All the data is usually stored and managed as files
+- Agility of storing any data at low cost; eludes the problems of quality and governance
 - *Schema-on-read* architecture 
-- Agility of storing any data at low cost
-- Eludes the problems of quality and governance
 
 Downsides of data lakes
 
-- *Security*
-  - All the data is stored and managed as files
-  - No fine-grained access control on the contents of files, but only coarse-grained access governing who can access what files or directories
+- *Security*: no fine-grained access control on the contents of files, but only coarse-grained access governing who can access files or directories
 - *Quality*
-  - Hard to prevent data corruption and manage schema changes
-  - Challenging to ensure atomic operations when writing a group of files
-  - No roll-back mechanism
+  - Hard to manage schema changes
+  - Challenging to ensure atomic operations when writing a group of files; no roll-back mechanism
 - *Query performance*
   - Formats are not optimized for fast access
 
-It is often said that the *lake* easily turns into a *swamp*
+The *lake* can easily turn into a **swamp**
 
 # DWH vs Data Lake?
 
