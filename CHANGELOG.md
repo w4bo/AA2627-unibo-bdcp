@@ -1,3 +1,9 @@
+## [1.0.24](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.23...1.0.24) (2026-10-19)
+
+### Bug Fixes
+
+* update dwh ([d0185d5](https://github.com/w4bo/AA2627-unibo-bdcp/commit/d0185d5f72ce1cbe32dd7d319c682838d95bcc90))
+
 ## [1.0.23](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.22...1.0.23) (2026-10-19)
 
 ### Bug Fixes
