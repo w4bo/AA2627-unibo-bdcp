@@ -139,9 +139,9 @@ The role of computer science in companies has radically changed since the early 
 
 # Data platform: from big data to small data
 
-*Big Data* must be transformed into *Small Data* so that it can be exploited for decision-making purposes
+**Big Data** must be transformed into **Small Data** so that it can be exploited for decision-making purposes
 
-- Small data is data that is "small" enough for human comprehension.
+- *Small* data is data that is *small enough* for human comprehension.
 - It is data in a volume and format that makes it accessible, informative and actionable.
 
 ![Big vs small data](img/phdslides_72.jpg)
@@ -170,7 +170,7 @@ Scenario:
 
 > **Data Warehouse (DWH)** [@golfarelli2009data]
 >
-> "A collection of data that supports decision-making processes. It provides the following features: subject-oriented, integrated and consistent, not volatile."
+> "A collection of data that supports decision-making processes. It provides the following features: *subject-oriented*, *integrated* and *consistent*, *evolution over time and it is not volatile*."
 
 :::
 :::{.column width=50%}
@@ -180,13 +180,15 @@ Scenario:
 :::
 ::::
 
+# Data platform: DWH definition
+
+![Organize data around core business concepts (e.g., sales and customers) rather than around individual applications or processes.](img/dwh-1.png)
+
+# Data platform: DWH definition
+
+![Integration and consistency of data.](img/dwh-2.png)
+
 # Data platform: multidimensional analysis
-
-A **DWH** is a collection of data that supports decision-making processes. It provides the following features:
-
-- It is *subject-oriented*;
-- It is *integrated and consistent*;
-- It shows its *evolution over time and it is not volatile*
 
 :::{.fragment}
 The **multidimensional model** is the key for representing and querying information in a DW

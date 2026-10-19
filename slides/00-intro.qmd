@@ -109,8 +109,6 @@ If you need help with coding and labs, *you can ask me and the assigned tutor*.
 
 # Context
 
-
-
 **Why this matters for Decision Support Systems (DSS)**
 
 - A DSS relies on *timely, consistent, and trustworthy data*
