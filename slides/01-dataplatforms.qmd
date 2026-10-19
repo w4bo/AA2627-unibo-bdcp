@@ -284,10 +284,6 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 
 <div></div>
 
-![DFM](img/cube-dfm.svg)
-
-# Data platform: DFM to ER
-
 ::::{.columns}
 :::{.column width=50%}
 
