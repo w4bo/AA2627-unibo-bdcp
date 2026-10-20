@@ -1,3 +1,9 @@
+## [1.0.27](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.26...1.0.27) (2026-10-20)
+
+### Bug Fixes
+
+* data governance ([aa5a103](https://github.com/w4bo/AA2627-unibo-bdcp/commit/aa5a1030e47ace84eab3f5190c2cd2a0e14f2790))
+
 ## [1.0.26](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.25...1.0.26) (2026-10-19)
 
 ### Bug Fixes
