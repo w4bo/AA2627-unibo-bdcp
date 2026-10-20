@@ -380,28 +380,13 @@ product_reviews.csv</code></pre>
 <pre><code>customer_id,first_name,email,country,telephone</code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb6-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/sales/sales_part1.csv</span></code></pre></div>
 <pre><code>order_key,cust_id,product_id,quantity,date,amount_usd</code></pre>
-<p>What about <code>.json</code> and <code>.xlsx</code> files?</p>
-</section>
-
-<section id="step-1-schema-extraction-1" class="title-slide slide level1 center">
-<h1>Step 1: Schema Extraction</h1>
-<p>For each file, read the first rows to collect column names</p>
-<p>Examples:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb8-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/customers/customers_part1.csv</span></code></pre></div>
-<pre><code>customer_id,first_name,email,country,telephone</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb10-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_a/sales/sales_part1.csv </span></code></pre></div>
-<pre><code>order_key,cust_id,product_id,quantity,date,amount_usd</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb8-1"><a href="" aria-label="1"></a><span class="fu">head</span> <span class="at">-n1</span> /home/datalake/data/bronze/department_b/customers/customers_v2.csv</span></code></pre></div>
+<pre><code>custID,name,location,telephone</code></pre>
 <div class="fragment">
 <p>Problems:</p>
 <ul>
 <li>What about <code>.json</code> and <code>.xlsx</code> files?</li>
-<li>Manual integration is:
-<ul>
-<li>Time-consuming</li>
-<li>Error-prone</li>
-<li>Not scalable</li>
-</ul></li>
-<li>Even if we build a Python program (e.g., with Pandas), we have many files to manually analyze</li>
+<li>Manual integration is not scalable</li>
 </ul>
 </div>
 </section>
@@ -589,15 +574,15 @@ product_reviews.csv</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Computing the embeddings:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb12-1"><a href="" aria-label="1"></a>{</span>
-<span id="cb12-2"><a href="" aria-label="2"></a>  <span class="st">'telephone'</span>: [<span class="op">-</span><span class="fl">0.11484879</span>  <span class="fl">0.06089507</span>  <span class="fl">0.01468573</span> ... ],</span>
-<span id="cb12-3"><a href="" aria-label="3"></a>  <span class="st">'first_name'</span>: [<span class="op">-</span><span class="fl">0.11216891</span>  <span class="fl">0.04061386</span> <span class="op">-</span><span class="fl">0.01322238</span> ... ],</span>
-<span id="cb12-4"><a href="" aria-label="4"></a>  <span class="st">'customer_id'</span>: [<span class="op">-</span><span class="fl">0.06831077</span>  <span class="fl">0.03470041</span> <span class="op">-</span><span class="fl">0.02761879</span> ... ],</span>
-<span id="cb12-5"><a href="" aria-label="5"></a>... }</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb10-1"><a href="" aria-label="1"></a>{</span>
+<span id="cb10-2"><a href="" aria-label="2"></a>  <span class="st">'telephone'</span>: [<span class="op">-</span><span class="fl">0.11484879</span>  <span class="fl">0.06089507</span>  <span class="fl">0.01468573</span> ... ],</span>
+<span id="cb10-3"><a href="" aria-label="3"></a>  <span class="st">'first_name'</span>: [<span class="op">-</span><span class="fl">0.11216891</span>  <span class="fl">0.04061386</span> <span class="op">-</span><span class="fl">0.01322238</span> ... ],</span>
+<span id="cb10-4"><a href="" aria-label="4"></a>  <span class="st">'customer_id'</span>: [<span class="op">-</span><span class="fl">0.06831077</span>  <span class="fl">0.03470041</span> <span class="op">-</span><span class="fl">0.02761879</span> ... ],</span>
+<span id="cb10-5"><a href="" aria-label="5"></a>... }</span></code></pre></div>
 <p>Computing the similarity between embeddings:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb13-1"><a href="" aria-label="1"></a>sim_cos(<span class="st">'country'</span>, <span class="st">'location'</span>): <span class="fl">0.63932264</span>,</span>
-<span id="cb13-2"><a href="" aria-label="2"></a>sim_cos(<span class="st">'location'</span>, <span class="st">'name'</span>): <span class="fl">0.39198124</span>,</span>
-<span id="cb13-3"><a href="" aria-label="3"></a>sim_cos(<span class="st">'name'</span>, <span class="st">'first_name'</span>): <span class="fl">0.6186802</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines"><code class="sourceCode python"><span id="cb11-1"><a href="" aria-label="1"></a>sim_cos(<span class="st">'country'</span>, <span class="st">'location'</span>): <span class="fl">0.63932264</span>,</span>
+<span id="cb11-2"><a href="" aria-label="2"></a>sim_cos(<span class="st">'location'</span>, <span class="st">'name'</span>): <span class="fl">0.39198124</span>,</span>
+<span id="cb11-3"><a href="" aria-label="3"></a>sim_cos(<span class="st">'name'</span>, <span class="st">'first_name'</span>): <span class="fl">0.6186802</span></span></code></pre></div>
 <p>Example:</p>
 <ul>
 <li><span class="math inline">\(Schema_A = \{id, name, email, country\}\)</span></li>
