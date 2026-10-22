@@ -5,7 +5,7 @@ matplotlib==3.11.2
 neo4j==6.4.1
 notebook==7.6.3
 openpyxl==3.1.5
-pandas==3.0.6
+pandas==3.1.0
 paretoset==1.2.5
 pptx2md==2.0.6
 prov[dot]==3.2.3
