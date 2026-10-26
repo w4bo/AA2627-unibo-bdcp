@@ -1,3 +1,9 @@
+## [1.0.29](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.28...1.0.29) (2026-10-26)
+
+### Bug Fixes
+
+* update labs and layouts ([b33fc03](https://github.com/w4bo/AA2627-unibo-bdcp/commit/b33fc0311b5c9b4893e46fbcb37eb9f4a64d0968))
+
 ## [1.0.28](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.27...1.0.28) (2026-10-26)
 
 ### Dependency updates
