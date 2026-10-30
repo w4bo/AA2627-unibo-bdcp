@@ -3,7 +3,7 @@ flaml[automl]==2.7.0
 jupyter==1.1.1
 matplotlib==3.11.2
 neo4j==6.4.1
-notebook==7.6.3
+notebook==7.6.4
 openpyxl==3.1.5
 pandas==3.1.0
 paretoset==1.2.5
