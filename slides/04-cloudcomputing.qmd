@@ -469,14 +469,17 @@ Containerization isolates an application from its environment.
 # Why moving to the cloud? **Worldwide deployment**
 
 ::::{.columns}
-:::{.column width=60%}
+:::{.column width=50%}
 
 ![Google's [Worldwide deployment](https://cloud.google.com/about/locations)](img/google-worlwide.jpg)
 
 :::
-:::{.column width=40%}
+:::{.column width=50%}
 
 ![Regions](img/slides109.png)
+
+:::
+::::
 
 Cloud services are hosted in separate geographic areas.
 
@@ -485,8 +488,6 @@ Cloud services are hosted in separate geographic areas.
   - Availability zones in a region: a data center
 - Resources are usually replicated across zones but not regions
 - [Using regions and availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
-:::
-::::
 
 # Cesena Campus (UniBO), May 2023
 
