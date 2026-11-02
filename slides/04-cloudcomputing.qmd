@@ -525,7 +525,7 @@ Service **integration**
 ::::{.columns}
 :::{.column width=50%}
 
-![Magic Quadrant 2025](img/gartner-mq-2025.png)
+![Magic Quadrant 2025](img/mq-cloud-2026.png)
 
 :::
 :::{.column width=50%}
@@ -547,19 +547,24 @@ How do we choose the Cloud Service Providers?
 # Cloud computing: principal vendors
 
 ::::{.columns}
-:::{.column width=33%}
+:::{.column width=25%}
 
 ![Magic Quadrant 2020](img/slides110.png)
 
 :::
-:::{.column width=33%}
+:::{.column width=25%}
 
 ![Magic Quadrant 2023](img/gartner_mq_2023.png)
 
 :::
-:::{.column width=33%}
+:::{.column width=25%}
 
 ![Magic Quadrant 2025](img/gartner-mq-2025.png)
+
+:::
+:::{.column width=25%}
+
+![Magic Quadrant 2025](img/mq-cloud-2026.png)
 
 :::
 ::::
