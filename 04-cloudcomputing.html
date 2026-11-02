@@ -486,8 +486,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="why-moving-to-the-cloud-2" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
+<section id="what-is-cloud-computing" class="title-slide slide level1 center">
+<h1>What is cloud computing?</h1>
 <blockquote>
 <p><strong>Cloud Computing</strong> (National Institute of Standards and Technology)</p>
 <p>A model for enabling <em>ubiquitous, convenient, on-demand network access</em> to a <em>shared pool</em> of configurable computing resources (e.g., networks, servers, storage, services) that can be rapidly provisioned and released with <em>minimal management effort</em> or <em>service provider interaction</em></p>
@@ -534,214 +534,6 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </figure>
 </div>
 </div></div>
-</section>
-
-<section id="why-moving-to-the-cloud-3" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<p><strong>Scalability</strong></p>
-<ul>
-<li>Adjusts capacity to have predictable performance at the lowest cost</li>
-<li>Scale from one to thousands of computers
-<ul>
-<li>This is not possible on-premises</li>
-</ul></li>
-</ul>
-
-<img data-src="img/scalability.svg" class="r-stretch quarto-figure-center"><p class="caption">Scalability</p></section>
-
-<section id="why-moving-to-the-cloud-4" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<p><strong>Elasticity</strong></p>
-<ul>
-<li>Automatically scale resources in response to run-time conditions</li>
-<li>Adapt to changes in workload by turning on/off resources to match the necessary capacity</li>
-<li>Core justification for the cloud adoption</li>
-</ul>
-
-<img data-src="img/elasticity.svg" class="r-stretch quarto-figure-center"><p class="caption">Elasticity</p></section>
-
-<section id="why-moving-to-the-cloud-5" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p>Hardware scalability</p>
-<ul>
-<li>No longer think about rack space, switches, power supplies, etc.</li>
-</ul>
-<p>Grow storage from GBs to PBs.</p>
-<ul>
-<li>1PB: one hundred 10TB Enterprise Capacity 3.5 HDD hard drives</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides103.jpg"></p>
-<figcaption>Physical space</figcaption>
-</figure>
-</div>
-</div></div>
-<p><a href="https://blog.seagate.com/business/linus-tech-tips-want-petabyte-system/">https://blog.seagate.com/business/linus-tech-tips-want-petabyte-system/</a></p>
-</section>
-
-<section id="why-moving-to-the-cloud-6" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<p><strong>Resource pooling</strong></p>
-<ul>
-<li>Enable <em>cost-sharing</em>, a resource to serve different consumers</li>
-<li>Resources are dynamically reassigned according to demand</li>
-<li>Based on <em>virtualization</em>, running multiple virtual instances on top of a physical computer system</li>
-<li>Economy of scale for physical resources</li>
-</ul>
-
-<img data-src="img/pooling.svg" class="r-stretch quarto-figure-center"><p class="caption">Pooling</p></section>
-
-<section id="virtualization" class="title-slide slide level1 center">
-<h1>Virtualization</h1>
-<p>How do we provide computational resources?</p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<p><em>Containers</em> and <em>virtual machines</em> are packaged computing environments</p>
-<p><em>Containers</em></p>
-<ul>
-<li>On top of the physical server and its host OS</li>
-<li>Share the host OS kernel</li>
-<li>Shared components are read-only</li>
-<li>“Light” takes seconds to start</li>
-</ul>
-<p><em>Virtual machines</em></p>
-<ul>
-<li>Emulate a hardware/software system</li>
-<li>On top of a hypervisor (VM monitor)</li>
-</ul>
-</div><div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides112.jpg"></p>
-<figcaption>Containers vs VMs</figcaption>
-</figure>
-</div>
-</div></div>
-<p>Containerization isolates an application from its environment.</p>
-<ul>
-<li>Lightweight alternative to full virtualization</li>
-<li>Containers are isolated but need to be deployed to (public/private) server</li>
-<li>Excellent solution when dependencies are in play</li>
-<li>Housekeeping challenges and complexities</li>
-</ul>
-</section>
-
-<section id="why-moving-to-the-cloud-7" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<p><strong>Reliability</strong></p>
-<ul>
-<li>Built to handle failures</li>
-<li>Fault-tolerant or highly available</li>
-</ul>
-
-<img data-src="img/physical-node.png" class="r-stretch quarto-figure-center"><p class="caption">Physical Server Pools</p></section>
-
-<section id="why-moving-to-the-cloud-8" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><strong>Worldwide deployment</strong></p>
-<ul>
-<li>Improve data locality</li>
-<li>Deploy applications as close to customers as possible
-<ul>
-<li>E.g., to reduce network latency</li>
-</ul></li>
-<li>Compliant to privacy regulations (e.g., GDPR)</li>
-</ul>
-</div><div class="column" style="width:60%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/google-worlwide.jpg"></p>
-<figcaption>Google’s <a href="https://cloud.google.com/about/locations">Worldwide deployment</a></figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-
-<section id="cesena-campus-unibo-may-2023" class="title-slide slide level1 center">
-<h1>Cesena Campus (UniBO), May 2023</h1>
-<p>The importance of geographical redundancy.</p>
-<p><img src="img/phdslides_25.jpg" class="center-img" style="max-height: 600px !important" alt="Cesena, 2023-05-18"></p>
-</section>
-
-<section id="worldwide-deployment" class="title-slide slide level1 center">
-<h1>Worldwide deployment</h1>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Cloud services are hosted in separate geographic areas.</p>
-<ul>
-<li>Locations are composed of <strong>regions</strong> and <strong>availability zones</strong></li>
-<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">Using regions and availability zones</a></li>
-</ul>
-<p>Region (e.g., <code>us-east-1</code>)</p>
-<ul>
-<li>It is an independent geographical area that groups data centers</li>
-<li>Has availability zones</li>
-</ul>
-<p>Availability zones in a region</p>
-<ul>
-<li>A data center</li>
-<li>Connected through low-latency links</li>
-<li>Resources are usually replicated across zones but not regions</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/slides109.png"></p>
-<figcaption>Regions</figcaption>
-</figure>
-</div>
-</div></div>
-</section>
-
-<section id="why-moving-to-the-cloud-9" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<p>Measured <strong>quality of service</strong></p>
-<ul>
-<li>Services leverage a quantitative metering capability, making <em>pay-as-you-go (or pay-per-use)</em> billing</li>
-</ul>
-
-<img data-src="img/aws-billing.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://aws.amazon.com/it/blogs/aws/aws-cost-explorer-update-better-filtering-grouping-report-management-ri-reports/">AWS billing</a></p></section>
-
-<section id="why-moving-to-the-cloud-10" class="title-slide slide level1 center">
-<h1>Why moving to the cloud?</h1>
-<div class="columns">
-<div class="column" style="width:40%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="img/aws-services.jpg"></p>
-<figcaption>AWS Services</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:60%;">
-<p>Service <strong>integration</strong></p>
-<ul>
-<li>Do not reinvent the wheel; eliminate repetitive tasks
-<ul>
-<li>Use services that solve common problems (e.g., queuing)</li>
-</ul></li>
-<li>Abstract and automatically adapt the architecture to requirements
-<ul>
-<li>E.g., create (test) environments on demand</li>
-</ul></li>
-</ul>
-<p><em>Integration</em> and <em>abstraction</em> are drivers of change</p>
-<ul>
-<li>From <em>databases</em> to <em>data platforms</em></li>
-<li>From <em>on-premises</em> to <em>serverless</em> architectures</li>
-<li>From <em>custom</em> to <em>standardized</em> data pipelines</li>
-</ul>
-</div></div>
-</section>
-
-<section id="which-services" class="title-slide slide level1 center">
-<h1>Which services?</h1>
-
 </section>
 
 <section id="cloud-computing-principal-vendors" class="title-slide slide level1 center">
@@ -802,6 +594,150 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </figure>
 </div>
 </div></div>
+</section>
+
+<section id="why-moving-to-the-cloud-scalability" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Scalability</strong></h1>
+<ul>
+<li>Adjusts capacity to have predictable performance at the lowest cost</li>
+<li>Scale from one to thousands of computers
+<ul>
+<li>This is not possible on-premises</li>
+</ul></li>
+</ul>
+
+<img data-src="img/scalability.svg" class="r-stretch quarto-figure-center"><p class="caption">Scalability</p></section>
+
+<section id="why-moving-to-the-cloud-elasticity" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Elasticity</strong></h1>
+<ul>
+<li>Automatically scale resources in response to run-time conditions</li>
+<li>Adapt to changes in workload by turning on/off resources to match the necessary capacity</li>
+<li>Core justification for the cloud adoption</li>
+</ul>
+
+<img data-src="img/elasticity.svg" class="r-stretch quarto-figure-center"><p class="caption">Elasticity</p></section>
+
+<section id="why-moving-to-the-cloud-resource-pooling" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Resource pooling</strong></h1>
+<ul>
+<li>Enable <em>cost-sharing</em>, a resource to serve different consumers</li>
+<li>Resources are dynamically reassigned according to demand</li>
+<li>Based on <em>virtualization</em>, running multiple virtual instances on top of a physical computer system</li>
+<li>Economy of scale for physical resources</li>
+</ul>
+
+<img data-src="img/pooling.svg" class="r-stretch quarto-figure-center"><p class="caption">Pooling</p></section>
+
+
+
+<section id="why-moving-to-the-cloud-reliability" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Reliability</strong></h1>
+<ul>
+<li>Built to handle failures</li>
+<li>Fault-tolerant or highly available</li>
+</ul>
+
+<img data-src="img/physical-node.png" class="r-stretch quarto-figure-center"><p class="caption">Physical Server Pools</p></section>
+
+<section id="why-moving-to-the-cloud-worldwide-deployment" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Worldwide deployment</strong></h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/google-worlwide.jpg"></p>
+<figcaption>Google’s <a href="https://cloud.google.com/about/locations">Worldwide deployment</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<ul>
+<li>Improve data locality</li>
+<li>Deploy applications as close to customers as possible
+<ul>
+<li>E.g., to reduce network latency</li>
+</ul></li>
+<li>Compliant to privacy regulations (e.g., GDPR)</li>
+</ul>
+</div>
+</div></div>
+</section>
+
+<section id="why-moving-to-the-cloud-worldwide-deployment-1" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Worldwide deployment</strong></h1>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/google-worlwide.jpg"></p>
+<figcaption>Google’s <a href="https://cloud.google.com/about/locations">Worldwide deployment</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/slides109.png"></p>
+<figcaption>Regions</figcaption>
+</figure>
+</div>
+<p>Cloud services are hosted in separate geographic areas.</p>
+<ul>
+<li>Locations are composed of <strong>regions</strong> and <strong>availability zones</strong>
+<ul>
+<li>Region (e.g., <code>us-east-1</code>): an independent geographical area that groups data centers</li>
+<li>Availability zones in a region: a data center</li>
+</ul></li>
+<li>Resources are usually replicated across zones but not regions</li>
+<li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">Using regions and availability zones</a></li>
+</ul>
+</div></div>
+</section>
+
+<section id="cesena-campus-unibo-may-2023" class="title-slide slide level1 center">
+<h1>Cesena Campus (UniBO), May 2023</h1>
+<p>The importance of geographical redundancy.</p>
+<p><img src="img/phdslides_25.jpg" class="center-img" style="max-height: 600px !important" alt="Cesena, 2023-05-18"></p>
+</section>
+
+<section id="why-moving-to-the-cloud-qos-and-pay-as-you-go-billing" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>QoS</strong> and <strong>Pay-as-you-go</strong> billing</h1>
+
+<img data-src="img/aws-billing.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://aws.amazon.com/it/blogs/aws/aws-cost-explorer-update-better-filtering-grouping-report-management-ri-reports/">AWS billing</a></p></section>
+
+<section id="why-moving-to-the-cloud-service-integration" class="title-slide slide level1 center">
+<h1>Why moving to the cloud? <strong>Service integration</strong></h1>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/aws-services.jpg"></p>
+<figcaption>AWS Services</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Do not reinvent the wheel; eliminate repetitive tasks
+<ul>
+<li>Use services that solve common problems (e.g., queuing)</li>
+</ul></li>
+<li>Abstract and automatically adapt the architecture to requirements
+<ul>
+<li>E.g., create (test) environments on demand</li>
+</ul></li>
+</ul>
+<p><em>Integration</em> and <em>abstraction</em> are drivers of change</p>
+<ul>
+<li>From <em>databases</em> to <em>data platforms</em></li>
+<li>From <em>on-premises</em> to <em>serverless</em> architectures</li>
+<li>From <em>custom</em> to <em>standardized</em> data pipelines</li>
+</ul>
+</div></div>
+</section>
+
+<section id="which-services" class="title-slide slide level1 center">
+<h1>Which services?</h1>
+
 </section>
 
 <section id="data-pipeline" class="title-slide slide level1 center">
