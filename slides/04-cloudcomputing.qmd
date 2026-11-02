@@ -288,7 +288,7 @@ Moving from A to B is a multi-year process made up of intermediate goals
 - Can be accomplished in a limited time range (typically less than one year)
 - Costs must be economically related to gains
 
-# Why moving to the cloud?
+# What is cloud computing?
 
 > **Cloud Computing** (National Institute of Standards and Technology)
 >
@@ -329,196 +329,6 @@ There are different types of clouds.
 
 :::
 ::::
-
-# Why moving to the cloud?
-
-**Scalability**
-
-- Adjusts capacity to have predictable performance at the lowest cost
-- Scale from one to thousands of computers
-  - This is not possible on-premises
-
-![Scalability](img/scalability.svg)
-
-# Why moving to the cloud?
-
-**Elasticity**
-
-- Automatically scale resources in response to run-time conditions
-- Adapt to changes in workload by turning on/off resources to match the necessary capacity
-- Core justification for the cloud adoption
-
-![Elasticity](img/elasticity.svg)
-
-# Why moving to the cloud?
-
-::::{.columns}
-:::{.column width=60%}
-
-Hardware scalability
-
-- No longer think about rack space, switches, power supplies, etc.
-
-Grow storage from GBs to PBs.
-
-- 1PB: one hundred 10TB Enterprise Capacity 3.5 HDD hard drives
-
-:::
-:::{.column width=40%}
-
-![Physical space](img/slides103.jpg)
-
-:::
-::::
-
-[https://blog.seagate.com/business/linus-tech-tips-want-petabyte-system/](https://blog.seagate.com/business/linus-tech-tips-want-petabyte-system/)
-
-# Why moving to the cloud?
-
-**Resource pooling**
-
-- Enable *cost-sharing*, a resource to serve different consumers
-- Resources are dynamically reassigned according to demand
-- Based on *virtualization*, running multiple virtual instances on top of a physical computer system
-- Economy of scale for physical resources
-
-![Pooling](img/pooling.svg)
-
-# Virtualization
-
-How do we provide computational resources?
-
-::::{.columns}
-:::{.column width=60%}
-
-*Containers* and *virtual machines* are packaged computing environments
-
-*Containers*
-
-- On top of the physical server and its host OS
-- Share the host OS kernel
-- Shared components are read-only
-- "Light" takes seconds to start
-
-*Virtual machines*
-
-- Emulate a hardware/software system
-- On top of a hypervisor (VM monitor)
-
-:::
-:::{.column width=40%}
-
-![Containers vs VMs](img/slides112.jpg)
-
-:::
-::::
-
-Containerization isolates an application from its environment.
-
-- Lightweight alternative to full virtualization
-- Containers are isolated but need to be deployed to (public/private) server
-- Excellent solution when dependencies are in play
-- Housekeeping challenges and complexities
-
-# Why moving to the cloud?
-
-**Reliability**
-
-- Built to handle failures
-- Fault-tolerant or highly available
-
-![Physical Server Pools](img/physical-node.png)
-
-# Why moving to the cloud?
-
-::::{.columns}
-:::{.column width=40%}
-
-**Worldwide deployment**
-
-- Improve data locality
-- Deploy applications as close to customers as possible
-  - E.g., to reduce network latency
-- Compliant to privacy regulations (e.g., GDPR)
-
-:::
-:::{.column width=60%}
-
-![Google's [Worldwide deployment](https://cloud.google.com/about/locations)](img/google-worlwide.jpg)
-
-:::
-::::
-
-# Cesena Campus (UniBO), May 2023
-
-The importance of geographical redundancy.
-
-<img src="img/phdslides_25.jpg" class="center-img" style="max-height: 600px !important" alt="Cesena, 2023-05-18" />
-
-# Worldwide deployment
-
-::::{.columns}
-:::{.column width=50%}
-
-Cloud services are hosted in separate geographic areas.
-
-- Locations are composed of **regions** and **availability zones**
-- [Using regions and availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
-
-Region (e.g., `us-east-1`)
-
-- It is an independent geographical area that groups data centers
-- Has availability zones
-
-Availability zones in a region
-
-- A data center
-- Connected through low-latency links
-- Resources are usually replicated across zones but not regions
-
-:::
-:::{.column width=50%}
-
-![Regions](img/slides109.png)
-
-:::
-::::
-
-# Why moving to the cloud?
-
-Measured **quality of service**
-
-- Services leverage a quantitative metering capability, making *pay-as-you-go (or pay-per-use)* billing
-
-![[AWS billing](https://aws.amazon.com/it/blogs/aws/aws-cost-explorer-update-better-filtering-grouping-report-management-ri-reports/)](img/aws-billing.png)
-
-# Why moving to the cloud?
-
-::::{.columns}
-:::{.column width=40%}
-
-![AWS Services](img/aws-services.jpg)
-
-:::
-:::{.column width=60%}
-
-Service **integration**
-
-- Do not reinvent the wheel; eliminate repetitive tasks
-  - Use services that solve common problems (e.g., queuing)
-- Abstract and automatically adapt the architecture to requirements
-  - E.g., create (test) environments on demand
-
-*Integration* and *abstraction* are drivers of change
-
-- From *databases* to *data platforms*
-- From *on-premises* to *serverless* architectures
-- From *custom* to *standardized* data pipelines
-
-:::
-::::
-
-# Which services?
 
 # Cloud computing: principal vendors
 
@@ -568,6 +378,151 @@ How do we choose the Cloud Service Providers?
 
 :::
 ::::
+
+# Why moving to the cloud? **Scalability**
+
+- Adjusts capacity to have predictable performance at the lowest cost
+- Scale from one to thousands of computers
+  - This is not possible on-premises
+
+![Scalability](img/scalability.svg)
+
+# Why moving to the cloud? **Elasticity**
+
+- Automatically scale resources in response to run-time conditions
+- Adapt to changes in workload by turning on/off resources to match the necessary capacity
+- Core justification for the cloud adoption
+
+![Elasticity](img/elasticity.svg)
+
+# Why moving to the cloud? **Resource pooling**
+
+- Enable *cost-sharing*, a resource to serve different consumers
+- Resources are dynamically reassigned according to demand
+- Based on *virtualization*, running multiple virtual instances on top of a physical computer system
+- Economy of scale for physical resources
+
+![Pooling](img/pooling.svg)
+
+# Virtualization {visibility="hidden"}
+
+How do we provide computational resources?
+
+::::{.columns}
+:::{.column width=60%}
+
+*Containers* and *virtual machines* are packaged computing environments
+
+*Containers*
+
+- On top of the physical server and its host OS
+- Share the host OS kernel
+- Shared components are read-only
+- "Light" takes seconds to start
+
+*Virtual machines*
+
+- Emulate a hardware/software system
+- On top of a hypervisor (VM monitor)
+
+:::
+:::{.column width=40%}
+
+![Containers vs VMs](img/slides112.jpg)
+
+:::
+::::
+
+Containerization isolates an application from its environment.
+
+- Lightweight alternative to full virtualization
+- Containers are isolated but need to be deployed to (public/private) server
+- Excellent solution when dependencies are in play
+- Housekeeping challenges and complexities
+
+# Why moving to the cloud? **Reliability**
+
+- Built to handle failures
+- Fault-tolerant or highly available
+
+![Physical Server Pools](img/physical-node.png)
+
+# Why moving to the cloud? **Worldwide deployment**
+
+::::{.columns}
+:::{.column width=60%}
+
+![Google's [Worldwide deployment](https://cloud.google.com/about/locations)](img/google-worlwide.jpg)
+
+:::
+:::{.column width=40%}
+
+:::{.fragment}
+- Improve data locality
+- Deploy applications as close to customers as possible
+  - E.g., to reduce network latency
+- Compliant to privacy regulations (e.g., GDPR)
+:::
+:::
+::::
+
+# Why moving to the cloud? **Worldwide deployment**
+
+::::{.columns}
+:::{.column width=60%}
+
+![Google's [Worldwide deployment](https://cloud.google.com/about/locations)](img/google-worlwide.jpg)
+
+:::
+:::{.column width=40%}
+
+![Regions](img/slides109.png)
+
+Cloud services are hosted in separate geographic areas.
+
+- Locations are composed of **regions** and **availability zones**
+  - Region (e.g., `us-east-1`): an independent geographical area that groups data centers
+  - Availability zones in a region: a data center
+- Resources are usually replicated across zones but not regions
+- [Using regions and availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html)
+:::
+::::
+
+# Cesena Campus (UniBO), May 2023
+
+The importance of geographical redundancy.
+
+<img src="img/phdslides_25.jpg" class="center-img" style="max-height: 600px !important" alt="Cesena, 2023-05-18" />
+
+# Why moving to the cloud? **QoS** and **Pay-as-you-go** billing
+
+![[AWS billing](https://aws.amazon.com/it/blogs/aws/aws-cost-explorer-update-better-filtering-grouping-report-management-ri-reports/)](img/aws-billing.png)
+
+# Why moving to the cloud? **Service integration**
+
+::::{.columns}
+:::{.column width=40%}
+
+![AWS Services](img/aws-services.jpg)
+
+:::
+:::{.column width=60%}
+
+- Do not reinvent the wheel; eliminate repetitive tasks
+  - Use services that solve common problems (e.g., queuing)
+- Abstract and automatically adapt the architecture to requirements
+  - E.g., create (test) environments on demand
+
+*Integration* and *abstraction* are drivers of change
+
+- From *databases* to *data platforms*
+- From *on-premises* to *serverless* architectures
+- From *custom* to *standardized* data pipelines
+
+:::
+::::
+
+# Which services?
 
 # Data pipeline
 
