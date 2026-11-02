@@ -335,7 +335,7 @@ There are different types of clouds.
 ::::{.columns}
 :::{.column width=50%}
 
-![Magic Quadrant 2025](img/mq-cloud-2026.png)
+![Magic Quadrant 2026](img/mq-cloud-2026.png)
 
 :::
 :::{.column width=50%}
@@ -374,7 +374,7 @@ How do we choose the Cloud Service Providers?
 :::
 :::{.column width=25%}
 
-![Magic Quadrant 2025](img/mq-cloud-2026.png)
+![Magic Quadrant 2026](img/mq-cloud-2026.png)
 
 :::
 ::::
