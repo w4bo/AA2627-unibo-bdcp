@@ -1,3 +1,9 @@
+## [1.0.31](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.30...1.0.31) (2026-11-02)
+
+### Bug Fixes
+
+* working on cc ([6db2e79](https://github.com/w4bo/AA2627-unibo-bdcp/commit/6db2e79a9e3be78f84fd387e353c814e7aa351c4))
+
 ## [1.0.30](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.29...1.0.30) (2026-11-02)
 
 ### Dependency updates
