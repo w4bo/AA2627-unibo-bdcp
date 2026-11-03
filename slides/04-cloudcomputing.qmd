@@ -682,7 +682,7 @@ This is not a sharp taxonomy.
 
 > The new rules are part of an attempt to protect the EU's financial sector from the risks around its reliance on external technology providers, for example its use of cloud computing to run key banking services. Regulators are worried about the impact on the financial sector if a tech provider used by many banks had an outage.
 
-# Is cloud a silver bullet?
+# Is cloud a silver bullet? **Green computing**
 
 ::::{.columns}
 :::{.column width=50%}
@@ -701,7 +701,7 @@ This is not a sharp taxonomy.
 
 [(2025) Carbon capture and storage project](https://blog.google/outreach-initiatives/sustainability/first-carbon-capture-storage-project/)
 
-#
+# 
 
 [(2020) Microsoft finds underwater datacenters are reliable, practical and use energy sustainably](https://news.microsoft.com/source/features/sustainability/project-natick-underwater-datacenter/)
 
