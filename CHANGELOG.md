@@ -1,3 +1,21 @@
+## [1.0.32](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.31...1.0.32) (2026-11-03)
+
+### Dependency updates
+
+* **deps:** update slides/refs digest to cb8e19e ([#76](https://github.com/w4bo/AA2627-unibo-bdcp/issues/76)) ([6c841c8](https://github.com/w4bo/AA2627-unibo-bdcp/commit/6c841c80f66e00efac238ddfc933995c0307bc15))
+
+### Bug Fixes
+
+* working on cc ([90c5cb9](https://github.com/w4bo/AA2627-unibo-bdcp/commit/90c5cb9537ccfc1861acf8d3680f31c972ab22dd))
+* working on cc ([07bb06f](https://github.com/w4bo/AA2627-unibo-bdcp/commit/07bb06f388f46e00bde3cdc654b109b482110928))
+* working on cc ([3ab2d72](https://github.com/w4bo/AA2627-unibo-bdcp/commit/3ab2d7267ca8d05192cd474e09b87280aa6140ba))
+* working on cc ([fd9b6f0](https://github.com/w4bo/AA2627-unibo-bdcp/commit/fd9b6f0a7478da2f4eab1377113e6f7d6db1cc65))
+
+### General maintenance
+
+* add alias ([3a5cc94](https://github.com/w4bo/AA2627-unibo-bdcp/commit/3a5cc94d81c8b359a371b07a0309e72fbaa51256))
+* **release:** 1.0.32 [skip ci] ([f9318df](https://github.com/w4bo/AA2627-unibo-bdcp/commit/f9318df1cecbc7d2b6d318e86c85b0e9ada56d6a))
+
 ## [1.0.32](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.31...1.0.32) (2026-11-02)
 
 ### Bug Fixes
