@@ -1,3 +1,10 @@
+## [1.0.33](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.32...1.0.33) (2026-11-03)
+
+### Bug Fixes
+
+* add image ([c1164c8](https://github.com/w4bo/AA2627-unibo-bdcp/commit/c1164c8fff1ab0255fd040f3a25dd21f937bfe8f))
+* add image ([3841f51](https://github.com/w4bo/AA2627-unibo-bdcp/commit/3841f513f3cdd0a1f2977fb02376419589c618e3))
+
 ## [1.0.32](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.31...1.0.32) (2026-11-03)
 
 ### Dependency updates
