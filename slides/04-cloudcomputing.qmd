@@ -678,6 +678,12 @@ This is not a sharp taxonomy.
 
 # Is cloud a silver bullet?
 
+![[Amazon, Google named by EU among 'critical' tech providers for finance industry (Nov 2025)](https://www.reuters.com/sustainability/boards-policy-regulation/amazon-google-named-by-eu-among-critical-tech-providers-finance-industry-2025-11-18/)](img/aws-gc.png)
+
+> The new rules are part of an attempt to protect the EU's financial sector from the risks around its reliance on external technology providers, for example its use of cloud computing to run key banking services. Regulators are worried about the impact on the financial sector if a tech provider used by many banks had an outage.
+
+# Is cloud a silver bullet?
+
 ::::{.columns}
 :::{.column width=50%}
 
