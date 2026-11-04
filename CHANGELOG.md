@@ -1,3 +1,13 @@
+## [1.0.34](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.33...1.0.34) (2026-11-04)
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.158 ([#77](https://github.com/w4bo/AA2627-unibo-bdcp/issues/77)) ([44dee31](https://github.com/w4bo/AA2627-unibo-bdcp/commit/44dee31566b6e07fee94b58dd365e14350099821))
+
+### Bug Fixes
+
+* add image ([ca7aa25](https://github.com/w4bo/AA2627-unibo-bdcp/commit/ca7aa253394608201640dad2acc89a0c651e503b))
+
 ## [1.0.33](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.32...1.0.33) (2026-11-03)
 
 ### Bug Fixes
