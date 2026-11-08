@@ -1,3 +1,15 @@
+## [1.0.35](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.34...1.0.35) (2026-11-08)
+
+### Dependency updates
+
+* **deps:** update dependency flaml to v2.8.0 ([#80](https://github.com/w4bo/AA2627-unibo-bdcp/issues/80)) ([63de540](https://github.com/w4bo/AA2627-unibo-bdcp/commit/63de5409e77ac128e8e9c83d12216bc95913c545))
+* **deps:** update dependency notebook to v7.6.5 ([#81](https://github.com/w4bo/AA2627-unibo-bdcp/issues/81)) ([099be9e](https://github.com/w4bo/AA2627-unibo-bdcp/commit/099be9ef936d6b34702c54e885387962ae9cf690))
+* **deps:** update dependency pandas to v3.1.1 ([#79](https://github.com/w4bo/AA2627-unibo-bdcp/issues/79)) ([e46fa92](https://github.com/w4bo/AA2627-unibo-bdcp/commit/e46fa92b23ed20e3db0e1c347b9dcb633167d9ad))
+
+### Bug Fixes
+
+* change storage title ([e203916](https://github.com/w4bo/AA2627-unibo-bdcp/commit/e203916e65658777e9f0714dbddc62261dd58244))
+
 ## [1.0.34](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.33...1.0.34) (2026-11-04)
 
 ### Dependency updates
