@@ -1,3 +1,9 @@
+## [1.0.36](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.35...1.0.36) (2026-11-08)
+
+### Bug Fixes
+
+* add sqlalchemy ([de3a9cc](https://github.com/w4bo/AA2627-unibo-bdcp/commit/de3a9cc8daa58552c467e26e4e9f5908bde975ce))
+
 ## [1.0.35](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.34...1.0.35) (2026-11-08)
 
 ### Dependency updates
