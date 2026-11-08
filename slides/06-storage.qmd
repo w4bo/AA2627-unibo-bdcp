@@ -1,5 +1,5 @@
 ---
-title: Data pipelines on cloud (Storage)
+title: Storage on Cloud
 ---
 
 #
