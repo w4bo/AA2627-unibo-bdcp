@@ -1,3 +1,14 @@
+## [1.0.37](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.36...1.0.37) (2026-11-09)
+
+### Dependency updates
+
+* **deps:** update data-governance-demo digest to 410c7ef ([#75](https://github.com/w4bo/AA2627-unibo-bdcp/issues/75)) ([0fac322](https://github.com/w4bo/AA2627-unibo-bdcp/commit/0fac322ccb5ab46d76ed96f8abe8895df400116d))
+* **deps:** update dependency prov to v3.3.0 ([#82](https://github.com/w4bo/AA2627-unibo-bdcp/issues/82)) ([9d50397](https://github.com/w4bo/AA2627-unibo-bdcp/commit/9d503973553f5529412b03df1a416bd88677b0ac))
+
+### Bug Fixes
+
+* add ml in sql ([438686e](https://github.com/w4bo/AA2627-unibo-bdcp/commit/438686ec738d2c837edaaab4cf6c6c7668ab72ea))
+
 ## [1.0.36](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.35...1.0.36) (2026-11-08)
 
 ### Bug Fixes
