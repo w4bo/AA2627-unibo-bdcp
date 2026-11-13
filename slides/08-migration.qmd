@@ -10,7 +10,8 @@ title: Cluster migration - Based on a true story​
 Evaluating the costs for a cloud/on-premises data platform
 
 - Fill in this table
-- Real-world case study
+- Historical case study (2021–2024 estimates, not current quotations)
+- Scope: hardware amortization, listed licenses, and cloud charges; excludes energy, cooling, staff/operations, network, backups, retrieval, and migration work
 
 :::
 :::{.column width=40%}
@@ -60,8 +61,8 @@ lshw -short -C memory
 lshw -short -C disk
 ```
 
-- 8 CPUs (144 total)
-  - Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+- 18 processors: 108 physical cores / 216 logical threads
+  - [Intel Core i7-8700](https://www.intel.com/content/www/us/en/products/sku/126686/intel-core-i78700-processor-12m-cache-up-to-4-60-ghz/specifications.html): 6 cores / 12 threads per node
 - 32GB RAM (576GB total)
   - 2 x 16GB DIMM DDR4 2666 MHz
 - 12TB HDD Disk (216TB total)
@@ -205,7 +206,7 @@ How do we start?
 ::::{.columns}
 :::{.column width=60%}
 
-Migrating the cluster as-is: ?
+Sizing an initial cloud configuration: ?
 
 - Hint: add 18 EC2 instances satisfying the hardware requirements
 
@@ -225,9 +226,10 @@ Migrating the cluster as-is: ?
 ::::{.columns}
 :::{.column width=60%}
 
-$SOL_{cloud 1}$ migrating the cluster as-is: 13500\$/month = 162000\$/year
+$SOL_{cloud 1}$ historical sizing estimate: 13500\$/month = 162000\$/year
 
-- 18 EC2 instances (t4g.2xlarge) with 12TB EBS storage each machine
+- 18 EC2 instances ([t4g.2xlarge](https://aws.amazon.com/ec2/instance-types/t4/)) with 12TB EBS storage per machine
+- Arm-based, burstable instances: verify binary compatibility, sustained CPU demand/credit charges, and benchmark throughput; equal vCPU/RAM counts do not imply equivalent performance
 
 Prices change over the year
 
@@ -269,7 +271,7 @@ Pay attention to the region
 
 # Migration
 
-It makes no sense to move the cluster as-is
+This historical always-on estimate motivates a different configuration
 
 - More machines ensure better (on-prem) scalability but higher costs
 
@@ -299,7 +301,7 @@ How do we proceed with the migration?
 
 - For simplicity, we can omit it
 
-**Overall**: 50TB storage/year
+**Storage assumption for costing**: 50TB of usable data retained throughout each billed month; annual ingestion/growth is not modeled
 
 :::
 :::{.column width=40%}
@@ -352,8 +354,8 @@ AWS
 
 - 4 EC2 instances: 162000\$/year / 18 machines x 4 machines = *36000\$/year*
 - Problems
-  - Machines are up and running even when no computation is necessary
-    - This is necessary to persist data
+  - This estimate assumes always-on compute, even between jobs
+    - Retained EBS can persist while compute is stopped; storage charges continue
   - Still, no software stack
 
 :::
@@ -383,7 +385,8 @@ AWS
 HDFS on EC2
 
 - Heavy price
-- Machine must always be on to guarantee data persistence
+- Running nodes provide service availability; retained [EBS](https://docs.aws.amazon.com/ebs/latest/userguide/EBSFeatures.html) can persist while compute is stopped
+- Instance-store data is lost on stop/termination; EMR deletes attached volumes on termination
 - Data locality
 
 S3
@@ -448,27 +451,26 @@ Given the software requirements, we need
 ::::{.columns}
 :::{.column width=60%}
 
-Migrating cluster to EMR: *14710€/year*
+Historical component sum: *14709.96€/year* (≈14710€); reprice the corrected configuration
 
-- S3 Infrequent Access storage (50 TB per month): 640€
-- 1 x Master EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€
+- S3 Infrequent Access: 50TB retained, historical charge 640€/month
+- 1 x Master, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month
   - 75 h/month = 15min/task x 10task/day x 30day/month / 60min/hour
-- 1 x Core EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€
-- 4 x Task EMR nodes, EC2 (m4.4xlarge), Utilization (75 h/month): 72€
-- 4 x EC2 *on demand (task node): 174.83€*
-  - Storage amount (30 GB)
-  - Workload (Daily, Duration of peak: 0 Hr 15 Min)
-  - Instance type (m4.xlarge)
-- 2 x EC2 on demand (master and core nodes): 330€
-  - Storage amount (30 GB)
-  - Instance type (m4.xlarge)
+- 1 x Core, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month
+- 4 x Task, m4.4xlarge, ephemeral 75 h/month each: historical EMR surcharge 72€/month
+- 4 x task EC2/EBS, on-demand: historical input 174.83€/month (needs repricing)
+  - 30GB/node; corrected target: m4.4xlarge, 75 h/month each
+  - Original EC2 input used m4.xlarge and a different runtime basis
+- 2 x primary/core EC2/EBS, on-demand: historical input 330€/month (needs repricing)
+  - Corrected target: m4.xlarge, 75 h/month each, 30GB/node
+  - Original EC2 input did not establish the same 75-hour basis
 
 :::
 :::{.column width=40%}
 
 | $SOL_{cloud 3}$ | On-premises | On cloud |
 |:-: |:-: |:-: |
-| Hardware | 2356€/year | 14710€/year |
+| Hardware | 2356€/year | 14710€/year  |
 | Software | 100000€/year |? |
 
 :::
@@ -479,27 +481,26 @@ Migrating cluster to EMR: *14710€/year*
 ::::{.columns}
 :::{.column width=60%}
 
-[Migrating cluster to EMR](https://calculator.aws/#/estimate?id=c3780b12bb43b593d05def5a1d5218d9764b8a65): *13445€/year*
+[Historical component sum](https://calculator.aws/#/estimate?id=c3780b12bb43b593d05def5a1d5218d9764b8a65): *13446.60€/year* (≈13447€); reprice the corrected configuration
 
-- S3 Infrequent Access storage (50 TB per month): 640€
-- 1 x Master EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€
+- S3 Infrequent Access: 50TB retained, historical charge 640€/month
+- 1 x Master, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month
   - 75 h/month = 15min/task x 10task/day x 30day/month / 60min/hour
-- 1 x Core EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€
-- 4 x Task EMR nodes, EC2 (m4.4xlarge), Utilization (75 h/month): 72€
-- 4 x EC2 *spot (task node): 69.55€*
-  - Storage amount (30 GB)
-  - Workload (Daily, Duration of peak: 0 Hr 15 Min)
-  - Instance type (m4.xlarge)
-- 2 x EC2 on demand (master and core nodes): 330€
-  - Storage amount (30 GB)
-  - Instance type (m4.xlarge)
+- 1 x Core, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month
+- 4 x Task, m4.4xlarge, ephemeral 75 h/month each: historical EMR surcharge 72€/month
+- 4 x task EC2/EBS, Spot: historical input 69.55€/month (needs repricing)
+  - 30GB/node; corrected target: m4.4xlarge, 75 h/month each
+  - Original EC2 input used m4.xlarge and a different runtime basis
+- 2 x primary/core EC2/EBS, on-demand: historical input 330€/month (needs repricing)
+  - Corrected target: m4.xlarge, 75 h/month each, 30GB/node
+  - Original EC2 input did not establish the same 75-hour basis
 
 :::
 :::{.column width=40%}
 
 | $SOL_{cloud 4}$ | On-premises | On cloud |
 |:-: |:-: |:-: |
-| Hardware | 2356€/year | 13445€/year |
+| Hardware | 2356€/year | 13447€/year  |
 | Software | 100000€/year |? |
 
 :::
@@ -520,7 +521,7 @@ Migrating cluster to EMR: *14710€/year*
 
 # Summing up
 
-We estimated the cluster costs
+We compared historical infrastructure and listed software charges, not total cost of ownership
 
 - On-premises solution with 18 machines: no-go
 - Cloud solution with 18 EC2 instances: no go
@@ -528,7 +529,7 @@ We estimated the cluster costs
 We reduced the solution based on software requirements
 
 - On-premises solution with 4 machines: no-go
-- Cloud solution with 4 EC2 instances: no go, we miss the software configuration
+- Cloud solution with 4 EC2 instances: requires software setup and comparison with a stop/start EBS configuration
 - We moved the cluster to AWS EMR + spot instances + S3 storage
 
 Can we do better?

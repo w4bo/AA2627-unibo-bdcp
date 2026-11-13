@@ -117,7 +117,7 @@ LIMIT 10
 
 *Differ in the supported features*
 
-- E.g., maximum item size (DynamoDB: 400KB, S3: 5TB)
+- E.g., maximum item/object size (DynamoDB: 400KB, [S3: 50TB since December 2025](https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-s3-maximum-object-size-50-tb/))
 - E.g., indexes, querying mechanisms, latency, etc.
 
 # AWS Simple Storage Service (S3)
@@ -148,10 +148,9 @@ Benefits
 AWS S3: [storage classes](https://aws.amazon.com/s3/storage-classes/)
 
 - *Standard*: general purpose
-- *Infrequent (rapid) access*
+- *Standard-IA*: infrequent access with millisecond retrieval
 - *One Zone-IA*: lower-cost option for infrequently accessed data that do not require high availability and resilience
-- *Glacier*: low-cost storage class for data archiving, three retrieval options that range from a few minutes to hours
-- *Deep Glacier*: long-term retention for data accessed once/twice a year. 
+- *S3 Glacier Deep Archive*: long-term retention with retrieval measured in hours
   - E.g., retain data sets for 10 years or longer
 - *Intelligent-Tiering*: move objects between access tiers when access patterns change
 
@@ -450,20 +449,22 @@ Combine the key benefits of data lakes and DWHs
 
 # Data Lakehouse
 
-A two-tier architecture is highly complex for users
+Armbrust et al. (2021) identify complexity in two-tier architectures [@armbrust2021lakehouse].
 
 - (Optional) Data is first *ELTed* into data lakes, ...
 - ... and then *ETLed* into DWH
-- Enterprise use cases now include advanced analytics such as machine learning, for which DWHs are not ideal
+- The paper highlights inefficient access from ML systems to warehouse data
 
-(Some) main problems:
+Problems discussed in the paper:
 
 - *Reliability*: keeping the data lake and DWH consistent is difficult and costly
-- *Staleness*: the data in the DWH is stale compared to that of the data lake, with new data frequently taking days to load
+- *Staleness*: the paper reports delays of days when loading lake data into a DWH
 - *Limited support for advanced analytics*: businesses want to ask predictive questions using their warehousing data
   - E.g., "Which customers should I offer discounts to?" 
   - E.g., process large datasets using complex non-SQL code
 - It could require *two teams of users*: data scientists and BI
+
+These limitations depend on the implementation; current services also support in-warehouse ML (e.g., BigQuery ML).
 
 # Data Lakehouse
 
@@ -527,9 +528,9 @@ Delta Lake uses a **transaction log** and stores data into Apache Parquet for fa
 
 Changes are recorded as ordered, atomic commits in the transaction log.
 
-- Each commit is written as a JSON file, starting with `000000.json`.
+- Each standard filesystem commit is written as a JSON file with a 20-digit, zero-padded version, starting with `00000000000000000000.json`.
 - Additional changes to the table generate subsequent JSON files in ascending numerical order
-- Each log record object (e.g., `000003.json`) contains an array of actions to apply to the previous table version
+- Each commit file contains newline-delimited JSON: one action object per line, applied to the previous table version ([Delta protocol](https://github.com/delta-io/delta/blob/master/PROTOCOL.md))
 
 Whenever a user modifies a table (such as an INSERT, UPDATE, or DELETE), Delta Lake breaks that operation down into a series of discrete steps composed of one or more of the actions below.
 
@@ -546,6 +547,7 @@ Whenever a user modifies a table (such as an INSERT, UPDATE, or DELETE), Delta L
 
 ```sql
 CREATE TABLE suppliers(id INT, name STRING, age INT)
+    USING DELTA
     TBLPROPERTIES ('foo'='bar')
     COMMENT 'this is a comment'
     LOCATION 's3://...';
@@ -562,7 +564,7 @@ Delta tables are stored in S3 (simple files in a data lake), and they can be rea
 
 # Delta Lake
 
-Create a table of `suppliers`, the content of `00000000000000000000.json`
+Separate example: excerpts from a TPC-H suppliers table's `CREATE TABLE AS SELECT` commit, `00000000000000000000.json`
 
 ::::{.columns}
 :::{.column width=50%}
@@ -767,7 +769,8 @@ Checkpoint `00000000000000000002.checkpoint.parquet`
 
 - Every table is the sum of all commits recorded in the transaction log.
 - The log provides a step-by-step instruction guide, detailing how to get from the table's original state to its current state.
-- Recreate a table at any point in time by starting with the original version and processing only commits before that version. 
+- Reconstruct version $v$ from a checkpoint at or before $v$, then apply commits through $v$ (inclusive).
+- Required log and data files must still exist; retention and `VACUUM` limit [time travel](https://docs.delta.io/delta-batch/#data-retention).
 
 ```sql
 select * from suppliers; -- read the last version of the table
@@ -778,12 +781,12 @@ restore table suppliers to version as of 3; -- restore to a specific version
 
 **Data Lineage and Debugging**
 
-- The transaction log offers users a verifiable data lineage useful for governance, audit, and compliance purposes. 
+- The transaction log records table changes for auditing; full upstream/downstream pipeline lineage requires additional metadata.
 - It can also be used to trace the origin of an inadvertent change or a bug in a pipeline back to the exact action that caused it.
 
 ```sql
-delete from suppliers; -- delete is important for GDPR
--- what about data in the log?
+delete from suppliers; -- logical deletion alone is not a complete erasure procedure
+-- What remains in retained data files, logs, checkpoints, or backups?
 ```
 
 # Delta Lake
@@ -833,11 +836,11 @@ Example of a *write transaction*: read the data at table version `r` and attempt
   - If the step fails, the transaction can be retried; depending on the query's semantics (optimistic concurrency)
 4. Optionally, write a new `.parquet` checkpoint for log record `r+1`
 
-Not all large-scale storage systems have an atomic put operation
+The 2020 paper describes different atomic commit mechanisms by storage system
 
 - Google Cloud Storage and Azure Blob Store support atomic put-if-absent operations
 - HDFS, we use atomic renames to rename a temporary file to the target name
-- Amazon S3 needs ad-hoc protocols
+- Amazon S3 required additional coordination in that setting; [conditional writes became available in August 2024](https://aws.amazon.com/about-aws/whats-new/2024/08/amazon-s3-conditional-writes/)
 
 # Delta Lake
 
@@ -879,7 +882,7 @@ while i < 20000:
 Format-independent optimizations are
 
 - *Caching*: cache files from the cloud object store on faster storage devices such as SSDs and RAM on the processing nodes
-- *Auxiliary data*: maintain column min-max statistics for each data file in the table within the same Parquet file used to store the transaction log
+- *Auxiliary data*: maintain per-file column min-max statistics in transaction-log metadata, also carried into checkpoints
 - *Data layout*:
   - *Record ordering*: records clustered together are easiest to read together
     - E.g. ordering records using individual dimensions or space-filling curves such as Z-order

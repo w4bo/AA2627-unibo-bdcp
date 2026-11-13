@@ -43,7 +43,7 @@ The [instance type](https://aws.amazon.com/ec2/instance-types) determines the ha
 
 [Amazon Machine Image](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instances-and-amis.html) is a software template
 
-- The EC2 instance is used for creating the virtual server instance
+- An AMI supplies the image used to launch an EC2 instance
 - The AMI is the EC2 virtual machine image
 
 Interact with EC2 instance as with any computer
@@ -103,7 +103,7 @@ Example of workload
 - Upload input data into Amazon S3
 - EMR launches EC2 instances that you specified
 - EMR begins the execution while pulling the input data from S3 into the launched instances
-- Once the cluster is finished, EMR transfers output data to Amazon S3
+- Configure the job to write results to an S3 output path (e.g., `s3://example-bucket/output/`)
 
 # AWS EMR
 
@@ -172,7 +172,7 @@ The *node type* identifies the role within the cluster
 
 *On-Demand Instance*
 
-- Pay for computing capacity by the hour (minimum of 60 seconds)
+- EMR charges per second with a one-minute minimum; EC2 and EBS charges are additional ([pricing](https://aws.amazon.com/emr/pricing/))
 - No long-term commitments
 
 *Spot Instance*
@@ -204,14 +204,14 @@ Spot Instance cost strategies
 Choose to launch **master**, **core**, or **task** on Spot Instances
 
 - The **master** node controls the cluster
-  - When terminated, the cluster ends
+  - In this single-primary example, losing the primary node can terminate the cluster
   - Use *spot instances* if you are running a cluster where sudden termination is acceptable
 - **Core** nodes process data and store information using HDFS
-  - When terminated, data is lost
-  - Use *spot instances* when partial HDFS data loss is tolerable
+  - HDFS data is at risk if no healthy replicas remain; loss depends on replication and recovery
+  - Use *spot instances* only when replication, recovery, and workload requirements permit interruption
 - **Task** nodes process data but do not hold persistent data in HDFS
   - When terminated, computational capacity is lost
-  - The effect of spot instances on the cluster is "minimal"
+  - Interruptions can cause retries, delays, or application failures; impact depends on fault tolerance
 
 [https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html)
 
@@ -223,14 +223,14 @@ Choose to launch **master**, **core**, or **task** on Spot Instances
 
 Amazon EMR provides two main file systems
 
-- **HDFS** and **EMRFS**, specify which file system to use by the prefix
+- **HDFS** and S3 access, selected by the path prefix
 - `hdfs://path` (or just `path`)
   - HDFS is used by the master and core nodes
   - *AWS EBS volume storage is used for HDFS data*
   - It is fast and best used for caching the results produced by intermediate job-flow steps. *Why?*
   - It’s temporary storage which is reclaimed when the cluster ends
-- `s3://DOC-EXAMPLE-BUCKET1/path` (EMRFS)
-  - An implementation of the Hadoop file system atop Amazon S3
+- `s3://DOC-EXAMPLE-BUCKET1/path` (EMRFS in this historical release)
+  - A Hadoop filesystem connector for Amazon S3; [S3A is the default from EMR 7.10](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-s3a-migrate.html)
   - We can avoid EBS storage
 
 [https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-storage.html](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-storage.html)
@@ -255,18 +255,20 @@ Amazon EMR provides two main file systems
 
 *Infrastructure as code*: using CLI (command line interface)
 
+Historical EMR 6.2 walkthrough: instance types, roles, and console screenshots reflect that release.
+
 ```bash
-aws emr create-cluster
-  --auto-scaling-role EMR_AutoScaling_DefaultRole
-  --termination-protected
-  --applications Name=Hadoop Name=Hive Name=Hue Name=JupyterEnterpriseGateway Name=Spark
-  --ebs-root-volume-size 10
-  --ec2-attributes '{"KeyName":"bigdata","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-5fa2f912","EmrManagedSlaveSecurityGroup":"sg-07818b5690a50b3f1","EmrManagedMasterSecurityGroup":"sg-0e2f5550a2cb98f79"}'
-  --service-role EMR_DefaultRole
-  --enable-debugging
-  --release-label emr-6.2.0
-  --log-uri 's3n://aws-logs-604905954159-us-east-1/elasticmapreduce/'
-  --name 'BigData'
+aws emr create-cluster \
+  --auto-scaling-role EMR_AutoScaling_DefaultRole \
+  --termination-protected \
+  --applications Name=Hadoop Name=Hive Name=Hue Name=JupyterEnterpriseGateway Name=Spark \
+  --ebs-root-volume-size 10 \
+  --ec2-attributes '{"KeyName":"bigdata","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-5fa2f912","EmrManagedSlaveSecurityGroup":"sg-07818b5690a50b3f1","EmrManagedMasterSecurityGroup":"sg-0e2f5550a2cb98f79"}' \
+  --service-role EMR_DefaultRole \
+  --enable-debugging \
+  --release-label emr-6.2.0 \
+  --log-uri 's3n://aws-logs-604905954159-us-east-1/elasticmapreduce/' \
+  --name 'BigData' \
   --instance-groups '
     [{  "InstanceCount": 1,
         "BidPrice": "OnDemandPrice",
@@ -288,8 +290,8 @@ aws emr create-cluster
       }]},
       "InstanceGroupType": "CORE",
       "InstanceType": "m4.xlarge",
-      "Name": "Core - 2"}]'
-  --scale-down-behavior TERMINATE_AT_TASK_COMPLETION
+      "Name": "Core - 2"}]' \
+  --scale-down-behavior TERMINATE_AT_TASK_COMPLETION \
   --region us-east-1
 ```
 
@@ -321,11 +323,11 @@ Creating a cluster (it takes ~10 minutes)
 
 `RUNNING`: a step for the cluster is currently being run
 
-- Cluster sequentially runs any steps that you specified when you created the cluster
+- In this example, steps run sequentially; step concurrency is configurable
 
 `WAITING`: after steps run successfully
 
-`TERMINATING`: after manual shutdown
+`TERMINATING`: after manual shutdown, configured automatic completion, or a terminating error
 
 - *Any data stored on the cluster is deleted*
 
