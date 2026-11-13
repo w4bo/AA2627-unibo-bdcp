@@ -33,7 +33,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="02-integratedlab_files/libs/revealjs/dist/theme/quarto-b328c055d9dc1f3c009edd90f416a34b.css">
   <link href="02-integratedlab_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="02-integratedlab_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -157,12 +176,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Develop possible solutions</li>
 <li>Present these solutions in a way that a computer, human or both can understand</li>
 </ul>
-<p>Pillars to computational thinking:</p>
+<p>Pillars of computational thinking:</p>
 <ul>
 <li>Decomposition</li>
 <li>Pattern recognition</li>
 <li>Data representation</li>
 <li>Abstraction</li>
+<li>Algorithm design</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -179,13 +199,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p><strong>Decomposition</strong></p>
 <ul>
 <li>Taking a complex problem and breaking it into more manageable sub-problems.</li>
-<li>The solution to each sub-problem may be much simpler by putting together the solutions to the sub-problems (any example?)</li>
+<li>Solve the smaller subproblems, then combine their solutions (any example?)</li>
 </ul>
 <p><strong>Pattern recognition</strong></p>
 <ul>
 <li>Find patterns among the sub-problems</li>
 <li>Identify problems sharing similarities or characteristics</li>
-<li>Discovering these patterns make the complex problem easier to solve since we can use the same solution for each occurrence of the pattern (any example?)</li>
+<li>Discovering these patterns makes the complex problem easier to solve since we can use the same solution for each occurrence of the pattern (any example?)</li>
 </ul>
 <p>Data <strong>representation</strong> and <strong>abstraction</strong></p>
 <ul>
@@ -220,6 +240,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Building data pipelines</p>
+<p>Adapted from Géron, <em>Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>, 3rd ed.&nbsp;(2022), Chapter 2 <span class="citation" data-cites="geron2022hands">(<a href="#/in-action" role="doc-biblioref" onclick="">Géron 2022</a>)</span>.</p>
 <ul>
 <li>Frame the problem and look at the big picture</li>
 <li>Get the data</li>
@@ -245,7 +266,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>Building data pipelines</p>
 <ul>
 <li><em>Frame the problem</em> and look at the big picture</li>
-<li><em>“We’ll use the California Housing Prices. Our task is to use California census data to forecast housing prices given the population, median income, and median housing price for each block group in California. Block groups are the smallest geographical unit for which the US Census Bureau publishes sample data (a block group typically has a population of 600 to 3,000 people)”</em></li>
+<li>Predict each block group’s median housing value from census features such as population and median income. The historical census data support cross-sectional prediction, rather than a time-series forecast.</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -272,7 +293,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Frame the problem and look at the big picture
 <ul>
 <li><em>Knowing the objective</em> is important because it will determine how you frame the problem, which algorithms you will select, which performance measure you will use to evaluate your model, and how much effort you will spend tweaking it.</li>
-<li><em>“Your boss answers that your model’s output (a prediction of a district’s median housing price) will be fed to another Machine Learning system, along with many other signals. This downstream system will determine whether it is worth investing in a given area or not. Getting this right is critical, as it directly affects revenue.”</em></li>
+<li>Adapted scenario: the predicted median housing value is one input to a downstream investment model. Prediction errors can affect investment decisions and revenue.</li>
 </ul></li>
 </ul>
 
@@ -307,7 +328,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="in-action" class="title-slide slide level1 center">
+<section id="in-action" class="title-slide slide level1 smaller scrollable">
 <h1>In action</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -316,6 +337,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </figure>
 </div>
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-geron2022hands" class="csl-entry" role="listitem">
+Géron, Aurélien. 2022. <em>Hands-on Machine Learning with Scikit-Learn, Keras, and <span>TensorFlow</span></em>. 3rd ed. O’Reilly Media. <a href="https://github.com/ageron/handson-ml3">https://github.com/ageron/handson-ml3</a>.
+</div>
+</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">

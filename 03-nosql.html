@@ -279,12 +279,12 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><em>Painful scaling-out</em></p>
 <ul>
-<li>Not suited for a cluster architecture</li>
-<li>Distributing an RDBMS is neither easy nor cheap (e.g., Oracle RAC)</li>
+<li>Traditional single-node designs require additional mechanisms for distributed operation</li>
+<li>Partitioning and distributed SQL support scale-out, with coordination and operational costs</li>
 </ul>
 <p><em>Consistency vs latency</em></p>
 <ul>
-<li>Consistency is a must - even at the expense of latency</li>
+<li>Stronger consistency can increase coordination and latency; guarantees depend on the system and configuration</li>
 <li>Today’s applications require high reading/writing throughput with low latency</li>
 </ul>
 <p><em>Schema rigidity</em></p>
@@ -326,7 +326,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p><em>Amazon, 2007</em></p>
 <ul>
 <li>Goal: ensure the availability and reliability of its e-commerce service 24/7</li>
-<li>Solution: <em>DynamoDB</em> <span class="citation" data-cites="sivasubramanian2012amazon">(<a href="#/references" role="doc-biblioref" onclick="">Sivasubramanian 2012</a>)</span>, characterized by strong simplicity for data storage and manipulation</li>
+<li>Solution: <em>Dynamo</em>, a highly available key-value store (<a href="https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf">DeCandia et al., 2007</a>); DynamoDB followed as a managed service in 2012</li>
 </ul>
 </section>
 
@@ -376,11 +376,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>NoSQL common features</h1>
 <p><em>Distributed, shared-nothing architecture</em></p>
 <ul>
-<li>A shared-nothing architecture is a distributed architecture in which each update request is satisfied by a single node in a computer cluster
-<ul>
-<li>Nodes do not share (independently access) the same memory or storage.</li>
-</ul></li>
-<li>Trivial scalability in a distributed environment with no performance decay</li>
+<li>Nodes have independent memory and storage; replication and distributed operations may involve several nodes</li>
+<li>Scalability depends on shard-key skew, coordination, cross-shard operations, and rebalancing</li>
 </ul>
 
 <img data-src="img/shared-nothing-architecture.png" class="r-stretch quarto-figure-center"><p class="caption">Shared everything vs shared nothing</p></section>
@@ -417,26 +414,27 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tbody>
 </table>
 </div><div class="column" style="width:50%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb1-1"><a href="" aria-label="1"></a><span class="ot">[</span></span>
-<span id="cb1-2"><a href="" aria-label="2"></a>    <span class="fu">{</span></span>
-<span id="cb1-3"><a href="" aria-label="3"></a>        <span class="dt">"Product"</span><span class="fu">:</span> <span class="st">"P1"</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="" aria-label="4"></a>        <span class="dt">"Name"</span><span class="fu">:</span> <span class="st">"Beer"</span><span class="fu">,</span></span>
-<span id="cb1-5"><a href="" aria-label="5"></a>        <span class="dt">"Price"</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span></span>
-<span id="cb1-6"><a href="" aria-label="6"></a>        <span class="dt">"Quantity"</span><span class="fu">:</span> <span class="st">"0.4L"</span></span>
-<span id="cb1-7"><a href="" aria-label="7"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-8"><a href="" aria-label="8"></a>    <span class="fu">{</span></span>
-<span id="cb1-9"><a href="" aria-label="9"></a>        <span class="dt">"Product"</span><span class="fu">:</span> <span class="st">"P2"</span><span class="fu">,</span></span>
-<span id="cb1-10"><a href="" aria-label="10"></a>        <span class="dt">"Name"</span><span class="fu">:</span> <span class="st">"Milk"</span><span class="fu">,</span></span>
-<span id="cb1-11"><a href="" aria-label="11"></a>        <span class="dt">"Price"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb1-12"><a href="" aria-label="12"></a>        <span class="dt">"Expiration"</span><span class="fu">:</span> <span class="st">"2024-11-30"</span></span>
-<span id="cb1-13"><a href="" aria-label="13"></a>    <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-14"><a href="" aria-label="14"></a>    <span class="fu">{</span></span>
-<span id="cb1-15"><a href="" aria-label="15"></a>        <span class="dt">"Product"</span><span class="fu">:</span> <span class="st">"P3"</span><span class="fu">,</span></span>
-<span id="cb1-16"><a href="" aria-label="16"></a>        <span class="dt">"Name"</span><span class="fu">:</span> <span class="st">"Pizza"</span><span class="fu">,</span></span>
-<span id="cb1-17"><a href="" aria-label="17"></a>        <span class="dt">"Price"</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span></span>
-<span id="cb1-18"><a href="" aria-label="18"></a>        <span class="dt">"Ingredients"</span><span class="fu">:</span> <span class="ot">[</span><span class="er">...</span><span class="ot">]</span></span>
-<span id="cb1-19"><a href="" aria-label="19"></a>    <span class="fu">}</span></span>
-<span id="cb1-20"><a href="" aria-label="20"></a><span class="ot">]</span></span></code></pre></div>
+<p>Schematic JSON (ellipsis omits array contents):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource text number-lines"><code class="sourceCode"><span id="cb1-1"><a href="" aria-label="1"></a>[</span>
+<span id="cb1-2"><a href="" aria-label="2"></a>    {</span>
+<span id="cb1-3"><a href="" aria-label="3"></a>        "Product": "P1",</span>
+<span id="cb1-4"><a href="" aria-label="4"></a>        "Name": "Beer",</span>
+<span id="cb1-5"><a href="" aria-label="5"></a>        "Price": 6,</span>
+<span id="cb1-6"><a href="" aria-label="6"></a>        "Quantity": "0.4L"</span>
+<span id="cb1-7"><a href="" aria-label="7"></a>    },</span>
+<span id="cb1-8"><a href="" aria-label="8"></a>    {</span>
+<span id="cb1-9"><a href="" aria-label="9"></a>        "Product": "P2",</span>
+<span id="cb1-10"><a href="" aria-label="10"></a>        "Name": "Milk",</span>
+<span id="cb1-11"><a href="" aria-label="11"></a>        "Price": 1,</span>
+<span id="cb1-12"><a href="" aria-label="12"></a>        "Expiration": "2024-11-30"</span>
+<span id="cb1-13"><a href="" aria-label="13"></a>    },</span>
+<span id="cb1-14"><a href="" aria-label="14"></a>    {</span>
+<span id="cb1-15"><a href="" aria-label="15"></a>        "Product": "P3",</span>
+<span id="cb1-16"><a href="" aria-label="16"></a>        "Name": "Pizza",</span>
+<span id="cb1-17"><a href="" aria-label="17"></a>        "Price": 6,</span>
+<span id="cb1-18"><a href="" aria-label="18"></a>        "Ingredients": [...]</span>
+<span id="cb1-19"><a href="" aria-label="19"></a>    }</span>
+<span id="cb1-20"><a href="" aria-label="20"></a>]</span></code></pre></div>
 </div></div>
 </section>
 
@@ -498,7 +496,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>Graph</strong></td>
-<td style="text-align: center;">Stores vertices and arches</td>
+<td style="text-align: center;">Stores vertices and edges</td>
 <td style="text-align: center;">Social network queries, inference, pattern matching</td>
 </tr>
 </tbody>
@@ -564,15 +562,15 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="graph-storage" class="title-slide slide level1 center">
 <h1>Graph: storage</h1>
-<p><strong>Index-free adjacency</strong></p>
+<p><strong>Index-free adjacency</strong> (an implementation technique used by some graph databases)</p>
 <ul>
 <li>Each node directly references its adjacent (neighboring) nodes</li>
-<li>Accessing relationships is simply a memory pointer lookup</li>
+<li>Direct adjacency references reduce relationship-lookup overhead</li>
 </ul>
 <p>Graph processing time</p>
 <ul>
-<li>Proportional to the amount of data processed</li>
-<li>Not increasing exponentially with the number of relationships traversed</li>
+<li>Total work depends on the explored subgraph</li>
+<li>The number of explored nodes/paths can grow exponentially with traversal depth</li>
 </ul>
 </section>
 
@@ -640,7 +638,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p><strong>Aggregate-oriented modeling</strong>: data queries are stored together</p>
 <ul>
 <li>Aggregate = key-value pair, document, row (respectively)</li>
-<li>The aggregate is the atomic block (no guarantees for multi-aggregate operations)</li>
+<li>The aggregate is a natural consistency boundary; some systems also support multi-aggregate transactions</li>
 </ul>
 <p>Based on the concept of encapsulation</p>
 <ul>
@@ -835,9 +833,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p>Disadvantages</p>
 <ul>
-<li><strong>No design strategy exists for aggregates</strong>
+<li><strong>No single aggregate design suits every workload</strong>
 <ul>
-<li><em>It only depends on how they are meant to be used</em></li>
+<li>Use access patterns and consistency boundaries to choose aggregates</li>
 </ul></li>
 <li>Can optimize only a limited set of queries</li>
 <li>Data denormalization -&gt; possible inconsistencies</li>
@@ -877,7 +875,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Read/write operations are distributed</li>
 </ul></li>
 </ul>
-<p>A good <em>sharding strategy</em> is <strong>fundamental </strong> to optimize performances</p>
+<p>A good <em>sharding strategy</em> is <strong>fundamental</strong> to optimize performance</p>
 <ul>
 <li>Usually based on one or more fields composing the sharding key</li>
 </ul>
@@ -886,7 +884,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="sharding-strategy" class="title-slide slide level1 center">
 <h1>Sharding strategy</h1>
-<p>Thumbs-up rules for a sharding strategy:</p>
+<p>Rules of thumb for a sharding strategy:</p>
 <p><em>Data-locality</em></p>
 <ul>
 <li>Store the data close to those who need to access it</li>
@@ -909,8 +907,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Adopted by DynamoDB and Cassandra</li>
 <li>Pros:
 <ul>
-<li>ensures even data distribution across nodes and massive scalability</li>
-<li>new nodes can be added without heavy data redistribution</li>
+<li>can distribute data evenly when keys are well distributed</li>
+<li>consistent hashing or an explicit partition map can limit redistribution when nodes change</li>
 </ul></li>
 <li>Con: range queries become inefficient</li>
 </ul>
@@ -926,7 +924,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Cons:
 <ul>
 <li>global ordering often generates hot spots -&gt; risk of bottlenecks</li>
-<li>ranges are defined a priori, and this can determine heavy data redistribution</li>
+<li>splitting or rebalancing ranges moves data; systems such as HBase can split ranges dynamically</li>
 </ul></li>
 </ul>
 
@@ -977,7 +975,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>It’s the manager of the data</li>
 <li><em>Handles every write operation</em></li>
-<li>Can be chosen or drawn</li>
+<li>Can be chosen or elected</li>
 </ul>
 <p><em>Slaves</em></p>
 <ul>
@@ -1011,7 +1009,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li><em>The master is a bottleneck</em>
 <ul>
 <li><strong>Only the master can handle writes</strong></li>
-<li>In case of failure, a new master must be drawn</li>
+<li>In case of failure, a new master must be elected</li>
 </ul></li>
 <li>Delay in write propagation can be a source of inconsistency
 <ul>
@@ -1044,7 +1042,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p><strong>Pro</strong></p>
 <ul>
 <li>The failure of a node does not interrupt read or write requests</li>
-<li>Write performances easily scale by adding new nodes</li>
+<li>Write performance can scale by adding nodes, depending on coordination and workload</li>
 </ul>
 <p><strong>Cons</strong></p>
 <ul>
@@ -1067,7 +1065,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li><em>Tolerate conflicts</em>: the <em>inconsistency window</em> is usually limited</li>
 <li><em>Read-your-writes</em>: read consistency is guaranteed for the data written by the same user
 <ul>
-<li>Applies only to reads that immediately follow a write operation</li>
+<li>Applies to subsequent reads within the same session</li>
 <li>One way is to associate a user with a node (risk: unbalanced workloads)</li>
 <li>Typically, versioning fields are used to ensure that the up-to-date version is read</li>
 </ul></li>
@@ -1084,24 +1082,25 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>The quorum mechanism</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>The <em>quorum mechanism</em> ensures consistent IO under replication.</p>
+<p>The <em>quorum mechanism</em> coordinates access to replicated data.</p>
 <ul>
-<li>Based on contacting a majority of the nodes responsible for certain data</li>
+<li>Operations require acknowledgments from specified sets of replicas</li>
 <li>The quorum is the minimum number of nodes that a distributed operation has to obtain to be allowed to operate on a replicated data item</li>
 </ul>
-<p>Each data item has <span class="math inline">\(N\)</span> replicas.</p>
+<p>Assume a fixed set of <span class="math inline">\(N\)</span> replicas per item (no substitute replicas).</p>
 <ul>
 <li>Writing quorum: <span class="math inline">\(W &gt; \frac{N}{2}\)</span>
 <ul>
 <li>The write operation is allowed only if W replicas can be updated</li>
-<li>Ensures that two write operations cannot occur concurrently</li>
+<li>Ensures that write quorums intersect; concurrent writes are still possible</li>
 </ul></li>
 <li>Reading quorum: <span class="math inline">\(R &gt; N-W\)</span>
 <ul>
 <li>The read operation is allowed only if R replicas can be read</li>
-<li>Ensures that (at least) one copy with the up-to-date value is read</li>
+<li>Ensures intersection with a completed write quorum</li>
 </ul></li>
 </ul>
+<p>Linearizability also requires a protocol for versions, concurrent writes, and failures; quorum sizes alone are insufficient.</p>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -1124,14 +1123,14 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>RDBMSs come from decades of widespread usage.</p>
 <ul>
 <li>Strong focus on data consistency</li>
-<li>Years of research activities to optimize performances</li>
+<li>Years of research activities to optimize performance</li>
 <li>Highly complex systems (triggers, caching, security, etc.)</li>
 </ul>
 <p>NoSQL systems are designed to succeed where RDBMSs fail.</p>
 <ul>
 <li>Strong focus on data sharding and high availability</li>
-<li>Quite simple systems (for now)</li>
-<li>Speed and manageability rather than consistency at all costs</li>
+<li>Capabilities and consistency guarantees vary by product and configuration</li>
+<li>Data model alone does not determine consistency or availability</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1159,7 +1158,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>E.g., A+B = 0€</li>
 </ul></li>
 </ul>
-<p>RDBMSs adopt <em>transactions </em> to avoid this kind of issue.</p>
+<p>RDBMSs adopt <em>transactions</em> to avoid this kind of issue.</p>
 </section>
 
 <section id="consistency-in-rdbmss-acid" class="title-slide slide level1 center">
@@ -1188,7 +1187,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="consistency-in-rdbmss-acid-1" class="title-slide slide level1 center">
 <h1>Consistency in RDBMSs: ACID</h1>
-<p>Implementation of ACID properties relies on <em>locking mechanisms and logs</em></p>
+<p>One implementation of ACID properties uses <em>locking mechanisms and logs</em>; others use MVCC or optimistic concurrency control.</p>
 <ul>
 <li>Resources are locked, updates are logged</li>
 <li>In case of problems, rollback to the original state</li>
@@ -1217,7 +1216,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p>They are not properties on which NoSQL systems rely.</p>
 <ul>
-<li>Rather, they simply <em>try </em> to describe their behavior</li>
+<li>Rather, they describe guarantees and trade-offs in distributed systems</li>
 </ul>
 </section>
 
@@ -1225,17 +1224,16 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Consistency in NoSQL: CAP</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>“Theorem”: only two of the following three properties can be guaranteed</p>
-<p><em>C</em>onsistency: the system is always consistent</p>
+<p>During a network partition, a system cannot guarantee both linearizability and availability for all affected operations.</p>
+<p><em>C</em>onsistency: linearizability</p>
 <ul>
-<li>Every node returns the same, most recent, successful write</li>
-<li>Every client has the same view of the data</li>
+<li>Operations behave as if executed atomically in one order respecting real time</li>
 </ul>
-<p><em>A</em>vailability: the system is always available</p>
+<p><em>A</em>vailability: every request to a non-failing node eventually completes</p>
 <ul>
-<li>Every non-failing node returns a response for all read and write requests in a reasonable amount of time</li>
+<li>This is not a guarantee of a particular response-time bound</li>
 </ul>
-<p><em>P</em>artition tolerance: the system continues to function and upholds its consistency guarantees despite network partitions</p>
+<p><em>P</em>artition tolerance: the system must handle communication loss between groups of nodes</p>
 <ul>
 <li>In distributed systems, network <strong>partitioning is inevitably a possibility</strong></li>
 </ul>
@@ -1247,38 +1245,39 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </figure>
 </div>
 </div></div>
-<p>See <a href="https://dl.acm.org/doi/pdf/10.1145/564585.564601?casa*token=m69maazxkqIAAAAA:cBn5y1eKnJUh7Tl4GVsw9Hqv984qwQ3*b8XvSM*wM3U2zp*-363uPINWJADEmMt-8ZjPzA1yaoE">CAP demonstration</a></p>
+<p>See <a href="https://doi.org/10.1145/564585.564601">CAP demonstration</a></p>
 </section>
 
 <section id="consistency-in-nosql-cap-1" class="title-slide slide level1 center">
 <h1>Consistency in NoSQL: CAP</h1>
 <p>Three situations</p>
 <ul>
-<li><em>CA</em>: the system cannot suffer from network partitioning (single server)</li>
+<li><em>CA</em>: consistency and availability can coexist when partitions are excluded (e.g., a single server)</li>
 <li><em>AP</em>: in case of partitioning, the system sacrifices consistency (overbooking)</li>
-<li><em>CP</em>: in case of partitioning, the system sacrifices availability (bookings prevented)</li>
+<li><em>CP</em>: during a partition, some operations may block or fail to preserve consistency</li>
 </ul>
 <p>Theorem interpretation is not trivial.</p>
 <ul>
-<li>Asymmetric properties: consistency is sacrificed to favor speed at all times, not just when partitioning happens</li>
+<li>Outside partitions, consistency/latency trade-offs are described by PACELC, not required by CAP</li>
 <li>Different application requirements -&gt; different algorithms handle these properties more strictly/loosely</li>
 </ul>
 </section>
 
-<section id="consistency-in-nosql-relaxing-cap" class="title-slide slide level1 center">
-<h1>Consistency in NoSQL: relaxing CAP</h1>
+<section id="consistency-in-nosql-guarantees-by-operation" class="title-slide slide level1 center">
+<h1>Consistency in NoSQL: guarantees by operation</h1>
 <p>Consider two users who want to book the same room when a network partition happens.</p>
-<p><strong>CP</strong>: no one can book (<em>A is sacrificed</em>)</p>
+<p><strong>CP</strong>: bookings may proceed on a quorum side; other requests block or fail (<em>A is sacrificed</em>)</p>
 <ul>
-<li>Not the best solution</li>
+<li>Which requests complete depends on the protocol and partition topology</li>
 </ul>
 <p><strong>AP</strong>: both can book (<em>C is sacrificed</em>)</p>
 <ul>
 <li>Possible overbooking: writing conflict to handle</li>
 </ul>
-<p><strong>caP</strong>: only one can book</p>
+<p><strong>Mixed guarantees</strong>: stale availability reads, strongly consistent conditional bookings</p>
 <ul>
-<li>The other will see the room available, but cannot book it</li>
+<li>A user may see the room as available but have a booking rejected or blocked</li>
+<li>Reads sacrifice freshness; booking writes sacrifice availability during a partition. CAP still applies.</li>
 </ul>
 <p><em>This is admissible only in certain scenarios</em></p>
 <ul>
@@ -1307,7 +1306,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li><em>PA EL</em>: system focused on speed and availability (main NoSQL philosophy)</li>
 <li><em>PA EC</em>: consistency sacrificed only when partitioning happens</li>
 <li><em>PC EL</em>: consistency enforced only when partitioning happens (e.g., Yahoo Sherpa)</li>
-<li><em>PC EC</em>: system focused on consistency (RDBMS)</li>
+<li><em>PC EC</em>: consistency prioritized during and outside partitions</li>
 </ul>
 </section>
 
@@ -1319,15 +1318,15 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><em>B</em>asic <em>A</em>vailability: the system should always be available</p>
 <p><em>S</em>oft-state: it is acceptable for the system to be temporarily inconsistent</p>
-<p><em>E</em>ventual consistency: eventually, the system becomes consistent</p>
+<p><em>E</em>ventual consistency: replicas converge if updates cease and communication and conflict resolution succeed</p>
 <p>ACID</p>
 <ul>
-<li>Pessimistic approach (better safe than sorry)</li>
+<li>Transaction guarantees; implementations may use pessimistic or optimistic concurrency control</li>
 </ul>
 <p>BASE</p>
 <ul>
-<li>Optimistic approach (everything is going to be ok)</li>
-<li>Higher throughput is better than enforcing consistency</li>
+<li>Allows temporary divergence under specified convergence assumptions</li>
+<li>May favor availability or throughput over immediate replica agreement</li>
 </ul>
 </section>
 
@@ -1365,13 +1364,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <td style="text-align: center;">Network partitioning</td>
 <td style="text-align: center;">Inability to communicate with all replicas of a certain data</td>
 <td style="text-align: center;">- Read conflicts<br>- Possibly write conflicts</td>
-<td style="text-align: center;">- Relax CAP<br>- Prevent write conflicts<br>- Handle read conflict as above</td>
+<td style="text-align: center;">- Choose guarantees per operation<br>- Prevent write conflicts<br>- Handle read conflict as above</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">No ACID transactions</td>
+<td style="text-align: center;">No multi-record transaction</td>
 <td style="text-align: center;">- An update over multiple records fails mid-query<br>- Two updates over multiple records are interleaved</td>
-<td style="text-align: center;">Unrecoverable inconsistency</td>
-<td style="text-align: center;">- Each system provides its own mechanism to offer limited ACID-like transactions</td>
+<td style="text-align: center;">Partial or inconsistent updates</td>
+<td style="text-align: center;">- Use supported transactions<br>- Application compensation or repair</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Data de-normalization</td>
@@ -1391,7 +1390,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="document-popular-dbs" class="title-slide slide level1 center">
 <h1>Document: popular DBs</h1>
 <p><strong>MongoDB</strong>: <a href="http://www.mongodb.org/">http://www.mongodb.org</a></p>
-<p><strong>Couchbase: </strong> <a href="http://www.couchbase.com/">http://www.couchbase.com</a></p>
+<p><strong>Couchbase:</strong> <a href="http://www.couchbase.com/">http://www.couchbase.com</a></p>
 <p><strong>CouchDB</strong>: <a href="http://couchdb.apache.org/">http://couchdb.apache.org</a></p>
 </section>
 
@@ -1406,11 +1405,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li><strong>Event logs</strong>
 <ul>
-<li><em>Central repo to store event logs from many applications; </em> shard on app name or event type</li>
+<li><em>Central repo to store event logs from many applications</em>; shard on app name or event type</li>
 </ul></li>
 <li><strong>CMS, blogging platforms</strong>
 <ul>
-<li><em>The absence of a predefined schema </em>fits well* within content management systems (CMS) or website management applications, to handle comments, registrations, and user profiles</li>
+<li><em>Schema flexibility</em> suits content management systems (CMS) handling comments, registrations, and user profiles</li>
 </ul></li>
 <li><strong>Web Analytics or Real-Time Analytics</strong>
 <ul>
@@ -1440,7 +1439,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Real-time management of sensor-based data</li>
 <li>Bosch uses MongoDB to capture data from cars (brakes, ABS, windscreen wipers, etc.) and aircraft maintenance tools
 <ul>
-<li>Business rules are applied to warn the pilot when the breaking system pressure falls under a critical threshold, or the maintenance operator when the tool is used improperly</li>
+<li>Business rules are applied to warn the pilot when the braking system pressure falls under a critical threshold, or the maintenance operator when the tool is used improperly</li>
 </ul></li>
 <li>Technogym uses MongoDB to capture data from gym equipment</li>
 </ul>
@@ -1450,11 +1449,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Document: when to avoid</h1>
 <p><strong>ACID transactions requirement</strong></p>
 <ul>
-<li>If not for a few exceptions (e.g., RavenDB), document databases are not suited for cross-document atomicity</li>
+<li>Many document databases support multi-document transactions (e.g., <a href="https://www.mongodb.com/docs/manual/core/transactions/">MongoDB</a>); assess coordination cost and workload limits</li>
 </ul>
 <p><strong>Queries on high-variety data</strong></p>
 <ul>
-<li><em>If the aggregate structure continuously evolves, queries must be constantly updated </em> (and normalization clashes with the concept of aggregate)</li>
+<li><em>If the aggregate structure continuously evolves, queries may need updates</em> (and normalization clashes with the concept of aggregate)</li>
 </ul>
 </section>
 
@@ -1488,7 +1487,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>Finding common friends (e.g., friend-of-a-friend) in a social network</li>
 <li>Identifying clusters of phone calls that identify a criminal network</li>
-<li>Analyzing flows of money to identify money recycling patterns or credit card theft</li>
+<li>Analyzing flows of money to identify money laundering patterns or credit card theft</li>
 <li>Main users: law firms, police, intelligence agencies
 <ul>
 <li><a href="https://neo4j.com/use-cases/fraud-detection/">https://neo4j.com/use-cases/fraud-detection/</a></li>
@@ -1575,13 +1574,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>KV implementable as a table with two fields: a string key, and a blob value</li>
 <li>Cypher query language on top of a relational implementation of a graph</li>
-<li>Hstore data type in PostgreSQL for wide-column-like implementation</li>
-<li><strong>Scalability issue remains</strong></li>
+<li>The hstore type in PostgreSQL stores key/value pairs within a column</li>
+<li>Scale-out depends on partitioning, extensions, or a distributed architecture</li>
 </ul>
 <p>Multi-model NoSQL DBMSs</p>
 <ul>
 <li>ArangoDB, OrientDB</li>
-<li><strong>Support all NoSQL data models, but not the relational</strong></li>
+<li>Support multiple data models; exact combinations and query capabilities depend on the product</li>
 </ul>
 <p>Database-as-a-service</p>
 <ul>
@@ -1612,6 +1611,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="relational-data-model-2" class="title-slide slide level1 center">
 <h1>Relational data model</h1>
+<p>Simplified schema: each entity has at most one parent. General provenance can use a separate many-to-many derivation table.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb10-1"><a href="" aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (</span>
 <span id="cb10-2"><a href="" aria-label="2"></a>    entity_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
 <span id="cb10-3"><a href="" aria-label="3"></a>    name TEXT,</span>
@@ -1619,10 +1619,18 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb10-5"><a href="" aria-label="5"></a>    created_at TEXT,</span>
 <span id="cb10-6"><a href="" aria-label="6"></a>    wasDerivedFrom <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> entity(entity_id)</span>
 <span id="cb10-7"><a href="" aria-label="7"></a>);</span>
-<span id="cb10-8"><a href="" aria-label="8"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id <span class="dt">INTEGER</span>, name TEXT);</span>
-<span id="cb10-9"><a href="" aria-label="9"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id <span class="dt">INTEGER</span>, name TEXT);</span>
-<span id="cb10-10"><a href="" aria-label="10"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
-<span id="cb10-11"><a href="" aria-label="11"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<span id="cb10-8"><a href="" aria-label="8"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT);</span>
+<span id="cb10-9"><a href="" aria-label="9"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id <span class="dt">INTEGER</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, name TEXT);</span>
+<span id="cb10-10"><a href="" aria-label="10"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (</span>
+<span id="cb10-11"><a href="" aria-label="11"></a>    entity_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> entity(entity_id),</span>
+<span id="cb10-12"><a href="" aria-label="12"></a>    agent_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> <span class="kw">agent</span>(agent_id),</span>
+<span id="cb10-13"><a href="" aria-label="13"></a>    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (entity_id, agent_id)</span>
+<span id="cb10-14"><a href="" aria-label="14"></a>);</span>
+<span id="cb10-15"><a href="" aria-label="15"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (</span>
+<span id="cb10-16"><a href="" aria-label="16"></a>    entity_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> entity(entity_id),</span>
+<span id="cb10-17"><a href="" aria-label="17"></a>    activity_id <span class="dt">INTEGER</span> <span class="kw">REFERENCES</span> activity(activity_id),</span>
+<span id="cb10-18"><a href="" aria-label="18"></a>    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (entity_id, activity_id)</span>
+<span id="cb10-19"><a href="" aria-label="19"></a>);</span></code></pre></div>
 </section>
 
 
@@ -1634,12 +1642,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="limitations-of-the-relational-model" class="title-slide slide level1 center">
 <h1>Limitations of the Relational Model</h1>
-<p>Difficult to store <strong>heterogeneous metadata</strong>:</p>
+<p>Storing <strong>heterogeneous metadata</strong> in one flat table introduces sparse columns:</p>
 <ul>
 <li>CSV: columns, delimiter</li>
 <li>TIFF: resolution, color depth</li>
 <li>JSON: nested structures</li>
 </ul>
+<p>Relational alternatives include subtype tables and JSON columns.</p>
 </section>
 
 <section id="limitations-of-the-relational-model-1" class="title-slide slide level1 center">
@@ -1851,7 +1860,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="limitations-of-relational-model" class="title-slide slide level1 center">
 <h1>Limitations of Relational Model</h1>
 <p>Relationships (e.g., lineage chains) need complex joins:</p>
-<p>Which entity was derived from the entity <code>'a'</code>?</p>
+<p>Which entity was <code>'a'</code> derived from?</p>
 <div class="fragment">
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb12-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e2.name</span>
 <span id="cb12-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id</span>
@@ -1862,14 +1871,14 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="limitations-of-the-relational-model-3" class="title-slide slide level1 center">
 <h1>Limitations of the Relational Model</h1>
 <p>Reference schema</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb13-1"><a href="" aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
-<span id="cb13-2"><a href="" aria-label="2"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
-<span id="cb13-3"><a href="" aria-label="3"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
-<span id="cb13-4"><a href="" aria-label="4"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
-<span id="cb13-5"><a href="" aria-label="5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
-<p>Which entity was derived from an entity derived from <code>'a'</code>?</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource text number-lines"><code class="sourceCode"><span id="cb13-1"><a href="" aria-label="1"></a>entity(entity_id, name, file_type, created_at, wasDerivedFrom)</span>
+<span id="cb13-2"><a href="" aria-label="2"></a>agent(agent_id, name)</span>
+<span id="cb13-3"><a href="" aria-label="3"></a>activity(activity_id, name)</span>
+<span id="cb13-4"><a href="" aria-label="4"></a>wasAttributedTo(entity_id, agent_id)</span>
+<span id="cb13-5"><a href="" aria-label="5"></a>wasGeneratedBy(entity_id, activity_id)</span></code></pre></div>
+<p>Which ancestor is two derivation steps upstream of <code>'a'</code>?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb14-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb14-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e3.name</span>
 <span id="cb14-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id)</span>
 <span id="cb14-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
 <span id="cb14-4"><a href="" aria-label="4"></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
@@ -1879,14 +1888,14 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="limitations-of-the-relational-model-4" class="title-slide slide level1 center">
 <h1>Limitations of the Relational Model</h1>
 <p>Reference schema</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb15-1"><a href="" aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
-<span id="cb15-2"><a href="" aria-label="2"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
-<span id="cb15-3"><a href="" aria-label="3"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
-<span id="cb15-4"><a href="" aria-label="4"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
-<span id="cb15-5"><a href="" aria-label="5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
-<p>Which entity was (derived from an entity)<span class="math inline">\(^5\)</span> derived from <code>'a'</code>?</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource text number-lines"><code class="sourceCode"><span id="cb15-1"><a href="" aria-label="1"></a>entity(entity_id, name, file_type, created_at, wasDerivedFrom)</span>
+<span id="cb15-2"><a href="" aria-label="2"></a>agent(agent_id, name)</span>
+<span id="cb15-3"><a href="" aria-label="3"></a>activity(activity_id, name)</span>
+<span id="cb15-4"><a href="" aria-label="4"></a>wasAttributedTo(entity_id, agent_id)</span>
+<span id="cb15-5"><a href="" aria-label="5"></a>wasGeneratedBy(entity_id, activity_id)</span></code></pre></div>
+<p>Which ancestor is four derivation steps upstream of <code>'a'</code>?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb16-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb16-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e5.name</span>
 <span id="cb16-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id)</span>
 <span id="cb16-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
 <span id="cb16-4"><a href="" aria-label="4"></a>    <span class="kw">JOIN</span> entity e4 <span class="kw">ON</span> e3.wasDerivedFrom <span class="op">=</span> e4.entity_id</span>
@@ -1919,7 +1928,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb18-5"><a href="" aria-label="5"></a>  <span class="dt">"agents"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"alice"</span><span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb18-6"><a href="" aria-label="6"></a>  <span class="dt">"activities"</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></span>
 <span id="cb18-7"><a href="" aria-label="7"></a>  <span class="dt">"tiff_resolution"</span><span class="fu">:</span> <span class="st">"300dpi"</span><span class="fu">,</span></span>
-<span id="cb18-8"><a href="" aria-label="8"></a>  <span class="dt">"tiff_color_depth"</span><span class="fu">:</span> <span class="dv">24</span><span class="fu">,</span></span>
+<span id="cb18-8"><a href="" aria-label="8"></a>  <span class="dt">"tiff_color_depth"</span><span class="fu">:</span> <span class="dv">24</span></span>
 <span id="cb18-9"><a href="" aria-label="9"></a><span class="fu">}</span></span></code></pre></div>
 </div></div>
 <p>A <em>collection</em> is a list of documents.</p>
@@ -1934,23 +1943,23 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>It represents concepts as relations and relationships.</li>
 </ul>
 <p>Reference schema</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb19-1"><a href="" aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
-<span id="cb19-2"><a href="" aria-label="2"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
-<span id="cb19-3"><a href="" aria-label="3"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
-<span id="cb19-4"><a href="" aria-label="4"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
-<span id="cb19-5"><a href="" aria-label="5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource text number-lines"><code class="sourceCode"><span id="cb19-1"><a href="" aria-label="1"></a>entity(entity_id, name, file_type, created_at, wasDerivedFrom)</span>
+<span id="cb19-2"><a href="" aria-label="2"></a>agent(agent_id, name)</span>
+<span id="cb19-3"><a href="" aria-label="3"></a>activity(activity_id, name)</span>
+<span id="cb19-4"><a href="" aria-label="4"></a>wasAttributedTo(entity_id, agent_id)</span>
+<span id="cb19-5"><a href="" aria-label="5"></a>wasGeneratedBy(entity_id, activity_id)</span></code></pre></div>
 <p>Which agents were attributed to the entity?</p>
 <div class="fragment">
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb20-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e.name <span class="kw">AS</span> entity_name,a.name <span class="kw">AS</span> agent_name</span>
-<span id="cb20-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> entity e <span class="kw">JOIN</span> wasAttributedTo w <span class="kw">ON</span> e.<span class="kw">id</span> <span class="op">=</span> w.entity_id</span>
-<span id="cb20-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> <span class="kw">agent</span> a <span class="kw">ON</span> w.agent_id <span class="op">=</span> a.<span class="kw">id</span></span>
+<span id="cb20-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> entity e <span class="kw">JOIN</span> wasAttributedTo w <span class="kw">ON</span> e.entity_id <span class="op">=</span> w.entity_id</span>
+<span id="cb20-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> <span class="kw">agent</span> a <span class="kw">ON</span> w.agent_id <span class="op">=</span> a.agent_id</span>
 <span id="cb20-4"><a href="" aria-label="4"></a><span class="kw">WHERE</span> e.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
 <p>Which activities generated the entity?</p>
 </div>
 <div class="fragment">
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb21-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e.name <span class="kw">AS</span> entity_name, act.name <span class="kw">AS</span> activity_name</span>
-<span id="cb21-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> entity e <span class="kw">JOIN</span> wasGeneratedBy wgb <span class="kw">ON</span> e.<span class="kw">id</span> <span class="op">=</span> wgb.entity_id</span>
-<span id="cb21-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> activity act <span class="kw">ON</span> wgb.activity_id <span class="op">=</span> act.<span class="kw">id</span></span>
+<span id="cb21-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> entity e <span class="kw">JOIN</span> wasGeneratedBy wgb <span class="kw">ON</span> e.entity_id <span class="op">=</span> wgb.entity_id</span>
+<span id="cb21-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> activity act <span class="kw">ON</span> wgb.activity_id <span class="op">=</span> act.activity_id</span>
 <span id="cb21-4"><a href="" aria-label="4"></a><span class="kw">WHERE</span> e.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -1969,7 +1978,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb22-6"><a href="" aria-label="6"></a>  <span class="dt">"activities"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"extract_sales_data"</span><span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb22-7"><a href="" aria-label="7"></a>  <span class="dt">"columns"</span><span class="fu">:</span> <span class="dv">8</span><span class="fu">,</span></span>
 <span id="cb22-8"><a href="" aria-label="8"></a>  <span class="dt">"delimiter"</span><span class="fu">:</span> <span class="st">","</span><span class="fu">,</span></span>
-<span id="cb22-9"><a href="" aria-label="9"></a>  <span class="dt">"encoding"</span><span class="fu">:</span> <span class="st">"utf-8"</span><span class="fu">,</span></span>
+<span id="cb22-9"><a href="" aria-label="9"></a>  <span class="dt">"encoding"</span><span class="fu">:</span> <span class="st">"utf-8"</span></span>
 <span id="cb22-10"><a href="" aria-label="10"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 </div></div>
@@ -1986,11 +1995,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="the-graph-data-model" class="title-slide slide level1 center">
 <h1>The graph data model</h1>
 <p>Reference schema</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb23-1"><a href="" aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> entity (entity_id, wasDerivedFrom);</span>
-<span id="cb23-2"><a href="" aria-label="2"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="kw">agent</span> (agent_id, name);</span>
-<span id="cb23-3"><a href="" aria-label="3"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> activity (activity_id, name);</span>
-<span id="cb23-4"><a href="" aria-label="4"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasAttributedTo (entity_id, agent_id);</span>
-<span id="cb23-5"><a href="" aria-label="5"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> wasGeneratedBy (entity_id, activity_id);</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource text number-lines"><code class="sourceCode"><span id="cb23-1"><a href="" aria-label="1"></a>entity(entity_id, name, file_type, created_at, wasDerivedFrom)</span>
+<span id="cb23-2"><a href="" aria-label="2"></a>agent(agent_id, name)</span>
+<span id="cb23-3"><a href="" aria-label="3"></a>activity(activity_id, name)</span>
+<span id="cb23-4"><a href="" aria-label="4"></a>wasAttributedTo(entity_id, agent_id)</span>
+<span id="cb23-5"><a href="" aria-label="5"></a>wasGeneratedBy(entity_id, activity_id)</span></code></pre></div>
 <p>The graph data model is <strong>data-driven</strong> and represents data as <strong>nodes</strong> and <strong>edges</strong>.</p>
 <ul>
 <li>Relationships become <em>first-class citizens</em>.</li>
@@ -2011,8 +2020,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>The graph data model</h1>
 <p>Cypher is a declarative graph query language that allows for expressive and efficient data querying in a property graph.</p>
 <ul>
-<li><code>(:Agent)-[:WAS_ATTRIBUTED_TO]-&gt;(:Entity)</code></li>
-<li><code>(:Activity)-[:WAS_GENERATED_BY]-&gt;(:Entity)</code></li>
+<li><code>(:Entity)-[:WAS_ATTRIBUTED_TO]-&gt;(:Agent)</code></li>
+<li><code>(:Entity)-[:WAS_GENERATED_BY]-&gt;(:Activity)</code></li>
 <li><code>(:Entity)-[:WAS_DERIVED_FROM]-&gt;(:Entity)</code></li>
 </ul>
 <p>Metadata stays attached as key-value node properties.</p>
@@ -2020,8 +2029,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="the-graph-data-model-3" class="title-slide slide level1 center">
 <h1>The graph data model</h1>
-<p>SQL</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb25-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e2.name</span>
+<p>Four steps upstream: SQL</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb25-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e5.name</span>
 <span id="cb25-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id) </span>
 <span id="cb25-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
 <span id="cb25-4"><a href="" aria-label="4"></a>    <span class="kw">JOIN</span> entity e4 <span class="kw">ON</span> e3.wasDerivedFrom <span class="op">=</span> e4.entity_id</span>
@@ -2033,25 +2042,31 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb26-3"><a href="" aria-label="3"></a> -[:WAS_DERIVED_FROM]-&gt;(e3:Entity)</span>
 <span id="cb26-4"><a href="" aria-label="4"></a> -[:WAS_DERIVED_FROM]-&gt;(e4:Entity)</span>
 <span id="cb26-5"><a href="" aria-label="5"></a> -[:WAS_DERIVED_FROM]-&gt;(e5:Entity)</span>
-<span id="cb26-6"><a href="" aria-label="6"></a>RETURN e1.name, e2.name, e3.name, e4.name, e5.name;</span></code></pre></div>
+<span id="cb26-6"><a href="" aria-label="6"></a>RETURN e1.name, e5.name;</span></code></pre></div>
 </section>
 
 <section id="the-graph-data-model-4" class="title-slide slide level1 center">
 <h1>The graph data model</h1>
-<p>SQL</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb27-1"><a href="" aria-label="1"></a><span class="kw">SELECT</span> e1.name, e2.name</span>
-<span id="cb27-2"><a href="" aria-label="2"></a><span class="kw">FROM</span> (entity e1 <span class="kw">JOIN</span> entity e2 <span class="kw">ON</span> e1.wasDerivedFrom <span class="op">=</span> e2.entity_id) </span>
-<span id="cb27-3"><a href="" aria-label="3"></a>    <span class="kw">JOIN</span> entity e3 <span class="kw">ON</span> e2.wasDerivedFrom <span class="op">=</span> e3.entity_id</span>
-<span id="cb27-4"><a href="" aria-label="4"></a>    <span class="kw">JOIN</span> entity e4 <span class="kw">ON</span> e3.wasDerivedFrom <span class="op">=</span> e4.entity_id</span>
-<span id="cb27-5"><a href="" aria-label="5"></a>    <span class="kw">JOIN</span> entity e5 <span class="kw">ON</span> e4.wasDerivedFrom <span class="op">=</span> e5.entity_id</span>
-<span id="cb27-6"><a href="" aria-label="6"></a><span class="kw">WHERE</span> e1.name <span class="op">=</span> <span class="st">'a'</span>;</span></code></pre></div>
+<p>One to five steps upstream: SQL with a recursive CTE</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb27-1"><a href="" aria-label="1"></a><span class="kw">WITH</span> RECURSIVE upstream(entity_id, wasDerivedFrom, <span class="fu">depth</span>) <span class="kw">AS</span> (</span>
+<span id="cb27-2"><a href="" aria-label="2"></a>    <span class="kw">SELECT</span> <span class="kw">parent</span>.entity_id, <span class="kw">parent</span>.wasDerivedFrom, <span class="dv">1</span></span>
+<span id="cb27-3"><a href="" aria-label="3"></a>    <span class="kw">FROM</span> entity <span class="kw">child</span> <span class="kw">JOIN</span> entity <span class="kw">parent</span> <span class="kw">ON</span> <span class="kw">child</span>.wasDerivedFrom <span class="op">=</span> <span class="kw">parent</span>.entity_id</span>
+<span id="cb27-4"><a href="" aria-label="4"></a>    <span class="kw">WHERE</span> <span class="kw">child</span>.name <span class="op">=</span> <span class="st">'a'</span></span>
+<span id="cb27-5"><a href="" aria-label="5"></a>    <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb27-6"><a href="" aria-label="6"></a>    <span class="kw">SELECT</span> <span class="kw">parent</span>.entity_id, <span class="kw">parent</span>.wasDerivedFrom, u.<span class="fu">depth</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb27-7"><a href="" aria-label="7"></a>    <span class="kw">FROM</span> upstream u <span class="kw">JOIN</span> entity <span class="kw">parent</span> <span class="kw">ON</span> u.wasDerivedFrom <span class="op">=</span> <span class="kw">parent</span>.entity_id</span>
+<span id="cb27-8"><a href="" aria-label="8"></a>    <span class="kw">WHERE</span> u.<span class="fu">depth</span> <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb27-9"><a href="" aria-label="9"></a>)</span>
+<span id="cb27-10"><a href="" aria-label="10"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="st">'a'</span> <span class="kw">AS</span> source_name, e.name <span class="kw">AS</span> ancestor_name</span>
+<span id="cb27-11"><a href="" aria-label="11"></a><span class="kw">FROM</span> upstream u <span class="kw">JOIN</span> entity e <span class="kw">ON</span> u.entity_id <span class="op">=</span> e.entity_id;</span></code></pre></div>
 <p>Cypher</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode numberSource cypher number-lines"><code class="sourceCode"><span id="cb28-1"><a href="" aria-label="1"></a>MATCH (e1:Entity {name: 'a'})-[:WAS_DERIVED_FROM*1..5]-&gt;(e2:Entity)</span>
-<span id="cb28-2"><a href="" aria-label="2"></a>RETURN e1.name, e2.name;</span></code></pre></div>
+<span id="cb28-2"><a href="" aria-label="2"></a>RETURN DISTINCT e1.name AS source_name, e2.name AS ancestor_name;</span></code></pre></div>
 </section>
 
 <section id="comparison-summary" class="title-slide slide level1 center">
 <h1>Comparison Summary</h1>
+<p>Comparison of these examples; assume acyclic lineage and unique entity names when comparing queries. Schema flexibility depends on the modeling choices.</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 26%">
@@ -2252,7 +2267,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tr>
 <tr class="odd">
 <td style="text-align: center;">cust-1:ord-99</td>
-<td style="text-align: center;">{ “orderpayments”: [ {“card”:477, “billadrs”: {“street”:“Adam”, “city”:“Chicago”, “state”:“illinois”, “code”:60007} }, {“card”:457, “billadrs”: {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, “code”:10001} ], “products”: [ {“id”:1, “name”:“Cola”, “price”:12.4}, {“id”:2, “name”:“Fanta”, “price”:14.4} ], “shipAdrs”: {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, code”:10001}}</td>
+<td style="text-align: center;">{ “orderpayments”: [ {“card”:477, “billadrs”: {“street”:“Adam”, “city”:“Chicago”, “state”:“illinois”, “code”:60007} }, {“card”:457, “billadrs”: {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, “code”:10001} } ], “products”: [ {“id”:1, “name”:“Cola”, “price”:12.4}, {“id”:2, “name”:“Fanta”, “price”:14.4} ], “shipAdrs”: {“street”:“9th”, “city”:“NewYork”, “state”:“NewYork”, “code”:10001}}</td>
 </tr>
 </tbody>
 </table>
@@ -2299,7 +2314,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Can select which columns to project</li>
 <li>Can update specific columns (not always)</li>
 </ul>
-<p>Given the similarity with the relational model, a <em>SQL-like </em> language is often used.</p>
+<p>Given the similarity with the relational model, a <em>SQL-like</em> language is often used.</p>
 </section>
 
 <section id="wide-column-columnar" class="title-slide slide level1 center">
@@ -2395,13 +2410,12 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><strong>Amazon S3 (Simple Storage Service)</strong></p>
 <ul>
-<li>A cloud-based file system service</li>
+<li>An object storage service with key-based access, rather than POSIX file-system semantics</li>
 <li>Useful for personal backups, file sharing, website or app publication</li>
-<li>The more you store, the more you pay
+<li>Charges depend on stored volume, storage class, requests, retrieval, and data transfer
 <ul>
-<li>Storage: approx. $0.03 per GB per month</li>
-<li>Uploading files: approx. $0.005 per 1000 items</li>
-<li>Downloading files: approx. $0.004 per 10,000 files* PLUS $0.09 per GB (first GB free)</li>
+<li>Specify region, date, and workload when estimating costs</li>
+<li>Use current <a href="https://aws.amazon.com/s3/pricing/">S3 pricing</a> for the selected configuration</li>
 </ul></li>
 </ul>
 
@@ -2447,7 +2461,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul></li>
 <li><strong>Sparse matrixes</strong>
 <ul>
-<li>While an RDBMS would store <em>null </em> values, a wide column <em>stores only the columns for which a value is specified</em></li>
+<li>While an RDBMS would store <em>null</em> values, a wide column <em>stores only the columns for which a value is specified</em></li>
 </ul></li>
 <li><strong>GIS applications</strong>
 <ul>
@@ -2498,9 +2512,6 @@ Chang, Fay, Jeffrey Dean, Sanjay Ghemawat, et al. 2008. <span>“Bigtable: <span
 </div>
 <div id="ref-DBLP:journals/cacm/Codd70" class="csl-entry" role="listitem">
 Codd, E. F. 1970. <span>“A Relational Model of Data for Large Shared Data Banks.”</span> <em>Commun. <span>ACM</span></em> 13 (6): 377–87. <a href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a>.
-</div>
-<div id="ref-sivasubramanian2012amazon" class="csl-entry" role="listitem">
-Sivasubramanian, Swaminathan. 2012. <span>“Amazon dynamoDB: A Seamlessly Scalable Non-Relational Database Service.”</span> <em>Proceedings of the 2012 ACM SIGMOD International Conference on Management of Data</em>, 729–30.
 </div>
 </div>
 </section>

@@ -180,7 +180,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li><em>Volume</em>: small to big</li>
 <li><em>Variety</em>: structure to unstructured</li>
-<li><em>Velocity</em>: pull to push</li>
+<li><em>Velocity</em>: data arrival rate and timeliness requirements</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -198,19 +198,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="column" style="width:60%;">
 <p><strong>Variety</strong></p>
 <ul>
-<li><strong>Structured</strong>
-<ul>
-<li>Relational tuples with FK/PK relationships</li>
-</ul></li>
-<li><strong>Unstructured</strong>
-<ul>
-<li>Key-value</li>
-<li>Columnar</li>
-<li>Document-based</li>
-<li>Graph</li>
-<li>…</li>
-</ul></li>
+<li><strong>Structured</strong>: records with defined fields and relationships</li>
+<li><strong>Semi-structured</strong>: JSON or XML with flexible structure</li>
+<li><strong>Unstructured</strong>: text, images, audio, and video</li>
 </ul>
+<p>Storage models (key-value, document, graph) and layouts (row/columnar) are a separate classification.</p>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -232,15 +224,15 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Reference scenario</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><strong>Velocity</strong> (latency)</p>
+<p><strong>Arrival rate</strong>: how much data arrives per unit of time</p>
+<p><strong>Processing latency</strong>: time from arrival to an available result</p>
 <ul>
-<li><em>High</em>: clients synchronously pulling data from sources</li>
-<li><em>Low</em>: sources asynchronously pushing data to clients</li>
+<li>Required latency depends on the application</li>
+<li>Throughput and latency are distinct measures</li>
 </ul>
-<p><strong>Velocity</strong> (speed; dual to latency)</p>
+<p><strong>Delivery mechanism</strong>: clients pull data or sources push it</p>
 <ul>
-<li><em>High</em>: processing in real-time (milliseconds) or near-real-time (minutes)</li>
-<li><em>Low</em>: processing can take hours</li>
+<li>Either mechanism can support different rates and latencies</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -384,25 +376,21 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Reference scenario</h1>
 <p><strong>Collecting data</strong></p>
 <ul>
-<li><em>Scheduled Batch</em>
+<li><em>Scheduled batch</em>
 <ul>
-<li>Large volume of data processed on a regularly scheduled basis</li>
-<li>Velocity is very predictable</li>
+<li>Process bounded datasets at regular intervals</li>
 </ul></li>
-<li><em>Periodic</em>
+<li><em>Triggered batch</em>
 <ul>
-<li>Data processed at irregular times (e.g., after collecting a certain –large– amount of data)</li>
-<li>Velocity is less predictable</li>
+<li>Process a bounded dataset when an event or volume threshold is reached</li>
 </ul></li>
 <li><em>Near real-time</em>
 <ul>
-<li>Streaming data processed in small individual batches collected and processed within minutes</li>
-<li>Velocity is a huge concern</li>
+<li>Process arrivals with a short application-defined delay, individually or in micro-batches</li>
 </ul></li>
 <li><em>Real-time</em>
 <ul>
-<li>Streaming data is collected and processed in very small individual batches within milliseconds</li>
-<li>Velocity is the paramount concern</li>
+<li>Produce results within the application’s deadline; micro-batching is not required</li>
 </ul></li>
 </ul>
 </section>
@@ -411,7 +399,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Reference scenario</h1>
 <p><strong>Processing data</strong></p>
 <ul>
-<li><em>Batch and periodic</em>
+<li><em>Scheduled and triggered batch</em>
 <ul>
 <li>Once data has been collected, processing can be done in a controlled environment</li>
 <li>There is time to plan for the appropriate resources</li>
@@ -419,7 +407,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li><em>Near real-time and real-time</em>
 <ul>
 <li>Collection of the data leads to an immediate need for processing</li>
-<li>The complexity of the processing can slow down the velocity of the solution significantly</li>
+<li>Processing complexity can increase latency or limit throughput</li>
 <li>Plan accordingly</li>
 </ul></li>
 </ul>
@@ -489,14 +477,14 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="what-is-cloud-computing" class="title-slide slide level1 center">
 <h1>What is cloud computing?</h1>
 <blockquote>
-<p><strong>Cloud Computing</strong> (National Institute of Standards and Technology)</p>
+<p><strong>Cloud Computing</strong> (<a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf">NIST SP 800-145</a>)</p>
 <p>A model for enabling <em>ubiquitous, convenient, on-demand network access</em> to a <em>shared pool</em> of configurable computing resources (e.g., networks, servers, storage, services) that can be rapidly provisioned and released with <em>minimal management effort</em> or <em>service provider interaction</em></p>
 <ul>
 <li>On-demand self-service (consume services when you want)</li>
 <li>Broad network access (consume services from anywhere)</li>
 <li>Resource pooling (infrastructure, virtual platforms, and applications)</li>
 <li>Rapid elasticity (enable horizontal scalability)</li>
-<li>Measured service (pay for the service you consume as you consume)</li>
+<li>Measured service (meter, control, and report resource usage)</li>
 </ul>
 </blockquote>
 <p><strong>Digital transformation</strong> involves the <strong>cloud</strong> to create/change business flows</p>
@@ -522,9 +510,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul></li>
 <li><strong>Private</strong>: accessible by individuals within an institution
 <ul>
-<li>Cost-sharing disappears in private clouds</li>
+<li>Resources and costs can be shared across departments or internal tenants</li>
 </ul></li>
-<li><strong>Hybrid</strong>: a mix of the previous</li>
+<li><strong>Hybrid</strong>: combines distinct private, community, or public clouds</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -602,7 +590,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Adjusts capacity to have predictable performance at the lowest cost</li>
 <li>Scale from one to thousands of computers
 <ul>
-<li>This is not possible on-premises</li>
+<li>On premises, expansion is constrained by installed capacity and procurement lead times</li>
 </ul></li>
 </ul>
 
@@ -658,7 +646,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>E.g., to reduce network latency</li>
 </ul></li>
-<li>Compliant to privacy regulations (e.g., GDPR)</li>
+<li>Region selection supports data-residency requirements; compliance also depends on processing, access, contracts, and transfer arrangements</li>
 </ul>
 </div>
 </div></div>
@@ -687,9 +675,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Locations are composed of <strong>regions</strong> and <strong>availability zones</strong>
 <ul>
 <li>Region (e.g., <code>us-east-1</code>): an independent geographical area that groups data centers</li>
-<li>Availability zones in a region: a data center</li>
+<li>An AWS availability zone contains one or more data centers</li>
 </ul></li>
-<li>Resources are usually replicated across zones but not regions</li>
+<li>Cross-zone and cross-region replication depend on the service and configuration; EC2 instances are not automatically replicated</li>
 <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html">Using regions and availability zones</a></li>
 </ul>
 </section>
@@ -921,6 +909,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <img data-src="img/crowstrike.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.reuters.com/business/aerospace-defense/air-travel-hit-by-global-cyber-outage-2024-07-19/">Global cyber outage hits air travel (2024)</a></p><blockquote>
 <p>A software update by global cybersecurity firm CrowdStrike (CRWD.O), opens new tab triggered systems problems for Microsoft (MSFT.O), opens new tab customers that turned into hours of delays for airlines using their software. Some travelers were issued handwritten boarding passes with software inoperative.</p>
 </blockquote>
+<p>This illustrates shared software-dependency risk.</p>
 </section>
 
 <section id="is-cloud-a-silver-bullet-3" class="title-slide slide level1 center">
@@ -964,8 +953,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <img data-src="img/slides107.png" class="r-stretch quarto-figure-center"><p class="caption">https://xkcd.com/908/</p></section>
 
-<section id="cloud-computing-deployment-models" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <p>Understanding architectures is paramount to successful systems.</p>
 <ul>
 <li>Good architectures help to scale</li>
@@ -979,8 +968,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="cloud-computing-deployment-models-1" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-1" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><strong>On-premises</strong></p>
@@ -1002,8 +991,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="cloud-computing-deployment-models-2" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-2" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><strong>Infrastructure as a service (IaaS)</strong></p>
@@ -1023,8 +1012,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="cloud-computing-deployment-models-3" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-3" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><strong>Platform as a Service (PaaS)</strong></p>
@@ -1043,11 +1032,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="cloud-computing-deployment-models-4" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-4" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <div class="columns">
 <div class="column" style="width:70%;">
-<p><strong>Function as a Service (FaaS)</strong></p>
+<p><strong>Function as a Service (FaaS)</strong>: an additional service abstraction beyond the original NIST IaaS/PaaS/SaaS taxonomy</p>
 <ul>
 <li>A coding environment, a cloud provider provisions a platform to run the code (e.g., AWS Lambda)</li>
 <li>Infrastructure provisioning and management are invisible to the developer</li>
@@ -1062,8 +1051,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="cloud-computing-deployment-models-5" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-5" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1082,8 +1071,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="cloud-computing-deployment-models-6" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-6" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <p>Principles of FaaS architectures</p>
 <ul>
 <li>FaaS is based on a <em>serverless</em> approach, using a compute service to execute code on demand</li>
@@ -1098,8 +1087,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p>FaaS is not a silver bullet.</p>
 <ul>
-<li><em>Not appropriate for latency-sensitive applications</em></li>
-<li>Strict specific service-level agreements</li>
+<li>Assess cold-start latency against the application deadline</li>
+<li>Check execution-duration, concurrency, and other service limits</li>
 <li>Migration costs
 <ul>
 <li>Vendor lock-in can be an issue</li>
@@ -1107,8 +1096,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 </section>
 
-<section id="cloud-computing-deployment-models-7" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-7" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><strong>Software as a service (SaaS)</strong></p>
@@ -1126,18 +1115,17 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </div></div>
 </section>
 
-<section id="cloud-computing-deployment-models-8" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
-<p>On a cloud architecture, you can rely on <a href="https://cloud.google.com/blog/topics/developers-practitioners/serverless-vs-fully-managed-whats-difference"><em>serverless</em> or <em>managed</em> services</a> (accessed 2020-08-01)</p>
+<section id="cloud-computing-service-models-8" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 
 <img data-src="img/google-serverless.png" class="r-stretch quarto-figure-center"><p class="caption">Serverless vs Managed</p></section>
 
-<section id="cloud-computing-deployment-models-9" class="title-slide slide level1 center">
-<h1>Cloud computing: deployment models</h1>
+<section id="cloud-computing-service-models-9" class="title-slide slide level1 center">
+<h1>Cloud computing: service models</h1>
 <p><em>Serverless</em></p>
 <ul>
-<li>Standalone independent services built for a specific purpose and integrated by the cloud service provider</li>
-<li>No visibility into the machines
+<li>The provider manages server provisioning and scaling</li>
+<li>Server details are abstracted away
 <ul>
 <li>There are still servers in serverless, but they are abstracted away</li>
 <li>No server management, do not have to manage any servers or scale them</li>
@@ -1147,12 +1135,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><em>(Fully) Managed</em></p>
 <ul>
-<li>Visibility and control of machines
-<ul>
-<li>You can choose the number of machines that are being used to run your application</li>
-</ul></li>
-<li>Do not have to set up any machines, the management and backup are taken care of for you</li>
-<li>Pay for machine runtime, however long you run the machines and resources that your application uses</li>
+<li>The provider handles specified operational tasks such as provisioning, patching, or backups</li>
+<li>Some services expose machine counts or capacity settings; others are also serverless</li>
+<li>Billing may use provisioned capacity, depending on the service</li>
 </ul>
 </section>
 

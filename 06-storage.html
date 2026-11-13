@@ -386,7 +386,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><em>Differ in the supported features</em></p>
 <ul>
-<li>E.g., maximum item size (DynamoDB: 400KB, S3: 5TB)</li>
+<li>E.g., maximum item/object size (DynamoDB: 400KB, <a href="https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-s3-maximum-object-size-50-tb/">S3: 50TB since December 2025</a>)</li>
 <li>E.g., indexes, querying mechanisms, latency, etc.</li>
 </ul>
 </section>
@@ -426,10 +426,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>AWS S3: <a href="https://aws.amazon.com/s3/storage-classes/">storage classes</a></p>
 <ul>
 <li><em>Standard</em>: general purpose</li>
-<li><em>Infrequent (rapid) access</em></li>
+<li><em>Standard-IA</em>: infrequent access with millisecond retrieval</li>
 <li><em>One Zone-IA</em>: lower-cost option for infrequently accessed data that do not require high availability and resilience</li>
-<li><em>Glacier</em>: low-cost storage class for data archiving, three retrieval options that range from a few minutes to hours</li>
-<li><em>Deep Glacier</em>: long-term retention for data accessed once/twice a year.
+<li><em>S3 Glacier Deep Archive</em>: long-term retention with retrieval measured in hours
 <ul>
 <li>E.g., retain data sets for 10 years or longer</li>
 </ul></li>
@@ -810,16 +809,16 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="data-lakehouse-4" class="title-slide slide level1 center">
 <h1>Data Lakehouse</h1>
-<p>A two-tier architecture is highly complex for users</p>
+<p>Armbrust et al.&nbsp;(2021) identify complexity in two-tier architectures <span class="citation" data-cites="armbrust2021lakehouse">(<a href="#/references" role="doc-biblioref" onclick="">Armbrust et al. 2021</a>)</span>.</p>
 <ul>
 <li>(Optional) Data is first <em>ELTed</em> into data lakes, …</li>
 <li>… and then <em>ETLed</em> into DWH</li>
-<li>Enterprise use cases now include advanced analytics such as machine learning, for which DWHs are not ideal</li>
+<li>The paper highlights inefficient access from ML systems to warehouse data</li>
 </ul>
-<p>(Some) main problems:</p>
+<p>Problems discussed in the paper:</p>
 <ul>
 <li><em>Reliability</em>: keeping the data lake and DWH consistent is difficult and costly</li>
-<li><em>Staleness</em>: the data in the DWH is stale compared to that of the data lake, with new data frequently taking days to load</li>
+<li><em>Staleness</em>: the paper reports delays of days when loading lake data into a DWH</li>
 <li><em>Limited support for advanced analytics</em>: businesses want to ask predictive questions using their warehousing data
 <ul>
 <li>E.g., “Which customers should I offer discounts to?”</li>
@@ -827,6 +826,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul></li>
 <li>It could require <em>two teams of users</em>: data scientists and BI</li>
 </ul>
+<p>These limitations depend on the implementation; current services also support in-warehouse ML (e.g., BigQuery ML).</p>
 </section>
 
 <section id="data-lakehouse-5" class="title-slide slide level1 center">
@@ -900,9 +900,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Delta Lake</h1>
 <p>Changes are recorded as ordered, atomic commits in the transaction log.</p>
 <ul>
-<li>Each commit is written as a JSON file, starting with <code>000000.json</code>.</li>
+<li>Each standard filesystem commit is written as a JSON file with a 20-digit, zero-padded version, starting with <code>00000000000000000000.json</code>.</li>
 <li>Additional changes to the table generate subsequent JSON files in ascending numerical order</li>
-<li>Each log record object (e.g., <code>000003.json</code>) contains an array of actions to apply to the previous table version</li>
+<li>Each commit file contains newline-delimited JSON: one action object per line, applied to the previous table version (<a href="https://github.com/delta-io/delta/blob/master/PROTOCOL.md">Delta protocol</a>)</li>
 </ul>
 <p>Whenever a user modifies a table (such as an INSERT, UPDATE, or DELETE), Delta Lake breaks that operation down into a series of discrete steps composed of one or more of the actions below.</p>
 <ul>
@@ -919,9 +919,10 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Delta Lake</h1>
 <p><em>You own your data</em>: we are decoupling the data from database engines!</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb2-1"><a href="" aria-label="1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> suppliers(<span class="kw">id</span> <span class="dt">INT</span>, name STRING, age <span class="dt">INT</span>)</span>
-<span id="cb2-2"><a href="" aria-label="2"></a>    TBLPROPERTIES (<span class="st">'foo'</span><span class="op">=</span><span class="st">'bar'</span>)</span>
-<span id="cb2-3"><a href="" aria-label="3"></a>    <span class="kw">COMMENT</span> <span class="st">'this is a comment'</span></span>
-<span id="cb2-4"><a href="" aria-label="4"></a>    LOCATION <span class="st">'s3://...'</span>;</span></code></pre></div>
+<span id="cb2-2"><a href="" aria-label="2"></a>    <span class="kw">USING</span> DELTA</span>
+<span id="cb2-3"><a href="" aria-label="3"></a>    TBLPROPERTIES (<span class="st">'foo'</span><span class="op">=</span><span class="st">'bar'</span>)</span>
+<span id="cb2-4"><a href="" aria-label="4"></a>    <span class="kw">COMMENT</span> <span class="st">'this is a comment'</span></span>
+<span id="cb2-5"><a href="" aria-label="5"></a>    LOCATION <span class="st">'s3://...'</span>;</span></code></pre></div>
 <p>Delta tables are stored in S3 (simple files in a data lake), and they can be read using <em>different computes</em>:</p>
 <ul>
 <li>Databricks, EMR, etc.</li>
@@ -935,7 +936,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="delta-lake-2" class="title-slide slide level1 center">
 <h1>Delta Lake</h1>
-<p>Create a table of <code>suppliers</code>, the content of <code>00000000000000000000.json</code></p>
+<p>Separate example: excerpts from a TPC-H suppliers table’s <code>CREATE TABLE AS SELECT</code> commit, <code>00000000000000000000.json</code></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource json number-lines"><code class="sourceCode json"><span id="cb3-1"><a href="" aria-label="1"></a><span class="fu">{</span></span>
@@ -1111,7 +1112,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>Every table is the sum of all commits recorded in the transaction log.</li>
 <li>The log provides a step-by-step instruction guide, detailing how to get from the table’s original state to its current state.</li>
-<li>Recreate a table at any point in time by starting with the original version and processing only commits before that version.</li>
+<li>Reconstruct version <span class="math inline">\(v\)</span> from a checkpoint at or before <span class="math inline">\(v\)</span>, then apply commits through <span class="math inline">\(v\)</span> (inclusive).</li>
+<li>Required log and data files must still exist; retention and <code>VACUUM</code> limit <a href="https://docs.delta.io/delta-batch/#data-retention">time travel</a>.</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb8-1"><a href="" aria-label="1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> suppliers; <span class="co">-- read the last version of the table</span></span>
 <span id="cb8-2"><a href="" aria-label="2"></a><span class="kw">delete</span> <span class="kw">from</span> suppliers; <span class="co">-- delete all data from the table!</span></span>
@@ -1119,11 +1121,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb8-4"><a href="" aria-label="4"></a>restore <span class="kw">table</span> suppliers <span class="kw">to</span> version <span class="kw">as</span> <span class="kw">of</span> <span class="dv">3</span>; <span class="co">-- restore to a specific version</span></span></code></pre></div>
 <p><strong>Data Lineage and Debugging</strong></p>
 <ul>
-<li>The transaction log offers users a verifiable data lineage useful for governance, audit, and compliance purposes.</li>
+<li>The transaction log records table changes for auditing; full upstream/downstream pipeline lineage requires additional metadata.</li>
 <li>It can also be used to trace the origin of an inadvertent change or a bug in a pipeline back to the exact action that caused it.</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb9-1"><a href="" aria-label="1"></a><span class="kw">delete</span> <span class="kw">from</span> suppliers; <span class="co">-- delete is important for GDPR</span></span>
-<span id="cb9-2"><a href="" aria-label="2"></a><span class="co">-- what about data in the log?</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sql number-lines"><code class="sourceCode sql"><span id="cb9-1"><a href="" aria-label="1"></a><span class="kw">delete</span> <span class="kw">from</span> suppliers; <span class="co">-- logical deletion alone is not a complete erasure procedure</span></span>
+<span id="cb9-2"><a href="" aria-label="2"></a><span class="co">-- What remains in retained data files, logs, checkpoints, or backups?</span></span></code></pre></div>
 </section>
 
 <section id="delta-lake-8" class="title-slide slide level1 center">
@@ -1181,11 +1183,11 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ol start="4" type="1">
 <li>Optionally, write a new <code>.parquet</code> checkpoint for log record <code>r+1</code></li>
 </ol>
-<p>Not all large-scale storage systems have an atomic put operation</p>
+<p>The 2020 paper describes different atomic commit mechanisms by storage system</p>
 <ul>
 <li>Google Cloud Storage and Azure Blob Store support atomic put-if-absent operations</li>
 <li>HDFS, we use atomic renames to rename a temporary file to the target name</li>
-<li>Amazon S3 needs ad-hoc protocols</li>
+<li>Amazon S3 required additional coordination in that setting; <a href="https://aws.amazon.com/about-aws/whats-new/2024/08/amazon-s3-conditional-writes/">conditional writes became available in August 2024</a></li>
 </ul>
 </section>
 
@@ -1224,7 +1226,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>Format-independent optimizations are</p>
 <ul>
 <li><em>Caching</em>: cache files from the cloud object store on faster storage devices such as SSDs and RAM on the processing nodes</li>
-<li><em>Auxiliary data</em>: maintain column min-max statistics for each data file in the table within the same Parquet file used to store the transaction log</li>
+<li><em>Auxiliary data</em>: maintain per-file column min-max statistics in transaction-log metadata, also carried into checkpoints</li>
 <li><em>Data layout</em>:
 <ul>
 <li><em>Record ordering</em>: records clustered together are easiest to read together

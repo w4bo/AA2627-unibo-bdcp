@@ -385,10 +385,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </li>
 <li>Converts visual content into structured metadata</li>
 </ul>
-<p>How YOLO Sees the Image</p>
+<p>How the original <strong>YOLOv1</strong> works (<a href="https://arxiv.org/abs/1506.02640">Redmon et al., 2016</a>)</p>
 <ul>
-<li>Input image is divided into a grid (e.g., 13x13)<br>
-</li>
+<li>Input image is divided into a grid (7×7 in the original model)</li>
 <li>Each grid cell is responsible for objects <strong>whose center falls in the cell</strong><br>
 </li>
 <li>Each cell predicts <strong>bounding boxes + confidence + class probabilities</strong></li>
@@ -427,8 +426,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="data-catalog-for-accessible-metadata" class="title-slide slide level1 center">
 <h1>Data Catalog for Accessible Metadata</h1>
-<p>A data catalog store metadata and makes them searchable.</p>
-<p>Using MongoDB as a (very simple) data catalog, we can stores per-image JSON metadata efficiently:</p>
+<p>A data catalog stores metadata and makes it searchable.</p>
+<p>Store one JSON document per image in MongoDB and index the fields used for search:</p>
 <ul>
 <li>Flexible schema for diverse metadata<br>
 </li>
@@ -478,8 +477,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="columns">
 <div class="column" style="width:50%;">
 <blockquote>
-<p><strong>Database</strong> <span class="citation" data-cites="ozsu2018">(<a href="#/references" role="doc-biblioref" onclick="">Özsu 2018</a>)</span></p>
-<p>“A database is a <em>structured and persistent collection</em> of information about some aspect of the real world, organized and stored in a way that facilitates efficient retrieval and modification. The structure of a database is determined by an <em>abstract data model</em>. Primarily, it is this structure that differentiates a database from a data file.”</p>
+<p><strong>Database</strong> (adapted from <span class="citation" data-cites="ozsu2018">(<a href="#/references" role="doc-biblioref" onclick="">Özsu 2018</a>)</span>)</p>
+<p>A database is a <em>structured and persistent collection</em> of information about some aspect of the real world, organized and stored in a way that facilitates efficient retrieval and modification. The structure of a database is determined by an <em>abstract data model</em>. Primarily, it is this structure that differentiates a database from a data file.</p>
 </blockquote>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -532,7 +531,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="column" style="width:50%;">
 <blockquote>
 <p><strong>Schemaless databases</strong></p>
-<p>There is no predefined schema that the data must conform to before being added to the database. As a result, you don’t need to know the structure of your data, enabling you to store all your data more easily and quickly.</p>
+<p>The database does not require every record to conform to one predefined schema. Applications still need to interpret and validate the stored structure.</p>
 </blockquote>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -584,8 +583,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <div class="columns">
 <div class="column" style="width:50%;">
 <blockquote>
-<p><strong>Data Warehouse (DWH)</strong> <span class="citation" data-cites="golfarelli2009data">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli and Rizzi 2009</a>)</span></p>
-<p>“A collection of data that supports decision-making processes. It provides the following features: <em>subject-oriented</em>, <em>integrated</em> and <em>consistent</em>, <em>evolution over time and it is not volatile</em>.”</p>
+<p><strong>Data Warehouse (DWH)</strong> (adapted from <span class="citation" data-cites="golfarelli2009data">(<a href="#/references" role="doc-biblioref" onclick="">Golfarelli and Rizzi 2009</a>)</span>)</p>
+<p>A collection of data that supports decision-making processes. It provides the following features: <em>subject-oriented</em>, <em>integrated</em> and <em>consistent</em>, <em>evolution over time and it is not volatile</em>.</p>
 </blockquote>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -775,18 +774,18 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Type</td>
-<td style="text-align: center;">Operational data</td>
-<td style="text-align: center;">Business data</td>
+<td style="text-align: center;">Operational business data</td>
+<td style="text-align: center;">Analytical business data</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Data retention</td>
-<td style="text-align: center;">Short-term (2-6 months)</td>
-<td style="text-align: center;">Long-term (2-5 years)</td>
+<td style="text-align: center;">Supports current operations; history depends on application requirements</td>
+<td style="text-align: center;">Supports historical analysis over the required time horizon</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Storage</td>
-<td style="text-align: center;">Gigabytes (GB)</td>
-<td style="text-align: center;">Terabytes (TB) / Petabytes (PB)</td>
+<td style="text-align: center;">Access pattern</td>
+<td style="text-align: center;">Frequent reads/writes of individual records</td>
+<td style="text-align: center;">Scans and aggregations over many records</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Users</td>
@@ -830,20 +829,20 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>The data lake started with the Apache Hadoop movement, using the Hadoop File System (HDFS) for cheap storage</p>
 <ul>
 <li>All the data is usually stored and managed as files</li>
-<li>Agility of storing any data at low cost; eludes the problems of quality and governance</li>
+<li>Agility of storing raw data at low cost; quality and governance require additional mechanisms</li>
 <li><em>Schema-on-read</em> architecture</li>
 </ul>
-<p>Downsides of data lakes</p>
+<p>Limitations of unmanaged raw-file data lakes</p>
 <ul>
-<li><em>Security</em>: no fine-grained access control on the contents of files, but only coarse-grained access governing who can access files or directories</li>
-<li><em>Quality</em>
+<li><em>Security</em>: file-level permissions alone do not provide row/column-level access control</li>
+<li><em>Data management</em>
 <ul>
 <li>Hard to manage schema changes</li>
-<li>Challenging to ensure atomic operations when writing a group of files; no roll-back mechanism</li>
+<li>Atomic multi-file updates and rollback require a transactional layer</li>
 </ul></li>
 <li><em>Query performance</em>
 <ul>
-<li>Formats are not optimized for fast access</li>
+<li>Depends on file format and layout; Parquet and ORC support efficient analytical scans</li>
 </ul></li>
 </ul>
 <p>The <em>lake</em> can easily turn into a <strong>swamp</strong></p>
@@ -882,13 +881,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Price/performance</td>
-<td style="text-align: center;">Faster queries, higher cost storage</td>
-<td style="text-align: center;">Slower queries, lower-cost storage</td>
+<td style="text-align: center;">Storage and execution optimized for BI queries</td>
+<td style="text-align: center;">Low-cost storage; query performance depends on format, layout, and engine</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Data quality</td>
-<td style="text-align: center;">Highly curated data, the central version of the truth</td>
-<td style="text-align: center;">Any (raw) data</td>
+<td style="text-align: center;">Typically curated through validation and integration</td>
+<td style="text-align: center;">Raw and curated data; quality depends on validation and processing</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Users</td>
@@ -906,13 +905,13 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="data-platform-two-tier-architecture" class="title-slide slide level1 center">
 <h1>Data platform: two-tier architecture</h1>
-<p>A two-tier data lake + DWH architecture is dominant in the industry</p>
+<p>Armbrust et al.&nbsp;(2021) describe a two-tier data lake + DWH architecture as dominant in industry <span class="citation" data-cites="armbrust2021lakehouse">(<a href="#/references" role="doc-biblioref" onclick="">Armbrust et al. 2021</a>)</span>.</p>
 <ul>
 <li>HDFS replaced by cloud data lakes (e.g., S3, ADLS, GCS)</li>
 <li>Data lake directly accessible to a wide range of analytics engines</li>
 <li>A subset of data is “ETL-ed” to a DWH for important decision support and BI apps</li>
 </ul>
-<p>While the data lake and DWH architecture is ostensibly cheap, a two-tier architecture is highly complex for users</p>
+<p>The paper identifies complexity in maintaining both tiers.</p>
 <ul>
 <li><em>Problems</em>?</li>
 </ul>
@@ -920,20 +919,21 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="data-platform-two-tier-limitations" class="title-slide slide level1 center">
 <h1>Data platform: two-tier limitations</h1>
-<p>(Some) main problems:</p>
+<p>Problems highlighted by <span class="citation" data-cites="armbrust2021lakehouse">(<a href="#/references" role="doc-biblioref" onclick="">Armbrust et al. 2021</a>)</span>:</p>
 <ul>
 <li>Data is first ELTed into lakes, and then again ETLed into DWHs
 <ul>
 <li><em>Reliability</em>. Keeping the data lake and DWH consistent is difficult and costly</li>
-<li><em>Data staleness</em>. The data in the DWH is stale compared to that of the data lake, with new data frequently taking days to load</li>
+<li><em>Data staleness</em>. The paper reports delays of days when loading lake data into a DWH</li>
 </ul></li>
 <li><em>Limited support for advanced analytics</em>.
 <ul>
 <li>Businesses want to ask predictive questions using their DWHs</li>
-<li>Machine learning systems do not work well directly on top of DWHs</li>
+<li>The paper discusses inefficient access from ML systems to warehouse data</li>
 </ul></li>
 <li><em>Process large datasets using complex non-SQL code</em></li>
 </ul>
+<p>These limitations depend on the implementation; current services also support in-warehouse ML (e.g., BigQuery ML).</p>
 </section>
 
 <section id="data-platform-towards-lakehouses" class="title-slide slide level1 center">
@@ -982,7 +982,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>Storing hot data on fast devices such as SSDs, maintaining statistics, building efficient indexes, etc.</li>
 </ul></li>
-<li>In a Lakehouse it is not possible to change the format, but it is possible to implement other optimizations that leave the data files unchanged</li>
+<li>Optimizations should preserve interoperability with the chosen open table and file formats</li>
 </ul>
 </section>
 
@@ -1008,9 +1008,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Data format</td>
-<td style="text-align: center;">Proprietary format</td>
-<td style="text-align: center;">Open format</td>
-<td style="text-align: center;">Open format</td>
+<td style="text-align: center;">Often engine-managed</td>
+<td style="text-align: center;">Open formats</td>
+<td style="text-align: center;">Open table and file formats</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Types of data</td>
@@ -1020,35 +1020,29 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Data access</td>
-<td style="text-align: center;">SQL-only, no file access</td>
-<td style="text-align: center;">File access</td>
-<td style="text-align: center;">APIs for SQL, R, Python, etc.</td>
+<td style="text-align: center;">SQL and engine APIs</td>
+<td style="text-align: center;">File/object access through processing engines</td>
+<td style="text-align: center;">SQL and processing-engine APIs</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Reliability</td>
-<td style="text-align: center;">High quality, ACID transactions</td>
-<td style="text-align: center;">Low quality, “data swamp”</td>
-<td style="text-align: center;">High quality, ACID transactions</td>
+<td style="text-align: center;">Transactions</td>
+<td style="text-align: center;">Typically ACID</td>
+<td style="text-align: center;">Multi-file ACID requires a transactional layer</td>
+<td style="text-align: center;">ACID through the table layer</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Governance &amp; security</td>
-<td style="text-align: center;">Fine-grained (row/column-level)</td>
-<td style="text-align: center;">Weak governance; file-level security</td>
-<td style="text-align: center;">Fine-grained (row/column-level)</td>
+<td style="text-align: center;">Row/column controls commonly available</td>
+<td style="text-align: center;">File-level controls; finer controls through query/governance layers</td>
+<td style="text-align: center;">Row/column controls through query/governance layers</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Performance</td>
-<td style="text-align: center;">High</td>
-<td style="text-align: center;">Low</td>
-<td style="text-align: center;">High</td>
+<td style="text-align: center;">Scalability</td>
+<td style="text-align: center;">Depends on engine and deployment</td>
+<td style="text-align: center;">Object storage scales independently of compute</td>
+<td style="text-align: center;">Object storage scales independently of compute</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Scalability</td>
-<td style="text-align: center;">Expensive at scale</td>
-<td style="text-align: center;">Scales cheaply for any data type</td>
-<td style="text-align: center;">Scales cheaply for any data type</td>
-</tr>
-<tr class="even">
 <td style="text-align: center;">Use case</td>
 <td style="text-align: center;">BI</td>
 <td style="text-align: center;">Machine learning</td>
@@ -1062,8 +1056,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Data platform: data hub</h1>
 <p><em>Data lakes (or lakehouses)</em> have increasingly taken the role of <em>data hubs</em></p>
 <ul>
-<li>Eliminate up-front costs of ingestion and ETL since data are stored in the original format</li>
-<li>Once in DL, data are available for analysis by everyone in the organization</li>
+<li>Raw landing can defer some transformations</li>
+<li>Ingestion, validation, permissions, and discovery still require work</li>
 </ul>
 
 <img data-src="img/slides28.png" class="r-stretch quarto-figure-center"><p class="caption">(Big) data pipeline</p><p><em>Blurring</em> of the <em>architectural borderlines</em>: Drawing a sharp line between storage/computation/analysis is hard</p>
@@ -1080,7 +1074,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>A <em>unified</em> infrastructure that facilitates the ingestion, storage, management, and exploitation of large volumes of heterogeneous data. It provides a collection of <em>independent</em> and <em>well-integrated</em> services meeting <em>end-to-end</em> data needs.</p>
 <ul>
 <li><em>Unified</em>: is conceptually a data backbone</li>
-<li><em>Independent</em>: a service is not coupled with any other</li>
+<li><em>Independent</em>: services are loosely coupled through defined interfaces</li>
 <li><em>Well-integrated</em>: services have interfaces that enable easy and frictionless composition</li>
 <li><em>End-to-end</em>: services cover the entire data life cycle</li>
 </ul>
@@ -1088,7 +1082,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>Rationale: relieve users from the complexity of administration and provision</p>
 <ul>
 <li>Not only technological skills, but also privacy, access control, etc.</li>
-<li>Users should only focus on functional aspects</li>
+<li>Users can focus more on functional aspects while retaining security, cost, and governance responsibilities</li>
 </ul>
 </section>
 

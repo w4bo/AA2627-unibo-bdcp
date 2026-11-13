@@ -219,7 +219,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>Evaluating the costs for a cloud/on-premises data platform</p>
 <ul>
 <li>Fill in this table</li>
-<li>Real-world case study</li>
+<li>Historical case study (2021–2024 estimates, not current quotations)</li>
+<li>Scope: hardware amortization, listed licenses, and cloud charges; excludes energy, cooling, staff/operations, network, backups, retrieval, and migration work</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <table class="caption-top">
@@ -287,9 +288,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb1-2"><a href="" aria-label="2"></a><span class="ex">lshw</span> <span class="at">-short</span> <span class="at">-C</span> memory</span>
 <span id="cb1-3"><a href="" aria-label="3"></a><span class="ex">lshw</span> <span class="at">-short</span> <span class="at">-C</span> disk</span></code></pre></div>
 <ul>
-<li>8 CPUs (144 total)
+<li>18 processors: 108 physical cores / 216 logical threads
 <ul>
-<li>Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz</li>
+<li><a href="https://www.intel.com/content/www/us/en/products/sku/126686/intel-core-i78700-processor-12m-cache-up-to-4-60-ghz/specifications.html">Intel Core i7-8700</a>: 6 cores / 12 threads per node</li>
 </ul></li>
 <li>32GB RAM (576GB total)
 <ul>
@@ -512,7 +513,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>On cloud v1</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>Migrating the cluster as-is: ?</p>
+<p>Sizing an initial cloud configuration: ?</p>
 <ul>
 <li>Hint: add 18 EC2 instances satisfying the hardware requirements</li>
 </ul>
@@ -545,9 +546,10 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>On cloud v1</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><span class="math inline">\(SOL_{cloud 1}\)</span> migrating the cluster as-is: 13500$/month = 162000$/year</p>
+<p><span class="math inline">\(SOL_{cloud 1}\)</span> historical sizing estimate: 13500$/month = 162000$/year</p>
 <ul>
-<li>18 EC2 instances (t4g.2xlarge) with 12TB EBS storage each machine</li>
+<li>18 EC2 instances (<a href="https://aws.amazon.com/ec2/instance-types/t4/">t4g.2xlarge</a>) with 12TB EBS storage per machine</li>
+<li>Arm-based, burstable instances: verify binary compatibility, sustained CPU demand/credit charges, and benchmark throughput; equal vCPU/RAM counts do not imply equivalent performance</li>
 </ul>
 <p>Prices change over the year</p>
 <ul>
@@ -603,7 +605,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="migration-6" class="title-slide slide level1 center">
 <h1>Migration</h1>
-<p>It makes no sense to move the cluster as-is</p>
+<p>This historical always-on estimate motivates a different configuration</p>
 <ul>
 <li>More machines ensure better (on-prem) scalability but higher costs</li>
 </ul>
@@ -640,7 +642,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>For simplicity, we can omit it</li>
 </ul>
-<p><strong>Overall</strong>: 50TB storage/year</p>
+<p><strong>Storage assumption for costing</strong>: 50TB of usable data retained throughout each billed month; annual ingestion/growth is not modeled</p>
 </div><div class="column" style="width:40%;">
 <p><img data-src="img/335.svg"></p>
 </div></div>
@@ -684,9 +686,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>4 EC2 instances: 162000$/year / 18 machines x 4 machines = <em>36000$/year</em></li>
 <li>Problems
 <ul>
-<li>Machines are up and running even when no computation is necessary
+<li>This estimate assumes always-on compute, even between jobs
 <ul>
-<li>This is necessary to persist data</li>
+<li>Retained EBS can persist while compute is stopped; storage charges continue</li>
 </ul></li>
 <li>Still, no software stack</li>
 </ul></li>
@@ -744,7 +746,8 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>HDFS on EC2</p>
 <ul>
 <li>Heavy price</li>
-<li>Machine must always be on to guarantee data persistence</li>
+<li>Running nodes provide service availability; retained <a href="https://docs.aws.amazon.com/ebs/latest/userguide/EBSFeatures.html">EBS</a> can persist while compute is stopped</li>
+<li>Instance-store data is lost on stop/termination; EMR deletes attached volumes on termination</li>
 <li>Data locality</li>
 </ul>
 <p>S3</p>
@@ -830,25 +833,24 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>On cloud v3</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>Migrating cluster to EMR: <em>14710€/year</em></p>
+<p>Historical component sum: <em>14709.96€/year</em> (≈14710€); reprice the corrected configuration</p>
 <ul>
-<li>S3 Infrequent Access storage (50 TB per month): 640€</li>
-<li>1 x Master EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€
+<li>S3 Infrequent Access: 50TB retained, historical charge 640€/month</li>
+<li>1 x Master, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month
 <ul>
 <li>75 h/month = 15min/task x 10task/day x 30day/month / 60min/hour</li>
 </ul></li>
-<li>1 x Core EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€</li>
-<li>4 x Task EMR nodes, EC2 (m4.4xlarge), Utilization (75 h/month): 72€</li>
-<li>4 x EC2 <em>on demand (task node): 174.83€</em>
+<li>1 x Core, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month</li>
+<li>4 x Task, m4.4xlarge, ephemeral 75 h/month each: historical EMR surcharge 72€/month</li>
+<li>4 x task EC2/EBS, on-demand: historical input 174.83€/month (needs repricing)
 <ul>
-<li>Storage amount (30 GB)</li>
-<li>Workload (Daily, Duration of peak: 0 Hr 15 Min)</li>
-<li>Instance type (m4.xlarge)</li>
+<li>30GB/node; corrected target: m4.4xlarge, 75 h/month each</li>
+<li>Original EC2 input used m4.xlarge and a different runtime basis</li>
 </ul></li>
-<li>2 x EC2 on demand (master and core nodes): 330€
+<li>2 x primary/core EC2/EBS, on-demand: historical input 330€/month (needs repricing)
 <ul>
-<li>Storage amount (30 GB)</li>
-<li>Instance type (m4.xlarge)</li>
+<li>Corrected target: m4.xlarge, 75 h/month each, 30GB/node</li>
+<li>Original EC2 input did not establish the same 75-hour basis</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -880,25 +882,24 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>On cloud v4</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><a href="https://calculator.aws/#/estimate?id=c3780b12bb43b593d05def5a1d5218d9764b8a65">Migrating cluster to EMR</a>: <em>13445€/year</em></p>
+<p><a href="https://calculator.aws/#/estimate?id=c3780b12bb43b593d05def5a1d5218d9764b8a65">Historical component sum</a>: <em>13446.60€/year</em> (≈13447€); reprice the corrected configuration</p>
 <ul>
-<li>S3 Infrequent Access storage (50 TB per month): 640€</li>
-<li>1 x Master EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€
+<li>S3 Infrequent Access: 50TB retained, historical charge 640€/month</li>
+<li>1 x Master, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month
 <ul>
 <li>75 h/month = 15min/task x 10task/day x 30day/month / 60min/hour</li>
 </ul></li>
-<li>1 x Core EMR nodes, EC2 (m4.xlarge), Utilization (75 h/month): 4.5€</li>
-<li>4 x Task EMR nodes, EC2 (m4.4xlarge), Utilization (75 h/month): 72€</li>
-<li>4 x EC2 <em>spot (task node): 69.55€</em>
+<li>1 x Core, m4.xlarge, ephemeral 75 h/month: historical EMR surcharge 4.5€/month</li>
+<li>4 x Task, m4.4xlarge, ephemeral 75 h/month each: historical EMR surcharge 72€/month</li>
+<li>4 x task EC2/EBS, Spot: historical input 69.55€/month (needs repricing)
 <ul>
-<li>Storage amount (30 GB)</li>
-<li>Workload (Daily, Duration of peak: 0 Hr 15 Min)</li>
-<li>Instance type (m4.xlarge)</li>
+<li>30GB/node; corrected target: m4.4xlarge, 75 h/month each</li>
+<li>Original EC2 input used m4.xlarge and a different runtime basis</li>
 </ul></li>
-<li>2 x EC2 on demand (master and core nodes): 330€
+<li>2 x primary/core EC2/EBS, on-demand: historical input 330€/month (needs repricing)
 <ul>
-<li>Storage amount (30 GB)</li>
-<li>Instance type (m4.xlarge)</li>
+<li>Corrected target: m4.xlarge, 75 h/month each, 30GB/node</li>
+<li>Original EC2 input did not establish the same 75-hour basis</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:40%;">
@@ -914,7 +915,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <tr class="odd">
 <td style="text-align: center;">Hardware</td>
 <td style="text-align: center;">2356€/year</td>
-<td style="text-align: center;">13445€/year</td>
+<td style="text-align: center;">13447€/year</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Software</td>
@@ -1008,7 +1009,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 
 <section id="summing-up-1" class="title-slide slide level1 center">
 <h1>Summing up</h1>
-<p>We estimated the cluster costs</p>
+<p>We compared historical infrastructure and listed software charges, not total cost of ownership</p>
 <ul>
 <li>On-premises solution with 18 machines: no-go</li>
 <li>Cloud solution with 18 EC2 instances: no go</li>
@@ -1016,7 +1017,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <p>We reduced the solution based on software requirements</p>
 <ul>
 <li>On-premises solution with 4 machines: no-go</li>
-<li>Cloud solution with 4 EC2 instances: no go, we miss the software configuration</li>
+<li>Cloud solution with 4 EC2 instances: requires software setup and comparison with a stop/start EBS configuration</li>
 <li>We moved the cluster to AWS EMR + spot instances + S3 storage</li>
 </ul>
 <p>Can we do better?</p>

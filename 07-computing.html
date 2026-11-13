@@ -258,7 +258,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instances-and-amis.html">Amazon Machine Image</a> is a software template</p>
 <ul>
-<li>The EC2 instance is used for creating the virtual server instance</li>
+<li>An AMI supplies the image used to launch an EC2 instance</li>
 <li>The AMI is the EC2 virtual machine image</li>
 </ul>
 <p>Interact with EC2 instance as with any computer</p>
@@ -329,7 +329,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>Upload input data into Amazon S3</li>
 <li>EMR launches EC2 instances that you specified</li>
 <li>EMR begins the execution while pulling the input data from S3 into the launched instances</li>
-<li>Once the cluster is finished, EMR transfers output data to Amazon S3</li>
+<li>Configure the job to write results to an S3 output path (e.g., <code>s3://example-bucket/output/</code>)</li>
 </ul>
 </section>
 
@@ -408,7 +408,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>AWS EMR: <a href="https://aws.amazon.com/ec2/pricing/">pricing</a></h1>
 <p><em>On-Demand Instance</em></p>
 <ul>
-<li>Pay for computing capacity by the hour (minimum of 60 seconds)</li>
+<li>EMR charges per second with a one-minute minimum; EC2 and EBS charges are additional (<a href="https://aws.amazon.com/emr/pricing/">pricing</a>)</li>
 <li>No long-term commitments</li>
 </ul>
 <p><em>Spot Instance</em></p>
@@ -448,18 +448,18 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <ul>
 <li>The <strong>master</strong> node controls the cluster
 <ul>
-<li>When terminated, the cluster ends</li>
+<li>In this single-primary example, losing the primary node can terminate the cluster</li>
 <li>Use <em>spot instances</em> if you are running a cluster where sudden termination is acceptable</li>
 </ul></li>
 <li><strong>Core</strong> nodes process data and store information using HDFS
 <ul>
-<li>When terminated, data is lost</li>
-<li>Use <em>spot instances</em> when partial HDFS data loss is tolerable</li>
+<li>HDFS data is at risk if no healthy replicas remain; loss depends on replication and recovery</li>
+<li>Use <em>spot instances</em> only when replication, recovery, and workload requirements permit interruption</li>
 </ul></li>
 <li><strong>Task</strong> nodes process data but do not hold persistent data in HDFS
 <ul>
 <li>When terminated, computational capacity is lost</li>
-<li>The effect of spot instances on the cluster is “minimal”</li>
+<li>Interruptions can cause retries, delays, or application failures; impact depends on fault tolerance</li>
 </ul></li>
 </ul>
 <p><a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html">https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-instances-guidelines.html</a></p>
@@ -474,7 +474,7 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <h1>Creating the cluster</h1>
 <p>Amazon EMR provides two main file systems</p>
 <ul>
-<li><strong>HDFS</strong> and <strong>EMRFS</strong>, specify which file system to use by the prefix</li>
+<li><strong>HDFS</strong> and S3 access, selected by the path prefix</li>
 <li><code>hdfs://path</code> (or just <code>path</code>)
 <ul>
 <li>HDFS is used by the master and core nodes</li>
@@ -482,9 +482,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <li>It is fast and best used for caching the results produced by intermediate job-flow steps. <em>Why?</em></li>
 <li>It’s temporary storage which is reclaimed when the cluster ends</li>
 </ul></li>
-<li><code>s3://DOC-EXAMPLE-BUCKET1/path</code> (EMRFS)
+<li><code>s3://DOC-EXAMPLE-BUCKET1/path</code> (EMRFS in this historical release)
 <ul>
-<li>An implementation of the Hadoop file system atop Amazon S3</li>
+<li>A Hadoop filesystem connector for Amazon S3; <a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-s3a-migrate.html">S3A is the default from EMR 7.10</a></li>
 <li>We can avoid EBS storage</li>
 </ul></li>
 </ul>
@@ -514,18 +514,19 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <section id="creating-the-cluster-7" class="title-slide slide level1 center">
 <h1>Creating the cluster</h1>
 <p><em>Infrastructure as code</em>: using CLI (command line interface)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-label="1"></a><span class="ex">aws</span> emr create-cluster</span>
-<span id="cb1-2"><a href="" aria-label="2"></a>  <span class="ex">--auto-scaling-role</span> EMR_AutoScaling_DefaultRole</span>
-<span id="cb1-3"><a href="" aria-label="3"></a>  <span class="ex">--termination-protected</span></span>
-<span id="cb1-4"><a href="" aria-label="4"></a>  <span class="ex">--applications</span> Name=Hadoop Name=Hive Name=Hue Name=JupyterEnterpriseGateway Name=Spark</span>
-<span id="cb1-5"><a href="" aria-label="5"></a>  <span class="ex">--ebs-root-volume-size</span> 10</span>
-<span id="cb1-6"><a href="" aria-label="6"></a>  <span class="ex">--ec2-attributes</span> <span class="st">'{"KeyName":"bigdata","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-5fa2f912","EmrManagedSlaveSecurityGroup":"sg-07818b5690a50b3f1","EmrManagedMasterSecurityGroup":"sg-0e2f5550a2cb98f79"}'</span></span>
-<span id="cb1-7"><a href="" aria-label="7"></a>  <span class="ex">--service-role</span> EMR_DefaultRole</span>
-<span id="cb1-8"><a href="" aria-label="8"></a>  <span class="ex">--enable-debugging</span></span>
-<span id="cb1-9"><a href="" aria-label="9"></a>  <span class="ex">--release-label</span> emr-6.2.0</span>
-<span id="cb1-10"><a href="" aria-label="10"></a>  <span class="ex">--log-uri</span> <span class="st">'s3n://aws-logs-604905954159-us-east-1/elasticmapreduce/'</span></span>
-<span id="cb1-11"><a href="" aria-label="11"></a>  <span class="ex">--name</span> <span class="st">'BigData'</span></span>
-<span id="cb1-12"><a href="" aria-label="12"></a>  <span class="ex">--instance-groups</span> <span class="st">'</span></span>
+<p>Historical EMR 6.2 walkthrough: instance types, roles, and console screenshots reflect that release.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines"><code class="sourceCode bash"><span id="cb1-1"><a href="" aria-label="1"></a><span class="ex">aws</span> emr create-cluster <span class="dt">\</span></span>
+<span id="cb1-2"><a href="" aria-label="2"></a>  <span class="at">--auto-scaling-role</span> EMR_AutoScaling_DefaultRole <span class="dt">\</span></span>
+<span id="cb1-3"><a href="" aria-label="3"></a>  <span class="at">--termination-protected</span> <span class="dt">\</span></span>
+<span id="cb1-4"><a href="" aria-label="4"></a>  <span class="at">--applications</span> Name=Hadoop Name=Hive Name=Hue Name=JupyterEnterpriseGateway Name=Spark <span class="dt">\</span></span>
+<span id="cb1-5"><a href="" aria-label="5"></a>  <span class="at">--ebs-root-volume-size</span> 10 <span class="dt">\</span></span>
+<span id="cb1-6"><a href="" aria-label="6"></a>  <span class="at">--ec2-attributes</span> <span class="st">'{"KeyName":"bigdata","InstanceProfile":"EMR_EC2_DefaultRole","SubnetId":"subnet-5fa2f912","EmrManagedSlaveSecurityGroup":"sg-07818b5690a50b3f1","EmrManagedMasterSecurityGroup":"sg-0e2f5550a2cb98f79"}'</span> <span class="dt">\</span></span>
+<span id="cb1-7"><a href="" aria-label="7"></a>  <span class="at">--service-role</span> EMR_DefaultRole <span class="dt">\</span></span>
+<span id="cb1-8"><a href="" aria-label="8"></a>  <span class="at">--enable-debugging</span> <span class="dt">\</span></span>
+<span id="cb1-9"><a href="" aria-label="9"></a>  <span class="at">--release-label</span> emr-6.2.0 <span class="dt">\</span></span>
+<span id="cb1-10"><a href="" aria-label="10"></a>  <span class="at">--log-uri</span> <span class="st">'s3n://aws-logs-604905954159-us-east-1/elasticmapreduce/'</span> <span class="dt">\</span></span>
+<span id="cb1-11"><a href="" aria-label="11"></a>  <span class="at">--name</span> <span class="st">'BigData'</span> <span class="dt">\</span></span>
+<span id="cb1-12"><a href="" aria-label="12"></a>  <span class="at">--instance-groups</span> <span class="st">'</span></span>
 <span id="cb1-13"><a href="" aria-label="13"></a><span class="st">    [{  "InstanceCount": 1,</span></span>
 <span id="cb1-14"><a href="" aria-label="14"></a><span class="st">        "BidPrice": "OnDemandPrice",</span></span>
 <span id="cb1-15"><a href="" aria-label="15"></a><span class="st">        "EbsConfiguration": {</span></span>
@@ -546,9 +547,9 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 <span id="cb1-30"><a href="" aria-label="30"></a><span class="st">      }]},</span></span>
 <span id="cb1-31"><a href="" aria-label="31"></a><span class="st">      "InstanceGroupType": "CORE",</span></span>
 <span id="cb1-32"><a href="" aria-label="32"></a><span class="st">      "InstanceType": "m4.xlarge",</span></span>
-<span id="cb1-33"><a href="" aria-label="33"></a><span class="st">      "Name": "Core - 2"}]'</span></span>
-<span id="cb1-34"><a href="" aria-label="34"></a>  <span class="ex">--scale-down-behavior</span> TERMINATE_AT_TASK_COMPLETION</span>
-<span id="cb1-35"><a href="" aria-label="35"></a>  <span class="ex">--region</span> us-east-1</span></code></pre></div>
+<span id="cb1-33"><a href="" aria-label="33"></a><span class="st">      "Name": "Core - 2"}]'</span> <span class="dt">\</span></span>
+<span id="cb1-34"><a href="" aria-label="34"></a>  <span class="at">--scale-down-behavior</span> TERMINATE_AT_TASK_COMPLETION <span class="dt">\</span></span>
+<span id="cb1-35"><a href="" aria-label="35"></a>  <span class="at">--region</span> us-east-1</span></code></pre></div>
 </section>
 
 <section id="cluster-lifecycle" class="title-slide slide level1 center">
@@ -579,10 +580,10 @@ Matteo Francia <br> DISI — University of Bologna <br> m.francia@unibo.it
 </ul>
 <p><code>RUNNING</code>: a step for the cluster is currently being run</p>
 <ul>
-<li>Cluster sequentially runs any steps that you specified when you created the cluster</li>
+<li>In this example, steps run sequentially; step concurrency is configurable</li>
 </ul>
 <p><code>WAITING</code>: after steps run successfully</p>
-<p><code>TERMINATING</code>: after manual shutdown</p>
+<p><code>TERMINATING</code>: after manual shutdown, configured automatic completion, or a terminating error</p>
 <ul>
 <li><em>Any data stored on the cluster is deleted</em></li>
 </ul>

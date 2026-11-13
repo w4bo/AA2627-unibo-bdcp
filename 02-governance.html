@@ -511,7 +511,7 @@ product_reviews.csv</code></pre>
 <li>String similarity based on <strong>edit distance</strong></li>
 <li>Two attributes are match if they differ by a few characters (i.e., if their similarity is above a threshold <span class="math inline">\(\alpha\)</span>)
 <ul>
-<li>Example metric: <strong>Levenshtein distance</strong> <span class="citation" data-cites="lcvenshtcin1966binary">(<a href="#/references" role="doc-biblioref" onclick="">Lcvenshtcin 1966</a>)</span></li>
+<li>Example metric: <strong>Levenshtein distance</strong> <span class="citation" data-cites="lcvenshtcin1966binary">(<a href="#/references" role="doc-biblioref" onclick=""><strong>lcvenshtcin1966binary?</strong></a>)</span></li>
 </ul></li>
 </ul>
 <blockquote>
@@ -932,7 +932,7 @@ memory usage: 6.0 KB</code></pre>
 <ul>
 <li>8 statistics × 4 columns = 32 metadata values</li>
 <li>The dataset contains 150 rows</li>
-<li>Metadata-to-data ratio: <span class="math inline">\(\frac{32}{150} ≈ 21.3\%\)</span></li>
+<li>32 summary values for four columns and 150 rows</li>
 </ul>
 </div>
 </section>
@@ -1133,7 +1133,7 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-provenance-prov-model" class="title-slide slide level1 center">
 <h1>Data provenance: PROV model</h1>
-<p>Provenance is a graph, for which we have a standard: <a href="https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/">PROV-DM</a> <span class="citation" data-cites="moreau2022provenance">(<a href="#/references" role="doc-biblioref" onclick="">Moreau and Groth 2022</a>)</span></p>
+<p>Provenance is a graph, for which we have a standard: <a href="https://www.w3.org/TR/prov-dm/">PROV-DM</a> <span class="citation" data-cites="moreau2022provenance">(<a href="#/references" role="doc-biblioref" onclick="">Moreau and Groth 2022</a>)</span></p>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p><em>Entity</em></p>
@@ -1172,7 +1172,7 @@ memory usage: 6.0 KB</code></pre>
 <p>Granularity <span class="citation" data-cites="simmhan2005survey">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Simmhan et al.</span> 2005</a>)</span></p>
 <ul>
 <li><em>Fine-grained</em> (instance level): tracking data items (e.g., a tuple in a dataset) transformations</li>
-<li><em>Coarse-grained</em> (schema-level): tracking dataset transformations</li>
+<li><em>Coarse-grained</em>: dependencies between datasets and processing steps</li>
 </ul>
 </section>
 
@@ -1293,8 +1293,8 @@ memory usage: 6.0 KB</code></pre>
 </ul>
 <p>Choosing a granularity is the <em>result of a trade-off between accuracy and computational effort</em></p>
 <ul>
-<li>Storing only the name and the version of a clustering algorithm enables an approximate reproducibility of the results</li>
-<li>Storing all its parameters makes this functionality much more accurate</li>
+<li>Algorithm name and version alone are insufficient for reproducibility</li>
+<li>Also retain input versions, parameters, random seeds, and relevant environment details</li>
 </ul>
 </section>
 
@@ -1390,9 +1390,8 @@ memory usage: 6.0 KB</code></pre>
 <div class="column" style="width:60%;">
 <p>A <strong>data catalog</strong> is an organized inventory of the company’s data <span class="citation" data-cites="olesen2023enterprise">(<a href="#/references" role="doc-biblioref" onclick="">Olesen-Bagneux 2023</a>)</span></p>
 <ul>
-<li>The data catalog provides an overview at a metadata level only</li>
-<li>No actual data values are exposed.</li>
-<li>Everyone sees the metadata they need without exposing confidential or sensitive data.</li>
+<li>Catalogs primarily expose metadata and may also include data samples or profiling summaries.</li>
+<li>Access to metadata and samples must also be governed.</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1430,8 +1429,8 @@ memory usage: 6.0 KB</code></pre>
 
 </section>
 
-<section id="three-layers-for-modern-data-platforms" class="title-slide slide level1 center">
-<h1>Three layers for modern data platforms</h1>
+<section id="three-complementary-perspectives" class="title-slide slide level1 center">
+<h1>Three complementary perspectives</h1>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1440,7 +1439,7 @@ memory usage: 6.0 KB</code></pre>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Layer</th>
+<th>Perspective</th>
 <th>Main question</th>
 <th>Main mechanism</th>
 </tr>
@@ -1465,13 +1464,13 @@ memory usage: 6.0 KB</code></pre>
 </table>
 <p>Takeaway:</p>
 <blockquote>
-<p>Fabric connects the platform. Mesh assigns responsibility. AI makes the platform more exploitable.</p>
+<p>Fabric connects data assets. Mesh assigns responsibility. AI can help users search documentation and query data.</p>
 </blockquote>
 </section>
 
 <section id="data-fabric-definition" class="title-slide slide level1 center">
 <h1>Data fabric: definition</h1>
-<p><strong>Data fabric</strong> is a design concept “for data management […] that seamlessly connects different clouds environments.” (<a href="https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf">2016</a>)</p>
+<p><strong>Data fabric</strong> is a design concept for managing data across different cloud environments (<a href="https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf">NetApp white paper</a>).</p>
 <p>Frictionless access and sharing of data in a distributed data environment</p>
 <ul>
 <li>Enables a <em>single and consistent data management framework</em></li>
@@ -1498,7 +1497,7 @@ memory usage: 6.0 KB</code></pre>
 <ul>
 <li><em>Catalog all data</em>: Cover business glossary, design-time, and runtime metadata.</li>
 <li><em>Enable self-service capabilities</em>: Support data discovery, profiling, exploration, quality checks, and consumption.</li>
-<li><em>Provide a knowledge graph</em>: Visualize links among data, people, processes, and systems for actionable insight.</li>
+<li><em>Provide a knowledge graph</em>: Link data, people, processes, and systems to identify owners and trace dependencies.</li>
 <li><em>Deliver automatic integration</em>: Help IT and business users with data integration, transformation, virtualization, and federation.</li>
 <li><em>Manage unified lifecycle</em>: Maintain a consistent end-to-end Data Fabric lifecycle across platforms and teams.</li>
 </ul>
@@ -1508,19 +1507,18 @@ memory usage: 6.0 KB</code></pre>
 <h1>Data fabric: active metadata</h1>
 <div class="columns">
 <div class="column" style="width:55%;">
-<p><strong>Active metadata</strong>: leverage open APIs to connect platform services using metadata.</p>
+<p><strong>Active metadata</strong>: use APIs to connect platform services and trigger actions from metadata.</p>
 <p><em>Active metadata is always on</em></p>
 <ul>
 <li>Automatically and continually collect metadata from various sources.</li>
 </ul>
 <p><em>Active metadata is “intelligent”</em>:</p>
 <ul>
-<li>Constantly process metadata to connect the dots and create intelligence.</li>
-<li>E.g., auto-classify sensitive data, automatic suggestions to document data.</li>
+<li>Process metadata to classify sensitive columns and suggest data owners or missing documentation.</li>
 </ul>
 <p><em>Active metadata is action-oriented</em></p>
 <ul>
-<li>Active metadata should drive actions such as curating recommendations</li>
+<li>Propagate schema-change alerts, validate data contracts, and trigger quality checks.</li>
 </ul>
 <p><em>Active metadata is open by default</em></p>
 <ul>
@@ -1552,7 +1550,7 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-mesh-principles" class="title-slide slide level1 center">
 <h1>Data mesh: principles</h1>
-<p>Distributed data architecture under centralized governance for interoperability, enabled by a shared and harmonized self-serve data infrastructure</p>
+<p>Domain-owned data products with federated computational governance and shared interoperability standards, supported by self-serve data infrastructure</p>
 <ul>
 <li><em>Domain-oriented decentralized data ownership</em>
 <ul>
@@ -1584,7 +1582,7 @@ memory usage: 6.0 KB</code></pre>
 <p>Data Mesh organizes data around <strong>business domain owners</strong> and transforms relevant data assets (data sources) to <strong>data products</strong> that can be consumed by distributed business users from various business domains or functions.</p>
 <ul>
 <li>Data products are created, governed, and used in an <strong>autonomous, decentralized</strong>, and self-service manner</li>
-<li><strong>Self-service capabilities</strong>, which we have already referenced as a Data Fabric capability, enable business organizations to entertain a data marketplace with shopping-for-data characteristics</li>
+<li><strong>Self-service capabilities</strong> let users discover data products, inspect their documentation, and request access</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -1598,9 +1596,9 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="what-makes-data-a-product" class="title-slide slide level1 center">
 <h1>What makes data a product?</h1>
-<p>A <strong>data product</strong> is raw data transformed into a business context</p>
+<p>A <strong>data product</strong> provides data for a defined use, with an owner, documented interfaces, quality expectations, and support.</p>
 <ul>
-<li>Data products are registered in the <strong>knowledge catalog</strong> through specifications (XML, JSON, etc.).</li>
+<li>Data products can expose source-aligned or transformed data and are described in a <strong>data catalog</strong>.</li>
 <li>Data products need to be searchable and discoverable by potential data product consumers and business users.
 <ul>
 <li><em>Cataloged</em>: All data products need to be registered in the knowledge catalog.</li>
@@ -1629,8 +1627,8 @@ memory usage: 6.0 KB</code></pre>
 <p><strong>Data fabric</strong></p>
 <ul>
 <li>Attempts to centralize and coordinate data management</li>
-<li>Tackles the complexity of data and metadata in a smart way that works well together</li>
-<li>Focus on the architectural, technical capabilities, and intelligent analysis to produce active metadata supporting a smarter, AI-infused system to orchestrate various data integration styles</li>
+<li>Uses shared metadata to coordinate discovery, integration, and access</li>
+<li>Uses active metadata to classify sensitive columns, track dependencies, and trigger integration or quality checks</li>
 </ul>
 <p><strong>Data mesh</strong></p>
 <ul>
@@ -1707,7 +1705,7 @@ memory usage: 6.0 KB</code></pre>
 <li>Columns become metrics, dimensions, policies, and definitions</li>
 <li>Queries can use business language instead of physical schemas</li>
 </ul>
-<p>Close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="bienvenu2018ontology">(<a href="#/references" role="doc-biblioref" onclick="">Bienvenu and Ortiz 2018</a>)</span>.</p>
+<p>Close to <strong>ontology-based data access</strong>, where users query a conceptual layer while mappings connect it to source data <span class="citation" data-cites="xiao2018ontology">(<a href="#/references" role="doc-biblioref" onclick="">Xiao et al. 2018</a>)</span>.</p>
 <p>Example:</p>
 <ul>
 <li>User asks: “monthly active customers by region”</li>
@@ -1726,13 +1724,13 @@ memory usage: 6.0 KB</code></pre>
 <li>notebooks, dashboards, tickets, and incident reports</li>
 </ul>
 
-<img data-src="./img/hipporag2.png" class="r-stretch quarto-figure-center"><p class="caption">HippoRAG2</p></section>
+<img data-src="./img/hipporag2.png" class="r-stretch quarto-figure-center"><p class="caption">HippoRAG 2: graph-based retrieval with Personalized PageRank (<a href="https://proceedings.mlr.press/v267/gutierrez25a.html">Gutiérrez et al., 2025</a>)</p></section>
 
 <section id="graphrag-for-connected-metadata" class="title-slide slide level1 center">
 <h1>GraphRAG for connected metadata</h1>
-<p>Plain RAG retrieves similar chunks.</p>
-<p><strong>GraphRAG</strong> builds a graph of entities and relationships, then retrieves from that graph for local and global questions <span class="citation" data-cites="hogan2021knowledge edge2025graphrag">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Hogan et al.</span> 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Edge et al. 2025</a>)</span>.</p>
-<p>Example question:</p>
+<p>A common RAG baseline retrieves chunks by embedding similarity.</p>
+<p><strong>GraphRAG</strong> uses entities and relationships for retrieval. The cited Microsoft approach also builds community summaries for global questions <span class="citation" data-cites="hogan2021knowledge edge2025graphrag">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Hogan et al.</span> 2021</a>; <a href="#/references" role="doc-biblioref" onclick="">Edge et al. 2025</a>)</span>.</p>
+<p>Platform example (a lineage query, rather than the paper’s global-summarization task):</p>
 <blockquote>
 <p>Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?</p>
 </blockquote>
@@ -1741,7 +1739,7 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="llm-wiki-for-data-products" class="title-slide slide level1 center">
 <h1>LLM wiki for data products</h1>
-<p>An <strong>LLM wiki</strong> is a curated, human-readable layer generated from governed platform metadata.</p>
+<p>Example pattern: an <strong>LLM wiki</strong> provides human-readable pages generated from governed platform metadata.</p>
 <p>Useful rule:</p>
 <blockquote>
 <p>Every generated page must cite catalog, lineage, or documentation sources.</p>
@@ -1756,7 +1754,7 @@ memory usage: 6.0 KB</code></pre>
 
 <section id="data-agents" class="title-slide slide level1 center">
 <h1>Data agents</h1>
-<p>A <strong>data agent</strong> is a governed conversational layer over a data platform.</p>
+<p>In this example, a <strong>data agent</strong> uses platform tools through a governed conversational interface.</p>
 <p>It combines an LLM with platform tools:</p>
 <ul>
 <li>semantic models, catalogs, schemas, and policies</li>
@@ -1764,7 +1762,7 @@ memory usage: 6.0 KB</code></pre>
 <li>user permissions and governance checks</li>
 <li>readable answers with tables, charts, queries, or citations</li>
 </ul>
-<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis <span class="citation" data-cites="sui2026dataagents">(<a href="#/references" role="doc-biblioref" onclick="">Sui et al. 2026</a>)</span>.</p>
+<p>The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis <span class="citation" data-cites="luo2026dataagents">(<a href="#/references" role="doc-biblioref" onclick="">Luo et al. 2026</a>)</span>.</p>
 <p>Examples:</p>
 <ul>
 <li>Microsoft Fabric Data Agent</li>
@@ -1818,9 +1816,6 @@ memory usage: 6.0 KB</code></pre>
 <div id="ref-barika2019orchestrating" class="csl-entry" role="listitem">
 Barika, Mutaz, Saurabh Garg, Albert Y Zomaya, Lizhe Wang, Aad Van Moorsel, and Rajiv Ranjan. 2019. <span>“Orchestrating Big Data Analysis Workflows in the Cloud: Research Challenges, Survey, and Future Directions.”</span> <em>ACM Computing Surveys (CSUR)</em> 52 (5): 1–41.
 </div>
-<div id="ref-bienvenu2018ontology" class="csl-entry" role="listitem">
-Bienvenu, Meghyn, and Magdalena Ortiz. 2018. <span>“Ontology-Based Data Access: A Survey.”</span> <em>Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence</em>, 5511–19. <a href="https://doi.org/10.24963/ijcai.2018/777">https://doi.org/10.24963/ijcai.2018/777</a>.
-</div>
 <div id="ref-bruno2002exploiting" class="csl-entry" role="listitem">
 Bruno, Nicolas, and Surajit Chaudhuri. 2002. <span>“Exploiting Statistics on Query Expressions for Optimization.”</span> <em>Proceedings of the 2002 ACM SIGMOD International Conference on Management of Data</em>, 263–74.
 </div>
@@ -1828,7 +1823,7 @@ Bruno, Nicolas, and Surajit Chaudhuri. 2002. <span>“Exploiting Statistics on Q
 Burkhard, Walter A., and Robert M. Keller. 1973. <span>“Some Approaches to Best-Match File Searching.”</span> <em>Communications of the ACM</em> 16 (4): 230–36.
 </div>
 <div id="ref-edge2025graphrag" class="csl-entry" role="listitem">
-Edge, Darren, Ha Trinh, Newman Cheng, et al. 2025. <span>“From Local to Global: A Graph <span>RAG</span> Approach to Query-Focused Summarization.”</span> <em>arXiv Preprint arXiv:2404.16130</em>.
+Edge, Darren, Ha Trinh, Newman Cheng, et al. 2025. <em>From Local to Global: A Graph <span>RAG</span> Approach to Query-Focused Summarization</em>. Version 2. <a href="https://arxiv.org/abs/2404.16130v2">https://arxiv.org/abs/2404.16130v2</a>.
 </div>
 <div id="ref-DBLP:journals/vldb/ForresiGGH21" class="csl-entry" role="listitem">
 Forresi, Chiara, Enrico Gallinucci, Matteo Golfarelli, and Hamdi Ben Hamadou. 2021. <span>“A Dataspace-Based Framework for <span>OLAP</span> Analyses in a High-Variety Multistore.”</span> <em>The VLDB Journal</em> 30 (6): 1017–40. <a href="https://doi.org/10.1007/S00778-021-00682-5">https://doi.org/10.1007/S00778-021-00682-5</a>.
@@ -1842,11 +1837,11 @@ Herschel, Melanie, Ralf Diestelkämper, and Houssem Ben Lahmar. 2017. <span>“A
 <div id="ref-ikeda2009data" class="csl-entry" role="listitem">
 Ikeda, Robert, and Jennifer Widom. 2009. <em>Data Lineage: A Survey</em>. Stanford InfoLab.
 </div>
-<div id="ref-lcvenshtcin1966binary" class="csl-entry" role="listitem">
-Lcvenshtcin, VI. 1966. <span>“Binary Coors Capable or ‘Correcting Deletions, Insertions, and Reversals.”</span> <em>Soviet Physics-Doklady</em> 10.
-</div>
 <div id="ref-lewis2020retrieval" class="csl-entry" role="listitem">
 Lewis, Patrick, Ethan Perez, Aleksandra Piktus, et al. 2020. <span>“Retrieval-Augmented Generation for Knowledge-Intensive <span>NLP</span> Tasks.”</span> <em>Advances in Neural Information Processing Systems</em> 33: 9459–74.
+</div>
+<div id="ref-luo2026dataagents" class="csl-entry" role="listitem">
+Luo, Yuyu, Guoliang Li, Ju Fan, and Nan Tang. 2026. <em>Data Agents: Levels, State of the Art, and Open Problems</em>. <a href="https://arxiv.org/abs/2602.04261">https://arxiv.org/abs/2602.04261</a>.
 </div>
 <div id="ref-mann2002some" class="csl-entry" role="listitem">
 Mann, Bob. 2002. <span>“Some Data Derivation and Provenance Issues in Astronomy.”</span> <em>Workshop on Data Derivation and Provenance, Chicago</em>.
@@ -1869,8 +1864,8 @@ Papadakis, George, Dimitrios Skoutas, Emmanouil Thanos, and Themis Palpanas. 202
 <div id="ref-simmhan2005survey" class="csl-entry" role="listitem">
 <span class="nocase">Simmhan, Yogesh L, Beth Plale, Dennis Gannon, et al.</span> 2005. <span>“A Survey of Data Provenance Techniques.”</span> <em>Computer Science Department, Indiana University, Bloomington IN</em> 47405: 69.
 </div>
-<div id="ref-sui2026dataagents" class="csl-entry" role="listitem">
-Sui, Yuan, Yaqi Wang, Zheng Lin, et al. 2026. <em>Data Agents: Levels, State of the Art, and Open Problems</em>. <a href="https://arxiv.org/abs/2602.04261">https://arxiv.org/abs/2602.04261</a>.
+<div id="ref-xiao2018ontology" class="csl-entry" role="listitem">
+Xiao, Guohui, Diego Calvanese, Roman Kontchakov, et al. 2018. <span>“Ontology-Based Data Access: A Survey.”</span> <em>Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence</em>, 5511–19. <a href="https://doi.org/10.24963/ijcai.2018/777">https://doi.org/10.24963/ijcai.2018/777</a>.
 </div>
 </div>
 </section>
