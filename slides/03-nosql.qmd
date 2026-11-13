@@ -39,12 +39,12 @@ After the relational model [@DBLP:journals/cacm/Codd70] new types of databases h
 
 *Painful scaling-out*
 
-- Not suited for a cluster architecture
-- Distributing an RDBMS is neither easy nor cheap (e.g., Oracle RAC)
+- Traditional single-node designs require additional mechanisms for distributed operation
+- Partitioning and distributed SQL support scale-out, with coordination and operational costs
 
 *Consistency vs latency*
 
-- Consistency is a must - even at the expense of latency
+- Stronger consistency can increase coordination and latency; guarantees depend on the system and configuration
 - Today's applications require high reading/writing throughput with low latency
 
 *Schema rigidity*
@@ -82,7 +82,7 @@ Today, *NoSQL* indicates *DBMSs* adopting a *different data model from the relat
 *Amazon, 2007*
 
 - Goal: ensure the availability and reliability of its e-commerce service 24/7
-- Solution: *DynamoDB* [@sivasubramanian2012amazon], characterized by strong simplicity for data storage and manipulation
+- Solution: *Dynamo*, a highly available key-value store ([DeCandia et al., 2007](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)); DynamoDB followed as a managed service in 2012
 
 # NoSQL common features
 
@@ -122,9 +122,8 @@ Today, *NoSQL* indicates *DBMSs* adopting a *different data model from the relat
 
 *Distributed, shared-nothing architecture*
 
-- A shared-nothing architecture is a distributed architecture in which each update request is satisfied by a single node in a computer cluster
-  - Nodes do not share (independently access) the same memory or storage. 
-- Trivial scalability in a distributed environment with no performance decay
+- Nodes have independent memory and storage; replication and distributed operations may involve several nodes
+- Scalability depends on shard-key skew, coordination, cross-shard operations, and rebalancing
 
 ![Shared everything vs shared nothing](img/shared-nothing-architecture.png)
 
@@ -144,7 +143,9 @@ Today, *NoSQL* indicates *DBMSs* adopting a *different data model from the relat
 :::
 :::{.column width=50%}
 
-```json
+Schematic JSON (ellipsis omits array contents):
+
+```text
 [
     {
         "Product": "P1",
@@ -199,7 +200,7 @@ One of the key challenges is to determine which one best suits the required appl
 | **Key-value** | Associates any kind of value to a string | Dictionary, lookup table, cache, file, and image storage |
 | **Document** | Stores hierarchical data in a tree-like structure | Documents, anything that fits into a hierarchical structure |
 | **Wide-column** | Stores sparse matrices where a cell is identified by the row and column keys | Crawling, high-variability systems, sparse matrices |
-| **Graph** | Stores vertices and arches | Social network queries, inference, pattern matching |
+| **Graph** | Stores vertices and edges | Social network queries, inference, pattern matching |
 
 # Running example
 
@@ -250,15 +251,15 @@ IDs are implicitly handled; different edge colors imply different edge types.
 
 # Graph: storage
 
-**Index-free adjacency**
+**Index-free adjacency** (an implementation technique used by some graph databases)
 
 - Each node directly references its adjacent (neighboring) nodes
-- Accessing relationships is simply a memory pointer lookup
+- Direct adjacency references reduce relationship-lookup overhead
 
 Graph processing time
 
-- Proportional to the amount of data processed
-- Not increasing exponentially with the number of relationships traversed
+- Total work depends on the explored subgraph
+- The number of explored nodes/paths can grow exponentially with traversal depth
 
 #
 
@@ -297,7 +298,7 @@ The graph data model is intrinsically different from the others.
 **Aggregate-oriented modeling**: data queries are stored together
 
 - Aggregate = key-value pair, document, row (respectively)
-- The aggregate is the atomic block (no guarantees for multi-aggregate operations)
+- The aggregate is a natural consistency boundary; some systems also support multi-aggregate transactions
 
 Based on the concept of encapsulation
 
@@ -505,8 +506,8 @@ Advantages
 
 Disadvantages
 
-- **No design strategy exists for aggregates**
-  - *It only depends on how they are meant to be used*
+- **No single aggregate design suits every workload**
+  - Use access patterns and consistency boundaries to choose aggregates
 - Can optimize only a limited set of queries
 - Data denormalization -> possible inconsistencies
 
@@ -537,7 +538,7 @@ Two aspects must be considered when deploying on a cluster.
 - Improves the efficiency of the system
   - Read/write operations are distributed
 
-A good *sharding strategy* is **fundamental ** to optimize performances
+A good *sharding strategy* is **fundamental** to optimize performance
 
 - Usually based on one or more fields composing the sharding key
 
@@ -545,7 +546,7 @@ A good *sharding strategy* is **fundamental ** to optimize performances
 
 # Sharding strategy
 
-Thumbs-up rules for a sharding strategy:
+Rules of thumb for a sharding strategy:
 
 *Data-locality*
 
@@ -566,8 +567,8 @@ Thumbs-up rules for a sharding strategy:
 
 - Adopted by DynamoDB and Cassandra
 - Pros:
-    - ensures even data distribution across nodes and massive scalability
-    - new nodes can be added without heavy data redistribution
+    - can distribute data evenly when keys are well distributed
+    - consistent hashing or an explicit partition map can limit redistribution when nodes change
 - Con: range queries become inefficient
 
 ![Hash sharding](img/slides82.png)
@@ -580,7 +581,7 @@ Thumbs-up rules for a sharding strategy:
 - Pro: efficiently run range queries that work on the sharding key values
 - Cons:
     - global ordering often generates hot spots -> risk of bottlenecks
-    - ranges are defined a priori, and this can determine heavy data redistribution
+    - splitting or rebalancing ranges moves data; systems such as HBase can split ranges dynamically
 
 ![Range strategy](img/slides83.png)
 
@@ -621,7 +622,7 @@ Main issue: each update must be pushed to every replica
 
 - It’s the manager of the data
 - *Handles every write operation*
-- Can be chosen or drawn
+- Can be chosen or elected
 
 *Slaves*
 
@@ -650,7 +651,7 @@ Main issue: each update must be pushed to every replica
 
 - *The master is a bottleneck*
   - **Only the master can handle writes**
-  - In case of failure, a new master must be drawn
+  - In case of failure, a new master must be elected
 - Delay in write propagation can be a source of inconsistency
   - Two users may read different values at the same time
   - *Read inconsistency can be problematic, but it is relatively limited in time*
@@ -680,7 +681,7 @@ The loss of a node does not compromise reads or writes.
 **Pro**
 
 - The failure of a node does not interrupt read or write requests
-- Write performances easily scale by adding new nodes
+- Write performance can scale by adding nodes, depending on coordination and workload
 
 **Cons**
 
@@ -696,7 +697,7 @@ Read conflicts
 
 - *Tolerate conflicts*: the *inconsistency window* is usually limited
 - *Read-your-writes*: read consistency is guaranteed for the data written by the same user
-  - Applies only to reads that immediately follow a write operation
+  - Applies to subsequent reads within the same session
   - One way is to associate a user with a node (risk: unbalanced workloads)
   - Typically, versioning fields are used to ensure that the up-to-date version is read
 
@@ -711,19 +712,21 @@ Write conflicts (P2P model)
 ::::{.columns}
 :::{.column width=60%}
 
-The *quorum mechanism* ensures consistent IO under replication.
+The *quorum mechanism* coordinates access to replicated data.
 
-- Based on contacting a majority of the nodes responsible for certain data
+- Operations require acknowledgments from specified sets of replicas
 - The quorum is the minimum number of nodes that a distributed operation has to obtain to be allowed to operate on a replicated data item
 
-Each data item has $N$ replicas.
+Assume a fixed set of $N$ replicas per item (no substitute replicas).
 
 - Writing quorum: $W > \frac{N}{2}$
   - The write operation is allowed only if W replicas can be updated
-  - Ensures that two write operations cannot occur concurrently
+  - Ensures that write quorums intersect; concurrent writes are still possible
 - Reading quorum: $R > N-W$
   - The read operation is allowed only if R replicas can be read
-  - Ensures that (at least) one copy with the up-to-date value is read
+  - Ensures intersection with a completed write quorum
+
+Linearizability also requires a protocol for versions, concurrent writes, and failures; quorum sizes alone are insufficient.
 
 :::
 :::{.column width=40%}
@@ -745,14 +748,14 @@ A look behind the curtain
 RDBMSs come from decades of widespread usage.
 
 - Strong focus on data consistency
-- Years of research activities to optimize performances
+- Years of research activities to optimize performance
 - Highly complex systems (triggers, caching, security, etc.)
 
 NoSQL systems are designed to succeed where RDBMSs fail.
 
 - Strong focus on data sharding and high availability
-- Quite simple systems (for now)
-- Speed and manageability rather than consistency at all costs
+- Capabilities and consistency guarantees vary by product and configuration
+- Data model alone does not determine consistency or availability
 
 :::
 :::{.column width=50%}
@@ -776,7 +779,7 @@ What should never happen
 - A query on the database shows an intermediate state
   - E.g., A+B = 0€
 
-RDBMSs adopt *transactions * to avoid this kind of issue.
+RDBMSs adopt *transactions* to avoid this kind of issue.
 
 # Consistency in RDBMSs: ACID
 
@@ -803,7 +806,7 @@ Transactions guarantee four fundamental properties: ACID.
 
 # Consistency in RDBMSs: ACID
 
-Implementation of ACID properties relies on *locking mechanisms and logs*
+One implementation of ACID properties uses *locking mechanisms and logs*; others use MVCC or optimistic concurrency control.
 
 - Resources are locked, updates are logged
 - In case of problems, rollback to the original state
@@ -830,25 +833,24 @@ Several attempts have been made to describe NoSQL properties with respect to ACI
 
 They are not properties on which NoSQL systems rely.
 
-- Rather, they simply *try * to describe their behavior
+- Rather, they describe guarantees and trade-offs in distributed systems
 
 # Consistency in NoSQL: CAP
 
 ::::{.columns}
 :::{.column width=60%}
 
-"Theorem": only two of the following three properties can be guaranteed
+During a network partition, a system cannot guarantee both linearizability and availability for all affected operations.
 
-*C*onsistency: the system is always consistent
+*C*onsistency: linearizability
 
-- Every node returns the same, most recent, successful write
-- Every client has the same view of the data
+- Operations behave as if executed atomically in one order respecting real time
 
-*A*vailability: the system is always available
+*A*vailability: every request to a non-failing node eventually completes
 
-- Every non-failing node returns a response for all read and write requests in a reasonable amount of time
+- This is not a guarantee of a particular response-time bound
 
-*P*artition tolerance: the system continues to function and upholds its consistency guarantees despite network partitions
+*P*artition tolerance: the system must handle communication loss between groups of nodes
 
 - In distributed systems, network **partitioning is inevitably a possibility**
 
@@ -860,36 +862,37 @@ They are not properties on which NoSQL systems rely.
 :::
 ::::
 
-See [CAP demonstration](https://dl.acm.org/doi/pdf/10.1145/564585.564601?casa*token=m69maazxkqIAAAAA:cBn5y1eKnJUh7Tl4GVsw9Hqv984qwQ3*b8XvSM*wM3U2zp*-363uPINWJADEmMt-8ZjPzA1yaoE)
+See [CAP demonstration](https://doi.org/10.1145/564585.564601)
 
 # Consistency in NoSQL: CAP
 
 Three situations
 
-- *CA*: the system cannot suffer from network partitioning (single server)
+- *CA*: consistency and availability can coexist when partitions are excluded (e.g., a single server)
 - *AP*: in case of partitioning, the system sacrifices consistency (overbooking)
-- *CP*: in case of partitioning, the system sacrifices availability (bookings prevented)
+- *CP*: during a partition, some operations may block or fail to preserve consistency
 
 Theorem interpretation is not trivial.
 
-- Asymmetric properties: consistency is sacrificed to favor speed at all times, not just when partitioning happens
+- Outside partitions, consistency/latency trade-offs are described by PACELC, not required by CAP
 - Different application requirements -> different algorithms handle these properties more strictly/loosely
 
-# Consistency in NoSQL: relaxing CAP
+# Consistency in NoSQL: guarantees by operation
 
 Consider two users who want to book the same room when a network partition happens.
 
-**CP**: no one can book (*A is sacrificed*)
+**CP**: bookings may proceed on a quorum side; other requests block or fail (*A is sacrificed*)
 
-- Not the best solution
+- Which requests complete depends on the protocol and partition topology
 
 **AP**: both can book (*C is sacrificed*)
 
 - Possible overbooking: writing conflict to handle
 
-**caP**: only one can book
+**Mixed guarantees**: stale availability reads, strongly consistent conditional bookings
 
-- The other will see the room available, but cannot book it
+- A user may see the room as available but have a booking rejected or blocked
+- Reads sacrifice freshness; booking writes sacrifice availability during a partition. CAP still applies.
 
 *This is admissible only in certain scenarios*
 
@@ -919,7 +922,7 @@ Four situations:
 - *PA EL*: system focused on speed and availability (main NoSQL philosophy)
 - *PA EC*: consistency sacrificed only when partitioning happens
 - *PC EL*: consistency enforced only when partitioning happens (e.g., Yahoo Sherpa)
-- *PC EC*: system focused on consistency (RDBMS)
+- *PC EC*: consistency prioritized during and outside partitions
 
 # Consistency in NoSQL: BASE
 
@@ -931,16 +934,16 @@ The CAP theorem is often cited as a justification for the use of weaker consiste
 
 *S*oft-state: it is acceptable for the system to be temporarily inconsistent
 
-*E*ventual consistency: eventually, the system becomes consistent
+*E*ventual consistency: replicas converge if updates cease and communication and conflict resolution succeed
 
 ACID
 
-- Pessimistic approach (better safe than sorry)
+- Transaction guarantees; implementations may use pessimistic or optimistic concurrency control
 
 BASE
 
-- Optimistic approach (everything is going to be ok)
-- Higher throughput is better than enforcing consistency
+- Allows temporary divergence under specified convergence assumptions
+- May favor availability or throughput over immediate replica agreement
 
 # Consistency in NoSQL: summary
 
@@ -948,8 +951,8 @@ BASE
 |:-: |:-: |:-: |:-: |
 | Replication (MS and P2P) | Write propagation delay between replicas is slow | Read conflicts | - Tolerate<br />- Read-your-writes<br />- Quorum |
 | Replication (P2P) | Two write operations can be issued on different replicas | Write conflicts | - Last write wins<br />- Conflict prevention<br />- Conflict detection<br />- Quorum |
-| Network partitioning | Inability to communicate with all replicas of a certain data | - Read conflicts<br />- Possibly write conflicts | - Relax CAP<br />- Prevent write conflicts<br />- Handle read conflict as above |
-| No ACID transactions | - An update over multiple records fails mid-query<br />- Two updates over multiple records are interleaved | Unrecoverable inconsistency | - Each system provides its own mechanism to offer limited ACID-like transactions |
+| Network partitioning | Inability to communicate with all replicas of a certain data | - Read conflicts<br />- Possibly write conflicts | - Choose guarantees per operation<br />- Prevent write conflicts<br />- Handle read conflict as above |
+| No multi-record transaction | - An update over multiple records fails mid-query<br />- Two updates over multiple records are interleaved | Partial or inconsistent updates | - Use supported transactions<br />- Application compensation or repair |
 | Data de-normalization | The same data is repeated in different instances with different values | Inability to find the correct values | - Avoid denormalization if strong consistency is needed<br />- Data cleaning before analysis |
 
 # One size does not fit all
@@ -960,7 +963,7 @@ To each application, its own data model
 
 **MongoDB**: [http://www.mongodb.org](http://www.mongodb.org/)
 
-**Couchbase: ** [http://www.couchbase.com](http://www.couchbase.com/)
+**Couchbase:** [http://www.couchbase.com](http://www.couchbase.com/)
 
 **CouchDB**: [http://couchdb.apache.org](http://couchdb.apache.org/)
 
@@ -974,9 +977,9 @@ Higher expressiveness
 Examples
 
 - **Event logs**
-  - *Central repo to store event logs from many applications; * shard on app name or event type
+  - *Central repo to store event logs from many applications*; shard on app name or event type
 - **CMS, blogging platforms**
-  - *The absence of a predefined schema *fits well* within content management systems (CMS) or website management applications, to handle comments, registrations, and user profiles
+  - *Schema flexibility* suits content management systems (CMS) handling comments, registrations, and user profiles
 - **Web Analytics or Real-Time Analytics**
   - *The ability to update only specific fields* enables fast update of analytical metrics
   - *Text indexing* enables real-time sentiment analysis and social media monitoring
@@ -996,18 +999,18 @@ Examples
 
 - Real-time management of sensor-based data
 - Bosch uses MongoDB to capture data from cars (brakes, ABS, windscreen wipers, etc.) and aircraft maintenance tools
-  - Business rules are applied to warn the pilot when the breaking system pressure falls under a critical threshold, or the maintenance operator when the tool is used improperly
+  - Business rules are applied to warn the pilot when the braking system pressure falls under a critical threshold, or the maintenance operator when the tool is used improperly
 - Technogym uses MongoDB to capture data from gym equipment
 
 # Document: when to avoid
 
 **ACID transactions requirement**
 
-- If not for a few exceptions (e.g., RavenDB), document databases are not suited for cross-document atomicity
+- Many document databases support multi-document transactions (e.g., [MongoDB](https://www.mongodb.com/docs/manual/core/transactions/)); assess coordination cost and workload limits
 
 **Queries on high-variety data**
 
-- *If the aggregate structure continuously evolves, queries must be constantly updated * (and normalization clashes with the concept of aggregate)
+- *If the aggregate structure continuously evolves, queries may need updates* (and normalization clashes with the concept of aggregate)
 
 # Graph: popular DBs
 
@@ -1037,7 +1040,7 @@ Examples
 
 - Finding common friends (e.g., friend-of-a-friend) in a social network
 - Identifying clusters of phone calls that identify a criminal network
-- Analyzing flows of money to identify money recycling patterns or credit card theft
+- Analyzing flows of money to identify money laundering patterns or credit card theft
 - Main users: law firms, police, intelligence agencies
   - [https://neo4j.com/use-cases/fraud-detection/](https://neo4j.com/use-cases/fraud-detection/)
 - Useful for text analysis as well (Natural Language Processing)
@@ -1117,13 +1120,13 @@ Extended RDBMSs
 
 - KV implementable as a table with two fields: a string key, and a blob value
 - Cypher query language on top of a relational implementation of a graph
-- Hstore data type in PostgreSQL for wide-column-like implementation
-- **Scalability issue remains**
+- The hstore type in PostgreSQL stores key/value pairs within a column
+- Scale-out depends on partitioning, extensions, or a distributed architecture
 
 Multi-model NoSQL DBMSs
 
 - ArangoDB, OrientDB
-- **Support all NoSQL data models, but not the relational**
+- Support multiple data models; exact combinations and query capabilities depend on the product
 
 Database-as-a-service
 
@@ -1220,7 +1223,7 @@ Customer collection
 |:-: |:-: |
 | cust-1:name | Martin |
 | cust-1:adrs | [   {"street":"Adam", "city":"Chicago", "state":"Illinois", "code":60007},    {"street":"9th", "city":"NewYork", "state":"NewYork", "code":10001}] |
-| cust-1:ord-99 | {   "orderpayments": [      {"card":477, "billadrs":         {"street":"Adam", "city":"Chicago", "state":"illinois", "code":60007} },      {"card":457, "billadrs":        {"street":"9th", "city":"NewYork", "state":"NewYork", "code":10001}   ], "products": [      {"id":1, "name":"Cola", "price":12.4},      {"id":2, "name":"Fanta", "price":14.4}   ], "shipAdrs": {"street":"9th", "city":"NewYork", "state":"NewYork", code":10001}} |
+| cust-1:ord-99 | {   "orderpayments": [      {"card":477, "billadrs":         {"street":"Adam", "city":"Chicago", "state":"illinois", "code":60007} },      {"card":457, "billadrs":        {"street":"9th", "city":"NewYork", "state":"NewYork", "code":10001} } ], "products": [      {"id":1, "name":"Cola", "price":12.4},      {"id":2, "name":"Fanta", "price":14.4}   ], "shipAdrs": {"street":"9th", "city":"NewYork", "state":"NewYork", "code":10001}} |
 
 :::
 ::::
@@ -1264,7 +1267,7 @@ The query language expressiveness is between key-value and document data models.
 - Can select which columns to project
 - Can update specific columns (not always)
 
-Given the similarity with the relational model, a *SQL-like * language is often used.
+Given the similarity with the relational model, a *SQL-like* language is often used.
 
 # Wide column: ≠ columnar
 
@@ -1342,12 +1345,11 @@ Examples
 
 **Amazon S3 (Simple Storage Service)**
 
-- A cloud-based file system service
+- An object storage service with key-based access, rather than POSIX file-system semantics
 - Useful for personal backups, file sharing, website or app publication
-- The more you store, the more you pay
-  - Storage: approx. $0.03 per GB per month
-  - Uploading files: approx. $0.005 per 1000 items
-  - Downloading files: approx. $0.004 per 10,000 files* PLUS $0.09 per GB (first GB free)
+- Charges depend on stored volume, storage class, requests, retrieval, and data transfer
+  - Specify region, date, and workload when estimating costs
+  - Use current [S3 pricing](https://aws.amazon.com/s3/pricing/) for the selected configuration
 
 ![Key-value](img/slides89.png)
 
@@ -1387,7 +1389,7 @@ Examples
 - **Event logs; CMS, blogging platforms**
   - Similarly to document databases, *different applications may use different columns*
 - **Sparse matrixes**
-  - While an RDBMS would store *null * values, a wide column *stores only the columns for which a value is specified*
+  - While an RDBMS would store *null* values, a wide column *stores only the columns for which a value is specified*
 - **GIS applications**
   - Pieces of a map (tiles) can be stored as *couples of latitude and longitude*
 
