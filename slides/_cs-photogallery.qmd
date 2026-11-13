@@ -52,15 +52,15 @@ YOLO (You Only Look Once) is an object detection system.
 - Provides labels, bounding boxes, and confidence scores  
 - Converts visual content into structured metadata  
 
-How YOLO Sees the Image
+How the original **YOLOv1** works ([Redmon et al., 2016](https://arxiv.org/abs/1506.02640))
 
-- Input image is divided into a grid (e.g., 13x13)  
+- Input image is divided into a grid (7×7 in the original model)
 - Each grid cell is responsible for objects **whose center falls in the cell**  
 - Each cell predicts **bounding boxes + confidence + class probabilities**
 
 # What Each Cell Predicts {visibility="hidden"}
 
-For each bounding box:
+In YOLOv1, each grid cell predicts bounding boxes and shared class probabilities:
 
 - **Coordinates:** (x, y, width, height)  
 - **Confidence:** probability an object exists × IoU with ground truth  
@@ -69,7 +69,7 @@ For each bounding box:
 # How Bounding Boxes Are Calculated {visibility="hidden"}
 
 - Each cell predicts offsets relative to the cell  
-- Uses **anchor boxes** for different object sizes  
+- YOLOv1 predicts boxes directly; later versions introduced **anchor boxes**, while some recent versions are anchor-free
 - Confidence score = Pr(object) × IOU(predicted box, ground truth)
 
 # YOLO Neural Network {visibility="hidden"}
@@ -115,9 +115,9 @@ Example JSON snippet:
 
 # Data Catalog for Accessible Metadata
 
-A data catalog store metadata and makes them searchable.
+A data catalog stores metadata and makes it searchable.
 
-Using MongoDB as a (very simple) data catalog, we can stores per-image JSON metadata efficiently:
+Store one JSON document per image in MongoDB and index the fields used for search:
 
 - Flexible schema for diverse metadata  
 - Enables querying by labels, confidence, dates, or GPS  

@@ -14,6 +14,8 @@ Organizations manage **data catalogs** with details about data, algorithms, and 
 
 # Relational data model
 
+Simplified schema: each entity has at most one parent. General provenance can use a separate many-to-many derivation table.
+
 ```sql
 CREATE TABLE entity (
     entity_id INTEGER PRIMARY KEY,
@@ -22,10 +24,18 @@ CREATE TABLE entity (
     created_at TEXT,
     wasDerivedFrom INTEGER REFERENCES entity(entity_id)
 );
-CREATE TABLE agent (agent_id INTEGER, name TEXT);
-CREATE TABLE activity (activity_id INTEGER, name TEXT);
-CREATE TABLE wasAttributedTo (entity_id, agent_id);
-CREATE TABLE wasGeneratedBy (entity_id, activity_id);
+CREATE TABLE agent (agent_id INTEGER PRIMARY KEY, name TEXT);
+CREATE TABLE activity (activity_id INTEGER PRIMARY KEY, name TEXT);
+CREATE TABLE wasAttributedTo (
+    entity_id INTEGER REFERENCES entity(entity_id),
+    agent_id INTEGER REFERENCES agent(agent_id),
+    PRIMARY KEY (entity_id, agent_id)
+);
+CREATE TABLE wasGeneratedBy (
+    entity_id INTEGER REFERENCES entity(entity_id),
+    activity_id INTEGER REFERENCES activity(activity_id),
+    PRIMARY KEY (entity_id, activity_id)
+);
 ```
 
 # Implementing the relational data model {visibility="hidden"}
@@ -54,11 +64,13 @@ erDiagram
 
 # Limitations of the Relational Model
 
-Difficult to store **heterogeneous metadata**:
+Storing **heterogeneous metadata** in one flat table introduces sparse columns:
 
 * CSV: columns, delimiter
 * TIFF: resolution, color depth
 * JSON: nested structures
+
+Relational alternatives include subtype tables and JSON columns.
 
 # Limitations of the Relational Model
 
@@ -96,7 +108,7 @@ Difficult to store **heterogeneous metadata**:
 
 Relationships (e.g., lineage chains) need complex joins:
 
-Which entity was derived from the entity `'a'`?
+Which entity was `'a'` derived from?
 
 :::{.fragment}
 ```sql
@@ -110,19 +122,19 @@ WHERE e1.name = 'a';
 
 Reference schema
 
-```sql
-CREATE TABLE entity (entity_id, wasDerivedFrom);
-CREATE TABLE agent (agent_id, name);
-CREATE TABLE activity (activity_id, name);
-CREATE TABLE wasAttributedTo (entity_id, agent_id);
-CREATE TABLE wasGeneratedBy (entity_id, activity_id);
+```text
+entity(entity_id, name, file_type, created_at, wasDerivedFrom)
+agent(agent_id, name)
+activity(activity_id, name)
+wasAttributedTo(entity_id, agent_id)
+wasGeneratedBy(entity_id, activity_id)
 ```
 
-Which entity was derived from an entity derived from `'a'`?
+Which ancestor is two derivation steps upstream of `'a'`?
 
 :::{.fragment}
 ```sql
-SELECT e1.name, e2.name
+SELECT e1.name, e3.name
 FROM (entity e1 JOIN entity e2 ON e1.wasDerivedFrom = e2.entity_id)
     JOIN entity e3 ON e2.wasDerivedFrom = e3.entity_id
 WHERE e1.name = 'a';
@@ -133,19 +145,19 @@ WHERE e1.name = 'a';
 
 Reference schema
 
-```sql
-CREATE TABLE entity (entity_id, wasDerivedFrom);
-CREATE TABLE agent (agent_id, name);
-CREATE TABLE activity (activity_id, name);
-CREATE TABLE wasAttributedTo (entity_id, agent_id);
-CREATE TABLE wasGeneratedBy (entity_id, activity_id);
+```text
+entity(entity_id, name, file_type, created_at, wasDerivedFrom)
+agent(agent_id, name)
+activity(activity_id, name)
+wasAttributedTo(entity_id, agent_id)
+wasGeneratedBy(entity_id, activity_id)
 ```
 
-Which entity was (derived from an entity)$^5$ derived from `'a'`?
+Which ancestor is four derivation steps upstream of `'a'`?
 
 :::{.fragment}
 ```sql
-SELECT e1.name, e2.name
+SELECT e1.name, e5.name
 FROM (entity e1 JOIN entity e2 ON e1.wasDerivedFrom = e2.entity_id)
     JOIN entity e3 ON e2.wasDerivedFrom = e3.entity_id
     JOIN entity e4 ON e3.wasDerivedFrom = e4.entity_id
@@ -186,7 +198,7 @@ Each entity becomes a (JSON) **document** with customizable attributes.
   "agents": ["alice"],
   "activities": [],
   "tiff_resolution": "300dpi",
-  "tiff_color_depth": 24,
+  "tiff_color_depth": 24
 }
 ```
 
@@ -205,12 +217,12 @@ The relational model is *data-driven*
 
 Reference schema
 
-```sql
-CREATE TABLE entity (entity_id, wasDerivedFrom);
-CREATE TABLE agent (agent_id, name);
-CREATE TABLE activity (activity_id, name);
-CREATE TABLE wasAttributedTo (entity_id, agent_id);
-CREATE TABLE wasGeneratedBy (entity_id, activity_id);
+```text
+entity(entity_id, name, file_type, created_at, wasDerivedFrom)
+agent(agent_id, name)
+activity(activity_id, name)
+wasAttributedTo(entity_id, agent_id)
+wasGeneratedBy(entity_id, activity_id)
 ```
 
 Which agents were attributed to the entity?
@@ -219,8 +231,8 @@ Which agents were attributed to the entity?
 
 ```sql
 SELECT e.name AS entity_name,a.name AS agent_name
-FROM entity e JOIN wasAttributedTo w ON e.id = w.entity_id
-    JOIN agent a ON w.agent_id = a.id
+FROM entity e JOIN wasAttributedTo w ON e.entity_id = w.entity_id
+    JOIN agent a ON w.agent_id = a.agent_id
 WHERE e.name = 'a';
 ```
 
@@ -230,8 +242,8 @@ Which activities generated the entity?
 :::{.fragment}
 ```sql
 SELECT e.name AS entity_name, act.name AS activity_name
-FROM entity e JOIN wasGeneratedBy wgb ON e.id = wgb.entity_id
-    JOIN activity act ON wgb.activity_id = act.id
+FROM entity e JOIN wasGeneratedBy wgb ON e.entity_id = wgb.entity_id
+    JOIN activity act ON wgb.activity_id = act.activity_id
 WHERE e.name = 'a';
 ```
 :::
@@ -258,7 +270,7 @@ Which activities generated the entity?
   "activities": ["extract_sales_data"],
   "columns": 8,
   "delimiter": ",",
-  "encoding": "utf-8",
+  "encoding": "utf-8"
 }
 ```
 :::
@@ -275,12 +287,12 @@ Which activities generated the entity?
 
 Reference schema
 
-```sql
-CREATE TABLE entity (entity_id, wasDerivedFrom);
-CREATE TABLE agent (agent_id, name);
-CREATE TABLE activity (activity_id, name);
-CREATE TABLE wasAttributedTo (entity_id, agent_id);
-CREATE TABLE wasGeneratedBy (entity_id, activity_id);
+```text
+entity(entity_id, name, file_type, created_at, wasDerivedFrom)
+agent(agent_id, name)
+activity(activity_id, name)
+wasAttributedTo(entity_id, agent_id)
+wasGeneratedBy(entity_id, activity_id)
 ```
 
 The graph data model is **data-driven** and represents data as **nodes** and **edges**.
@@ -305,18 +317,18 @@ Example of implementation in Resource Description Framework (RDF) triples (Subje
 
 Cypher is a declarative graph query language that allows for expressive and efficient data querying in a property graph.
 
-* `(:Agent)-[:WAS_ATTRIBUTED_TO]->(:Entity)`
-* `(:Activity)-[:WAS_GENERATED_BY]->(:Entity)`
+* `(:Entity)-[:WAS_ATTRIBUTED_TO]->(:Agent)`
+* `(:Entity)-[:WAS_GENERATED_BY]->(:Activity)`
 * `(:Entity)-[:WAS_DERIVED_FROM]->(:Entity)`
 
 Metadata stays attached as key-value node properties.
 
 # The graph data model
 
-SQL 
+Four steps upstream: SQL
 
 ```sql
-SELECT e1.name, e2.name
+SELECT e1.name, e5.name
 FROM (entity e1 JOIN entity e2 ON e1.wasDerivedFrom = e2.entity_id) 
     JOIN entity e3 ON e2.wasDerivedFrom = e3.entity_id
     JOIN entity e4 ON e3.wasDerivedFrom = e4.entity_id
@@ -332,30 +344,37 @@ MATCH (e1)-[:WAS_DERIVED_FROM]->(e2:Entity)
  -[:WAS_DERIVED_FROM]->(e3:Entity)
  -[:WAS_DERIVED_FROM]->(e4:Entity)
  -[:WAS_DERIVED_FROM]->(e5:Entity)
-RETURN e1.name, e2.name, e3.name, e4.name, e5.name;
+RETURN e1.name, e5.name;
 ```
 
 # The graph data model
 
-SQL
+One to five steps upstream: SQL with a recursive CTE
 
 ```sql
-SELECT e1.name, e2.name
-FROM (entity e1 JOIN entity e2 ON e1.wasDerivedFrom = e2.entity_id) 
-    JOIN entity e3 ON e2.wasDerivedFrom = e3.entity_id
-    JOIN entity e4 ON e3.wasDerivedFrom = e4.entity_id
-    JOIN entity e5 ON e4.wasDerivedFrom = e5.entity_id
-WHERE e1.name = 'a';
+WITH RECURSIVE upstream(entity_id, wasDerivedFrom, depth) AS (
+    SELECT parent.entity_id, parent.wasDerivedFrom, 1
+    FROM entity child JOIN entity parent ON child.wasDerivedFrom = parent.entity_id
+    WHERE child.name = 'a'
+    UNION ALL
+    SELECT parent.entity_id, parent.wasDerivedFrom, u.depth + 1
+    FROM upstream u JOIN entity parent ON u.wasDerivedFrom = parent.entity_id
+    WHERE u.depth < 5
+)
+SELECT DISTINCT 'a' AS source_name, e.name AS ancestor_name
+FROM upstream u JOIN entity e ON u.entity_id = e.entity_id;
 ```
 
 Cypher
 
 ```cypher
 MATCH (e1:Entity {name: 'a'})-[:WAS_DERIVED_FROM*1..5]->(e2:Entity)
-RETURN e1.name, e2.name;
+RETURN DISTINCT e1.name AS source_name, e2.name AS ancestor_name;
 ```
 
 # Comparison Summary
+
+Comparison of these examples; assume acyclic lineage and unique entity names when comparing queries. Schema flexibility depends on the modeling choices.
 
 | Aspect                 | Relational          | Document          | Graph              |
 | ---------------------- |:-------------------:|:-----------------:|:------------------:|
