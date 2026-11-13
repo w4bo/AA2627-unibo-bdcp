@@ -122,7 +122,7 @@ How much metadata are we producing?
 :::{.fragment}
 - 8 statistics × 4 columns = 32 metadata values
 - The dataset contains 150 rows
-- Metadata-to-data ratio: $\frac{32}{150} ≈ 21.3\%$
+- 32 summary values for four columns and 150 rows
 :::
 
 
@@ -249,7 +249,7 @@ Examples of use cases [@simmhan2005survey]
 
 # Data provenance: PROV model
 
-Provenance is a graph, for which we have a standard: [PROV-DM](https://www.w3.org/TR/2013/NOTE-prov-primer-20130430/) [@moreau2022provenance]
+Provenance is a graph, for which we have a standard: [PROV-DM](https://www.w3.org/TR/prov-dm/) [@moreau2022provenance]
 
 ::::{.columns}
 :::{.column width=60%}
@@ -283,11 +283,11 @@ _Agent_
 Measures of centrality
 
 * **Betweenness centrality (A)**
-  * Number of shortest paths between two nodes that pass from a certain node
+  * Sum, over pairs of other nodes, of the fraction of shortest paths passing through the node
 * **Closeness centrality (B)**
-  * Sum of distances to all other nodes.
+  * Inverse of the average shortest-path distance to other nodes (for a connected graph)
 * **Eigenvector centrality (C)**
-  * The score of a node is influenced by score of adjacent nodes (Page rank)
+  * A node scores highly when connected to other high-scoring nodes; PageRank is a related, distinct measure
 * **Degree centrality (D)**
   * Number of adjacent nodes
 :::
@@ -305,7 +305,7 @@ Measures of centrality
 Granularity [@simmhan2005survey]
 
 - _Fine-grained_ (instance level): tracking data items (e.g., a tuple in a dataset) transformations
-- _Coarse-grained_ (schema-level): tracking dataset transformations
+- _Coarse-grained_: dependencies between datasets and processing steps
 
 # Data provenance: fine-grained vs coarse-grained
 
@@ -379,8 +379,8 @@ How would you document this table update?
 
 Choosing a granularity is the *result of a trade-off between accuracy and computational effort*
 
-* Storing only the name and the version of a clustering algorithm enables an approximate reproducibility of the results
-* Storing all its parameters makes this functionality much more accurate
+* Algorithm name and version alone are insufficient for reproducibility
+* Also retain input versions, parameters, random seeds, and relevant environment details
 
 # Data provenance: query types
 
@@ -495,9 +495,8 @@ Can users discover, understand, and request access to data assets without inspec
 
 A **data catalog** is an organized inventory of the company's data [@olesen2023enterprise]
 
-- The data catalog provides an overview at a metadata level only
-- No actual data values are exposed.
-- Everyone sees the metadata they need without exposing confidential or sensitive data.
+- Catalogs primarily expose metadata and may also include data samples or profiling summaries.
+- Access to metadata and samples must also be governed.
 
 :::
 :::{.column width=40%}
@@ -573,9 +572,11 @@ No, in a data platform, you also need to manage (streams of) operational data an
 
 # Designing data platforms
 
-# Three layers for modern data platforms
+# Three complementary perspectives
 
-| Layer | Main question | Main mechanism |
+
+
+| Perspective | Main question | Main mechanism |
 |---|---|---|
 | **Data fabric** | How do we connect and govern distributed data assets? | Active metadata, integration, orchestration |
 | **Data mesh** | Who owns data products, quality, and access? | Domains, data products, federated governance |
@@ -583,11 +584,11 @@ No, in a data platform, you also need to manage (streams of) operational data an
 
 Takeaway:
 
-> Fabric connects the platform. Mesh assigns responsibility. AI makes the platform more exploitable.
+> Fabric connects data assets. Mesh assigns responsibility. AI can help users search documentation and query data.
 
 # Data fabric: definition
 
-**Data fabric** is a design concept "for data management [...] that seamlessly connects different clouds environments." ([2016](https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf))
+**Data fabric** is a design concept for managing data across different cloud environments ([NetApp white paper](https://cloud.netapp.com/hubfs/Data-Fabric/Data%20Fabric%20WP%20April%202017.pdf)).
 
 Frictionless access and sharing of data in a distributed data environment
 
@@ -633,7 +634,7 @@ It is a unified architecture with an integrated set of technologies and services
 
 * *Catalog all data*: Cover business glossary, design-time, and runtime metadata.
 * *Enable self-service capabilities*: Support data discovery, profiling, exploration, quality checks, and consumption.
-* *Provide a knowledge graph*: Visualize links among data, people, processes, and systems for actionable insight.
+* *Provide a knowledge graph*: Link data, people, processes, and systems to identify owners and trace dependencies.
 * *Deliver automatic integration*: Help IT and business users with data integration, transformation, virtualization, and federation.
 * *Manage unified lifecycle*: Maintain a consistent end-to-end Data Fabric lifecycle across platforms and teams.
 
@@ -642,7 +643,7 @@ It is a unified architecture with an integrated set of technologies and services
 ::::{.columns}
 :::{.column width=55%}
 
-**Active metadata**: leverage open APIs to connect platform services using metadata.
+**Active metadata**: use APIs to connect platform services and trigger actions from metadata.
 
 *Active metadata is always on*
 
@@ -650,12 +651,11 @@ It is a unified architecture with an integrated set of technologies and services
 
 *Active metadata is "intelligent"*:
 
-- Constantly process metadata to connect the dots and create intelligence.
-- E.g., auto-classify sensitive data, automatic suggestions to document data.
+- Process metadata to classify sensitive columns and suggest data owners or missing documentation.
 
 *Active metadata is action-oriented*
 
-- Active metadata should drive actions such as curating recommendations
+- Propagate schema-change alerts, validate data contracts, and trigger quality checks.
 
 *Active metadata is open by default*
 
@@ -766,7 +766,7 @@ R8 Monitoring and Failure-Tolerance
 
 # Data mesh: principles
 
-Distributed data architecture under centralized governance for interoperability, enabled by a shared and harmonized self-serve data infrastructure
+Domain-owned data products with federated computational governance and shared interoperability standards, supported by self-serve data infrastructure
 
 - *Domain-oriented decentralized data ownership*
   - Decentralization and distribution of responsibility to people who are closest to the data, to support continuous change and scalability
@@ -792,7 +792,7 @@ Distributed data architecture under centralized governance for interoperability,
 Data Mesh organizes data around **business domain owners** and transforms relevant data assets (data sources) to **data products** that can be consumed by distributed business users from various business domains or functions.
 
 - Data products are created, governed, and used in an **autonomous, decentralized**, and self-service manner
-- **Self-service capabilities**, which we have already referenced as a Data Fabric capability, enable business organizations to entertain a data marketplace with shopping-for-data characteristics
+- **Self-service capabilities** let users discover data products, inspect their documentation, and request access
 
 :::
 :::{.column width=50%}
@@ -804,9 +804,9 @@ Data Mesh organizes data around **business domain owners** and transforms releva
 
 # What makes data a product?
 
-A **data product** is raw data transformed into a business context
+A **data product** provides data for a defined use, with an owner, documented interfaces, quality expectations, and support.
 
-- Data products are registered in the **knowledge catalog** through specifications (XML, JSON, etc.).
+- Data products can expose source-aligned or transformed data and are described in a **data catalog**.
 - Data products need to be searchable and discoverable by potential data product consumers and business users.
   - *Cataloged*: All data products need to be registered in the knowledge catalog.
   - *Data product description*: The data product needs to be well-described.
@@ -828,8 +828,8 @@ Both provide an architectural framework to access data across multiple technolog
 **Data fabric**
 
 - Attempts to centralize and coordinate data management
-- Tackles the complexity of data and metadata in a smart way that works well together
-- Focus on the architectural, technical capabilities, and intelligent analysis to produce active metadata supporting a smarter, AI-infused system to orchestrate various data integration styles
+- Uses shared metadata to coordinate discovery, integration, and access
+- Uses active metadata to classify sensitive columns, track dependencies, and trigger integration or quality checks
 
 **Data mesh**
 
@@ -896,7 +896,7 @@ A **semantic layer** maps technical assets to business concepts.
 - Columns become metrics, dimensions, policies, and definitions
 - Queries can use business language instead of physical schemas
 
-Close to **ontology-based data access**, where users query a conceptual layer while mappings connect it to source data [@bienvenu2018ontology].
+Close to **ontology-based data access**, where users query a conceptual layer while mappings connect it to source data [@xiao2018ontology].
 
 Example:
 
@@ -914,15 +914,15 @@ In a data platform, the retrievable corpus can include:
 - lineage graphs and pipeline logs
 - notebooks, dashboards, tickets, and incident reports
 
-![HippoRAG2](./img/hipporag2.png)
+![HippoRAG 2: graph-based retrieval with Personalized PageRank ([Gutiérrez et al., 2025](https://proceedings.mlr.press/v267/gutierrez25a.html))](./img/hipporag2.png)
 
 # GraphRAG for connected metadata
 
-Plain RAG retrieves similar chunks.
+A common RAG baseline retrieves chunks by embedding similarity.
 
-**GraphRAG** builds a graph of entities and relationships, then retrieves from that graph for local and global questions [@hogan2021knowledge; @edge2025graphrag].
+**GraphRAG** uses entities and relationships for retrieval. The cited Microsoft approach also builds community summaries for global questions [@hogan2021knowledge; @edge2025graphrag].
 
-Example question:
+Platform example (a lineage query, rather than the paper's global-summarization task):
 
 > Which data products would be affected if we changed the customer identifier in the CRM ingestion pipeline?
 
@@ -930,7 +930,7 @@ Example question:
 
 # LLM wiki for data products
 
-An **LLM wiki** is a curated, human-readable layer generated from governed platform metadata.
+Example pattern: an **LLM wiki** provides human-readable pages generated from governed platform metadata.
 
 Useful rule:
 
@@ -944,7 +944,7 @@ Useful rule:
 
 # Data agents
 
-A **data agent** is a governed conversational layer over a data platform.
+In this example, a **data agent** uses platform tools through a governed conversational interface.
 
 It combines an LLM with platform tools:
 
@@ -953,7 +953,7 @@ It combines an LLM with platform tools:
 - user permissions and governance checks
 - readable answers with tables, charts, queries, or citations
 
-The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis [@sui2026dataagents].
+The term is broad: recent work distinguishes simple query assistants from more autonomous agents for data management and analysis [@luo2026dataagents].
 
 Examples:
 
@@ -1033,7 +1033,7 @@ DevOps practices enable software development (dev) and operations (ops) teams to
 
 From DevOps to DataOps
 
-- "A collaborative data management practice focused on improving the _communication, integration and automation of data flows between data managers and data consumers across an organization_"
+- Adapted from Gartner (2020): a collaborative data management practice that improves _communication, integration, and automation of data flows between data managers and data consumers across an organization_
 - Data analytics improved in terms of velocity, quality, predictability, and scale of software engineering and deployment
 
 Some key rules
