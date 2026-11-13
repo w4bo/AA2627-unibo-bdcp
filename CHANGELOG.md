@@ -1,3 +1,32 @@
+## [1.0.38](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.37...1.0.38) (2026-11-13)
+
+### Dependency updates
+
+* **deps:** update data-governance-demo digest to 060b6d2 ([#87](https://github.com/w4bo/AA2627-unibo-bdcp/issues/87)) ([8349387](https://github.com/w4bo/AA2627-unibo-bdcp/commit/8349387efccf49919cd5159d99fd5556bdd11af3))
+* **deps:** update data-governance-demo digest to 2e9e764 ([#85](https://github.com/w4bo/AA2627-unibo-bdcp/issues/85)) ([57f685b](https://github.com/w4bo/AA2627-unibo-bdcp/commit/57f685bb3d9e5131bbb95b22453565577c829b3e))
+* **deps:** update data-governance-demo digest to 6d59194 ([#84](https://github.com/w4bo/AA2627-unibo-bdcp/issues/84)) ([bf0c74d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/bf0c74d38fa7c011a479590b9337782ce2ac1702))
+* **deps:** update data-governance-demo digest to ae11193 ([#83](https://github.com/w4bo/AA2627-unibo-bdcp/issues/83)) ([bab7cbf](https://github.com/w4bo/AA2627-unibo-bdcp/commit/bab7cbf837b520fd13f92bda5bf0478d5c6805ac))
+* **deps:** update dependency pymongo to v4.20.0 ([#86](https://github.com/w4bo/AA2627-unibo-bdcp/issues/86)) ([5dcc967](https://github.com/w4bo/AA2627-unibo-bdcp/commit/5dcc9670e01cc4a963538f64dbf423e91bf10381))
+* **deps:** update slides/refs digest to 835162f ([#78](https://github.com/w4bo/AA2627-unibo-bdcp/issues/78)) ([1849274](https://github.com/w4bo/AA2627-unibo-bdcp/commit/184927447f558331b4d327b0d02350d2b6732288))
+
+### Bug Fixes
+
+* fix typos ([5d560a4](https://github.com/w4bo/AA2627-unibo-bdcp/commit/5d560a44ce7e1f312c303ccd40ef9207432d43d8))
+* fix typos ([3afdcaa](https://github.com/w4bo/AA2627-unibo-bdcp/commit/3afdcaabb391536d7fc76fa55642e3812d3f3767))
+
+### General maintenance
+
+* add index.html ([87082a1](https://github.com/w4bo/AA2627-unibo-bdcp/commit/87082a1365cc77219436c157fc9501d931cbacc4))
+* fix data governance ([13d8238](https://github.com/w4bo/AA2627-unibo-bdcp/commit/13d823833b261ccaea62db1253747d73fe4be302))
+* fix data platforms ([025ccfb](https://github.com/w4bo/AA2627-unibo-bdcp/commit/025ccfb1505b93ca6ca7a1e51c189aeff90c480c))
+* fix nosql ([db23ea7](https://github.com/w4bo/AA2627-unibo-bdcp/commit/db23ea70922e1fdad8e4026f160616fc9bf88ec7))
+* fix the intro ([d8e3404](https://github.com/w4bo/AA2627-unibo-bdcp/commit/d8e34041d8ce9b4a0f89b245f9ac5abed4b5b085))
+* move unused data ([288785a](https://github.com/w4bo/AA2627-unibo-bdcp/commit/288785a15a20b54772f0a839c1444716d8d8738a))
+* move unused data ([8ca2e3e](https://github.com/w4bo/AA2627-unibo-bdcp/commit/8ca2e3e9f19a0a7829f97f15341c9c9cd3e61aa1))
+* update cloud ([2a776d4](https://github.com/w4bo/AA2627-unibo-bdcp/commit/2a776d4f0e21747fbfdd52b9affe426b9e6a4346))
+* update migration ([8933647](https://github.com/w4bo/AA2627-unibo-bdcp/commit/89336473c68ec2dcb13a6dfc8c3fea6807710230))
+* update streaming ([802ac8d](https://github.com/w4bo/AA2627-unibo-bdcp/commit/802ac8d592e785b9a20ac49f9ba412c0c5b0a003))
+
 ## [1.0.37](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.36...1.0.37) (2026-11-09)
 
 ### Dependency updates
