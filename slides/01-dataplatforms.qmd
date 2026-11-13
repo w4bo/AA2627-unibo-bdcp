@@ -77,9 +77,9 @@ Getting _value_ from data _is not_ (only) a matter of _storage_. *Examples*?
 ::::{.columns}
 :::{.column width=50%}
 
-> **Database** [@ozsu2018]
+> **Database** (adapted from [@ozsu2018])
 >
-> "A database is a _structured and persistent collection_ of information about some aspect of the real world, organized and stored in a way that facilitates efficient retrieval and modification. The structure of a database is determined by an _abstract data model_. Primarily, it is this structure that differentiates a database from a data file."
+> A database is a _structured and persistent collection_ of information about some aspect of the real world, organized and stored in a way that facilitates efficient retrieval and modification. The structure of a database is determined by an _abstract data model_. Primarily, it is this structure that differentiates a database from a data file.
 
 :::
 :::{.column width=50%}
@@ -124,8 +124,8 @@ The role of computer science in companies has radically changed since the early 
 
 > **Schemaless databases**
 >
-> There is no predefined schema that the data must conform to before being added to the database.
-> As a result, you don't need to know the structure of your data, enabling you to store all your data more easily and quickly.
+> The database does not require every record to conform to one predefined schema.
+> Applications still need to interpret and validate the stored structure.
 
 :::
 :::{.column width=50%}
@@ -168,9 +168,9 @@ Scenario:
 ::::{.columns}
 :::{.column width=50%}
 
-> **Data Warehouse (DWH)** [@golfarelli2009data]
+> **Data Warehouse (DWH)** (adapted from [@golfarelli2009data])
 >
-> "A collection of data that supports decision-making processes. It provides the following features: *subject-oriented*, *integrated* and *consistent*, *evolution over time and it is not volatile*."
+> A collection of data that supports decision-making processes. It provides the following features: *subject-oriented*, *integrated* and *consistent*, *evolution over time and it is not volatile*.
 
 :::
 :::{.column width=50%}
@@ -293,9 +293,9 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 |:-: |:-: |:-: |
 | Type of workload | Constant transactions (reads/writes) | Periodic large writes, interactive large reads |
 | Examples | Accounting database, online retail transactions | Reporting, decision support |
-| Type | Operational data | Business data |
-| Data retention | Short-term (2-6 months) | Long-term (2-5 years) |
-| Storage | Gigabytes (GB) | Terabytes (TB) / Petabytes (PB) |
+| Type | Operational business data | Analytical business data |
+| Data retention | Supports current operations; history depends on application requirements | Supports historical analysis over the required time horizon |
+| Access pattern | Frequent reads/writes of individual records | Scans and aggregations over many records |
 | Users | Many | Few |
 
 # Data platform: platform generations
@@ -328,17 +328,17 @@ The **Dimensional Fact Model** [@DBLP:journals/ijcis/GolfarelliMR98] is a graphi
 The data lake started with the Apache Hadoop movement, using the Hadoop File System (HDFS) for cheap storage
 
 - All the data is usually stored and managed as files
-- Agility of storing any data at low cost; eludes the problems of quality and governance
+- Agility of storing raw data at low cost; quality and governance require additional mechanisms
 - *Schema-on-read* architecture 
 
-Downsides of data lakes
+Limitations of unmanaged raw-file data lakes
 
-- *Security*: no fine-grained access control on the contents of files, but only coarse-grained access governing who can access files or directories
-- *Quality*
+- *Security*: file-level permissions alone do not provide row/column-level access control
+- *Data management*
   - Hard to manage schema changes
-  - Challenging to ensure atomic operations when writing a group of files; no roll-back mechanism
+  - Atomic multi-file updates and rollback require a transactional layer
 - *Query performance*
-  - Formats are not optimized for fast access
+  - Depends on file format and layout; Parquet and ORC support efficient analytical scans
 
 The *lake* can easily turn into a **swamp**
 
@@ -346,38 +346,42 @@ The *lake* can easily turn into a **swamp**
 
 # Data platform: DWH vs Data Lake
 
+
+
 | | Data warehouse | Data lake |
 |:-: |:-: |:-: |
 | Data model | Relational | Non-relational and relational |
 | Schema | Designed prior to implementation <br />(**schema-on-write**) | Written at the time of analysis <br /> (**schema-on-read**) |
-| Price/performance | Faster queries, higher cost storage | Slower queries, lower-cost storage |
-| Data quality | Highly curated data, the central version of the truth | Any (raw) data |
+| Price/performance | Storage and execution optimized for BI queries | Low-cost storage; query performance depends on format, layout, and engine |
+| Data quality | Typically curated through validation and integration | Raw and curated data; quality depends on validation and processing |
 | Users | Business analysts | Data scientists, developers, and business analysts |
 | Analytics | Batch reporting, BI, and visualizations | Machine learning, predictive analytics, data discovery, and profiling. |
 
 # Data platform: two-tier architecture
 
-A two-tier data lake + DWH architecture is dominant in the industry
+Armbrust et al. (2021) describe a two-tier data lake + DWH architecture as dominant in industry [@armbrust2021lakehouse].
 
 - HDFS replaced by cloud data lakes (e.g., S3, ADLS, GCS)
 - Data lake directly accessible to a wide range of analytics engines
 - A subset of data is "ETL-ed" to a DWH for important decision support and BI apps
 
-While the data lake and DWH architecture is ostensibly cheap, a two-tier architecture is highly complex for users
+The paper identifies complexity in maintaining both tiers.
 
 - *Problems*?
 
 # Data platform: two-tier limitations
 
-(Some) main problems:
+Problems highlighted by [@armbrust2021lakehouse]:
 
 - Data is first ELTed into lakes, and then again ETLed into DWHs
   - *Reliability*. Keeping the data lake and DWH consistent is difficult and costly
-  - *Data staleness*. The data in the DWH is stale compared to that of the data lake, with new data frequently taking days to load
+  - *Data staleness*. The paper reports delays of days when loading lake data into a DWH
 - *Limited support for advanced analytics*.
   - Businesses want to ask predictive questions using their DWHs
-  - Machine learning systems do not work well directly on top of DWHs
+  - The paper discusses inefficient access from ML systems to warehouse data
 - *Process large datasets using complex non-SQL code*
+
+These limitations depend on the implementation; current services also support in-warehouse ML (e.g., BigQuery ML).
 
 # Data platform: towards lakehouses
 
@@ -423,7 +427,7 @@ Challenges:
 - The metadata layer is insufficient to achieve good SQL performance
 - DWHs use several techniques to get state-of-the-art performance
   - Storing hot data on fast devices such as SSDs, maintaining statistics, building efficient indexes, etc.
-- In a Lakehouse it is not possible to change the format, but it is possible to implement other optimizations that leave the data files unchanged
+- Optimizations should preserve interoperability with the chosen open table and file formats
 
 # Data lakehouse: metadata challenges {visibility="hidden"}
 
@@ -454,23 +458,24 @@ Challenges:
 
 # Data lakehouse: comparison
 
+
+
 |  | Data Warehouse | Data Lake | Data Lakehouse |
 |:-:|:-:|:-:|:-:|
-| Data format | Proprietary format | Open format | Open format |
+| Data format | Often engine-managed | Open formats | Open table and file formats |
 | Types of data | Structured | \* | \* |
-| Data access | SQL-only, no file access | File access | APIs for SQL, R, Python, etc. |
-| Reliability | High quality, ACID transactions | Low quality, "data swamp" | High quality, ACID transactions |
-| Governance & security | Fine-grained (row/column-level) | Weak governance; file-level security | Fine-grained (row/column-level) |
-| Performance | High | Low | High |
-| Scalability | Expensive at scale | Scales cheaply for any data type | Scales cheaply for any data type |
+| Data access | SQL and engine APIs | File/object access through processing engines | SQL and processing-engine APIs |
+| Transactions | Typically ACID | Multi-file ACID requires a transactional layer | ACID through the table layer |
+| Governance & security | Row/column controls commonly available | File-level controls; finer controls through query/governance layers | Row/column controls through query/governance layers |
+| Scalability | Depends on engine and deployment | Object storage scales independently of compute | Object storage scales independently of compute |
 | Use case | BI | Machine learning | Unified for BI and ML |
 
 # Data platform: data hub
 
 *Data lakes (or lakehouses)* have increasingly taken the role of *data hubs*
 
-- Eliminate up-front costs of ingestion and ETL since data are stored in the original format
-- Once in DL, data are available for analysis by everyone in the organization
+- Raw landing can defer some transformations
+- Ingestion, validation, permissions, and discovery still require work
 
 ![(Big) data pipeline](img/slides28.png)
 
@@ -486,14 +491,14 @@ Challenges:
 > A *unified* infrastructure that facilitates the ingestion, storage, management, and exploitation of large volumes of heterogeneous data. It provides a collection of *independent* and *well-integrated* services meeting *end-to-end* data needs.
 >
 > - *Unified*: is conceptually a data backbone
-> - *Independent*: a service is not coupled with any other
+> - *Independent*: services are loosely coupled through defined interfaces
 > - *Well-integrated*: services have interfaces that enable easy and frictionless composition
 > - *End-to-end*: services cover the entire data life cycle
 
 Rationale: relieve users from the complexity of administration and provision
 
 - Not only technological skills, but also privacy, access control, etc.
-- Users should only focus on functional aspects
+- Users can focus more on functional aspects while retaining security, cost, and governance responsibilities
 
 # Example of data platform: Hadoop-based
 
