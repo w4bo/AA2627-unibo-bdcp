@@ -48,9 +48,7 @@ In this module, we will discuss:
 * *Migration*: moving from on-premises clusters to cloud-based architectures
 * *Case studies and labs*: applying the concepts to realistic scenarios
 
-The goal is not to memorize a catalog of services.
-
-The goal is to understand how to **connect data needs, architectural choices, and business constraints**.
+Connect **data requirements, architectural choices, and business constraints**.
 
 # Learning Outcomes
 
@@ -122,7 +120,7 @@ If you need help with coding and labs, *you can ask me and the assigned tutor*.
 - Defines *data models, standards, and integration strategies*
 - Bridges business needs and technical capabilities
 
-**Data platform + skilled data architect** = reliable, actionable, and impactful decision support.
+Data platforms and data architects support decisions by making relevant, trustworthy data available.
 
 # So far
 
@@ -152,7 +150,7 @@ There are no easy answers: big-data architectures require many skills.
 
 # So far
 
-Cloud data platforms sit between two perspectives, and your profile is a good fit for both.
+Cloud data platforms require both technical and business decisions.
 
 * **Technological** perspective
   * How do we configure a distributed environment?
@@ -204,7 +202,7 @@ Cloud data platforms sit between two perspectives, and your profile is a good fi
 
 # Teaching material
 
-You will find all you need in these slides.
+The slides, notebooks, and seminar materials cover the examination topics.
 
 * However, keeping up the pace with data platforms and the cloud is hard
 * There is a rapid development of technologies, and not all of them will survive
