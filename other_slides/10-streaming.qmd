@@ -61,7 +61,7 @@ How long does it take?
 
 How many *days*?
 
-- 80000GB / (1Gbps / 8) / 60 / 60 / 24 ~= a week without internet
+- 80 TB × 10^12 bytes/TB × 8 bits/byte / (10^9 bits/s) = 640,000 s ≈ 7.41 days, before overhead
 
 # Ingestion: batch
 
@@ -97,14 +97,14 @@ Workflow
 
 What if we have exabytes of data?
 
-- $10^3$ KB (kilobyte)
-- $10^6$ MB (megabyte)
-- $10^9$ GB (gigabyte)
-- $10^{12}$ TB (terabyte)
-- $10^{15}$ PB (petabyte)
-- $10^{18}$ EB (exabyte)
-- $10^{21}$ ZB (zettabyte)
-- $10^{24}$ YB (yottabyte)
+- $1$ KB $= 10^3$ bytes (kilobyte)
+- $1$ MB $= 10^6$ bytes (megabyte)
+- $1$ GB $= 10^9$ bytes (gigabyte)
+- $1$ TB $= 10^{12}$ bytes (terabyte)
+- $1$ PB $= 10^{15}$ bytes (petabyte)
+- $1$ EB $= 10^{18}$ bytes (exabyte)
+- $1$ ZB $= 10^{21}$ bytes (zettabyte)
+- $1$ YB $= 10^{24}$ bytes (yottabyte)
 
 # Ingestion: stream [@kreps2014heart]
 
@@ -137,7 +137,7 @@ Two pipelines per application (data in/out)
 **Continuous streaming**
 
 - Illimited succession of individual events
-- Ordered by the point in time at which each event occurred
+- Event time (occurrence) can differ from ingestion time; late and out-of-order arrivals are possible
 
 **Publish/subscribe (pub/sub)**: a way of communicating messages
 
@@ -208,7 +208,7 @@ General idea:
 **Append-only**: new events are appended to the unified log
 
 - Existing events are never updated in place
-  - If read event \#10, never look at events 1 through 10 again
+  - A consumer normally advances its cursor; retained events can be reread for recovery or reprocessing
 - Events are automatically deleted from the unified log when they age
   - E.g., automatically remove events after 7 days
 
@@ -242,7 +242,7 @@ Using a log as a universal integration mechanism is never going to be more than 
 ::::{.columns}
 :::{.column width=60%}
 
-**Ordered**: events in a shard have sequential IDs (unique in a shard)
+**Ordered**: records have a sequence order within a shard; this need not match event-time order
 
 - Local ordering keeps things much simpler than global ordering [@lamport2019time]
 - Applications maintain their cursor for each shard
@@ -286,16 +286,16 @@ Two types of processing
 
 [Amazon Kinesis Data Streams](https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html)
 
-- Created and provisioned by shard
+- Provisioned mode: capacity is set by shard; on-demand mode manages shards automatically
   - Each shard provides 1 MBps and 1000 data puts per second
 - A data record consists of
   - User-supplied partition key to balance records across shards
   - Incremental sequence number added by the shard
   - A data blob
 - Consumers get records by shard
-  - Records are sorted by partition key and sequence number
+  - Sequence numbers identify record order within a shard, not global event-time order
   - Ordering is not guaranteed across shards
-- Records are retained for 7 days at maximum
+- Retention defaults to 24 hours and can be extended up to 365 days
 
 :::
 :::{.column width=40%}
@@ -310,9 +310,9 @@ Two types of processing
 Re-sharding (i.e., scaling)
 
 - Split a shard into two, or merge two shards
-- Users must scale shards up and down manually
+- In provisioned mode, users manage shard scaling; on-demand mode manages shards automatically
   - Monitor usage with [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/) and modify scale as needed
-- Avoid shard management by using [Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose)
+- For managed delivery to storage/analytics destinations, consider [Amazon Data Firehose](https://aws.amazon.com/firehose/)
 
 Kinesis is a regional service, with streams scoped to specific regions
 
@@ -320,20 +320,20 @@ Kinesis is a regional service, with streams scoped to specific regions
 
 Costs
 
-- Priced by shard hour, data volume, and data retention period
-- Pay for resources you provision (even if not used)
+- Provisioned mode: shard-hour and usage charges; on-demand mode: throughput-based charges; extended retention costs extra
+- In provisioned mode, shard capacity is billed even when unused
 
 # Ingestion: stream
 
 | Feature | AWS Kinesis | Google Pub/Sub |
 |:-: |:-: |:-: |
 | Unit of deployment | Stream | Topic |
-| Unit of provisioning | Shard | N/A (fully managed) |
+| Unit of provisioning | Shard (provisioned mode); automatic (on-demand) | N/A (fully managed) |
 | Data unit | Record | Message |
 | Data producer/destination | Producer/Consumer | Publisher/Subscriber |
 | Data partitioning | User-supplied partition key | N/A (fully managed) |
-| Retention period | Up to 7 days | Up to 7 days |
-| Pricing | Per shard-hour, PUT payload units,<br />and optional data retention | Message ingestion and delivery,<br />and optional message retention |
+| Retention period | Up to 365 days | Up to 31 days ([subscription properties](https://docs.cloud.google.com/pubsub/docs/subscription-properties)) |
+| Pricing | Provisioned: shard-hour and usage;<br />on-demand: throughput; extended retention extra | Message ingestion and delivery,<br />and optional message retention |
 
 # 
 
