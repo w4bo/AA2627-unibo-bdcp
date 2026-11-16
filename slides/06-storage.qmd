@@ -468,6 +468,12 @@ These limitations depend on the implementation; current services also support in
 
 # Data Lakehouse
 
+![2026](img/hypecycle-dm-2026.png)
+
+The market is pushing for the adoption of Lakehouse as a standard *de facto*
+
+# Data Lakehouse
+
 ::::{.columns}
 :::{.column width=25%}
 
@@ -482,18 +488,16 @@ These limitations depend on the implementation; current services also support in
 
 :::{.column width=25%}
 
-![2024](img/hypecycle-dm-2025.png)
+![2025](img/hypecycle-dm-2025.png)
 
 :::
 
 :::{.column width=25%}
 
-![2024](img/hypecycle-dm-2026.png)
+![2026](img/hypecycle-dm-2026.png)
 
 :::
 ::::
-
-The market is pushing for the adoption of Lakehouse as a standard *de facto*
 
 # Dataset Search for Data Discovery, Augmentation, and Explanation
 
