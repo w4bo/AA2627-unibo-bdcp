@@ -1,5 +1,5 @@
 ---
-title: Data pipelines on cloud (Computing)
+title: Computing on Cloud
 ---
 
 #
