@@ -469,14 +469,26 @@ These limitations depend on the implementation; current services also support in
 # Data Lakehouse
 
 ::::{.columns}
-:::{.column width=50%}
+:::{.column width=25%}
 
 ![2023](img/hypecycle-dm-2023.png)
 
 :::
-:::{.column width=50%}
+:::{.column width=25%}
 
 ![2024](img/hypecycle-dm-2024.png)
+
+:::
+
+:::{.column width=25%}
+
+![2024](img/hypecycle-dm-2025.png)
+
+:::
+
+:::{.column width=25%}
+
+![2024](img/hypecycle-dm-2026.png)
 
 :::
 ::::
