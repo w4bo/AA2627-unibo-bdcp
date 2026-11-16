@@ -1,3 +1,10 @@
+## [1.0.40](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.39...1.0.40) (2026-11-16)
+
+### Bug Fixes
+
+* fix hc ([8341111](https://github.com/w4bo/AA2627-unibo-bdcp/commit/8341111ab166510e53e9247dcc2a0a82b1c10805))
+* fix hc ([c3efb52](https://github.com/w4bo/AA2627-unibo-bdcp/commit/c3efb524d97177cd3cb41fde2690f52922a2b804))
+
 ## [1.0.39](https://github.com/w4bo/AA2627-unibo-bdcp/compare/1.0.38...1.0.39) (2026-11-16)
 
 ### Dependency updates
